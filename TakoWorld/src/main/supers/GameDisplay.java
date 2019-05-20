@@ -16,7 +16,7 @@ public abstract class GameDisplay {
 		return GameDisplay.current;
 	}
 
-	public abstract void show(TWInfo tinfo);
+	public abstract void show(TWInfo tInfo);
 
 	public abstract void loadMedia() throws IOException;
 }

@@ -1,5 +1,6 @@
 package main;
 
+//キーの定数フィールドを格納
 public class KEY_STATE {
 	public static final int LEFT=0;
 	public static final int RIGHT=1;
