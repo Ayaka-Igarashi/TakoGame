@@ -11,10 +11,11 @@ import javax.imageio.ImageIO;
 
 import main.supers.GameDisplay;
 import main.supers.GameMode;
+import main.supers.SoundBox;
 
 public class TWDisplay extends GameDisplay{
 	GameDisplay title,main,end;
-	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,50);
+	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
 	GameMode mode=new TextMode();
 
 	public TWDisplay() {
@@ -53,25 +54,24 @@ public class TWDisplay extends GameDisplay{
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
-			tInfo.g.drawString(str,400-strw, 600);
+			tInfo.g.drawString(str,400-strw, 500);
 			if(tInfo.keyState[KEY_STATE.Z]) {
 				GameDisplay.current=TWDisplay.this.main;
-				//
-
+				SoundBox.singleton.playClip(0);//音楽を流す
 			}
 
 		}
 
 		@Override
 		public void loadMedia() throws IOException {
-			this.img_title=ImageIO.read(new File("haikei2.png"));
+			this.img_title=ImageIO.read(new File("media/haikei2.png"));
 		}
 
 	}
 
 	//本編
 	public class TWMain extends GameDisplay{
-		private BufferedImage img_back;
+
 		private BufferedImage img_textbox;
 		private BufferedImage img_hotate;
 
@@ -93,9 +93,9 @@ public class TWDisplay extends GameDisplay{
 		public void loadMedia() throws IOException {
 			TWDisplay.this.mode.loadMedia();
 			/*
-			this.img_back=ImageIO.read(new File("haikei.png"));
-			this.img_textbox=ImageIO.read(new File("textbox.png"));
-			this.img_hotate=ImageIO.read(new File("kai.png"));*/
+
+			this.img_textbox=ImageIO.read(new File("media/textbox.png"));
+			this.img_hotate=ImageIO.read(new File("media/kai.png"));*/
 
 		}
 
