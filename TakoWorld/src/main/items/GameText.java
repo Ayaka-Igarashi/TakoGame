@@ -2,21 +2,25 @@ package main.items;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.geom.Point2D;
 
 import main.KEY_STATE;
 import main.TWInfo;
 
 public class GameText {
 	private String[][] gameTexts= {
+			{""},
 			{"やほーー","おはおは","こんにちは"},
 			{"はろー"},
 			{"私は今、","どこにいるの？"}
 	};
 	private int nowTextNum=0;//現在のテキスト番号
-	private String[] nowText;//現在の表示テキスト
+	private String[] nowText=new String[3];//現在の表示テキスト
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,25);
-	private boolean strFin=false;
-	private long lastPushTime;
+	private boolean strFin=true;//次のテキストに行ってよいか
+	private long lastTime;
+	private int nowLine;//文字送り行数
+	private Point2D.Double pointer;
 
 	//テキストデータを外部から読み込む
 	public void getTexts() {
@@ -24,27 +28,55 @@ public class GameText {
 		return;
 	}
 
-	//テキストを表示する(文字送りしたい)
+	//テキストを表示する
 	public void draw(TWInfo tInfo) {
 		tInfo.g.setColor(new Color(50,80,255));
 		tInfo.g.setFont(this.font);
+		this.calcText(tInfo);
 		for(int i=0;i<gameTexts[nowTextNum].length;i++) {
-		tInfo.g.drawString(gameTexts[nowTextNum][i],150,480+i*35);
+			tInfo.g.drawString(this.nowText[i],160,480+i*35);
 		}
 		return;
 	}
 
 	//現在の表示テキストを求める
 	private void calcText(TWInfo tInfo) {
-		for(int i=0;i<gameTexts[nowTextNum].length;i++) {
-			//gameTexts[nowTextNum][i]をcharに変換
-			//int num=charの個数（文字数）
-			//(int)(tInfo.currentTime-lastPushTime)/50
-			//for文i<num
-			//nowText[i]+=変換したやつ
+		int charNum;
+		int nowNum;
+		int num;
+		//文字送り済みの行
+		for(int i=0;i<this.nowLine;i++) {
+			this.nowText[i]=this.gameTexts[nowTextNum][i];
 		}
+		//文字送りが未の行の初期化
+		for(int i=this.nowLine;i<gameTexts[nowTextNum].length;i++) {
+			this.nowText[i]="";
+		}
+		//文字送りをする
+		if(this.nowLine<gameTexts[nowTextNum].length) {
+			char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
+			charNum=c.length;//文字の数
+			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)/100);//文字送りスピード
+			num=Math.min(charNum,nowNum);
+			for(int j=0;j<num;j++) {
+				this.nowText[this.nowLine]+=String.valueOf(c[j]);
+			}
+			//文字送りの終了&次の行へ
+			if(charNum<nowNum) {
+				//次の行を文字送りする
+				if(this.nowLine<gameTexts[nowTextNum].length) {
+					this.nowLine+=1;
+				}
 
-
+				this.lastTime=tInfo.currentTime;//時間の更新
+			}
+		}
+		//文字送り終了処理
+		if(this.nowLine==gameTexts[nowTextNum].length) {
+			this.strFin=true;//次の文にいってよい
+			tInfo.g.setBackground(new Color(50,80,255));
+			tInfo.g.fillRect(750, 550, 15, 15);
+		}
 		return;
 	}
 
@@ -54,10 +86,12 @@ public class GameText {
 	}
 
 	public void keyControl(TWInfo tInfo) {
-		if(tInfo.keyState[KEY_STATE.Z]&&strFin==true) {
-			if(nowTextNum<gameTexts.length-1) {nowTextNum+=1;}
-			lastPushTime=tInfo.currentTime;
-			strFin=false;
+
+		if(tInfo.keyState[KEY_STATE.Z]&&this.strFin==true) {
+			if(this.nowTextNum<gameTexts.length-1) {this.nowTextNum+=1;}
+			this.lastTime=tInfo.currentTime;
+			this.nowLine=0;
+			this.strFin=false;
 		}
 		return;
 	}

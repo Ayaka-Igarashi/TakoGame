@@ -8,6 +8,7 @@ public class TWInfo {
 	public long currentTime;
 	public long pushTime;//最後にボタンを押した時間
 	public boolean[] keyState;
+	public long lastPushTime;//仮
 
 	public TWInfo() {
 		this.keyState=new boolean[8];
