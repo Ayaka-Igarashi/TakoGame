@@ -6,6 +6,7 @@ import java.awt.geom.Point2D;
 
 import main.KEY_STATE;
 import main.TWInfo;
+import main.supers.SoundBox;
 
 //テキスト
 public class GameText {
@@ -15,10 +16,11 @@ public class GameText {
 			{"はろー"},
 			{"私は今、","どこにいるの？"}
 	};
-	private int nowTextNum=0;//現在のテキスト番号
+	private int nowTextNum;//現在のテキスト番号
 	private String[] nowText=new String[3];//現在の表示テキスト
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,25);
-	private boolean strFin=true;//次のテキストに行ってよいか
+	private boolean strFin;//次のテキストに行ってよいか
+	private boolean endFlg;//テキストが終わりかどうか
 	private long lastTime;
 	private int nowLine;//文字送り行数
 	private Point2D.Double pointer=new Point2D.Double();
@@ -26,6 +28,14 @@ public class GameText {
 	//テキストデータを外部から読み込む
 	public void getTexts() {
 
+		return;
+	}
+
+	public void first() {
+		this.nowTextNum=0;
+		this.nowLine=0;
+		this.strFin=true;
+		this.endFlg=false;
 		return;
 	}
 
@@ -57,7 +67,8 @@ public class GameText {
 		if(this.nowLine<gameTexts[nowTextNum].length) {
 			char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
 			charNum=c.length;//文字の数
-			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)/100);//文字送りスピード
+			//文字送りスピード調節(小さいほど速い)
+			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)/80);
 			num=Math.min(charNum,nowNum);
 			for(int j=0;j<num;j++) {
 				this.nowText[this.nowLine]+=String.valueOf(c[j]);
@@ -86,19 +97,28 @@ public class GameText {
 		return;
 	}
 
-
 	public void control(TWInfo tInfo) {
 		return;
 	}
 
 	public void keyControl(TWInfo tInfo) {
-
 		if(tInfo.keyState[KEY_STATE.Z]&&this.strFin==true) {
-			if(this.nowTextNum<gameTexts.length-1) {this.nowTextNum+=1;}
-			this.lastTime=tInfo.currentTime;
-			this.nowLine=0;
-			this.strFin=false;
+			if(this.nowTextNum<gameTexts.length-1) {
+				this.nowTextNum+=1;
+				this.lastTime=tInfo.currentTime;
+				this.nowLine=0;
+				this.strFin=false;
+				SoundBox.singleton.playClip(2);//効果音を流す
+			}
+			if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {
+				this.endFlg=true;
+			}
 		}
 		return;
+	}
+
+	//テキストが終わりかどうか
+	public boolean isEnd() {
+		return this.endFlg;
 	}
 }

@@ -30,9 +30,10 @@ public class TextMode extends GameMode {
 		this.haikei.first();
 		this.hotate.first();
 		this.textBox.first();
+		this.text.first();
 	}
 
-	//画面操作(どの画像を)
+	//画面操作+キー操作(どの画像を表示するかなど)
 	@Override
 	public void control(TWInfo tInfo) {
 		this.haikei.control(tInfo);
@@ -74,17 +75,22 @@ public class TextMode extends GameMode {
 		this.img_textBox=ImageIO.read(new File("media/textbox2.png"));
 		this.textBox.setImage(img_textBox);
 
-		this.first();//初期画像設定
 
 		//音楽読み込み
 		try {
 			SoundBox.singleton.loadSound(new File("media/city-trial.wav"));
+			SoundBox.singleton.loadSound(new File("media/fm005.wav"));
 		}catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		}catch (LineUnavailableException e) {
 			e.printStackTrace();
 		}
 
+	}
+	//エンディングにいくかどうか
+	@Override
+	public boolean isEnd() {
+		return this.text.isEnd();
 	}
 
 

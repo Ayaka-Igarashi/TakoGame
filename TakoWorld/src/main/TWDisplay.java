@@ -66,7 +66,9 @@ public class TWDisplay extends GameDisplay{
 			}
 			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.main;
+				TWDisplay.this.mode.first();//初期画像設定
 				SoundBox.singleton.playClip(1);//音楽を流す
+				pushFlg=false;
 			}
 		}
 
@@ -90,23 +92,19 @@ public class TWDisplay extends GameDisplay{
 		private BufferedImage img_textbox;
 		private BufferedImage img_hotate;
 
+		//繰り返し呼ばれる
 		@Override
-		public void show(TWInfo tInfo) {/*
-			tInfo.g.drawImage(this.img_back,0,0,null);
-			tInfo.g.drawImage(this.img_textbox,0,0,null);
-			tInfo.g.drawImage(this.img_hotate,0,0,null);
-			*/
+		public void show(TWInfo tInfo) {
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
+			if(TWDisplay.this.mode.isEnd()) {
+				GameDisplay.current=TWDisplay.this.end;
+				SoundBox.singleton.stopClip(1);//音楽を止める
 			}
+		}
 
 		@Override
 		public void loadMedia() throws IOException {
 			TWDisplay.this.mode.loadMedia();
-			/*
-
-			this.img_textbox=ImageIO.read(new File("media/textbox.png"));
-			this.img_hotate=ImageIO.read(new File("media/kai.png"));*/
-
 		}
 
 	}
@@ -121,8 +119,8 @@ public class TWDisplay extends GameDisplay{
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
-			tInfo.g.drawString(str,400-strw, 600);
-			if(tInfo.keyState[KEY_STATE.Z]) {
+			tInfo.g.drawString(str,400-strw, 400);
+			if(tInfo.keyState[KEY_STATE.X]) {
 				GameDisplay.current=TWDisplay.this.title;
 
 			}
