@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import main.KEY_STATE;
 import main.TWInfo;
 
+//テキスト
 public class GameText {
 	private String[][] gameTexts= {
 			{""},
@@ -20,7 +21,7 @@ public class GameText {
 	private boolean strFin=true;//次のテキストに行ってよいか
 	private long lastTime;
 	private int nowLine;//文字送り行数
-	private Point2D.Double pointer;
+	private Point2D.Double pointer=new Point2D.Double();
 
 	//テキストデータを外部から読み込む
 	public void getTexts() {
@@ -48,7 +49,7 @@ public class GameText {
 		for(int i=0;i<this.nowLine;i++) {
 			this.nowText[i]=this.gameTexts[nowTextNum][i];
 		}
-		//文字送りが未の行の初期化
+		//文字送りが未遂な行の初期化
 		for(int i=this.nowLine;i<gameTexts[nowTextNum].length;i++) {
 			this.nowText[i]="";
 		}
@@ -67,15 +68,20 @@ public class GameText {
 				if(this.nowLine<gameTexts[nowTextNum].length) {
 					this.nowLine+=1;
 				}
+				if(this.nowLine==gameTexts[nowTextNum].length) {
+					this.strFin=true;//次の文にいってよい
+					//ポインターの位置
+					this.pointer.x=190+charNum*25;
+					this.pointer.y=467+(nowLine-1)*35;
+				}
 
 				this.lastTime=tInfo.currentTime;//時間の更新
 			}
 		}
-		//文字送り終了処理
+		//文字送り終了時のポインターを描く
 		if(this.nowLine==gameTexts[nowTextNum].length) {
-			this.strFin=true;//次の文にいってよい
 			tInfo.g.setBackground(new Color(50,80,255));
-			tInfo.g.fillRect(750, 550, 15, 15);
+			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 15,15);
 		}
 		return;
 	}
