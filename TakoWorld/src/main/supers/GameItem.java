@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import main.TWInfo;
 
+//背景とかキャラ
 public class GameItem {
 	protected ArrayList<BufferedImage> imgList=new ArrayList<BufferedImage>();
 	public ArrayList<Point2D.Double> posList=new ArrayList<Point2D.Double>();
@@ -46,6 +47,10 @@ public class GameItem {
 			this.drawOne(tInfo, i);
 		}
 		return this;
+	}
+	//初期の画像の配置
+	public void first() {
+		return;
 	}
 
 	public void control(TWInfo tInfo) {

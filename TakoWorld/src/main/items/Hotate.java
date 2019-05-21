@@ -7,12 +7,19 @@ import main.supers.GameChara;
 //ホタテ
 public class Hotate extends GameChara{
 
+	//初期設定
 	@Override
-	public void control(TWInfo tInfo) {
+	public void first() {
 		this.setVisible(0, true);
 		return;
 	}
 
+	@Override
+	public void control(TWInfo tInfo) {
+		return;
+	}
+
+	//キーが押された時の画像処理
 	@Override
 	public void keyControl(TWInfo tInfo) {
 		if(tInfo.keyState[KEY_STATE.Z]) {
