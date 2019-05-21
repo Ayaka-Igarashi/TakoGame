@@ -1,7 +1,7 @@
 package main.items;
 
-import main.KEY_STATE;
 import main.TWInfo;
+import main.constant.KEY_STATE;
 import main.supers.GameChara;
 
 //ホタテ

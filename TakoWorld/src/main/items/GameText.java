@@ -4,8 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.geom.Point2D;
 
-import main.KEY_STATE;
 import main.TWInfo;
+import main.constant.KEY_STATE;
+import main.constant.MUSIC_NUM;
 import main.supers.SoundBox;
 
 //テキスト
@@ -130,7 +131,7 @@ public class GameText {
 			if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {
 				this.endFlg=true;
 			}
-			SoundBox.singleton.playClip(2);//効果音を流す
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 		}
 		return;
 	}

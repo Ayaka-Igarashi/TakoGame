@@ -8,6 +8,8 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import main.constant.KEY_STATE;
+import main.constant.MUSIC_NUM;
 import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
@@ -78,8 +80,9 @@ public class TextMode extends GameMode {
 
 		//音楽読み込み
 		try {
-			SoundBox.singleton.loadSound(new File("media/city-trial.wav"));
+			SoundBox.singleton.loadSound(new File("media/question.wav"));
 			SoundBox.singleton.loadSound(new File("media/fm005.wav"));
+			SoundBox.singleton.setLoop(MUSIC_NUM.QUESTION, 0, 331000);//ループ設定
 		}catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		}catch (LineUnavailableException e) {

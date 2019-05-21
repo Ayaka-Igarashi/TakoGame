@@ -11,6 +11,8 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import main.constant.KEY_STATE;
+import main.constant.MUSIC_NUM;
 import main.supers.GameDisplay;
 import main.supers.GameMode;
 import main.supers.SoundBox;
@@ -62,12 +64,12 @@ public class TWDisplay extends GameDisplay{
 			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
-				SoundBox.singleton.playClip(0);//音楽を流す
+				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//音楽を流す
 			}
 			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.main;
 				TWDisplay.this.mode.first();//初期画像設定
-				SoundBox.singleton.playClip(1);//音楽を流す
+				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);
 				pushFlg=false;
 			}
 		}
@@ -103,7 +105,7 @@ public class TWDisplay extends GameDisplay{
 			}
 			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.end;
-				SoundBox.singleton.stopClip(1);//音楽を止める
+				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//音楽を止める
 				pushFlg=false;
 			}
 		}
@@ -130,7 +132,7 @@ public class TWDisplay extends GameDisplay{
 			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
-				SoundBox.singleton.playClip(0);//音楽を流す
+				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//音楽を流す
 			}
 			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.title;

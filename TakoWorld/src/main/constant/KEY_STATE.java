@@ -1,4 +1,4 @@
-package main;
+package main.constant;
 
 //キーの定数フィールドを格納
 public class KEY_STATE {
