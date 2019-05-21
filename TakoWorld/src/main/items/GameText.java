@@ -39,7 +39,7 @@ public class GameText {
 		for(int i=0;i<gameTexts[nowTextNum].length;i++) {
 			//gameTexts[nowTextNum][i]をcharに変換
 			//int num=charの個数（文字数）
-			//
+			//(int)(tInfo.currentTime-lastPushTime)/50
 			//for文i<num
 			//nowText[i]+=変換したやつ
 		}
