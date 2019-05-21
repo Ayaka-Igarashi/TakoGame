@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
 import main.items.TextBox;
@@ -18,6 +19,7 @@ public class TextMode extends GameMode {
 	private Haikei haikei=new Haikei();
 	private Hotate hotate=new Hotate();
 	private TextBox textBox=new TextBox();
+	private GameText text=new GameText();
 	private BufferedImage img_back1,img_back2;
 	private BufferedImage img_hotate1,img_hotate2;
 	private BufferedImage img_textBox;
@@ -36,12 +38,14 @@ public class TextMode extends GameMode {
 		this.haikei.control(tInfo);
 		this.hotate.control(tInfo);
 		this.textBox.control(tInfo);
+		this.text.control(tInfo);
 		//キーが押されたら押した時間を更新
 		if(tInfo.currentTime-tInfo.pushTime>200) {
 			if(tInfo.keyState[KEY_STATE.Z]||tInfo.keyState[KEY_STATE.X]) {
 				this.haikei.keyControl(tInfo);
 				this.hotate.keyControl(tInfo);
 				this.textBox.keyControl(tInfo);
+				this.text.keyControl(tInfo);
 				tInfo.pushTime=tInfo.currentTime;
 			}
 		}
@@ -54,6 +58,7 @@ public class TextMode extends GameMode {
 		this.haikei.draw(tInfo);
 		this.hotate.draw(tInfo);
 		this.textBox.draw(tInfo);
+		this.text.draw(tInfo);
 	}
 
 	@Override
