@@ -2,9 +2,10 @@ package main.items;
 
 import main.KEY_STATE;
 import main.TWInfo;
-import main.supers.GameItem;
+import main.supers.GameChara;
 
-public class Haikei extends GameItem {
+//ホタテ
+public class Hotate extends GameChara{
 
 	@Override
 	public void control(TWInfo tInfo) {
@@ -18,8 +19,11 @@ public class Haikei extends GameItem {
 			this.setVisible(0, false);
 			this.setVisible(1, true);
 		}
+		if(tInfo.keyState[KEY_STATE.X]) {
+			this.setVisible(0, true);
+			this.setVisible(1, false);
+		}
 		return;
 	}
-
 
 }

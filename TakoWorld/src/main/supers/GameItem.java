@@ -48,4 +48,12 @@ public class GameItem {
 		return this;
 	}
 
+	public void control(TWInfo tInfo) {
+		return;
+	}
+
+	public void keyControl(TWInfo tInfo) {
+		return;
+	}
+
 }

@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import main.supers.GameDisplay;
 import main.supers.GameMode;
@@ -44,34 +46,47 @@ public class TWDisplay extends GameDisplay{
 	//タイトル画面
 	public class TWTitle extends GameDisplay{
 		private BufferedImage img_title;
+		boolean pushFlg=false;//ボタンが押されたか判定
 
 		@Override
 		public void show(TWInfo tInfo) {
 			tInfo.g.drawImage(this.img_title,0,0,null);
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="PUSH Z";
+			String str ="PUSH SPACE";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, 500);
-			if(tInfo.keyState[KEY_STATE.Z]) {
-				GameDisplay.current=TWDisplay.this.main;
+			//1回押したらもう押されないように
+			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
+				tInfo.pushTime=tInfo.currentTime;
+				pushFlg=true;
 				SoundBox.singleton.playClip(0);//音楽を流す
 			}
-
+			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
+				GameDisplay.current=TWDisplay.this.main;
+				SoundBox.singleton.playClip(1);//音楽を流す
+			}
 		}
 
 		@Override
 		public void loadMedia() throws IOException {
 			this.img_title=ImageIO.read(new File("media/haikei2.png"));
+			//音楽読み込み
+			try {
+				SoundBox.singleton.loadSound(new File("media/bom34.wav"));
+			}catch (UnsupportedAudioFileException e) {
+				e.printStackTrace();
+			}catch (LineUnavailableException e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
 
 	//本編
 	public class TWMain extends GameDisplay{
-
 		private BufferedImage img_textbox;
 		private BufferedImage img_hotate;
 
@@ -82,12 +97,7 @@ public class TWDisplay extends GameDisplay{
 			tInfo.g.drawImage(this.img_hotate,0,0,null);
 			*/
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
-			if(tInfo.keyState[KEY_STATE.Z]) {
-				//処理
-
 			}
-
-		}
 
 		@Override
 		public void loadMedia() throws IOException {
