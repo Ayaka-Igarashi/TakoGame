@@ -91,14 +91,20 @@ public class TWDisplay extends GameDisplay{
 	public class TWMain extends GameDisplay{
 		private BufferedImage img_textbox;
 		private BufferedImage img_hotate;
+		boolean pushFlg=false;//ボタンが押されたか判定
 
 		//繰り返し呼ばれる
 		@Override
 		public void show(TWInfo tInfo) {
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
-			if(TWDisplay.this.mode.isEnd()) {
+			if(TWDisplay.this.mode.isEnd()&&pushFlg==false) {
+				tInfo.pushTime=tInfo.currentTime;
+				pushFlg=true;
+			}
+			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.end;
 				SoundBox.singleton.stopClip(1);//音楽を止める
+				pushFlg=false;
 			}
 		}
 
@@ -110,19 +116,25 @@ public class TWDisplay extends GameDisplay{
 	}
 	//エンディング
 	public class TWEnd extends GameDisplay{
+		boolean pushFlg=false;//ボタンが押されたか判定
 
 		@Override
 		public void show(TWInfo tInfo) {
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="CLEAR! PUSH X";
+			String str ="CLEAR! PUSH Z";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, 400);
-			if(tInfo.keyState[KEY_STATE.X]) {
+			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
+				tInfo.pushTime=tInfo.currentTime;
+				pushFlg=true;
+				SoundBox.singleton.playClip(0);//音楽を流す
+			}
+			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.title;
-
+				pushFlg=false;
 			}
 
 		}

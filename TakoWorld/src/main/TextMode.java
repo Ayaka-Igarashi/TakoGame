@@ -72,7 +72,7 @@ public class TextMode extends GameMode {
 		this.hotate.setImage(img_hotate1);
 		this.img_hotate2=ImageIO.read(new File("media/kai2.png"));
 		this.hotate.setImage(img_hotate2);
-		this.img_textBox=ImageIO.read(new File("media/textbox2.png"));
+		this.img_textBox=ImageIO.read(new File("media/UI.png"));
 		this.textBox.setImage(img_textBox);
 
 

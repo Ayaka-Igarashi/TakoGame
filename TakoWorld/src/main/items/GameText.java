@@ -12,13 +12,31 @@ import main.supers.SoundBox;
 public class GameText {
 	private String[][] gameTexts= {
 			{""},
-			{"やほーー","おはおは","こんにちは"},
-			{"はろー"},
-			{"私は今、","どこにいるの？"}
+			{"私はタコが嫌いです。ぬめぬめしているし、","吸盤ぺたぺたしているし、"},
+			{"そんなのが腕によじ登ってきたらと思うと","ゾッとします。"},
+			{"なんでみんながタコ焼なんかをを美味しそうに","食べているのか、わかりません、","ありえません、冒涜的です。"},
+			{"そんなことを考えながら歩いていたいつもの通学路、","海の見える丘でその事件は起こります…"},
+			{"ミツケタゾ、アイツダ。"},
+			{"今日、雨降るなんて聞いてないよー","折り畳み傘持ってきておいてよかった。"},
+			{"さっさと家に帰ろ"},
+			{"オイ、ソコノオマエ。"},
+			{"えっ"},
+			{"オマエダ、オマエ、ミツケタゾ"},
+			{"たこ焼き…？"},
+			{"ソウダ、オマエダ"},
+			{"たこ焼きが…喋ってるっ！！"},
+			{"キズクノガ、オソイゾ。"},
+			{"なんで、どうして、どうやって！","疲れてるのかな…本の読みすぎ？TRPGのやりすぎ？"},
+			{"そしてなんでよりにもよってたこ焼きなの！","私の一番苦手な料理、”た・こ・や・き”！"},
+			{"カタマッタゾ、"},
+			{"ドウスルカ。"},
+			{"チョウドイイ、コノママ、ハコンデイコウ。"},
+			{""},
+			{"ヨウコソ、”たこわーるど”へ…"}
 	};
 	private int nowTextNum;//現在のテキスト番号
 	private String[] nowText=new String[3];//現在の表示テキスト
-	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,25);
+	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
 	private boolean strFin;//次のテキストに行ってよいか
 	private boolean endFlg;//テキストが終わりかどうか
 	private long lastTime;
@@ -45,7 +63,7 @@ public class GameText {
 		tInfo.g.setFont(this.font);
 		this.calcText(tInfo);
 		for(int i=0;i<gameTexts[nowTextNum].length;i++) {
-			tInfo.g.drawString(this.nowText[i],160,480+i*35);
+			tInfo.g.drawString(this.nowText[i],155,470+i*27);///////
 		}
 		return;
 	}
@@ -67,8 +85,8 @@ public class GameText {
 		if(this.nowLine<gameTexts[nowTextNum].length) {
 			char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
 			charNum=c.length;//文字の数
-			//文字送りスピード調節(小さいほど速い)
-			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)/80);
+			//文字送りスピード調節
+			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.02);
 			num=Math.min(charNum,nowNum);
 			for(int j=0;j<num;j++) {
 				this.nowText[this.nowLine]+=String.valueOf(c[j]);
@@ -82,8 +100,8 @@ public class GameText {
 				if(this.nowLine==gameTexts[nowTextNum].length) {
 					this.strFin=true;//次の文にいってよい
 					//ポインターの位置
-					this.pointer.x=190+charNum*25;
-					this.pointer.y=467+(nowLine-1)*35;
+					this.pointer.x=165+charNum*20;
+					this.pointer.y=460+(nowLine-1)*27;//////////
 				}
 
 				this.lastTime=tInfo.currentTime;//時間の更新
@@ -92,7 +110,7 @@ public class GameText {
 		//文字送り終了時のポインターを描く
 		if(this.nowLine==gameTexts[nowTextNum].length) {
 			tInfo.g.setBackground(new Color(50,80,255));
-			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 15,15);
+			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 12,12);
 		}
 		return;
 	}
@@ -108,11 +126,11 @@ public class GameText {
 				this.lastTime=tInfo.currentTime;
 				this.nowLine=0;
 				this.strFin=false;
-				SoundBox.singleton.playClip(2);//効果音を流す
 			}
 			if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {
 				this.endFlg=true;
 			}
+			SoundBox.singleton.playClip(2);//効果音を流す
 		}
 		return;
 	}
