@@ -11,6 +11,7 @@ public class Hotate extends GameChara{
 	@Override
 	public void first() {
 		this.setVisible(0, true);
+		this.setVisible(1, false);
 		return;
 	}
 

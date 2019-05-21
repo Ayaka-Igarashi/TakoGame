@@ -53,7 +53,7 @@ public class TWDisplay extends GameDisplay{
 			tInfo.g.drawImage(this.img_title,0,0,null);
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="PUSH SPACE";
+			String str ="スタート画面　PUSH Z";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
@@ -115,7 +115,7 @@ public class TWDisplay extends GameDisplay{
 		public void show(TWInfo tInfo) {
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="CLEAR!";
+			String str ="CLEAR! PUSH X";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;

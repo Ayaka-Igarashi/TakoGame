@@ -10,6 +10,7 @@ public class Haikei extends GameItem {
 	@Override
 	public void first() {
 		this.setVisible(0, true);
+		this.setVisible(1, false);
 		return;
 	}
 
