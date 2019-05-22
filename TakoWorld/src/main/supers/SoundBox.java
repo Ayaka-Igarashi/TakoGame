@@ -47,7 +47,7 @@ public class SoundBox {
 		return clip;
 	}
 /*
-	//1回再生
+	//1回再生（いらない）
 	public Clip playOnce(int idx) {
 		Clip clip=this.getClip(idx);
 		clip.setFramePosition(0);
