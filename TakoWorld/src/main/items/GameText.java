@@ -7,6 +7,7 @@ import java.awt.geom.Point2D;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.functions.TextEffect;
 import main.supers.SoundBox;
 
 //テキスト
@@ -52,8 +53,10 @@ public class GameText {
 
 	public void first() {
 		this.nowTextNum=0;
-		this.nowLine=0;
+		this.nowLine=0;//
+		TextEffect.nowLine=0;
 		this.strFin=true;
+		TextEffect.strFin=true;
 		this.endFlg=false;
 		return;
 	}
@@ -72,8 +75,8 @@ public class GameText {
 	//現在の表示テキストを求める
 	private void calcText(TWInfo tInfo) {
 		//これでできるように
-		//this.nowText=TextEffect.textAnim(tInfo, this.gameTexts[nowTextNum],this.strFin,this.lastTime);
-
+		this.nowText=TextEffect.textAnim(tInfo, this.gameTexts[nowTextNum]);
+/*
 		int charNum;
 		int nowNum;
 		int num;
@@ -122,6 +125,7 @@ public class GameText {
 			tInfo.g.setBackground(new Color(50,80,255));
 			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 12,12);
 		}
+		*/
 		return;
 	}
 
@@ -129,20 +133,24 @@ public class GameText {
 		return;
 	}
 
+	//押された瞬間の処理
 	public void keyControl(TWInfo tInfo, int key) {
 		if(key==KEY_STATE.Z) {
-			if(this.strFin==true) {
+			if(TextEffect.strFin==true) {
 				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ
 					this.nowTextNum+=1;
-					this.lastTime=tInfo.currentTime;
-					this.nowLine=0;
-					this.strFin=false;
-				}
-				if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {//テキストの終了
+					//this.lastTime=tInfo.currentTime;//
+					TextEffect.lastTime=tInfo.currentTime;
+					//this.nowLine=0;//
+					//this.strFin=false;//
+					TextEffect.strFin=false;
+				}else if(this.nowTextNum==gameTexts.length-1) {//テキストの終了
 					this.endFlg=true;
 				}
-			}else if(this.strFin==false) {
-				this.strFin=true;//早送りしている
+				TextEffect.nowLine=0;
+			}else if(TextEffect.strFin==false) {
+				//this.strFin=true;//早送りしている
+				TextEffect.strFin=true;
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 		}

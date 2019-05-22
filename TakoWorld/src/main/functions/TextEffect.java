@@ -1,6 +1,7 @@
 package main.functions;
 
 import java.awt.Color;
+import java.awt.geom.Point2D;
 
 import main.TWInfo;
 
@@ -8,15 +9,18 @@ import main.TWInfo;
 public class TextEffect {
 
 	public static int nowLine=0;
+	public static boolean strFin;
+	public static long lastTime;
 
 	//毎回呼び出される
-	public static String[] textAnim(TWInfo tInfo,String[] texts,boolean strFin,long lastTime) {
+	public static String[] textAnim(TWInfo tInfo,String[] texts) {
 
-		String[] nowText;
+		String[] nowText=new String[3];
+		Point2D.Double pointer=new Point2D.Double();
 		int charNum;
 		int nowNum;
 		int num;
-		if(strFin==true) {
+		if(TextEffect.strFin==true) {
 			for(int i=0;i<texts.length;i++) {
 				nowText[i]=texts[i];
 			}
@@ -35,7 +39,7 @@ public class TextEffect {
 				char[] c=texts[TextEffect.nowLine].toCharArray();
 				charNum=c.length;//文字の数
 				//文字送りスピード調節
-				nowNum=(int)((double)(tInfo.currentTime-lastTime)*0.025);
+				nowNum=(int)((double)(tInfo.currentTime-TextEffect.lastTime)*0.025);
 				num=Math.min(charNum,nowNum);
 				for(int j=0;j<num;j++) {
 					nowText[TextEffect.nowLine]+=String.valueOf(c[j]);
@@ -46,20 +50,20 @@ public class TextEffect {
 					if(TextEffect.nowLine<texts.length-1) {
 						TextEffect.nowLine+=1;
 					}else if(TextEffect.nowLine==texts.length-1) {
-						strFin=true;//次の文にいってよい
+	/**/					TextEffect.strFin=true;//次の文にいってよい
 					}
 
-					lastTime=tInfo.currentTime;//時間の更新
+		/**/			TextEffect.lastTime=tInfo.currentTime;//時間の更新
 				}
 			}
 		}
 		//文字送り終了時のポインターを描く
-		if(TextEffect.nowLine==texts.length-1&&strFin==true) {
+		if(TextEffect.nowLine==texts.length-1&&TextEffect.strFin==true) {
 			//ポインターの位置
-			this.pointer.x=165+texts[TextEffect.nowLine].length()*20;
-			this.pointer.y=460+(this.nowLine)*27;//////////
+			pointer.x=165+texts[TextEffect.nowLine].length()*20;
+			pointer.y=460+(TextEffect.nowLine)*27;//////////
 			tInfo.g.setBackground(new Color(50,80,255));
-			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 12,12);
+			tInfo.g.fillRect((int)pointer.x, (int)pointer.y, 12,12);
 		}
 		return nowText;
 	}
