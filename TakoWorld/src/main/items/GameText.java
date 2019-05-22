@@ -71,6 +71,9 @@ public class GameText {
 
 	//現在の表示テキストを求める
 	private void calcText(TWInfo tInfo) {
+		//これでできるように
+		//this.nowText=TextEffect.textAnim(tInfo, this.gameTexts[nowTextNum],this.strFin,this.lastTime);
+
 		int charNum;
 		int nowNum;
 		int num;
@@ -93,7 +96,7 @@ public class GameText {
 				char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
 				charNum=c.length;//文字の数
 				//文字送りスピード調節
-				nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.03);
+				nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.025);
 				num=Math.min(charNum,nowNum);
 				for(int j=0;j<num;j++) {
 					this.nowText[this.nowLine]+=String.valueOf(c[j]);
