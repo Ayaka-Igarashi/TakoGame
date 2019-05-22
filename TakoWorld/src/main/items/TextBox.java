@@ -12,7 +12,7 @@ public class TextBox extends GameItem {
 	}
 
 	@Override
-	public void keyControl(TWInfo tInfo) {
+	public void keyControl(TWInfo tInfo,int key) {
 		return;
 	}
 

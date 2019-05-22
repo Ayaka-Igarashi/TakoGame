@@ -41,7 +41,6 @@ public class TWDisplay extends GameDisplay{
 		this.main.loadMedia();
 		this.end.loadMedia();
 		//追加していく
-
 	}
 
 

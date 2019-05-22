@@ -44,9 +44,9 @@ public class TextMode extends GameMode {
 		this.text.control(tInfo);
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
-				this.haikei.keyControl(tInfo);
-				this.hotate.keyControl(tInfo);
-				this.textBox.keyControl(tInfo);
+				this.haikei.keyControl(tInfo,KEY_STATE.Z);
+				this.hotate.keyControl(tInfo,KEY_STATE.Z);
+				this.textBox.keyControl(tInfo,KEY_STATE.Z);
 				this.text.keyControl(tInfo,KEY_STATE.Z);
 				tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.Z]==false) {
@@ -55,7 +55,8 @@ public class TextMode extends GameMode {
 		}
 		//Xキー
 		if(tInfo.keyState[KEY_STATE.X]==true&&tInfo.keyReleased[KEY_STATE.X]==true) {
-			tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
+			this.hotate.keyControl(tInfo,KEY_STATE.X);
+			tInfo.keyReleased[KEY_STATE.X]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.X]==false) {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
 		}
