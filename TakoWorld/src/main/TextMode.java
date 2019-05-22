@@ -42,15 +42,19 @@ public class TextMode extends GameMode {
 		this.hotate.control(tInfo);
 		this.textBox.control(tInfo);
 		this.text.control(tInfo);
-		//キーが押されたら押した時間を更新
-		if(tInfo.currentTime-tInfo.pushTime>200) {
-			if(tInfo.keyState[KEY_STATE.Z]||tInfo.keyState[KEY_STATE.X]) {
+		//Zキーが押された瞬間の処理tInfo.currentTime-tInfo.pushTime>200
+		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
+			//if(tInfo.keyState[KEY_STATE.Z]||tInfo.keyState[KEY_STATE.X]) {
 				this.haikei.keyControl(tInfo);
 				this.hotate.keyControl(tInfo);
 				this.textBox.keyControl(tInfo);
-				this.text.keyControl(tInfo);
-				tInfo.pushTime=tInfo.currentTime;
-			}
+				this.text.keyControl(tInfo,KEY_STATE.Z);
+				tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
+				//tInfo.pushTime=tInfo.currentTime;//キーが押されたら押した時間を更新
+			//}
+		}else if(tInfo.keyState[KEY_STATE.Z]==false) {
+			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
+			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
 	}
 

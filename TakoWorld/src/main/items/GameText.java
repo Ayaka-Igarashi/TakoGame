@@ -40,7 +40,9 @@ public class GameText {
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
 	private boolean strFin;//次のテキストに行ってよいか
 	private boolean endFlg;//テキストが終わりかどうか
-	private long lastTime;
+	private long lastTime;//文字送りに使う
+	//private long waitTime;//ボタン操作に使う
+	//private boolean isWait;
 	private int nowLine;//文字送り行数
 	private Point2D.Double pointer=new Point2D.Double();
 
@@ -55,6 +57,7 @@ public class GameText {
 		this.nowLine=0;
 		this.strFin=true;
 		this.endFlg=false;
+		//this.isWait=false;
 		return;
 	}
 
@@ -74,43 +77,49 @@ public class GameText {
 		int charNum;
 		int nowNum;
 		int num;
-		//文字送り済みの行
-		for(int i=0;i<this.nowLine;i++) {
-			this.nowText[i]=this.gameTexts[nowTextNum][i];
-		}
-		//文字送りが未遂な行の初期化
-		for(int i=this.nowLine;i<gameTexts[nowTextNum].length;i++) {
-			this.nowText[i]="";
-		}
-		//文字送りをする
-		if(this.nowLine<gameTexts[nowTextNum].length) {
-			char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
-			charNum=c.length;//文字の数
-			//文字送りスピード調節
-			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.03);
-			num=Math.min(charNum,nowNum);
-			for(int j=0;j<num;j++) {
-				this.nowText[this.nowLine]+=String.valueOf(c[j]);
+		if(this.strFin==true) {
+			for(int i=0;i<gameTexts[nowTextNum].length;i++) {
+				this.nowText[i]=this.gameTexts[nowTextNum][i];
 			}
-			//文字送りの終了&次の行へ
-			if(charNum<nowNum) {
-				//次の行を文字送りする
-				if(this.nowLine<gameTexts[nowTextNum].length) {
-					this.nowLine+=1;
+			this.nowLine=gameTexts[nowTextNum].length-1;
+		}else {
+			//文字送り済みの行
+			for(int i=0;i<this.nowLine;i++) {
+				this.nowText[i]=this.gameTexts[nowTextNum][i];
+			}
+			//文字送りが未遂な行の初期化
+			for(int i=this.nowLine;i<gameTexts[nowTextNum].length;i++) {
+				this.nowText[i]="";
+			}
+			//文字送りをする
+			if(this.nowLine<gameTexts[nowTextNum].length) {
+				char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
+				charNum=c.length;//文字の数
+				//文字送りスピード調節
+				nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.03);
+				num=Math.min(charNum,nowNum);
+				for(int j=0;j<num;j++) {
+					this.nowText[this.nowLine]+=String.valueOf(c[j]);
 				}
-				if(this.nowLine==gameTexts[nowTextNum].length) {
-					this.strFin=true;//次の文にいってよい
-					//ポインターの位置
-					this.pointer.x=165+charNum*20;
-					this.pointer.y=460+(nowLine-1)*27;//////////
-					SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
-				}
+				//文字送りの終了&次の行へ
+				if(charNum<nowNum) {
+					//次の行を文字送りする
+					if(this.nowLine<gameTexts[nowTextNum].length-1) {
+						this.nowLine+=1;
+					}else if(this.nowLine==gameTexts[nowTextNum].length-1) {
+						this.strFin=true;//次の文にいってよい
+						//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+					}
 
-				this.lastTime=tInfo.currentTime;//時間の更新
+					this.lastTime=tInfo.currentTime;//時間の更新
+				}
 			}
 		}
 		//文字送り終了時のポインターを描く
-		if(this.nowLine==gameTexts[nowTextNum].length) {
+		if(this.nowLine==gameTexts[nowTextNum].length-1&&this.strFin==true) {
+			//ポインターの位置
+			this.pointer.x=165+gameTexts[nowTextNum][this.nowLine].length()*20;
+			this.pointer.y=460+(this.nowLine)*27;//////////
 			tInfo.g.setBackground(new Color(50,80,255));
 			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 12,12);
 		}
@@ -121,19 +130,47 @@ public class GameText {
 		return;
 	}
 
-	public void keyControl(TWInfo tInfo) {
-		if(tInfo.keyState[KEY_STATE.Z]&&this.strFin==true) {
+	public void keyControl(TWInfo tInfo, int key) {
+		if(key==KEY_STATE.Z) {
+			if(this.strFin==true) {
+				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ
+					this.nowTextNum+=1;
+					this.lastTime=tInfo.currentTime;
+					this.nowLine=0;
+					this.strFin=false;
+				}
+				if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {//テキストの終了
+					this.endFlg=true;
+				}
+			}else if(this.strFin==false) {
+				this.strFin=true;//早送りしている
+			}
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+		}
+		/*
+		if(key==KEY_STATE.Z&&this.strFin==true&&this.isWait==false) {
+			this.isWait=true;
+			this.waitTime=tInfo.currentTime;
+			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+		}
+		if(this.isWait==true&&tInfo.currentTime-this.waitTime>100) {
 			if(this.nowTextNum<gameTexts.length-1) {
 				this.nowTextNum+=1;
 				this.lastTime=tInfo.currentTime;
 				this.nowLine=0;
 				this.strFin=false;
+				this.isWait=false;
 			}
 			if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {
 				this.endFlg=true;
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 		}
+		//早送り
+		if(key==KEY_STATE.Z&&this.strFin==false) {
+			this.strFin=true;
+		}
+		*/
 		return;
 	}
 
