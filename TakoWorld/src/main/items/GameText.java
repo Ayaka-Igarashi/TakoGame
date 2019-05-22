@@ -41,8 +41,6 @@ public class GameText {
 	private boolean strFin;//次のテキストに行ってよいか
 	private boolean endFlg;//テキストが終わりかどうか
 	private long lastTime;//文字送りに使う
-	//private long waitTime;//ボタン操作に使う
-	//private boolean isWait;
 	private int nowLine;//文字送り行数
 	private Point2D.Double pointer=new Point2D.Double();
 
@@ -57,7 +55,6 @@ public class GameText {
 		this.nowLine=0;
 		this.strFin=true;
 		this.endFlg=false;
-		//this.isWait=false;
 		return;
 	}
 
@@ -108,7 +105,6 @@ public class GameText {
 						this.nowLine+=1;
 					}else if(this.nowLine==gameTexts[nowTextNum].length-1) {
 						this.strFin=true;//次の文にいってよい
-						//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 					}
 
 					this.lastTime=tInfo.currentTime;//時間の更新
@@ -147,30 +143,6 @@ public class GameText {
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 		}
-		/*
-		if(key==KEY_STATE.Z&&this.strFin==true&&this.isWait==false) {
-			this.isWait=true;
-			this.waitTime=tInfo.currentTime;
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
-		}
-		if(this.isWait==true&&tInfo.currentTime-this.waitTime>100) {
-			if(this.nowTextNum<gameTexts.length-1) {
-				this.nowTextNum+=1;
-				this.lastTime=tInfo.currentTime;
-				this.nowLine=0;
-				this.strFin=false;
-				this.isWait=false;
-			}
-			if(this.nowTextNum==gameTexts.length-1&&this.strFin==true) {
-				this.endFlg=true;
-			}
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-		}
-		//早送り
-		if(key==KEY_STATE.Z&&this.strFin==false) {
-			this.strFin=true;
-		}
-		*/
 		return;
 	}
 
