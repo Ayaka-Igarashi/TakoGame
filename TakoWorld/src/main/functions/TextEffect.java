@@ -8,9 +8,17 @@ import main.TWInfo;
 //一文を文字送り
 public class TextEffect {
 
+	//違うテキストに切りかるたたびに
 	public static int nowLine=0;
-	public static boolean strFin;
+	public static boolean strFin=true;
 	public static long lastTime;
+
+	//変数の初期化（次のテキストにするたびに呼び出す）
+	public static void firstPrm(TWInfo tInfo) {
+		TextEffect.nowLine=0;
+		TextEffect.strFin=false;
+		TextEffect.lastTime=tInfo.currentTime;
+	}
 
 	//毎回呼び出される
 	public static String[] textAnim(TWInfo tInfo,String[] texts) {

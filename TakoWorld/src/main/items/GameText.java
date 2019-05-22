@@ -2,7 +2,6 @@ package main.items;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.geom.Point2D;
 
 import main.TWInfo;
 import main.constant.KEY_STATE;
@@ -39,11 +38,7 @@ public class GameText {
 	private int nowTextNum;//現在のテキスト番号
 	private String[] nowText=new String[3];//現在の表示テキスト
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
-	private boolean strFin;//次のテキストに行ってよいか
 	private boolean endFlg;//テキストが終わりかどうか
-	private long lastTime;//文字送りに使う
-	private int nowLine;//文字送り行数
-	private Point2D.Double pointer=new Point2D.Double();
 
 	//テキストデータを外部から読み込む
 	public void getTexts() {
@@ -53,9 +48,7 @@ public class GameText {
 
 	public void first() {
 		this.nowTextNum=0;
-		this.nowLine=0;//
 		TextEffect.nowLine=0;
-		this.strFin=true;
 		TextEffect.strFin=true;
 		this.endFlg=false;
 		return;
@@ -74,58 +67,7 @@ public class GameText {
 
 	//現在の表示テキストを求める
 	private void calcText(TWInfo tInfo) {
-		//これでできるように
 		this.nowText=TextEffect.textAnim(tInfo, this.gameTexts[nowTextNum]);
-/*
-		int charNum;
-		int nowNum;
-		int num;
-		if(this.strFin==true) {
-			for(int i=0;i<gameTexts[nowTextNum].length;i++) {
-				this.nowText[i]=this.gameTexts[nowTextNum][i];
-			}
-			this.nowLine=gameTexts[nowTextNum].length-1;
-		}else {
-			//文字送り済みの行
-			for(int i=0;i<this.nowLine;i++) {
-				this.nowText[i]=this.gameTexts[nowTextNum][i];
-			}
-			//文字送りが未遂な行の初期化
-			for(int i=this.nowLine;i<gameTexts[nowTextNum].length;i++) {
-				this.nowText[i]="";
-			}
-			//文字送りをする
-			if(this.nowLine<gameTexts[nowTextNum].length) {
-				char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
-				charNum=c.length;//文字の数
-				//文字送りスピード調節
-				nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.025);
-				num=Math.min(charNum,nowNum);
-				for(int j=0;j<num;j++) {
-					this.nowText[this.nowLine]+=String.valueOf(c[j]);
-				}
-				//文字送りの終了&次の行へ
-				if(charNum<nowNum) {
-					//次の行を文字送りする
-					if(this.nowLine<gameTexts[nowTextNum].length-1) {
-						this.nowLine+=1;
-					}else if(this.nowLine==gameTexts[nowTextNum].length-1) {
-						this.strFin=true;//次の文にいってよい
-					}
-
-					this.lastTime=tInfo.currentTime;//時間の更新
-				}
-			}
-		}
-		//文字送り終了時のポインターを描く
-		if(this.nowLine==gameTexts[nowTextNum].length-1&&this.strFin==true) {
-			//ポインターの位置
-			this.pointer.x=165+gameTexts[nowTextNum][this.nowLine].length()*20;
-			this.pointer.y=460+(this.nowLine)*27;//////////
-			tInfo.g.setBackground(new Color(50,80,255));
-			tInfo.g.fillRect((int)this.pointer.x, (int)this.pointer.y, 12,12);
-		}
-		*/
 		return;
 	}
 
@@ -139,17 +81,12 @@ public class GameText {
 			if(TextEffect.strFin==true) {
 				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ
 					this.nowTextNum+=1;
-					//this.lastTime=tInfo.currentTime;//
-					TextEffect.lastTime=tInfo.currentTime;
-					//this.nowLine=0;//
-					//this.strFin=false;//
-					TextEffect.strFin=false;
+					TextEffect.firstPrm(tInfo);
 				}else if(this.nowTextNum==gameTexts.length-1) {//テキストの終了
 					this.endFlg=true;
 				}
-				TextEffect.nowLine=0;
+				//TextEffect.nowLine=0;
 			}else if(TextEffect.strFin==false) {
-				//this.strFin=true;//早送りしている
 				TextEffect.strFin=true;
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
