@@ -87,7 +87,7 @@ public class GameText {
 			char[] c=gameTexts[nowTextNum][this.nowLine].toCharArray();
 			charNum=c.length;//文字の数
 			//文字送りスピード調節
-			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.02);
+			nowNum=(int)((double)(tInfo.currentTime-this.lastTime)*0.03);
 			num=Math.min(charNum,nowNum);
 			for(int j=0;j<num;j++) {
 				this.nowText[this.nowLine]+=String.valueOf(c[j]);
@@ -103,6 +103,7 @@ public class GameText {
 					//ポインターの位置
 					this.pointer.x=165+charNum*20;
 					this.pointer.y=460+(nowLine-1)*27;//////////
+					SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 				}
 
 				this.lastTime=tInfo.currentTime;//時間の更新

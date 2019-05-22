@@ -64,7 +64,7 @@ public class TWDisplay extends GameDisplay{
 			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
-				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//音楽を流す
+				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//効果音を流す
 			}
 			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.main;

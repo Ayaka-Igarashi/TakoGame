@@ -46,7 +46,15 @@ public class SoundBox {
 		clip.setLoopPoints(start,end);
 		return clip;
 	}
-
+/*
+	//1回再生
+	public Clip playOnce(int idx) {
+		Clip clip=this.getClip(idx);
+		clip.setFramePosition(0);
+		clip.loop(1);
+		return clip;
+	}
+*/
 	//音楽をループ再生する
 	public Clip loopClip(int idx) {
 		Clip clip=this.getClip(idx);
