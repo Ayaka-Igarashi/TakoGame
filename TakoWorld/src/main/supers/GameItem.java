@@ -57,7 +57,7 @@ public class GameItem {
 		return;
 	}
 
-	public void keyControl(TWInfo tInfo,int key) {
+	public void keyControl(TWInfo tInfo,int key,int action) {
 		return;
 	}
 

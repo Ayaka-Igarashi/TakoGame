@@ -22,7 +22,7 @@ public class Haikei extends GameItem {
 
 	//キーが押された時の処理
 	@Override
-	public void keyControl(TWInfo tInfo,int key) {
+	public void keyControl(TWInfo tInfo,int key,int action) {
 		if(key==KEY_STATE.Z) {
 			this.setVisible(0, false);
 			this.setVisible(1, true);

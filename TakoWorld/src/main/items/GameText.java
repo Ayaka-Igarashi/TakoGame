@@ -76,7 +76,7 @@ public class GameText {
 	}
 
 	//押された瞬間の処理
-	public void keyControl(TWInfo tInfo, int key) {
+	public void keyControl(TWInfo tInfo, int key,int action) {
 		if(key==KEY_STATE.Z) {
 			if(TextEffect.strFin==true) {
 				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ

@@ -22,9 +22,9 @@ public class Choice extends GameItem{
 
 	//キーが押された時の処理
 	@Override
-	public void keyControl(TWInfo tInfo, int key) {
+	public void keyControl(TWInfo tInfo, int key,int action) {
 		// TODO 自動生成されたメソッド・スタブ
-		super.keyControl(tInfo, key);
+		super.keyControl(tInfo, key,action);
 	}
 
 }

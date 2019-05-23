@@ -8,8 +8,10 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import main.constant.ITEM_NUM;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.functions.TextEffect;
 import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
@@ -49,29 +51,49 @@ public class TextMode extends GameMode {
 		this.text.control(tInfo);
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
-			if(intro.getEvent().size()>this.pushNum_Z) {
-				Action event[] = null;//ここ修正
-				for(int i=0;i<intro.getEvent().get(this.pushNum_Z).size();i++) {
-					event[i]=intro.getEvent().get(this.pushNum_Z).get(i);//イベントを取り出すAction型
+			if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
+				this.text.keyControl(tInfo,KEY_STATE.Z,1);
+			}else {
+				if(intro.getEvent().size()>this.pushNum_Z) {
+					Action[] event =new Action[intro.getEvent().get(this.pushNum_Z).size()];
+					for(int i=0;i<event.length;i++) {
+						event[i]=intro.getEvent().get(this.pushNum_Z).get(i);//イベントを取り出すAction型
+
+						if(event[i].item==ITEM_NUM.BACK) {
+							this.haikei.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+						}else if(event[i].item==ITEM_NUM.TEXTBOX) {
+							this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+						}else if(event[i].item==ITEM_NUM.TEXT) {
+							this.text.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+						}else if(event[i].item==ITEM_NUM.CHOICE) {
+	//追加する
+						}else if(event[i].item==ITEM_NUM.HOTATE) {
+							this.hotate.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+						}
+					}
+					this.pushNum_Z+=1;//押した回数に1を足す
 				}
+
 			}
-			this.haikei.keyControl(tInfo,KEY_STATE.Z);//(tinfo,KEY,)
-			this.hotate.keyControl(tInfo,KEY_STATE.Z);
-			this.textBox.keyControl(tInfo,KEY_STATE.Z);
-			this.text.keyControl(tInfo,KEY_STATE.Z);
+
+			//this.haikei.keyControl(tInfo,KEY_STATE.Z);//(tinfo,KEY,)
+			//this.hotate.keyControl(tInfo,KEY_STATE.Z);
+			//this.textBox.keyControl(tInfo,KEY_STATE.Z);
+			//this.text.keyControl(tInfo,KEY_STATE.Z,1);
 			tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
-			this.pushNum_Z+=1;//押した回数に1を足す
 		}else if(tInfo.keyState[KEY_STATE.Z]==false) {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
 		//Xキー
 		if(tInfo.keyState[KEY_STATE.X]==true&&tInfo.keyReleased[KEY_STATE.X]==true) {
-			this.hotate.keyControl(tInfo,KEY_STATE.X);
+			//this.hotate.keyControl(tInfo,KEY_STATE.X);
 			tInfo.keyReleased[KEY_STATE.X]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.X]==false) {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
 		}
+
+		return;
 	}
 
 	//毎回呼び出されるやつ

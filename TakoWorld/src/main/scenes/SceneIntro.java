@@ -6,6 +6,7 @@ import java.util.Arrays;
 import main.Action;
 import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
+import main.items.Hotate;
 import main.supers.TWEvent;
 
 //イントロのイベントをここに書く
@@ -15,10 +16,34 @@ public class SceneIntro extends TWEvent{
 		public SceneIntro() {
 			this.label=SCENE_NUM.INTRO;
 
-			Action a1_1= new Action(ITEM_NUM.HOTATE,1);
-			Action a1_2=new Action(ITEM_NUM.BACK,1);
-			ArrayList<Action> a1=new ArrayList<Action>(Arrays.asList(a1_1,a1_2));
-			this.A.add(a1);
+			Action nextText=new Action(ITEM_NUM.TEXT,1);
+
+			Action h_rm=new Action(ITEM_NUM.HOTATE,Hotate.REMOVE);
+			Action h1= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL);
+			Action h2=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED);
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h1)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h1)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h1)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h1)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			Action b1=new Action(ITEM_NUM.BACK,1);
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b1,h_rm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));//余分に一個必要
 		}
 
 }
