@@ -14,10 +14,12 @@ import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
 import main.items.TextBox;
+import main.scenes.SceneIntro;
 import main.supers.GameMode;
 import main.supers.SoundBox;
 
 public class TextMode extends GameMode {
+	private int pushNum_Z;//Zキーを押した回数
 	private Haikei haikei=new Haikei();
 	private Hotate hotate=new Hotate();
 	private TextBox textBox=new TextBox();
@@ -26,9 +28,12 @@ public class TextMode extends GameMode {
 	private BufferedImage img_hotate1,img_hotate2;
 	private BufferedImage img_textBox;
 
+	private SceneIntro intro=new SceneIntro();//イントロの操作呼び出し
+
 	//最初の画像設定
 	@Override
 	public void first() {
+		this.pushNum_Z=0;
 		this.haikei.first();
 		this.hotate.first();
 		this.textBox.first();
@@ -44,11 +49,18 @@ public class TextMode extends GameMode {
 		this.text.control(tInfo);
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
-				this.haikei.keyControl(tInfo,KEY_STATE.Z);
-				this.hotate.keyControl(tInfo,KEY_STATE.Z);
-				this.textBox.keyControl(tInfo,KEY_STATE.Z);
-				this.text.keyControl(tInfo,KEY_STATE.Z);
-				tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
+			if(intro.getEvent().size()>this.pushNum_Z) {
+				Action event[] = null;//ここ修正
+				for(int i=0;i<intro.getEvent().get(this.pushNum_Z).size();i++) {
+					event[i]=intro.getEvent().get(this.pushNum_Z).get(i);//イベントを取り出すAction型
+				}
+			}
+			this.haikei.keyControl(tInfo,KEY_STATE.Z);//(tinfo,KEY,)
+			this.hotate.keyControl(tInfo,KEY_STATE.Z);
+			this.textBox.keyControl(tInfo,KEY_STATE.Z);
+			this.text.keyControl(tInfo,KEY_STATE.Z);
+			tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
+			this.pushNum_Z+=1;//押した回数に1を足す
 		}else if(tInfo.keyState[KEY_STATE.Z]==false) {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
