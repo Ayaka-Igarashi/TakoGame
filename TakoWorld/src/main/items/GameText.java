@@ -67,7 +67,7 @@ public class GameText {
 
 	//現在の表示テキストを求める
 	private void calcText(TWInfo tInfo) {
-		this.nowText=TextEffect.textAnim(tInfo, this.gameTexts[nowTextNum]);
+		this.nowText=TextEffect.textAnim(tInfo,this.gameTexts[nowTextNum]);
 		return;
 	}
 
@@ -84,8 +84,8 @@ public class GameText {
 					TextEffect.firstPrm(tInfo);
 				}else if(this.nowTextNum==gameTexts.length-1) {//テキストの終了
 					this.endFlg=true;
+					//TextEffect.nowLine=0;
 				}
-				//TextEffect.nowLine=0;
 			}else if(TextEffect.strFin==false) {
 				TextEffect.strFin=true;
 			}

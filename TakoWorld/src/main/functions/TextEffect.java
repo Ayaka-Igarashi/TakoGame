@@ -8,7 +8,6 @@ import main.TWInfo;
 //一文を文字送り
 public class TextEffect {
 
-	//違うテキストに切りかるたたびに
 	public static int nowLine=0;
 	public static boolean strFin=true;
 	public static long lastTime;
@@ -22,7 +21,6 @@ public class TextEffect {
 
 	//毎回呼び出される
 	public static String[] textAnim(TWInfo tInfo,String[] texts) {
-
 		String[] nowText=new String[3];
 		Point2D.Double pointer=new Point2D.Double();
 		int charNum;
@@ -58,10 +56,10 @@ public class TextEffect {
 					if(TextEffect.nowLine<texts.length-1) {
 						TextEffect.nowLine+=1;
 					}else if(TextEffect.nowLine==texts.length-1) {
-	/**/					TextEffect.strFin=true;//次の文にいってよい
+						TextEffect.strFin=true;//次の文にいってよい
 					}
 
-		/**/			TextEffect.lastTime=tInfo.currentTime;//時間の更新
+					TextEffect.lastTime=tInfo.currentTime;//時間の更新
 				}
 			}
 		}
@@ -75,10 +73,10 @@ public class TextEffect {
 		}
 		return nowText;
 	}
-
+/*
 	//1行の処理
 	public static String OneTextAnim(String text,long lastTime) {
 		return text;
-	}
+	}*/
 
 }
