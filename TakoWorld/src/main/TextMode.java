@@ -3,6 +3,7 @@ package main;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
@@ -11,14 +12,17 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import main.constant.ITEM_NUM;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.constant.SCENE_NUM;
 import main.functions.TextEffect;
 import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
 import main.items.TextBox;
+import main.scenes.Scene1;
 import main.scenes.SceneIntro;
 import main.supers.GameMode;
 import main.supers.SoundBox;
+import main.supers.TWEvent;
 
 public class TextMode extends GameMode {
 	private int pushNum_Z;//Zキーを押した回数
@@ -30,9 +34,17 @@ public class TextMode extends GameMode {
 	private BufferedImage img_hotate1,img_hotate2;
 	private BufferedImage img_textBox;
 
-	private SceneIntro intro=new SceneIntro();//イントロの操作呼び出し
+	private ArrayList<TWEvent> sceneList =new ArrayList<TWEvent>();//イベントリスト
+	private int nowScene;//現在のシーン
 
-	//最初の画像設定
+	//消すまでは1回しか呼び出されない
+	public TextMode() {
+		this.sceneList.add(SCENE_NUM.INTRO, new SceneIntro());//イベント追加
+		this.sceneList.add(SCENE_NUM.ONE,new Scene1());
+	}
+
+	//最初の画像設定とシーン設定
+	//最初から始めるごとに呼び出される
 	@Override
 	public void first() {
 		this.pushNum_Z=0;
@@ -40,6 +52,8 @@ public class TextMode extends GameMode {
 		this.hotate.first();
 		this.textBox.first();
 		this.text.first();
+		this.nowScene=SCENE_NUM.INTRO;
+		this.text.setTexts(this.sceneList.get(nowScene).getText());
 	}
 
 	//画面操作+キー操作(どの画像を表示するかなど)
@@ -54,10 +68,16 @@ public class TextMode extends GameMode {
 			if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
 				this.text.keyControl(tInfo,KEY_STATE.Z,1);
 			}else {
-				if(intro.getEvent().size()>this.pushNum_Z) {
-					Action[] event =new Action[intro.getEvent().get(this.pushNum_Z).size()];
+				if(this.sceneList.get(nowScene).isFinished(this.pushNum_Z)) {//シーンが終わったか
+					this.nowScene=this.sceneList.get(nowScene).getNext();//次のシーンに行く
+					this.text.setTexts(this.sceneList.get(nowScene).getText());
+					this.text.resetNowTextNum();
+					this.pushNum_Z=0;
+				}//そのまま次のシーンへ
+				if(sceneList.get(nowScene).getEvent().size()>this.pushNum_Z) {
+					Action[] event =new Action[sceneList.get(nowScene).getEvent().get(this.pushNum_Z).size()];
 					for(int i=0;i<event.length;i++) {
-						event[i]=intro.getEvent().get(this.pushNum_Z).get(i);//イベントを取り出すAction型
+						event[i]=sceneList.get(nowScene).getEvent().get(this.pushNum_Z).get(i);//イベントを取り出すAction型
 
 						if(event[i].item==ITEM_NUM.BACK) {
 							this.haikei.keyControl(tInfo,KEY_STATE.Z,event[i].action);
@@ -73,13 +93,8 @@ public class TextMode extends GameMode {
 					}
 					this.pushNum_Z+=1;//押した回数に1を足す
 				}
-
 			}
-
-			//this.haikei.keyControl(tInfo,KEY_STATE.Z);//(tinfo,KEY,)
-			//this.hotate.keyControl(tInfo,KEY_STATE.Z);
-			//this.textBox.keyControl(tInfo,KEY_STATE.Z);
-			//this.text.keyControl(tInfo,KEY_STATE.Z,1);
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.Z]==false) {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
@@ -106,6 +121,7 @@ public class TextMode extends GameMode {
 		this.text.draw(tInfo);
 	}
 
+	//消すまでは1回しか呼び出されない
 	@Override
 	public void loadMedia() throws IOException {
 		this.img_back1=ImageIO.read(new File("media/haikei.png"));

@@ -59,7 +59,7 @@ public class SoundBox {
 	public Clip loopClip(int idx) {
 		Clip clip=this.getClip(idx);
 		clip.setFramePosition(0);
-		clip.loop(clip.LOOP_CONTINUOUSLY);
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
 		return clip;
 	}
 

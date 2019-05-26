@@ -90,8 +90,6 @@ public class TWDisplay extends GameDisplay{
 
 	//本編
 	public class TWMain extends GameDisplay{
-		private BufferedImage img_textbox;
-		private BufferedImage img_hotate;
 		boolean pushFlg=false;//ボタンが押されたか判定
 
 		//繰り返し呼ばれる
