@@ -12,6 +12,11 @@ public class TextBox extends GameItem {
 	}
 
 	@Override
+	public void control(TWInfo tInfo) {
+
+	}
+
+	@Override
 	public void keyControl(TWInfo tInfo,int key,int action) {
 		return;
 	}

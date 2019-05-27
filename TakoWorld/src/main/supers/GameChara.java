@@ -1,6 +1,6 @@
 package main.supers;
 
 //キャラクター
-public class GameChara extends GameItem{
+public abstract class GameChara extends GameItem{
 
 }

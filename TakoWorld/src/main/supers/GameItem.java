@@ -4,38 +4,41 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
+import main.ImageState;
 import main.TWInfo;
 
 //背景とかキャラ
-public class GameItem {
-	protected ArrayList<BufferedImage> imgList=new ArrayList<BufferedImage>();
-	public ArrayList<Point2D.Double> posList=new ArrayList<Point2D.Double>();
-	public ArrayList<Boolean> visible=new ArrayList<Boolean>();
+public abstract class GameItem {
+	protected ArrayList<ImageState> imgList=new ArrayList<ImageState>();
 
 	public GameItem setImage(BufferedImage img) {
-		this.imgList.add(img);
-		this.posList.add(new Point2D.Double(0, 0));
-		this.visible.add(false);//見えない状態
+		this.imgList.add(new ImageState(img,new Point2D.Double(0, 0),false));
 		return this;
 	}
 
 	public BufferedImage getImage(int idx) {
-		return this.imgList.get(idx);
+		return this.imgList.get(idx).img;
 	}
 
 	public GameItem setVisible(int idx,boolean visible) {
-		this.visible.set(idx,visible);//代入している
+		this.imgList.get(idx).visible=visible;
+		return this;
+	}
+
+	public GameItem setPosition(int idx,Point2D.Double position) {
+		this.imgList.get(idx).position=position;
 		return this;
 	}
 
 	//1つの画像を線画する
 	public void drawOne(TWInfo tInfo,int idx){
-		if(this.visible.get(idx)==false)return;
+		if(this.imgList.get(idx).visible==false)return;
 		//変形は今のところしない
 		//AffineTransform oldtr=tInfo.g.getTransform();
 		//tInfo.g.translate(this.position.x, this.position.y);
 		//tInfo.g.rotate(0,0,0);
-		tInfo.g.drawImage(this.imgList.get(idx), (int)this.posList.get(idx).x, (int)this.posList.get(idx).y,null);
+		tInfo.g.drawImage(this.imgList.get(idx).img,
+				(int)this.imgList.get(idx).position.x, (int)this.imgList.get(idx).position.y,null);
 		//tInfo.g.setTransform(oldtr);
 		return;
 	}
@@ -49,16 +52,10 @@ public class GameItem {
 		return this;
 	}
 	//初期の画像の配置
-	public void first() {
-		return;
-	}
+	public abstract void first();
 
-	public void control(TWInfo tInfo) {
-		return;
-	}
+	public abstract void control(TWInfo tInfo);
 
-	public void keyControl(TWInfo tInfo,int key,int action) {
-		return;
-	}
+	public abstract void keyControl(TWInfo tInfo,int key,int action);
 
 }

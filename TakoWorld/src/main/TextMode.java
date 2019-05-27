@@ -14,6 +14,7 @@ import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
 import main.constant.SCENE_NUM;
 import main.functions.TextEffect;
+import main.items.Choice;
 import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
@@ -30,9 +31,11 @@ public class TextMode extends GameMode {
 	private Hotate hotate=new Hotate();
 	private TextBox textBox=new TextBox();
 	private GameText text=new GameText();
+	private Choice choice=new Choice();
 	private BufferedImage img_back1,img_back2;
 	private BufferedImage img_hotate1,img_hotate2;
 	private BufferedImage img_textBox;
+	private BufferedImage img_choice;
 
 	private ArrayList<TWEvent> sceneList =new ArrayList<TWEvent>();//イベントリスト
 	private int nowScene;//現在のシーン
@@ -141,6 +144,11 @@ public class TextMode extends GameMode {
 		this.hotate.setImage(img_hotate2);
 		this.img_textBox=ImageIO.read(new File("media/UI.png"));
 		this.textBox.setImage(img_textBox);
+		this.img_choice=ImageIO.read(new File("media/haikei.png"));////////////
+		///cut
+		this.choice.setImage(img_choice);
+		this.choice.setImage(img_choice);
+
 
 
 		//音楽読み込み
