@@ -36,6 +36,7 @@ public class TextMode extends GameMode {
 
 	private ArrayList<TWEvent> sceneList =new ArrayList<TWEvent>();//イベントリスト
 	private int nowScene;//現在のシーン
+	private boolean endFlg;
 
 	//消すまでは1回しか呼び出されない
 	public TextMode() {
@@ -54,6 +55,7 @@ public class TextMode extends GameMode {
 		this.text.first();
 		this.nowScene=SCENE_NUM.INTRO;
 		this.text.setTexts(this.sceneList.get(nowScene).getText());
+		this.endFlg=false;
 	}
 
 	//画面操作+キー操作(どの画像を表示するかなど)
@@ -69,10 +71,15 @@ public class TextMode extends GameMode {
 				this.text.keyControl(tInfo,KEY_STATE.Z,1);
 			}else {
 				if(this.sceneList.get(nowScene).isFinished(this.pushNum_Z)) {//シーンが終わったか
-					this.nowScene=this.sceneList.get(nowScene).getNext();//次のシーンに行く
-					this.text.setTexts(this.sceneList.get(nowScene).getText());
-					this.text.resetNowTextNum();
-					this.pushNum_Z=0;
+					if(this.sceneList.get(nowScene).getNext()==SCENE_NUM.END) {//エンディングに行く
+						this.endFlg=true;
+					}else {
+						this.nowScene=this.sceneList.get(nowScene).getNext();//次のシーンに行く
+						this.text.setTexts(this.sceneList.get(nowScene).getText());
+						this.text.resetNowTextNum();
+						this.pushNum_Z=0;
+					}
+
 				}//そのまま次のシーンへ
 				if(sceneList.get(nowScene).getEvent().size()>this.pushNum_Z) {
 					Action[] event =new Action[sceneList.get(nowScene).getEvent().get(this.pushNum_Z).size()];
@@ -151,7 +158,7 @@ public class TextMode extends GameMode {
 	//エンディングにいくかどうか
 	@Override
 	public boolean isEnd() {
-		return this.text.isEnd();
+		return this.endFlg;
 	}
 
 

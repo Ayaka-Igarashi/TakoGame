@@ -13,7 +13,6 @@ public class GameText {
 	private int nowTextNum;//現在のテキスト番号
 	private String[] nowText=new String[3];//現在の表示テキスト
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
-	private boolean endFlg;//テキストが終わりかどうか
 
 	//テキスト設定
 	public void setTexts(String[][] sceneTexts) {
@@ -31,7 +30,6 @@ public class GameText {
 		this.nowTextNum=0;
 		TextEffect.nowLine=0;
 		TextEffect.strFin=true;
-		this.endFlg=false;
 		return;
 	}
 
@@ -63,9 +61,6 @@ public class GameText {
 				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ
 					this.nowTextNum+=1;
 					TextEffect.firstPrm(tInfo);
-				}else if(this.nowTextNum==gameTexts.length-1) {//テキストの終了
-					this.endFlg=true;
-					TextEffect.nowLine=0;
 				}
 			}else if(TextEffect.strFin==false) {
 				TextEffect.strFin=true;
@@ -74,8 +69,4 @@ public class GameText {
 		return;
 	}
 
-	//テキストが終わりかどうか
-	public boolean isEnd() {
-		return this.endFlg;
-	}
 }

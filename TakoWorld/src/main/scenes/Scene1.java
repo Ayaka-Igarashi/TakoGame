@@ -15,7 +15,7 @@ public class Scene1 extends TWEvent{
 	public Scene1() {
 		//ラベル設定
 		this.label=SCENE_NUM.ONE;
-		this.next=SCENE_NUM.INTRO;//
+		this.next=SCENE_NUM.END;//次はエンディング
 
 		//テキスト設定
 		this.sceneText=TextData.s1_txt;
