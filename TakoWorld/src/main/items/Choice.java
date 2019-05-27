@@ -102,7 +102,6 @@ public class Choice extends GameItem{
 			}
 		}
 
-
 		return this;
 	}
 
