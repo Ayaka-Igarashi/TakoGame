@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import main.Action;
+import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
@@ -26,6 +27,8 @@ public class Scene2 extends TWEvent{
 		Action h1= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL);
 		Action h2=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED);
 
+		Action c0=new Action(ITEM_NUM.CHOICE,0);
+
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b2,h_rm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(h1)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(h2)));
@@ -34,6 +37,11 @@ public class Scene2 extends TWEvent{
 		this.A.add(new ArrayList<Action>(Arrays.asList(h1)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(h2)));
 
+	}
+
+	@Override
+	public void branch(TWInfo tInfo) {
+		return;
 	}
 
 	@Override

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import main.Action;
+import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
@@ -62,11 +63,17 @@ public class SceneIntro extends TWEvent{
 		}
 
 		@Override
+		public void branch(TWInfo tInfo) {
+			return;
+		}
+
+		@Override
 		public boolean isFinished(int pushNum) {
 			if(pushNum==A.size()) {
 				return true;
 			}
 			return false;
 		}
+
 
 }

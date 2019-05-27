@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import main.Action;
+import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
@@ -15,7 +16,6 @@ public class Scene1 extends TWEvent{
 	public Scene1() {
 		//ラベル設定
 		this.label=SCENE_NUM.ONE;
-		this.next=SCENE_NUM.TWO;
 
 		//テキスト設定
 		this.sceneText=TextData.s1_txt;
@@ -39,7 +39,17 @@ public class Scene1 extends TWEvent{
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
-		//this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));//ending
+	}
+
+	@Override
+	public void branch(TWInfo tInfo) {
+		if(tInfo.choice[0]==-1)return;
+		if(tInfo.choice[0]==0) {
+			this.next=SCENE_NUM.TWO;
+		}else {
+			this.next=SCENE_NUM.END;
+		}
+
 	}
 
 	@Override

@@ -78,6 +78,7 @@ public class TextMode extends GameMode {
 				this.text.keyControl(tInfo,KEY_STATE.Z,1);
 			}else {
 				if(this.sceneList.get(nowScene).isFinished(this.pushNum_Z)) {//シーンが終わったか
+					this.sceneList.get(nowScene).branch(tInfo);//分岐をきめる
 					if(this.sceneList.get(nowScene).getNext()==SCENE_NUM.END) {//エンディングに行く
 						this.endFlg=true;
 					}else {

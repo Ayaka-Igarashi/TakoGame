@@ -63,6 +63,7 @@ public class Choice extends GameItem{
 					this.choiceTime=true;//選択肢表示状態にする
 				}
 			}else if(this.choiceTime==true) {
+				tInfo.choice[this.nowText]=this.nowChoice;//選択した選択肢を保存
 				this.setVisible(0, false);
 				this.setVisible(1, false);
 				this.choiceTime=false;

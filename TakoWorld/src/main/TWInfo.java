@@ -10,6 +10,8 @@ public class TWInfo {
 	public boolean[] keyState;
 	public boolean[] keyReleased;//キーが押された後はなされたか
 
+	public int[] choice=new int[5];//選択したもの
+
 	public TWInfo() {
 		this.keyState=new boolean[8];
 		this.keyReleased=new boolean[8];
@@ -17,6 +19,11 @@ public class TWInfo {
 			this.keyState[i]=false;
 			this.keyReleased[i]=true;//放された後ということにする
 		}
+
+		for(int i=0;i<5;i++) {
+			this.choice[i]=-1;
+		}
+
 		this.pushTime=System.currentTimeMillis();
 	}
 

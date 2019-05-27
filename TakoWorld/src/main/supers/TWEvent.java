@@ -3,6 +3,7 @@ package main.supers;
 import java.util.ArrayList;
 
 import main.Action;
+import main.TWInfo;
 
 //イベントを作成する親クラス
 public abstract class TWEvent {
@@ -23,6 +24,8 @@ public abstract class TWEvent {
 	public String[][] getText(){
 		return this.sceneText;
 	}
+
+	public abstract void branch(TWInfo tInfo);
 
 	public abstract boolean isFinished(int pushNum);
 }
