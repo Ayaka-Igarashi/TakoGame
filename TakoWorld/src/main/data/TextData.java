@@ -1,6 +1,8 @@
 package main.data;
 
 public class TextData {
+	public static String[] choice1= {"走る","歩く","話かける"};
+
 	//最初の文は便宜上空白にする
 	public static String[][] intro_txt= {
 			{""},

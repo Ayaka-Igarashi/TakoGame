@@ -33,14 +33,16 @@ public class SceneIntro extends TWEvent{
 			Action b1=new Action(ITEM_NUM.BACK, Haikei.BLUE);
 			Action b2=new Action(ITEM_NUM.BACK, Haikei.CASTLE);
 
-			Action c1=new Action(ITEM_NUM.CHOICE,1);
+			Action c0=new Action(ITEM_NUM.CHOICE,0);
 			Action c2=new Action(ITEM_NUM.CHOICE,2);
+			Action c3=new Action(ITEM_NUM.CHOICE,3);
 
 			//イベント作成
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b2)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b1)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,c1)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,c2)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,c0)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(h2)));//
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
