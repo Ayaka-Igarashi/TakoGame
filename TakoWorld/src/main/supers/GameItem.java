@@ -9,7 +9,7 @@ import main.TWInfo;
 
 //背景とかキャラ
 public abstract class GameItem {
-	protected ArrayList<ImageState> imgList=new ArrayList<ImageState>();
+	private ArrayList<ImageState> imgList=new ArrayList<ImageState>();
 
 	public GameItem setImage(BufferedImage img) {
 		this.imgList.add(new ImageState(img,new Point2D.Double(0, 0),false));
@@ -20,12 +20,12 @@ public abstract class GameItem {
 		return this.imgList.get(idx).img;
 	}
 
-	public GameItem setVisible(int idx,boolean visible) {
+	protected GameItem setVisible(int idx,boolean visible) {
 		this.imgList.get(idx).visible=visible;
 		return this;
 	}
 
-	public GameItem setPosition(int idx,Point2D.Double position) {
+	protected GameItem setPosition(int idx,Point2D.Double position) {
 		this.imgList.get(idx).position=position;
 		return this;
 	}

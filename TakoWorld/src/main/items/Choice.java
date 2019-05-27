@@ -2,6 +2,7 @@ package main.items;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -14,17 +15,20 @@ import main.supers.GameItem;
 public class Choice extends GameItem{
 	private ArrayList<String[]> choiceText=new ArrayList<String[]>();
 	private int nowText;
-	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
+	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.BOLD,25);
 
 	private Point2D.Double[] loc= {
-			new Point2D.Double(200,80),
-			new Point2D.Double(200,200),
-			new Point2D.Double(200,320)
+			new Point2D.Double(280,80),
+			new Point2D.Double(280,190),
+			new Point2D.Double(280,300)
 	};
 
 	private boolean choiceTime=false;//選択肢が出ている状態か
 	private int choiceNum;//選択肢の数
 	private int nowChoice;//選択しようとしている選択肢番号
+
+	private int img_width;
+	private int img_height;
 
 	public Choice() {
 		this.choiceText.add(TextData.choice1);
@@ -37,6 +41,8 @@ public class Choice extends GameItem{
 	//初期画像設定
 	@Override
 	public void first() {
+		this.img_width=this.getImage(0).getWidth();
+		this.img_height=this.getImage(0).getHeight();
 	}
 
 	//毎回呼び出される
@@ -75,10 +81,17 @@ public class Choice extends GameItem{
 	}
 
 	public void drawText(TWInfo tInfo) {
-		tInfo.g.setColor(new Color(50,80,255));
+		tInfo.g.setColor(Color.BLACK);
 		tInfo.g.setFont(this.font);
+		FontMetrics fm=tInfo.g.getFontMetrics();
+		int sw;//文字の長さ
+		int sh;
 		for(int i=0;i<this.choiceText.get(0).length;i++) {
-			tInfo.g.drawString(this.choiceText.get(0)[i],(int)this.loc[i].x+40,(int)this.loc[i].y+40);
+			sw=fm.stringWidth(this.choiceText.get(0)[i]);
+			sh=fm.getHeight();
+			tInfo.g.drawString(this.choiceText.get(0)[i],
+					(int)this.loc[i].x+this.img_width/2-sw/2,
+					(int)this.loc[i].y+this.img_height/2+sh/2 -5);
 		}
 	}
 

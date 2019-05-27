@@ -124,10 +124,10 @@ public class TextMode extends GameMode {
 			if(this.choice.isChoiceTime()==true) {//選択中だったら動く
 				this.choice.keyControl(tInfo, KEY_STATE.UP, 0);
 			}
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.UP]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.UP]==false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+			//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.UP]=true;//キーが放された状態にする
 		}
 		//下キー
@@ -135,10 +135,10 @@ public class TextMode extends GameMode {
 			if(this.choice.isChoiceTime()==true) {//選択中だったら動く
 				this.choice.keyControl(tInfo, KEY_STATE.DOWN, 0);
 			}
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.DOWN]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.DOWN]==false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+			//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.DOWN]=true;//キーが放された状態にする
 		}
 
@@ -169,10 +169,9 @@ public class TextMode extends GameMode {
 		this.hotate.setImage(img_hotate2);
 		this.img_textBox=ImageIO.read(new File("media/UI.png"));
 		this.textBox.setImage(img_textBox);
-		this.img_choice=ImageIO.read(new File("media/haikei.png"));////////////
-		///cut
-		this.choice.setImage(img_choice);
-		this.choice.setImage(img_back2);
+		this.img_choice=ImageIO.read(new File("media/choice.png"));
+		this.choice.setImage(this.img_choice.getSubimage(0, 0, 230, 100));
+		this.choice.setImage(this.img_choice.getSubimage(0, 100, 230, 100));
 
 
 
