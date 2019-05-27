@@ -56,6 +56,7 @@ public class TextMode extends GameMode {
 		this.hotate.first();
 		this.textBox.first();
 		this.text.first();
+		this.choice.first();
 		this.nowScene=SCENE_NUM.INTRO;
 		this.text.setTexts(this.sceneList.get(nowScene).getText());
 		this.endFlg=false;
@@ -68,6 +69,7 @@ public class TextMode extends GameMode {
 		this.hotate.control(tInfo);
 		this.textBox.control(tInfo);
 		this.text.control(tInfo);
+		this.choice.control(tInfo);
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
 			if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
@@ -96,7 +98,7 @@ public class TextMode extends GameMode {
 						}else if(event[i].item==ITEM_NUM.TEXT) {
 							this.text.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 						}else if(event[i].item==ITEM_NUM.CHOICE) {
-	//追加する
+							this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 						}else if(event[i].item==ITEM_NUM.HOTATE) {
 							this.hotate.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 						}
@@ -117,6 +119,24 @@ public class TextMode extends GameMode {
 		}else if(tInfo.keyState[KEY_STATE.X]==false) {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
 		}
+		//上キー（選択肢用）
+		if(tInfo.keyState[KEY_STATE.UP]==true&&tInfo.keyReleased[KEY_STATE.UP]==true) {
+			if(this.choice.isChoiceTime()==true) {//選択中だったら動く
+				this.choice.keyControl(tInfo, KEY_STATE.UP, 0);
+			}
+			tInfo.keyReleased[KEY_STATE.UP]=false;//キーが放されていない状態にする
+		}else if(tInfo.keyState[KEY_STATE.UP]==false) {
+			tInfo.keyReleased[KEY_STATE.UP]=true;//キーが放された状態にする
+		}
+		//下キー
+		if(tInfo.keyState[KEY_STATE.DOWN]==true&&tInfo.keyReleased[KEY_STATE.DOWN]==true) {
+			if(this.choice.isChoiceTime()==true) {//選択中だったら動く
+				this.choice.keyControl(tInfo, KEY_STATE.DOWN, 0);
+			}
+			tInfo.keyReleased[KEY_STATE.DOWN]=false;//キーが放されていない状態にする
+		}else if(tInfo.keyState[KEY_STATE.DOWN]==false) {
+			tInfo.keyReleased[KEY_STATE.DOWN]=true;//キーが放された状態にする
+		}
 
 		return;
 	}
@@ -129,6 +149,7 @@ public class TextMode extends GameMode {
 		this.hotate.draw(tInfo);
 		this.textBox.draw(tInfo);
 		this.text.draw(tInfo);
+		this.choice.draw(tInfo);
 	}
 
 	//消すまでは1回しか呼び出されない
