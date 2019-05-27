@@ -1,7 +1,7 @@
 package main.data;
 
 public class TextData {
-	public static String[] choice1= {"走る","歩く","話かける"};
+	public static String[] choice1= {"探し回る","この場にいる","叫ぶ"};
 
 	//最初の文は便宜上空白にする
 	public static String[][] intro_txt= {
@@ -37,6 +37,11 @@ public class TextData {
 			{"なんか・・・","たこ焼きが喋ってた変な夢を見た気がする"},
 			{"そもそもなんだこの空間は","謎の世界にやってきてしまったのか"},
 			{"どうしよう・・・・","誰か助けてくれる人いないかな"}
+	};
+
+	public static String[][] s2_txt= {
+			{""},
+			{"きょろきょろ"}
 	};
 
 }

@@ -15,7 +15,7 @@ public class Scene1 extends TWEvent{
 	public Scene1() {
 		//ラベル設定
 		this.label=SCENE_NUM.ONE;
-		this.next=SCENE_NUM.END;//次はエンディング
+		this.next=SCENE_NUM.TWO;
 
 		//テキスト設定
 		this.sceneText=TextData.s1_txt;
@@ -28,6 +28,8 @@ public class Scene1 extends TWEvent{
 		Action h1= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL);
 		Action h2=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED);
 
+		Action c0=new Action(ITEM_NUM.CHOICE,0);
+
 		this.A.add(new ArrayList<Action>(Arrays.asList(b2,h_rm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h1)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
@@ -35,6 +37,8 @@ public class Scene1 extends TWEvent{
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h1)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h2)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
 		//this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));//ending
 	}
 
