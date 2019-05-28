@@ -10,25 +10,22 @@ import main.constant.SCENE_NUM;
 import main.data.TextData;
 import main.supers.TWEvent;
 
-public class Scene1 extends TWEvent{
-	public Scene1() {
-		//ラベル設定
-		this.label=SCENE_NUM.ONE;
+public class Scene3 extends TWEvent {
 
-		//テキスト設定
-		this.sceneText=TextData.s1_txt;
+	public Scene3() {
+		this.label=SCENE_NUM.THREE;
+		this.next=SCENE_NUM.END;
+
+		this.sceneText=TextData.s3_txt;
 
 		Action c0=new Action(ITEM_NUM.CHOICE,0);
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(b_castle,h_rm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,c0)));
+
 	}
 
 	@Override
@@ -41,7 +38,6 @@ public class Scene1 extends TWEvent{
 		}else if(tInfo.choice[0]==2) {
 			this.next=SCENE_NUM.FOUR;
 		}
-
 	}
 
 }

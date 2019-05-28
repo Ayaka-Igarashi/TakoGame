@@ -21,6 +21,8 @@ import main.items.Hotate;
 import main.items.TextBox;
 import main.scenes.Scene1;
 import main.scenes.Scene2;
+import main.scenes.Scene3;
+import main.scenes.Scene4;
 import main.scenes.SceneIntro;
 import main.supers.GameMode;
 import main.supers.SoundBox;
@@ -47,6 +49,8 @@ public class TextMode extends GameMode {
 		this.sceneList.add(SCENE_NUM.INTRO, new SceneIntro());//イベント追加
 		this.sceneList.add(SCENE_NUM.ONE,new Scene1());
 		this.sceneList.add(SCENE_NUM.TWO,new Scene2());
+		this.sceneList.add(SCENE_NUM.THREE,new Scene3());
+		this.sceneList.add(SCENE_NUM.FOUR,new Scene4());
 	}
 
 	//最初の画像設定とシーン設定

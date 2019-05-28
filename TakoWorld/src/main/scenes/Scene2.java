@@ -5,11 +5,8 @@ import java.util.Arrays;
 
 import main.Action;
 import main.TWInfo;
-import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
-import main.items.Haikei;
-import main.items.Hotate;
 import main.supers.TWEvent;
 
 public class Scene2 extends TWEvent{
@@ -19,23 +16,9 @@ public class Scene2 extends TWEvent{
 
 		this.sceneText=TextData.s2_txt;
 
-		Action nextText=new Action(ITEM_NUM.TEXT,1);
-
-		Action b2=new Action(ITEM_NUM.BACK, Haikei.CASTLE);
-
-		Action h_rm=new Action(ITEM_NUM.HOTATE,Hotate.REMOVE);
-		Action h1= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL);
-		Action h2=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED);
-
-		Action c0=new Action(ITEM_NUM.CHOICE,0);
-
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b2,h_rm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h1)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h2)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h1)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h2)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h1)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h2)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle,h_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(h_sw)));
 
 	}
 
@@ -43,13 +26,4 @@ public class Scene2 extends TWEvent{
 	public void branch(TWInfo tInfo) {
 		return;
 	}
-
-	@Override
-	public boolean isFinished(int pushNum) {
-		if(pushNum==A.size()) {
-			return true;
-		}
-		return false;
-	}
-
 }
