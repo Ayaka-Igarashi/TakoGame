@@ -18,6 +18,7 @@ import main.items.Choice;
 import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
+import main.items.TWMenu;
 import main.items.TextBox;
 import main.scenes.Scene1;
 import main.scenes.Scene2;
@@ -35,10 +36,12 @@ public class TextMode extends GameMode {
 	private TextBox textBox=new TextBox();
 	private GameText text=new GameText();
 	private Choice choice=new Choice();
+	private TWMenu menu=new TWMenu();
 	private BufferedImage img_back1,img_back2;
 	private BufferedImage img_hotate1,img_hotate2;
 	private BufferedImage img_textBox;
 	private BufferedImage img_choice;
+	private BufferedImage img_menu,img_arrow;
 
 	private ArrayList<TWEvent> sceneList =new ArrayList<TWEvent>();//イベントリスト
 	private int nowScene;//現在のシーン
@@ -63,6 +66,7 @@ public class TextMode extends GameMode {
 		this.textBox.first();
 		this.text.first();
 		this.choice.first();
+		this.menu.first();
 		this.nowScene=SCENE_NUM.INTRO;
 		this.text.setTexts(this.sceneList.get(nowScene).getText());
 		this.endFlg=false;
@@ -76,8 +80,9 @@ public class TextMode extends GameMode {
 		this.textBox.control(tInfo);
 		this.text.control(tInfo);
 		this.choice.control(tInfo);
+		//this.menu.control(tInfo);
 		//Zキーが押された瞬間の処理
-		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
+		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true&&this.menu.isMenuTime()==false) {
 			if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
 				this.text.keyControl(tInfo,KEY_STATE.Z,1);
 			}else {
@@ -115,37 +120,45 @@ public class TextMode extends GameMode {
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
-		}else if(tInfo.keyState[KEY_STATE.Z]==false) {
+		}else if(tInfo.keyState[KEY_STATE.Z]==false&&tInfo.keyReleased[KEY_STATE.Z]==false) {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
 		//Xキー
 		if(tInfo.keyState[KEY_STATE.X]==true&&tInfo.keyReleased[KEY_STATE.X]==true) {
-			//this.hotate.keyControl(tInfo,KEY_STATE.X);
+			this.menu.keyControl(tInfo,KEY_STATE.X,1);
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.X]=false;//キーが放されていない状態にする
-		}else if(tInfo.keyState[KEY_STATE.X]==false) {
+		}else if(tInfo.keyState[KEY_STATE.X]==false&&tInfo.keyReleased[KEY_STATE.X]==false) {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
+			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
 		//上キー（選択肢用）
 		if(tInfo.keyState[KEY_STATE.UP]==true&&tInfo.keyReleased[KEY_STATE.UP]==true) {
-			if(this.choice.isChoiceTime()==true) {//選択中だったら動く
+			if(this.menu.isMenuTime()==true) {
+				this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			}else if(this.choice.isChoiceTime()==true) {//選択中だったら動く
 				this.choice.keyControl(tInfo, KEY_STATE.UP, 0);
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
-			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.UP]=false;//キーが放されていない状態にする
-		}else if(tInfo.keyState[KEY_STATE.UP]==false) {
-			//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+		}else if(tInfo.keyState[KEY_STATE.UP]==false&&tInfo.keyReleased[KEY_STATE.UP]==false) {
+			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.UP]=true;//キーが放された状態にする
 		}
 		//下キー
 		if(tInfo.keyState[KEY_STATE.DOWN]==true&&tInfo.keyReleased[KEY_STATE.DOWN]==true) {
-			if(this.choice.isChoiceTime()==true) {//選択中だったら動く
+			if(this.menu.isMenuTime()==true) {
+				this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			}else if(this.choice.isChoiceTime()==true) {//選択中だったら動く
 				this.choice.keyControl(tInfo, KEY_STATE.DOWN, 0);
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
-			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.DOWN]=false;//キーが放されていない状態にする
-		}else if(tInfo.keyState[KEY_STATE.DOWN]==false) {
-			//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+		}else if(tInfo.keyState[KEY_STATE.DOWN]==false&&tInfo.keyReleased[KEY_STATE.DOWN]==false) {
+			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.DOWN]=true;//キーが放された状態にする
 		}
 
@@ -161,6 +174,7 @@ public class TextMode extends GameMode {
 		this.textBox.draw(tInfo);
 		this.text.draw(tInfo);
 		this.choice.draw(tInfo);
+		this.menu.draw(tInfo);
 	}
 
 	//消すまでは1回しか呼び出されない
@@ -168,17 +182,27 @@ public class TextMode extends GameMode {
 	public void loadMedia() throws IOException {
 		this.img_back1=ImageIO.read(new File("media/haikei.png"));
 		this.haikei.setImage(img_back1);
+
 		this.img_back2=ImageIO.read(new File("media/haikei2.png"));
 		this.haikei.setImage(img_back2);
+
 		this.img_hotate1=ImageIO.read(new File("media/kai.png"));
 		this.hotate.setImage(img_hotate1);
+
 		this.img_hotate2=ImageIO.read(new File("media/kai2.png"));
 		this.hotate.setImage(img_hotate2);
+
 		this.img_textBox=ImageIO.read(new File("media/UI.png"));
 		this.textBox.setImage(img_textBox);
+
 		this.img_choice=ImageIO.read(new File("media/choice.png"));
 		this.choice.setImage(this.img_choice.getSubimage(0, 0, 230, 100));
 		this.choice.setImage(this.img_choice.getSubimage(0, 100, 230, 100));
+
+		this.img_menu=ImageIO.read(new File("media/menu2.png"));
+		this.menu.setImage(img_menu);
+		this.img_arrow=ImageIO.read(new File("media/menu_arrow.png"));
+		this.menu.setImage(img_arrow);
 
 
 
@@ -199,11 +223,5 @@ public class TextMode extends GameMode {
 	public boolean isEnd() {
 		return this.endFlg;
 	}
-
-
-
-
-
-
 
 }

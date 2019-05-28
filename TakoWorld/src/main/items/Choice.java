@@ -25,7 +25,7 @@ public class Choice extends GameItem{
 
 	private boolean choiceTime=false;//選択肢が出ている状態か
 	private int choiceNum;//選択肢の数
-	private int nowChoice;//選択しようとしている選択肢番号
+	private int nowChoice=0;//選択しようとしている選択肢番号
 
 	private int img_width;
 	private int img_height;
