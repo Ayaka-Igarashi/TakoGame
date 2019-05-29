@@ -39,6 +39,7 @@ public class TextMode extends GameMode {
 	private TWMenu menu=new TWMenu();
 	private BufferedImage img_back1,img_back2;
 	private BufferedImage img_hotate1,img_hotate2;
+	private BufferedImage img_same1;
 	private BufferedImage img_textBox;
 	private BufferedImage img_choice;
 	private BufferedImage img_menu,img_arrow;
@@ -198,6 +199,9 @@ public class TextMode extends GameMode {
 
 		this.img_hotate2=ImageIO.read(new File("media/kai2.png"));
 		this.hotate.setImage(img_hotate2);
+
+		this.img_same1=ImageIO.read(new File("media/same1.png"));
+		this.hotate.setImage(img_same1);///
 
 		this.img_textBox=ImageIO.read(new File("media/UI.png"));
 		this.textBox.setImage(img_textBox);
