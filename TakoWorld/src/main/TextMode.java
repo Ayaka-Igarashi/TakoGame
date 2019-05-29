@@ -179,6 +179,8 @@ public class TextMode extends GameMode {
 		this.text.draw(tInfo);
 		this.choice.draw(tInfo);
 		this.menu.draw(tInfo);
+
+		this.modeLoad(tInfo);//ロードするときする
 		this.modeInfo(tInfo);//情報更新
 	}
 
@@ -238,6 +240,15 @@ public class TextMode extends GameMode {
 	public void modeInfo(TWInfo tInfo) {
 		tInfo.textModeInfo[0]=this.pushNum_Z;
 		tInfo.textModeInfo[1]=this.nowScene;
+	}
+
+	public void modeLoad(TWInfo tInfo) {
+		if(tInfo.isLoad==true) {
+			this.pushNum_Z=tInfo.textModeInfo[0];
+			this.nowScene=tInfo.textModeInfo[1];
+			tInfo.isLoad=false;
+			//System.out.println(this.pushNum_Z);
+		}
 	}
 
 }

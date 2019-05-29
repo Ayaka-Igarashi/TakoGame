@@ -61,8 +61,8 @@ public class TWMenu extends GameItem {
 				}else if(this.menuState==0||this.menuState==1||this.menuState==2){
 					if(this.confirmChoice==0) {//ok
 						if(this.menuState==0) {
-							this.menuState=3;
 							this.action(tInfo);//saveする
+							this.menuState=3;
 						}else if(this.menuState==1) {
 							this.menuState=4;
 						}else if(this.menuState==2) {
@@ -77,11 +77,11 @@ public class TWMenu extends GameItem {
 					this.nowChoice=0;
 					this.confirmChoice=0;
 				}else if(this.menuState==4) {//ロードします
-					this.menuState=-1;
 					this.nowChoice=0;
 					this.confirmChoice=0;
 					this.menuTime=false;
 					this.action(tInfo);//loadする
+					this.menuState=-1;
 				}
 			}
 		}
@@ -124,7 +124,7 @@ public class TWMenu extends GameItem {
 	public void action(TWInfo tInfo) {
 		if(this.menuState==0) {
 			tInfo.save();
-		}else if (this.menuState==1) {
+		}else if (this.menuState==4) {
 			tInfo.load();
 		}else if (this.menuState==2) {
 			this.exitFlg=true;

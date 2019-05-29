@@ -16,6 +16,8 @@ public class TWInfo {
 	public boolean[] keyState;
 	public boolean[] keyReleased;//キーが押された後はなされたか
 
+	public boolean isLoad;//ロードをするか
+
 	public int[] textModeInfo=new int[2];
 
 	public int[] choice=new int[5];//選択したもの
@@ -23,6 +25,7 @@ public class TWInfo {
 	public TWInfo() {
 		this.keyState=new boolean[8];
 		this.keyReleased=new boolean[8];
+		this.isLoad=false;
 		for(int i=0;i<8;i++) {
 			this.keyState[i]=false;
 			this.keyReleased[i]=true;//放された後ということにする
@@ -50,16 +53,17 @@ public class TWInfo {
 		try {
 			FileReader fr =new FileReader("saveData.txt");
 			BufferedReader br=new BufferedReader(fr);
-			while(true) {//
+			for(int i=0;i<2;i++) {//
 				String str=br.readLine();
-				if(str==null)break;
-				System.out.println(str);
+				this.textModeInfo[i]=Integer.parseInt(str);
+				System.out.println(this.textModeInfo[i]);
 			}
 			br.close();
 			fr.close();
 		} catch (IOException e) {
 			JOptionPane.showInputDialog("ロードできません");
 		}
+		this.isLoad=true;
 		return;
 	}
 
