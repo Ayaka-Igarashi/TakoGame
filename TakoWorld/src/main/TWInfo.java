@@ -50,7 +50,7 @@ public class TWInfo {
 		try {
 			FileReader fr =new FileReader("saveData.txt");
 			BufferedReader br=new BufferedReader(fr);
-			while(true) {
+			while(true) {//
 				String str=br.readLine();
 				if(str==null)break;
 				System.out.println(str);
