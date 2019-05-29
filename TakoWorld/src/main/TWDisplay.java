@@ -28,7 +28,6 @@ public class TWDisplay extends GameDisplay{
 		this.end=new TWEnd();
 		//追加していく
 		TWDisplay.current=this.title;
-
 	}
 
 	@Override
@@ -54,21 +53,24 @@ public class TWDisplay extends GameDisplay{
 			tInfo.g.drawImage(this.img_title,0,0,null);
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="スタート画面　PUSH Z";
+			String str ="NEW GAME      CONTINUE";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, 500);
 			//1回押したらもう押されないように
-			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
+			if(tInfo.keyState[KEY_STATE.Z]&&tInfo.keyReleased[KEY_STATE.Z]&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
 				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//効果音を流す
+				tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
+			}else if(tInfo.keyState[KEY_STATE.Z]==false) {
+				tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			}
-			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
+			if(tInfo.currentTime-tInfo.pushTime>300&&pushFlg==true) {//待ち時間を作る
 				GameDisplay.current=TWDisplay.this.main;
 				TWDisplay.this.mode.first();//初期画像設定
-				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);
+				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);//bgm
 				pushFlg=false;
 			}
 		}
@@ -90,12 +92,21 @@ public class TWDisplay extends GameDisplay{
 
 	//本編
 	public class TWMain extends GameDisplay{
-		boolean pushFlg=false;//ボタンが押されたか判定
+		//boolean pushFlg=false;//ボタンが押されたか判定
 
 		//繰り返し呼ばれる
 		@Override
 		public void show(TWInfo tInfo) {
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
+			if(TWDisplay.this.mode.isExit()) {
+				GameDisplay.current=TWDisplay.this.title;
+				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
+			}
+			if(TWDisplay.this.mode.isEnd()) {
+				GameDisplay.current=TWDisplay.this.end;
+				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
+			}
+			/*
 			if(TWDisplay.this.mode.isEnd()&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
@@ -104,7 +115,7 @@ public class TWDisplay extends GameDisplay{
 				GameDisplay.current=TWDisplay.this.end;
 				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//音楽を止める
 				pushFlg=false;
-			}
+			}*/
 		}
 
 		@Override

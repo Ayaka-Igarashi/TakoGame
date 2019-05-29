@@ -88,30 +88,39 @@ public class TWFrame {
 
 		private void setValue(int keyCode,boolean b) {
 			boolean[] keyState=TWFrame.this.tInfo.keyState;
+			//boolean[] keyReleased=TWFrame.this.tInfo.keyReleased;
 			switch(keyCode) {
 			case KeyEvent.VK_LEFT:
 				keyState[KEY_STATE.LEFT]=b;
+				//keyReleased[KEY_STATE.LEFT]=!b;
 				break;
 			case KeyEvent.VK_RIGHT:
 				keyState[KEY_STATE.RIGHT]=b;
+				//keyReleased[KEY_STATE.RIGHT]=!b;
 				break;
 			case KeyEvent.VK_UP:
 				keyState[KEY_STATE.UP]=b;
+				//keyReleased[KEY_STATE.UP]=!b;
 				break;
 			case KeyEvent.VK_DOWN:
 				keyState[KEY_STATE.DOWN]=b;
+				//keyReleased[KEY_STATE.DOWN]=!b;
 				break;
 			case KeyEvent.VK_Z:
 				keyState[KEY_STATE.Z]=b;
+				//keyReleased[KEY_STATE.Z]=!b;
 				break;
 			case KeyEvent.VK_X:
 				keyState[KEY_STATE.X]=b;
+				//keyReleased[KEY_STATE.X]=!b;
 				break;
 			case KeyEvent.VK_C:
 				keyState[KEY_STATE.C]=b;
+				//keyReleased[KEY_STATE.C]=!b;
 				break;
 			case KeyEvent.VK_SPACE:
 				keyState[KEY_STATE.SPACE]=b;
+				//keyReleased[KEY_STATE.SPACE]=!b;
 				break;
 			}
 

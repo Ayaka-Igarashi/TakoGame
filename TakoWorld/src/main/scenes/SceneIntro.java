@@ -23,7 +23,7 @@ public class SceneIntro extends TWEvent{
 
 			//イベント作成
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));/*
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
@@ -37,7 +37,7 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));*/
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));//固まったぞ
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
