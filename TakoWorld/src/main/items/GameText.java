@@ -58,8 +58,8 @@ public class GameText {
 	public void keyControl(TWInfo tInfo, int key,int action) {
 		if(key==KEY_STATE.Z) {
 			if(TextEffect.strFin==true) {
-				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ
-					this.nowTextNum+=1;
+				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ（表示テキストをaction(pushNumZ）に依存させたい
+					this.nowTextNum+=1;//修正するthis.nowTextNum=action;////////////////////////////ここ/////////////////////////
 					TextEffect.firstPrm(tInfo);
 				}
 			}else if(TextEffect.strFin==false) {

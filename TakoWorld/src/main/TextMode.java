@@ -112,7 +112,7 @@ public class TextMode extends GameMode {
 							}else if(event[i].item==ITEM_NUM.TEXTBOX) {
 								this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.TEXT) {
-								this.text.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+								this.text.keyControl(tInfo,KEY_STATE.Z,this.pushNum_Z);//this.pushNumZを送る
 							}else if(event[i].item==ITEM_NUM.CHOICE) {
 								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.HOTATE) {
