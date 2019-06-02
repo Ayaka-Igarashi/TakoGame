@@ -31,6 +31,7 @@ import main.supers.TWEvent;
 
 public class TextMode extends GameMode {
 	private int pushNum_Z;//Zキーを押した回数
+	private int textNum;//テキストの番号
 	private Haikei haikei=new Haikei();
 	private Hotate hotate=new Hotate();
 	private TextBox textBox=new TextBox();
@@ -62,6 +63,7 @@ public class TextMode extends GameMode {
 	@Override
 	public void first() {
 		this.pushNum_Z=0;
+		this.textNum=0;
 		this.haikei.first();
 		this.hotate.first();
 		this.textBox.first();
@@ -99,6 +101,7 @@ public class TextMode extends GameMode {
 							this.text.setTexts(this.sceneList.get(nowScene).getText());
 							this.text.resetNowTextNum();
 							this.pushNum_Z=0;
+							this.textNum=0;
 						}
 
 					}//そのまま次のシーンへ
@@ -112,7 +115,8 @@ public class TextMode extends GameMode {
 							}else if(event[i].item==ITEM_NUM.TEXTBOX) {
 								this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.TEXT) {
-								this.text.keyControl(tInfo,KEY_STATE.Z,this.pushNum_Z);//this.pushNumZを送る
+								this.textNum+=1;
+								this.text.keyControl(tInfo,KEY_STATE.Z,this.textNum);//this.pushNumZを送る
 							}else if(event[i].item==ITEM_NUM.CHOICE) {
 								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.HOTATE) {
@@ -243,15 +247,16 @@ public class TextMode extends GameMode {
 	//情報をTWInfoに更新する
 	public void modeInfo(TWInfo tInfo) {
 		tInfo.textModeInfo[0]=this.pushNum_Z;
-		tInfo.textModeInfo[1]=this.nowScene;
+		tInfo.textModeInfo[1]=this.textNum;
+		tInfo.textModeInfo[2]=this.nowScene;
 	}
 
 	public void modeLoad(TWInfo tInfo) {
 		if(tInfo.isLoad==true) {
 			this.pushNum_Z=tInfo.textModeInfo[0];
-			this.nowScene=tInfo.textModeInfo[1];
+			this.textNum=tInfo.textModeInfo[1];
+			this.nowScene=tInfo.textModeInfo[2];
 			tInfo.isLoad=false;
-			//System.out.println(this.pushNum_Z);
 		}
 	}
 

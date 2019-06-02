@@ -18,7 +18,7 @@ public class TWInfo {
 
 	public boolean isLoad;//ロードをするか
 
-	public int[] textModeInfo=new int[2];
+	public int[] textModeInfo=new int[3];
 
 	public int[] choice=new int[5];//選択したもの
 
@@ -41,7 +41,7 @@ public class TWInfo {
 	public void save() {
 		try {
 			FileWriter fw=new FileWriter("saveData.txt");
-			fw.write(this.textModeInfo[0]+"\n"+this.textModeInfo[1]);
+			fw.write(this.textModeInfo[0]+"\n"+this.textModeInfo[1]+"\n"+this.textModeInfo[2]);
 			fw.close();
 		} catch (IOException e) {
 			JOptionPane.showInputDialog("セーブできません");
@@ -53,7 +53,7 @@ public class TWInfo {
 		try {
 			FileReader fr =new FileReader("saveData.txt");
 			BufferedReader br=new BufferedReader(fr);
-			for(int i=0;i<2;i++) {//
+			for(int i=0;i<3;i++) {//
 				String str=br.readLine();
 				this.textModeInfo[i]=Integer.parseInt(str);
 				System.out.println(this.textModeInfo[i]);
