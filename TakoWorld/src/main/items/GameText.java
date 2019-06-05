@@ -25,6 +25,10 @@ public class GameText {
 		this.nowTextNum=0;
 	}
 
+	public void setNowTextNum(int num) {
+		this.nowTextNum=num;
+	}
+
 	//初期設定
 	public void first() {
 		this.nowTextNum=0;
@@ -59,7 +63,7 @@ public class GameText {
 		if(key==KEY_STATE.Z) {
 			if(TextEffect.strFin==true) {
 				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ（表示テキストをaction(pushNumZ）に依存させたい
-					this.nowTextNum=action;//修正するthis.nowTextNum=action;////////////////////////////ここ/////////////////////////
+					this.nowTextNum+=1;//修正するthis.nowTextNum=action;////////////////////////////ここ/////////////////////////
 					TextEffect.firstPrm(tInfo);
 				}
 			}else if(TextEffect.strFin==false) {
