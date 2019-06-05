@@ -18,7 +18,8 @@ public class TWInfo {
 
 	public boolean isLoad;//ロードをするか
 
-	public int[] textModeInfo=new int[3];
+	public TextMode modeInfo;//現在のゲームデータ
+	private int[] textModeInfo=new int[3];//現在のゲームデータprivate
 
 	public int[] choice=new int[5];//選択したもの
 
@@ -38,7 +39,24 @@ public class TWInfo {
 		this.pushTime=System.currentTimeMillis();
 	}
 
+	//セーブ時に情報の変換をする
+	private void dataConvert() {
+		textModeInfo[0]=this.modeInfo.getPushNumZ();
+		textModeInfo[1]=this.modeInfo.getTextNum();
+		textModeInfo[2]=this.modeInfo.getNowScene();
+	}
+
+	//ロード時にtextmodeを書き換える
+	private void dataApply() {
+		this.modeInfo.setPushNumZ(textModeInfo[0]);
+		this.modeInfo.setTextNum(textModeInfo[1]);
+		this.modeInfo.changeScene(textModeInfo[2]);
+		this.modeInfo.getText().setNowTextNum(textModeInfo[1]);
+	}
+
+	//セーブ
 	public void save() {
+		this.dataConvert();
 		try {
 			FileWriter fw=new FileWriter("saveData.txt");
 			fw.write(this.textModeInfo[0]+"\n"+this.textModeInfo[1]+"\n"+this.textModeInfo[2]);
@@ -49,6 +67,7 @@ public class TWInfo {
 		return;
 	}
 
+	//ロード
 	public void load() {
 		try {
 			FileReader fr =new FileReader("saveData.txt");
@@ -63,7 +82,8 @@ public class TWInfo {
 		} catch (IOException e) {
 			JOptionPane.showInputDialog("ロードできません");
 		}
-		this.isLoad=true;
+		//this.isLoad=true;
+		this.dataApply();
 		return;
 	}
 

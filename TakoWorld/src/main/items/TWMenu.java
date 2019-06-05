@@ -6,7 +6,9 @@ import java.awt.geom.Point2D;
 
 import main.TWInfo;
 import main.constant.KEY_STATE;
+import main.constant.MUSIC_NUM;
 import main.supers.GameItem;
+import main.supers.SoundBox;
 
 public class TWMenu extends GameItem {
 	private boolean menuTime;
@@ -96,24 +98,30 @@ public class TWMenu extends GameItem {
 			}
 		}
 		if(key==KEY_STATE.UP) {
-			if(this.menuState==-1) {
-				if(this.nowChoice>0) {
-					this.nowChoice-=1;
+			if(this.menuTime==true) {
+				if(this.menuState==-1) {
+					if(this.nowChoice>0) {
+						this.nowChoice-=1;
+					}
+				}else {
+					if(this.confirmChoice>0) {
+						this.confirmChoice-=1;
+					}
 				}
-			}else {
-				if(this.confirmChoice>0) {
-					this.confirmChoice-=1;
-				}
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
 		}else if(key==KEY_STATE.DOWN) {
-			if(this.menuState==-1) {
-				if(this.nowChoice<2) {
-					this.nowChoice+=1;
+			if(this.menuTime==true) {
+				if(this.menuState==-1) {
+					if(this.nowChoice<2) {
+						this.nowChoice+=1;
+					}
+				}else {
+					if(this.confirmChoice<1) {
+						this.confirmChoice+=1;
+					}
 				}
-			}else {
-				if(this.confirmChoice<1) {
-					this.confirmChoice+=1;
-				}
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
 		}
 		return;

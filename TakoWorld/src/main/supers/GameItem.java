@@ -58,4 +58,5 @@ public abstract class GameItem {
 
 	public abstract void keyControl(TWInfo tInfo,int key,int action);
 
+
 }

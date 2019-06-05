@@ -31,13 +31,14 @@ import main.supers.TWEvent;
 
 public class TextMode extends GameMode {
 	private int pushNum_Z;//Zキーを押した回数(イベント取り出しとシーン判定)
-	//private int textNum;//テキストの番号
+	private int textNum;//テキストの番号
 	private Haikei haikei=new Haikei();
 	private Hotate hotate=new Hotate();
 	private TextBox textBox=new TextBox();
 	private GameText text=new GameText();
 	private Choice choice=new Choice();
 	private TWMenu menu=new TWMenu();
+
 	private BufferedImage img_back1,img_back2;
 	private BufferedImage img_hotate1,img_hotate2;
 	private BufferedImage img_same1;
@@ -58,10 +59,42 @@ public class TextMode extends GameMode {
 		this.sceneList.add(SCENE_NUM.FOUR,new Scene4());
 	}
 
+	////////////////////  set   &   get   //////////////////////
+	public int getPushNumZ() {
+		return this.pushNum_Z;
+	}
+	public void setPushNumZ(int pushNumZ) {
+		this.pushNum_Z=pushNumZ;
+	}
+
+	public int getTextNum() {
+		return textNum;
+	}
+	public void setTextNum(int textNum) {
+		this.textNum = textNum;
+	}
+
+	public int getNowScene() {
+		return nowScene;
+	}
+	public void setNowScene(int nowScene) {
+		this.nowScene = nowScene;
+	}
+
+	public GameText getText() {
+		return text;
+	}
+	public void setText(GameText text) {
+		this.text = text;
+	}
+	////////////////////////////////////////////////////////////
+
+
+
 	//シーンを変える
-	private void changeScene(int sceneNum) {
+	public void changeScene(int sceneNum) {
 		this.nowScene=sceneNum;
-		this.text.setTexts(this.sceneList.get(nowScene).getText());
+		this.getText().setTexts(this.sceneList.get(nowScene).getText());
 	}
 
 	//最初の画像設定とシーン設定
@@ -69,15 +102,15 @@ public class TextMode extends GameMode {
 	@Override
 	public void first() {
 		this.pushNum_Z=0;
-		//this.textNum=0;
+		this.textNum=0;
 		this.haikei.first();
 		this.hotate.first();
 		this.textBox.first();
-		this.text.first();
+		this.getText().first();
 		this.choice.first();
 		this.menu.first();
 		this.nowScene=SCENE_NUM.INTRO;
-		this.text.setTexts(this.sceneList.get(nowScene).getText());
+		this.getText().setTexts(this.sceneList.get(nowScene).getText());
 		this.endFlg=false;
 	}
 
@@ -87,26 +120,30 @@ public class TextMode extends GameMode {
 		this.haikei.control(tInfo);
 		this.hotate.control(tInfo);
 		this.textBox.control(tInfo);
-		this.text.control(tInfo);
+		this.getText().control(tInfo);
 		this.choice.control(tInfo);
 		this.menu.control(tInfo);
+
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
 			if(this.menu.isMenuTime()==true) {//メニュー画面状態か
 				this.menu.keyControl(tInfo,KEY_STATE.Z,1);
 			}else if(this.menu.isMenuTime()==false) {
 				if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
-					this.text.keyControl(tInfo,KEY_STATE.Z,1);
+					this.getText().keyControl(tInfo,KEY_STATE.Z,1);
 				}else {
+					if(this.choice.isChoiceTime()==true) {//選択肢状態だったら選択してそのまま次へ
+						this.choice.keyControl(tInfo, KEY_STATE.Z, 0);
+					}
 					if(this.sceneList.get(nowScene).isFinished(this.pushNum_Z)) {//シーンが終わったか
 						this.sceneList.get(nowScene).branch(tInfo);//分岐をきめる
 						if(this.sceneList.get(nowScene).getNext()==SCENE_NUM.END) {//エンディングに行く
 							this.endFlg=true;
 						}else {
 							this.changeScene(this.sceneList.get(nowScene).getNext());//次のシーンに行く
-							this.text.resetNowTextNum();
+							this.getText().resetNowTextNum();
 							this.pushNum_Z=0;
-							//this.textNum=0;
+							this.textNum=0;
 						}
 
 					}//そのまま次のシーンへ
@@ -120,8 +157,8 @@ public class TextMode extends GameMode {
 							}else if(event[i].item==ITEM_NUM.TEXTBOX) {
 								this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.TEXT) {
-								//this.textNum+=1;
-								this.text.keyControl(tInfo,KEY_STATE.Z,0);//this.pushNumZを送る
+								this.textNum+=1;
+								this.getText().keyControl(tInfo,KEY_STATE.Z,this.textNum);//this.pushNumZを送る
 							}else if(event[i].item==ITEM_NUM.CHOICE) {
 								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.HOTATE) {
@@ -139,6 +176,7 @@ public class TextMode extends GameMode {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
+
 		//Xキー
 		if(tInfo.keyState[KEY_STATE.X]==true&&tInfo.keyReleased[KEY_STATE.X]==true) {
 			this.menu.keyControl(tInfo,KEY_STATE.X,1);
@@ -148,29 +186,21 @@ public class TextMode extends GameMode {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
+
 		//上キー（選択肢用）
 		if(tInfo.keyState[KEY_STATE.UP]==true&&tInfo.keyReleased[KEY_STATE.UP]==true) {
-			if(this.menu.isMenuTime()==true) {
-				this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
-				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			}else if(this.choice.isChoiceTime()==true) {//選択中だったら動く
-				this.choice.keyControl(tInfo, KEY_STATE.UP, 0);
-				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			}
+			this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
+			this.choice.keyControl(tInfo, KEY_STATE.UP, 0);
 			tInfo.keyReleased[KEY_STATE.UP]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.UP]==false&&tInfo.keyReleased[KEY_STATE.UP]==false) {
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.UP]=true;//キーが放された状態にする
 		}
+
 		//下キー
 		if(tInfo.keyState[KEY_STATE.DOWN]==true&&tInfo.keyReleased[KEY_STATE.DOWN]==true) {
-			if(this.menu.isMenuTime()==true) {
-				this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
-				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			}else if(this.choice.isChoiceTime()==true) {//選択中だったら動く
-				this.choice.keyControl(tInfo, KEY_STATE.DOWN, 0);
-				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			}
+			this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
+			this.choice.keyControl(tInfo, KEY_STATE.DOWN, 0);
 			tInfo.keyReleased[KEY_STATE.DOWN]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.DOWN]==false&&tInfo.keyReleased[KEY_STATE.DOWN]==false) {
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
@@ -179,6 +209,7 @@ public class TextMode extends GameMode {
 		return;
 	}
 
+
 	//毎回呼び出されるやつ
 	@Override
 	public void draw(TWInfo tInfo) {
@@ -186,12 +217,13 @@ public class TextMode extends GameMode {
 		this.haikei.draw(tInfo);
 		this.hotate.draw(tInfo);
 		this.textBox.draw(tInfo);
-		this.text.draw(tInfo);
+		this.getText().draw(tInfo);
 		this.choice.draw(tInfo);
 		this.menu.draw(tInfo);
 
-		this.modeLoad(tInfo);//ロードするときする
-		this.modeInfo(tInfo);//情報更新
+		//this.modeLoad(tInfo);//ロードするときする
+		//this.modeInfo(tInfo);//情報更新
+		tInfo.modeInfo=this;//情報更新
 	}
 
 	//消すまでは1回しか呼び出されない
@@ -238,6 +270,9 @@ public class TextMode extends GameMode {
 		}
 
 	}
+
+
+
 	//エンディングにいくかどうか
 	@Override
 	public boolean isEnd() {
@@ -248,22 +283,24 @@ public class TextMode extends GameMode {
 	public boolean isExit() {
 		return this.menu.isExit();
 	}
-
+/*
 	//情報をTWInfoに更新する
 	public void modeInfo(TWInfo tInfo) {
+		//tInfo.modeInfo=this;
+
 		tInfo.textModeInfo[0]=this.pushNum_Z;
-		//tInfo.textModeInfo[1]=this.textNum;
+		tInfo.textModeInfo[1]=this.textNum;
 		tInfo.textModeInfo[2]=this.nowScene;
 	}
 
 	public void modeLoad(TWInfo tInfo) {
 		if(tInfo.isLoad==true) {
 			this.pushNum_Z=tInfo.textModeInfo[0];//
-			//this.textNum=tInfo.textModeInfo[1];//
+			this.textNum=tInfo.textModeInfo[1];//とりあえず残す
 			this.changeScene(tInfo.textModeInfo[2]);
-			this.text.setNowTextNum(tInfo.textModeInfo[1]);
+			this.getText().setNowTextNum(tInfo.textModeInfo[1]);
 			tInfo.isLoad=false;
 		}
 	}
-
+*/
 }

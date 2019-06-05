@@ -8,8 +8,10 @@ import java.util.ArrayList;
 
 import main.TWInfo;
 import main.constant.KEY_STATE;
+import main.constant.MUSIC_NUM;
 import main.data.TextData;
 import main.supers.GameItem;
+import main.supers.SoundBox;
 
 //選択肢
 public class Choice extends GameItem{
@@ -23,7 +25,7 @@ public class Choice extends GameItem{
 			new Point2D.Double(280,300)
 	};
 
-	private boolean choiceTime=false;//選択肢が出ている状態か
+	private boolean choiceTime;//選択肢が出ている状態か
 	private int choiceNum;//選択肢の数
 	private int nowChoice=0;//選択しようとしている選択肢番号
 
@@ -43,6 +45,7 @@ public class Choice extends GameItem{
 	public void first() {
 		this.img_width=this.getImage(0).getWidth();
 		this.img_height=this.getImage(0).getHeight();
+		this.choiceTime=false;
 	}
 
 	//毎回呼び出される
@@ -71,12 +74,18 @@ public class Choice extends GameItem{
 			}
 		}
 		if(key==KEY_STATE.UP) {
-			if(this.nowChoice>0) {
-				this.nowChoice-=1;
+			if(this.choiceTime==true) {
+				if(this.nowChoice>0) {
+					this.nowChoice-=1;
+				}
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
 		}else if(key==KEY_STATE.DOWN) {
-			if(this.nowChoice<this.choiceNum-1) {
-				this.nowChoice+=1;
+			if(this.choiceTime==true) {
+				if(this.nowChoice<this.choiceNum-1) {
+					this.nowChoice+=1;
+				}
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
 		}
 	}
