@@ -221,9 +221,7 @@ public class TextMode extends GameMode {
 		this.choice.draw(tInfo);
 		this.menu.draw(tInfo);
 
-		//this.modeLoad(tInfo);//ロードするときする
-		//this.modeInfo(tInfo);//情報更新
-		tInfo.modeInfo=this;//情報更新
+		tInfo.textModeInfo=this;//情報更新
 	}
 
 	//消すまでは1回しか呼び出されない
@@ -283,24 +281,5 @@ public class TextMode extends GameMode {
 	public boolean isExit() {
 		return this.menu.isExit();
 	}
-/*
-	//情報をTWInfoに更新する
-	public void modeInfo(TWInfo tInfo) {
-		//tInfo.modeInfo=this;
 
-		tInfo.textModeInfo[0]=this.pushNum_Z;
-		tInfo.textModeInfo[1]=this.textNum;
-		tInfo.textModeInfo[2]=this.nowScene;
-	}
-
-	public void modeLoad(TWInfo tInfo) {
-		if(tInfo.isLoad==true) {
-			this.pushNum_Z=tInfo.textModeInfo[0];//
-			this.textNum=tInfo.textModeInfo[1];//とりあえず残す
-			this.changeScene(tInfo.textModeInfo[2]);
-			this.getText().setNowTextNum(tInfo.textModeInfo[1]);
-			tInfo.isLoad=false;
-		}
-	}
-*/
 }

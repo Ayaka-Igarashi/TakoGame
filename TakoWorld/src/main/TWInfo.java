@@ -16,17 +16,14 @@ public class TWInfo {
 	public boolean[] keyState;
 	public boolean[] keyReleased;//キーが押された後はなされたか
 
-	public boolean isLoad;//ロードをするか
-
-	public TextMode modeInfo;//現在のゲームデータ
-	private int[] textModeInfo=new int[3];//現在のゲームデータprivate
+	public TextMode textModeInfo;//現在のゲームデータ
+	private int[] saveData=new int[3];//セーブデータ
 
 	public int[] choice=new int[5];//選択したもの
 
 	public TWInfo() {
 		this.keyState=new boolean[8];
 		this.keyReleased=new boolean[8];
-		this.isLoad=false;
 		for(int i=0;i<8;i++) {
 			this.keyState[i]=false;
 			this.keyReleased[i]=true;//放された後ということにする
@@ -41,17 +38,17 @@ public class TWInfo {
 
 	//セーブ時に情報の変換をする
 	private void dataConvert() {
-		textModeInfo[0]=this.modeInfo.getPushNumZ();
-		textModeInfo[1]=this.modeInfo.getTextNum();
-		textModeInfo[2]=this.modeInfo.getNowScene();
+		saveData[0]=this.textModeInfo.getPushNumZ();
+		saveData[1]=this.textModeInfo.getTextNum();
+		saveData[2]=this.textModeInfo.getNowScene();
 	}
 
 	//ロード時にtextmodeを書き換える
 	private void dataApply() {
-		this.modeInfo.setPushNumZ(textModeInfo[0]);
-		this.modeInfo.setTextNum(textModeInfo[1]);
-		this.modeInfo.changeScene(textModeInfo[2]);
-		this.modeInfo.getText().setNowTextNum(textModeInfo[1]);
+		this.textModeInfo.setPushNumZ(saveData[0]);
+		this.textModeInfo.setTextNum(saveData[1]);
+		this.textModeInfo.changeScene(saveData[2]);
+		this.textModeInfo.getText().setNowTextNum(saveData[1]);
 	}
 
 	//セーブ
@@ -59,7 +56,7 @@ public class TWInfo {
 		this.dataConvert();
 		try {
 			FileWriter fw=new FileWriter("saveData.txt");
-			fw.write(this.textModeInfo[0]+"\n"+this.textModeInfo[1]+"\n"+this.textModeInfo[2]);
+			fw.write(this.saveData[0]+"\n"+this.saveData[1]+"\n"+this.saveData[2]);
 			fw.close();
 		} catch (IOException e) {
 			JOptionPane.showInputDialog("セーブできません");
@@ -74,15 +71,14 @@ public class TWInfo {
 			BufferedReader br=new BufferedReader(fr);
 			for(int i=0;i<3;i++) {//
 				String str=br.readLine();
-				this.textModeInfo[i]=Integer.parseInt(str);
-				System.out.println(this.textModeInfo[i]);
+				this.saveData[i]=Integer.parseInt(str);
+				System.out.println(this.saveData[i]);
 			}
 			br.close();
 			fr.close();
 		} catch (IOException e) {
 			JOptionPane.showInputDialog("ロードできません");
 		}
-		//this.isLoad=true;
 		this.dataApply();
 		return;
 	}
