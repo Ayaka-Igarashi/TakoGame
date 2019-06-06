@@ -23,6 +23,7 @@ public class TWFrame {
 		this.mainWindow=new JFrame("TakoWorld");
 		this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.mainWindow.setSize(800,600);
+		this.mainWindow.setUndecorated(true);//タイトルバー消す
 		this.mainWindow.setLocationRelativeTo(null);
 		this.mainWindow.setVisible(true);
 		this.mainWindow.setResizable(false);

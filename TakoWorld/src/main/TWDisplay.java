@@ -48,6 +48,7 @@ public class TWDisplay extends GameDisplay{
 	public class TWTitle extends GameDisplay{
 		private BufferedImage img_title;
 		boolean pushFlg=false;//ボタンが押されたか判定
+		private int nowChoice=0;//選択しているもの
 
 		@Override
 		public void show(TWInfo tInfo) {
@@ -62,7 +63,12 @@ public class TWDisplay extends GameDisplay{
 
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="TITLE";
+			String str;
+			//test用
+			if(this.nowChoice==0) {str ="start";}
+			else if(this.nowChoice==1) {str="continue";}
+			else {str="close";}
+
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
@@ -70,6 +76,10 @@ public class TWDisplay extends GameDisplay{
 
 			//1回押したらもう押されないように
 			if(tInfo.keyState[KEY_STATE.Z]&&tInfo.keyReleased[KEY_STATE.Z]&&pushFlg==false) {
+				if(this.nowChoice==2) {
+					this.nowChoice=0;
+					System.exit(0);//ゲームを終了する
+				}
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
 				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//効果音を流す
@@ -77,17 +87,40 @@ public class TWDisplay extends GameDisplay{
 			}else if(tInfo.keyState[KEY_STATE.Z]==false) {
 				tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			}
+
+			//上
+			if(tInfo.keyState[KEY_STATE.UP]&&tInfo.keyReleased[KEY_STATE.UP]&&pushFlg==false) {
+				if(this.nowChoice>0) {
+					this.nowChoice-=1;
+				}
+				tInfo.keyReleased[KEY_STATE.UP]=false;//キーが放されていない状態にする
+			}else if(tInfo.keyState[KEY_STATE.UP]==false) {
+				tInfo.keyReleased[KEY_STATE.UP]=true;//キーが放された状態にする
+			}
+
+			//下
+			if(tInfo.keyState[KEY_STATE.DOWN]&&tInfo.keyReleased[KEY_STATE.DOWN]&&pushFlg==false) {
+				if(this.nowChoice<2) {
+					this.nowChoice+=1;
+				}
+				tInfo.keyReleased[KEY_STATE.DOWN]=false;//キーが放されていない状態にする
+			}else if(tInfo.keyState[KEY_STATE.DOWN]==false) {
+				tInfo.keyReleased[KEY_STATE.DOWN]=true;//キーが放された状態にする
+			}
+
+			//待ち時間後の処理
 			if(tInfo.currentTime-tInfo.pushTime>300&&pushFlg==true) {//待ち時間を作る
 				GameDisplay.current=TWDisplay.this.main;
 				TWDisplay.this.mode.first();//初期画像設定
 				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);//bgm
 				pushFlg=false;
+				this.nowChoice=0;//選択をデフォルトの位置にする
 			}
 		}
 
 		@Override
 		public void loadMedia() throws IOException {
-			this.img_title=ImageIO.read(new File("media/title.png"));
+			this.img_title=ImageIO.read(new File("media/title_s.png"));
 			//音楽読み込み
 			try {
 				SoundBox.singleton.loadSound(new File("media/bom34.wav"));
