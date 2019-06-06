@@ -50,19 +50,24 @@ public class TWDisplay extends GameDisplay{
 		boolean pushFlg=false;//ボタンが押されたか判定
 
 		@Override
-		public void show(TWInfo tInfo) {/*
+		public void show(TWInfo tInfo) {
+			/*
+			//別の処理方法
 			ImageFilter filter = new AreaAveragingScaleFilter(800,600);
 			ImageProducer p = new FilteredImageSource(this.img_title.getSource(), filter);
 			java.awt.Image dstImage = Toolkit.getDefaultToolkit().createImage(p);
 			tInfo.g.drawImage(dstImage, 0, 0, null);*/
-			tInfo.g.drawImage(this.img_title.getScaledInstance(800, 600, Image.SCALE_AREA_AVERAGING),0,0,null);
+
+			tInfo.g.drawImage(this.img_title.getScaledInstance(800, 600, Image.SCALE_SMOOTH),0,0,null);
+
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="NEW GAME      CONTINUE";
+			String str ="TITLE";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, 500);
+
 			//1回押したらもう押されないように
 			if(tInfo.keyState[KEY_STATE.Z]&&tInfo.keyReleased[KEY_STATE.Z]&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;

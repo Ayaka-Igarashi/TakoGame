@@ -37,7 +37,7 @@ public abstract class GameItem {
 		//AffineTransform oldtr=tInfo.g.getTransform();
 		//tInfo.g.translate(this.position.x, this.position.y);
 		//tInfo.g.rotate(0,0,0);
-		tInfo.g.drawImage(this.imgList.get(idx).img,
+		tInfo.g.drawImage(this.imgList.get(idx).img,//.getScaledInstance(800, 600, Image.SCALE_SMOOTH)
 				(int)this.imgList.get(idx).position.x, (int)this.imgList.get(idx).position.y,null);
 		//tInfo.g.setTransform(oldtr);
 		return;
