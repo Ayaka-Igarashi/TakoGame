@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.geom.Point2D;
 
 import main.TWInfo;
+import main.items.GameText;
 
 //一文を文字送り
 public class TextEffect {
@@ -21,7 +22,7 @@ public class TextEffect {
 
 	//毎回呼び出される
 	public static String[] textAnim(TWInfo tInfo,String[] texts) {
-		String[] nowText=new String[3];
+		String[] nowText=new String[GameText.gyoNum];
 		Point2D.Double pointer=new Point2D.Double();
 		int charNum;
 		int nowNum;
@@ -67,7 +68,7 @@ public class TextEffect {
 		if(TextEffect.nowLine==texts.length-1&&TextEffect.strFin==true) {
 			//ポインターの位置
 			pointer.x=165+texts[TextEffect.nowLine].length()*20;
-			pointer.y=460+(TextEffect.nowLine)*27;//////////
+			pointer.y=460+(TextEffect.nowLine)*GameText.gyoSp;//////////
 			tInfo.g.setBackground(new Color(50,80,255));
 			tInfo.g.fillRect((int)pointer.x, (int)pointer.y, 12,12);
 		}

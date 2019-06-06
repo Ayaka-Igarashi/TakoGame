@@ -11,7 +11,9 @@ import main.functions.TextEffect;
 public class GameText {
 	private String[][] gameTexts;
 	private int nowTextNum;//現在のテキスト番号
-	private String[] nowText=new String[3];//現在の表示テキスト
+	public static final int gyoNum=2;//行数
+	public static final int gyoSp=45;//行間隔
+	private String[] nowText=new String[GameText.gyoNum];//現在の表示テキスト
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
 
 	//テキスト設定
@@ -43,7 +45,7 @@ public class GameText {
 		tInfo.g.setFont(this.font);
 		this.calcText(tInfo);
 		for(int i=0;i<gameTexts[nowTextNum].length;i++) {
-			tInfo.g.drawString(this.nowText[i],155,470+i*27);
+			tInfo.g.drawString(this.nowText[i],155,470+i*GameText.gyoSp);
 		}
 		return;
 	}
