@@ -8,6 +8,8 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import main.constant.SAVE_DATA;
+
 public class TWInfo {
 	public Graphics2D g;
 	public double frameTime;
@@ -17,38 +19,49 @@ public class TWInfo {
 	public boolean[] keyReleased;//キーが押された後はなされたか
 
 	public TextMode textModeInfo;//現在のゲームデータ
-	private int[] saveData=new int[3];//セーブデータ
+	private int[] saveData=new int[SAVE_DATA.NUM];//セーブデータ
 
 	public int[] choice=new int[5];//選択したもの
 
+	//初期化
 	public TWInfo() {
 		this.keyState=new boolean[8];
 		this.keyReleased=new boolean[8];
-		for(int i=0;i<8;i++) {
+		for(int i=0;i<this.keyState.length;i++) {
 			this.keyState[i]=false;
 			this.keyReleased[i]=true;//放された後ということにする
 		}
 
-		for(int i=0;i<5;i++) {
+		for(int i=0;i<this.choice.length;i++) {
 			this.choice[i]=-1;
 		}
+
+		//////////////////////この初期化は消すべし//////////////////////////////////////////////////
+		for(int i=0;i<this.saveData.length;i++) {
+			this.saveData[i]=-1;
+		}
+
 
 		this.pushTime=System.currentTimeMillis();
 	}
 
 	//セーブ時に情報の変換をする
 	private void dataConvert() {
-		saveData[0]=this.textModeInfo.getPushNumZ();
-		saveData[1]=this.textModeInfo.getTextNum();
-		saveData[2]=this.textModeInfo.getNowScene();
+		saveData[SAVE_DATA.PUSHNUM_Z]=this.textModeInfo.getPushNumZ();
+		saveData[SAVE_DATA.TEXT_NUM]=this.textModeInfo.getTextNum();
+		saveData[SAVE_DATA.SCENE_NUM]=this.textModeInfo.getNowScene();
+		saveData[SAVE_DATA.CHOICE_TIME]=this.textModeInfo.getChoice().getChoiceTimeInt();
+
+		//saveData[SAVE_DATA.TEXTBOX]=this.textModeInfo.getTextBox().
 	}
 
 	//ロード時にtextmodeを書き換える
 	private void dataApply() {
-		this.textModeInfo.setPushNumZ(saveData[0]);
-		this.textModeInfo.setTextNum(saveData[1]);
-		this.textModeInfo.changeScene(saveData[2]);
-		this.textModeInfo.getText().setNowTextNum(saveData[1]);
+		this.textModeInfo.setPushNumZ(saveData[SAVE_DATA.PUSHNUM_Z]);
+		this.textModeInfo.setTextNum(saveData[SAVE_DATA.TEXT_NUM]);
+		this.textModeInfo.changeScene(saveData[SAVE_DATA.SCENE_NUM]);
+		this.textModeInfo.getText().setNowTextNum(saveData[SAVE_DATA.TEXT_NUM]);
+		this.textModeInfo.getChoice().applyChoiceTime(saveData[SAVE_DATA.CHOICE_TIME]);
 	}
 
 	//セーブ
@@ -56,7 +69,9 @@ public class TWInfo {
 		this.dataConvert();
 		try {
 			FileWriter fw=new FileWriter("saveData.txt");
-			fw.write(this.saveData[0]+"\n"+this.saveData[1]+"\n"+this.saveData[2]);
+			for(int i=0;i<this.saveData.length;i++) {
+				fw.write(this.saveData[i]+"\n");
+			}
 			fw.close();
 		} catch (IOException e) {
 			JOptionPane.showInputDialog("セーブできません");
@@ -69,7 +84,7 @@ public class TWInfo {
 		try {
 			FileReader fr =new FileReader("saveData.txt");
 			BufferedReader br=new BufferedReader(fr);
-			for(int i=0;i<3;i++) {//
+			for(int i=0;i<this.saveData.length;i++) {
 				String str=br.readLine();
 				this.saveData[i]=Integer.parseInt(str);
 				System.out.println(this.saveData[i]);

@@ -60,41 +60,39 @@ public class TextMode extends GameMode {
 	}
 
 	////////////////////  set   &   get   //////////////////////
-	public int getPushNumZ() {
-		return this.pushNum_Z;
-	}
-	public void setPushNumZ(int pushNumZ) {
-		this.pushNum_Z=pushNumZ;
-	}
+	public int getPushNumZ() {return this.pushNum_Z;}
+	public void setPushNumZ(int pushNumZ) {this.pushNum_Z=pushNumZ;}
 
-	public int getTextNum() {
-		return textNum;
-	}
-	public void setTextNum(int textNum) {
-		this.textNum = textNum;
-	}
+	public int getTextNum() {return textNum;}
+	public void setTextNum(int textNum) {this.textNum = textNum;}
 
-	public int getNowScene() {
-		return nowScene;
-	}
-	public void setNowScene(int nowScene) {
-		this.nowScene = nowScene;
-	}
+	public int getNowScene() {return nowScene;}
+	public void setNowScene(int nowScene) {this.nowScene = nowScene;}
 
-	public GameText getText() {
-		return text;
-	}
-	public void setText(GameText text) {
-		this.text = text;
-	}
+	public GameText getText() {return text;}
+	public void setText(GameText text) {this.text = text;}
+
+	public Haikei getHaikei() {return haikei;}
+	public void setHaikei(Haikei haikei) {this.haikei = haikei;}
+
+	public Hotate getHotate() {return hotate;}
+	public void setHotate(Hotate hotate) {this.hotate = hotate;}
+
+	public TextBox getTextBox() {return textBox;}
+	public void setTextBox(TextBox textBox) {this.textBox = textBox;}
+
+	public Choice getChoice() {return choice;}
+	public void setChoice(Choice choice) {this.choice = choice;}
 	////////////////////////////////////////////////////////////
+
+
 
 
 
 	//シーンを変える
 	public void changeScene(int sceneNum) {
 		this.nowScene=sceneNum;
-		this.getText().setTexts(this.sceneList.get(nowScene).getText());
+		this.text.setTexts(this.sceneList.get(nowScene).getText());
 	}
 
 	//最初の画像設定とシーン設定
@@ -106,11 +104,11 @@ public class TextMode extends GameMode {
 		this.haikei.first();
 		this.hotate.first();
 		this.textBox.first();
-		this.getText().first();
+		this.text.first();
 		this.choice.first();
 		this.menu.first();
 		this.nowScene=SCENE_NUM.INTRO;
-		this.getText().setTexts(this.sceneList.get(nowScene).getText());
+		this.text.setTexts(this.sceneList.get(nowScene).getText());
 		this.endFlg=false;
 	}
 
@@ -120,7 +118,7 @@ public class TextMode extends GameMode {
 		this.haikei.control(tInfo);
 		this.hotate.control(tInfo);
 		this.textBox.control(tInfo);
-		this.getText().control(tInfo);
+		this.text.control(tInfo);
 		this.choice.control(tInfo);
 		this.menu.control(tInfo);
 
@@ -130,7 +128,7 @@ public class TextMode extends GameMode {
 				this.menu.keyControl(tInfo,KEY_STATE.Z,1);
 			}else if(this.menu.isMenuTime()==false) {
 				if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
-					this.getText().keyControl(tInfo,KEY_STATE.Z,1);
+					this.text.keyControl(tInfo,KEY_STATE.Z,1);
 				}else {
 					if(this.choice.isChoiceTime()==true) {//選択肢状態だったら選択してそのまま次へ
 						this.choice.keyControl(tInfo, KEY_STATE.Z, 0);
@@ -141,7 +139,7 @@ public class TextMode extends GameMode {
 							this.endFlg=true;
 						}else {
 							this.changeScene(this.sceneList.get(nowScene).getNext());//次のシーンに行く
-							this.getText().resetNowTextNum();
+							this.text.resetNowTextNum();
 							this.pushNum_Z=0;
 							this.textNum=0;
 						}
@@ -158,7 +156,7 @@ public class TextMode extends GameMode {
 								this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.TEXT) {
 								this.textNum+=1;
-								this.getText().keyControl(tInfo,KEY_STATE.Z,this.textNum);//this.pushNumZを送る
+								this.text.keyControl(tInfo,KEY_STATE.Z,this.textNum);//this.pushNumZを送る
 							}else if(event[i].item==ITEM_NUM.CHOICE) {
 								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.HOTATE) {
@@ -217,7 +215,7 @@ public class TextMode extends GameMode {
 		this.haikei.draw(tInfo);
 		this.hotate.draw(tInfo);
 		this.textBox.draw(tInfo);
-		this.getText().draw(tInfo);
+		this.text.draw(tInfo);
 		this.choice.draw(tInfo);
 		this.menu.draw(tInfo);
 
@@ -234,7 +232,9 @@ public class TextMode extends GameMode {
 		this.haikei.setImage(img_back2);
 
 		this.img_hotate1=ImageIO.read(new File("media/kai.png"));
-		this.hotate.setImage(img_hotate1);
+
+		this.hotate.setImage(this.img_hotate1);
+		//(BufferedImage)img_hotate1.getScaledInstance(80, 60, BufferedImage.SCALE_DEFAULT)
 
 		this.img_hotate2=ImageIO.read(new File("media/kai2.png"));
 		this.hotate.setImage(img_hotate2);

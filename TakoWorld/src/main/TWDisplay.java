@@ -3,6 +3,7 @@ package main;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -49,8 +50,12 @@ public class TWDisplay extends GameDisplay{
 		boolean pushFlg=false;//ボタンが押されたか判定
 
 		@Override
-		public void show(TWInfo tInfo) {
-			tInfo.g.drawImage(this.img_title,0,0,null);
+		public void show(TWInfo tInfo) {/*
+			ImageFilter filter = new AreaAveragingScaleFilter(800,600);
+			ImageProducer p = new FilteredImageSource(this.img_title.getSource(), filter);
+			java.awt.Image dstImage = Toolkit.getDefaultToolkit().createImage(p);
+			tInfo.g.drawImage(dstImage, 0, 0, null);*/
+			tInfo.g.drawImage(this.img_title.getScaledInstance(800, 600, Image.SCALE_AREA_AVERAGING),0,0,null);
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
 			String str ="NEW GAME      CONTINUE";

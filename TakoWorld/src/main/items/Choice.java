@@ -40,6 +40,25 @@ public class Choice extends GameItem{
 		return this.choiceTime;
 	}
 
+	//セーブ用のセッター
+	public int getChoiceTimeInt() {
+		if(this.choiceTime==true) {
+			return 1;
+		}else {
+			return 0;
+		}
+	}
+	//データ適用
+	public void applyChoiceTime(int choiceTime) {
+		if(choiceTime==1) {
+			this.choiceTime=true;
+		}else {
+			this.choiceTime=false;
+		}
+		this.nowChoice=0;
+	}
+
+
 	//初期画像設定
 	@Override
 	public void first() {
