@@ -18,13 +18,21 @@ public class TWFrame {
 	JFrame mainWindow;
 	BufferStrategy strategy;
 	TWDisplay display=new TWDisplay();
+	public static int title_bar_height;//タイトルバーの長さ
 
 	TWFrame(){
 		this.mainWindow=new JFrame("TakoWorld");
-		//this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.mainWindow.setSize(800,600);
-		this.mainWindow.setUndecorated(true);//タイトルバー消す
+		this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//タイトルバーの長さを求める
+		this.mainWindow.pack();
+		TWFrame.title_bar_height=this.mainWindow.getInsets().top;
+		System.out.println(TWFrame.title_bar_height);
+
+		//this.mainWindow.setUndecorated(true);//タイトルバー消す
+
+		this.mainWindow.setSize(800,600+TWFrame.title_bar_height);
 		this.mainWindow.setLocationRelativeTo(null);
+
 		this.mainWindow.setVisible(true);
 		this.mainWindow.setResizable(false);
 

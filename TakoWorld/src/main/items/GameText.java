@@ -6,9 +6,10 @@ import java.awt.Font;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.functions.TextEffect;
+import main.supers.GameItem;
 
 //テキスト
-public class GameText {
+public class GameText extends GameItem{
 	private String[][] gameTexts;
 	private int nowTextNum;//現在のテキスト番号
 	public static final int gyoNum=2;//行数
@@ -31,6 +32,7 @@ public class GameText {
 		this.nowTextNum=num;
 	}
 
+	@Override
 	//初期設定
 	public void first() {
 		this.nowTextNum=0;
@@ -39,15 +41,17 @@ public class GameText {
 		return;
 	}
 
+	@Override
 	//テキストを表示する
-	public void draw(TWInfo tInfo) {
+	public GameItem draw(TWInfo tInfo) {
 		tInfo.g.setColor(new Color(50,80,255));
 		tInfo.g.setFont(this.font);
 		this.calcText(tInfo);
 		for(int i=0;i<gameTexts[nowTextNum].length;i++) {
-			tInfo.g.drawString(this.nowText[i],155,470+i*GameText.gyoSp);
+			this.drawStr(tInfo, this.nowText[i], 155, 470+i*GameText.gyoSp);
+			//tInfo.g.drawString(this.nowText[i],155,470+i*GameText.gyoSp);
 		}
-		return;
+		return this;
 	}
 
 	//現在の表示テキストを求める
@@ -56,10 +60,12 @@ public class GameText {
 		return;
 	}
 
+	@Override
 	public void control(TWInfo tInfo) {
 		return;
 	}
 
+	@Override
 	//押された瞬間の処理
 	public void keyControl(TWInfo tInfo, int key,int action) {
 		if(key==KEY_STATE.Z) {

@@ -59,7 +59,7 @@ public class TWDisplay extends GameDisplay{
 			java.awt.Image dstImage = Toolkit.getDefaultToolkit().createImage(p);
 			tInfo.g.drawImage(dstImage, 0, 0, null);*/
 
-			tInfo.g.drawImage(this.img_title.getScaledInstance(800, 600, Image.SCALE_SMOOTH),0,0,null);
+			tInfo.g.drawImage(this.img_title.getScaledInstance(800, 600, Image.SCALE_SMOOTH),0,TWFrame.title_bar_height,null);
 
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);

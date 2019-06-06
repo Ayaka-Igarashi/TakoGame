@@ -146,16 +146,16 @@ public class TWMenu extends GameItem {
 		tInfo.g.setFont(this.font);
 		if(this.menuState==-1) {
 			for(int i=0;i<this.menuText.length;i++) {
-				tInfo.g.drawString(this.menuText[i],(int)this.loc[i].x-100,(int)this.loc[i].y+25);
+				this.drawStr(tInfo,this.menuText[i],(int)this.loc[i].x-100,(int)this.loc[i].y+25);
 			}
 		}else if(this.menuState==0||this.menuState==1||this.menuState==2){
-			tInfo.g.drawString(this.confirm[this.menuState],200,200);
-			tInfo.g.drawString(this.yesNo[0],350,240);//yes
-			tInfo.g.drawString(this.yesNo[1],350,300);//no
+			this.drawStr(tInfo,this.confirm[this.menuState],200,200);
+			this.drawStr(tInfo,this.yesNo[0],350,240);//yes
+			this.drawStr(tInfo,this.yesNo[1],350,300);//no
 		}else if(this.menuState==3) {
-			tInfo.g.drawString("セーブしました",200,200);
+			this.drawStr(tInfo,"セーブしました",200,200);
 		}else if(this.menuState==4) {
-			tInfo.g.drawString("ロードします",200,200);
+			this.drawStr(tInfo,"ロードします",200,200);
 		}
 	}
 

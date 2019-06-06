@@ -1,10 +1,12 @@
 package main.supers;
 
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import main.ImageState;
+import main.TWFrame;
 import main.TWInfo;
 
 //背景とかキャラ
@@ -30,16 +32,24 @@ public abstract class GameItem {
 		return this;
 	}
 
+	//文字を線画する
+	public void drawStr(TWInfo tInfo,String str,int x,int y) {
+		tInfo.g.drawString(str,x,y+TWFrame.title_bar_height);
+		return;
+	}
+
 	//1つの画像を線画する
 	public void drawOne(TWInfo tInfo,int idx){
 		if(this.imgList.get(idx).visible==false)return;
 		//変形は今のところしない
-		//AffineTransform oldtr=tInfo.g.getTransform();
-		//tInfo.g.translate(this.position.x, this.position.y);
-		//tInfo.g.rotate(0,0,0);
+		AffineTransform oldtr=tInfo.g.getTransform();
+		tInfo.g.translate(0, TWFrame.title_bar_height);
+		tInfo.g.rotate(0,0,0);
 		tInfo.g.drawImage(this.imgList.get(idx).img,//.getScaledInstance(800, 600, Image.SCALE_SMOOTH)
-				(int)this.imgList.get(idx).position.x, (int)this.imgList.get(idx).position.y,null);
-		//tInfo.g.setTransform(oldtr);
+				(int)this.imgList.get(idx).position.x,
+				(int)this.imgList.get(idx).position.y,
+				null);
+		tInfo.g.setTransform(oldtr);
 		return;
 	}
 

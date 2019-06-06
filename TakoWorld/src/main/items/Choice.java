@@ -118,7 +118,8 @@ public class Choice extends GameItem{
 		for(int i=0;i<this.choiceText.get(0).length;i++) {
 			sw=fm.stringWidth(this.choiceText.get(0)[i]);
 			sh=fm.getHeight();
-			tInfo.g.drawString(this.choiceText.get(0)[i],
+			this.drawStr(tInfo,
+					this.choiceText.get(0)[i],
 					(int)this.loc[i].x+this.img_width/2-sw/2,
 					(int)this.loc[i].y+this.img_height/2+sh/2 -5);
 		}
