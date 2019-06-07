@@ -254,6 +254,8 @@ public class TextMode extends GameMode {
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_back.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox2_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox2_R.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_R.png")));
 
