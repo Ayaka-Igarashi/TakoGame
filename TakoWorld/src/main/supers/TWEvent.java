@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import main.Action;
 import main.TWInfo;
 import main.constant.ITEM_NUM;
+import main.items.CharaSame;
 import main.items.Haikei;
 import main.items.Hotate;
 
@@ -22,6 +23,9 @@ public abstract class TWEvent {
 	protected Action h_rm=new Action(ITEM_NUM.HOTATE,Hotate.REMOVE);
 	protected Action h_nm= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL);
 	protected Action h_sw=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED);
+	protected Action s_rm=new Action(ITEM_NUM.SAME,CharaSame.REMOVE);
+	protected Action s_nmL=new Action(ITEM_NUM.SAME,CharaSame.NORMAL_L);
+	protected Action s_nmR=new Action(ITEM_NUM.SAME,CharaSame.NORMAL_R);
 
 	//イベントを返す
 	public ArrayList<ArrayList<Action>> getEvent(){

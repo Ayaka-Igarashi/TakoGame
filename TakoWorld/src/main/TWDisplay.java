@@ -120,10 +120,10 @@ public class TWDisplay extends GameDisplay{
 
 		@Override
 		public void loadMedia() throws IOException {
-			this.img_title=ImageIO.read(new File("media/title_s.png"));
+			this.img_title=ImageIO.read(new File("media/title.png"));
 			//音楽読み込み
 			try {
-				SoundBox.singleton.loadSound(new File("media/bom34.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/bom34.wav"));
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {

@@ -14,6 +14,7 @@ import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
 import main.constant.SCENE_NUM;
 import main.functions.TextEffect;
+import main.items.CharaSame;
 import main.items.Choice;
 import main.items.GameText;
 import main.items.Haikei;
@@ -34,17 +35,13 @@ public class TextMode extends GameMode {
 	private int textNum;//テキストの番号
 	private Haikei haikei=new Haikei();
 	private Hotate hotate=new Hotate();
+	private CharaSame same=new CharaSame();
 	private TextBox textBox=new TextBox();
 	private GameText text=new GameText();
 	private Choice choice=new Choice();
 	private TWMenu menu=new TWMenu();
 
-	private BufferedImage img_back1,img_back2;
-	private BufferedImage img_hotate1,img_hotate2;
-	private BufferedImage img_same1;
-	private BufferedImage img_textBox;
 	private BufferedImage img_choice;
-	private BufferedImage img_menu,img_arrow;
 
 	private ArrayList<TWEvent> sceneList =new ArrayList<TWEvent>();//イベントリスト
 	private int nowScene;//現在のシーン
@@ -103,6 +100,7 @@ public class TextMode extends GameMode {
 		this.textNum=0;
 		this.haikei.first();
 		this.hotate.first();
+		this.same.first();
 		this.textBox.first();
 		this.text.first();
 		this.choice.first();
@@ -117,6 +115,7 @@ public class TextMode extends GameMode {
 	public void control(TWInfo tInfo) {
 		this.haikei.control(tInfo);
 		this.hotate.control(tInfo);
+		this.same.control(tInfo);
 		this.textBox.control(tInfo);
 		this.text.control(tInfo);
 		this.choice.control(tInfo);
@@ -161,6 +160,8 @@ public class TextMode extends GameMode {
 								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.HOTATE) {
 								this.hotate.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.SAME) {
+								this.same.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}
 						}
 						this.pushNum_Z+=1;//押した回数に1を足す
@@ -214,6 +215,7 @@ public class TextMode extends GameMode {
 		this.control(tInfo);
 		this.haikei.draw(tInfo);
 		this.hotate.draw(tInfo);
+		this.same.draw(tInfo);
 		this.textBox.draw(tInfo);
 		this.text.draw(tInfo);
 		this.choice.draw(tInfo);
@@ -225,42 +227,37 @@ public class TextMode extends GameMode {
 	//消すまでは1回しか呼び出されない
 	@Override
 	public void loadMedia() throws IOException {
-		this.img_back1=ImageIO.read(new File("media/haikei.png"));
-		this.haikei.setImage(img_back1);
+		this.haikei.setImage(ImageIO.read(new File("media/haikei_default.png")));
+		this.haikei.setImage(ImageIO.read(new File("media/haikei2.png")));
 
-		this.img_back2=ImageIO.read(new File("media/haikei2.png"));
-		this.haikei.setImage(img_back2);
+		this.hotate.setImage(ImageIO.read(new File("media/kai.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/kai2.png")));
 
-		this.img_hotate1=ImageIO.read(new File("media/kai.png"));
+		this.same.setImage(ImageIO.read(new File("media/same/same_body_L.png")));
+		this.same.setImage(ImageIO.read(new File("media/same/same_body_R.png")));
+		this.same.setImage(ImageIO.read(new File("media/same/same_face_default_L.png")));
+		this.same.setImage(ImageIO.read(new File("media/same/same_face_default_R.png")));
 
-		this.hotate.setImage(this.img_hotate1);
-		//(BufferedImage)img_hotate1.getScaledInstance(80, 60, BufferedImage.SCALE_DEFAULT)
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_back.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_R.png")));
 
-		this.img_hotate2=ImageIO.read(new File("media/kai2.png"));
-		this.hotate.setImage(img_hotate2);
-
-		this.img_same1=ImageIO.read(new File("media/same1.png"));
-		this.hotate.setImage(img_same1);///
-
-		this.img_textBox=ImageIO.read(new File("media/UI.png"));
-		this.textBox.setImage(img_textBox);
 
 		this.img_choice=ImageIO.read(new File("media/choice.png"));
 		this.choice.setImage(this.img_choice.getSubimage(0, 0, 230, 100));
 		this.choice.setImage(this.img_choice.getSubimage(0, 100, 230, 100));
 
-		this.img_menu=ImageIO.read(new File("media/menu.png"));
-		this.menu.setImage(img_menu);
-		this.img_arrow=ImageIO.read(new File("media/menu_arrow.png"));
-		this.menu.setImage(img_arrow);
-
+		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
+		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
 
 
 		//音楽読み込み
 		try {
-			SoundBox.singleton.loadSound(new File("media/question.wav"));
+			SoundBox.singleton.loadSound(new File("media/sound/question.wav"));
 			SoundBox.singleton.setLoop(MUSIC_NUM.QUESTION, 0, 331000);//ループ設定
-			SoundBox.singleton.loadSound(new File("media/choice.wav"));
+			SoundBox.singleton.loadSound(new File("media/sound/choice.wav"));
 		}catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
 		}catch (LineUnavailableException e) {

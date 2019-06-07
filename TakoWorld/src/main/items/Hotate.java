@@ -38,10 +38,6 @@ public class Hotate extends GameChara{
 				this.setVisible(1, true);
 			}
 		}
-		if(key==KEY_STATE.X) {
-			this.setVisible(0, true);
-			this.setVisible(1, false);
-		}
 		return;
 	}
 

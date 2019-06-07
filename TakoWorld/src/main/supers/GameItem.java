@@ -23,12 +23,16 @@ public abstract class GameItem {
 	}
 
 	protected GameItem setVisible(int idx,boolean visible) {
-		this.imgList.get(idx).visible=visible;
+		if(this.imgList.size()>idx) {
+			this.imgList.get(idx).visible=visible;
+		}
 		return this;
 	}
 
 	protected GameItem setPosition(int idx,Point2D.Double position) {
-		this.imgList.get(idx).position=position;
+		if(this.imgList.size()>idx) {
+			this.imgList.get(idx).position=position;
+		}
 		return this;
 	}
 

@@ -20,8 +20,8 @@ public class Scene1 extends TWEvent{
 
 		Action c0=new Action(ITEM_NUM.CHOICE,0);
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(b_castle,h_rm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm,b_nm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(b_castle,h_rm,s_nmL)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm,b_nm,s_rm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw,b_castle)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw,b_nm)));

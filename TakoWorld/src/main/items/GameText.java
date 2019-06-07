@@ -44,7 +44,7 @@ public class GameText extends GameItem{
 	@Override
 	//テキストを表示する
 	public GameItem draw(TWInfo tInfo) {
-		tInfo.g.setColor(new Color(50,80,255));
+		tInfo.g.setColor(new Color(50,80,55));
 		tInfo.g.setFont(this.font);
 		this.calcText(tInfo);
 		for(int i=0;i<gameTexts[nowTextNum].length;i++) {

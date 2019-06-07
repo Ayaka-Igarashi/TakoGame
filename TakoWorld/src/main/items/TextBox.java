@@ -8,6 +8,10 @@ public class TextBox extends GameItem {
 	@Override
 	public void first() {
 		this.setVisible(0, true);
+		//this.setVisible(1, true);
+		//this.setVisible(2, true);
+		this.setVisible(3, true);
+		this.setVisible(4, true);
 		return;
 	}
 
