@@ -52,7 +52,10 @@ public class TWInfo {
 		saveData[SAVE_DATA.SCENE_NUM]=this.textModeInfo.getNowScene();
 		saveData[SAVE_DATA.CHOICE_TIME]=this.textModeInfo.getChoice().getChoiceTimeInt();
 
+		saveData[SAVE_DATA.HAIKEI]=this.textModeInfo.getHaikei().nowState;
 		//saveData[SAVE_DATA.TEXTBOX]=this.textModeInfo.getTextBox().
+		saveData[SAVE_DATA.HOTATE]=this.textModeInfo.getHotate().nowState;
+		saveData[SAVE_DATA.SAME]=this.textModeInfo.getCharaSame().nowState;
 	}
 
 	//ロード時にtextmodeを書き換える
@@ -62,6 +65,13 @@ public class TWInfo {
 		this.textModeInfo.changeScene(saveData[SAVE_DATA.SCENE_NUM]);
 		this.textModeInfo.getText().setNowTextNum(saveData[SAVE_DATA.TEXT_NUM]);
 		this.textModeInfo.getChoice().applyChoiceTime(saveData[SAVE_DATA.CHOICE_TIME]);
+
+		this.textModeInfo.getHaikei().nowState=saveData[SAVE_DATA.HAIKEI];
+		this.textModeInfo.getHaikei().isChange=true;
+		this.textModeInfo.getHotate().nowState=saveData[SAVE_DATA.HOTATE];
+		this.textModeInfo.getHotate().isChange=true;
+		this.textModeInfo.getCharaSame().nowState=saveData[SAVE_DATA.SAME];
+		this.textModeInfo.getCharaSame().isChange=true;
 	}
 
 	//セーブ
@@ -87,7 +97,7 @@ public class TWInfo {
 			for(int i=0;i<this.saveData.length;i++) {
 				String str=br.readLine();
 				this.saveData[i]=Integer.parseInt(str);
-				System.out.println(this.saveData[i]);
+				System.out.println("save "+i+" : "+this.saveData[i]);
 			}
 			br.close();
 			fr.close();

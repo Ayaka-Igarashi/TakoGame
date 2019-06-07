@@ -75,6 +75,9 @@ public class TextMode extends GameMode {
 	public Hotate getHotate() {return hotate;}
 	public void setHotate(Hotate hotate) {this.hotate = hotate;}
 
+	public CharaSame getCharaSame() {return same;}
+	public void getCharaSame(CharaSame same) {this.same = same;}
+
 	public TextBox getTextBox() {return textBox;}
 	public void setTextBox(TextBox textBox) {this.textBox = textBox;}
 
@@ -95,7 +98,7 @@ public class TextMode extends GameMode {
 	//最初の画像設定とシーン設定
 	//最初から始めるごとに呼び出される
 	@Override
-	public void first() {
+	public void first(TWInfo tInfo) {
 		this.pushNum_Z=0;
 		this.textNum=0;
 		this.haikei.first();
@@ -108,9 +111,11 @@ public class TextMode extends GameMode {
 		this.nowScene=SCENE_NUM.INTRO;
 		this.text.setTexts(this.sceneList.get(nowScene).getText());
 		this.endFlg=false;
+
+		tInfo.textModeInfo=this;
 	}
 
-	//画面操作+キー操作(どの画像を表示するかなど)
+	//画面操作
 	@Override
 	public void control(TWInfo tInfo) {
 		this.haikei.control(tInfo);
@@ -121,6 +126,11 @@ public class TextMode extends GameMode {
 		this.choice.control(tInfo);
 		this.menu.control(tInfo);
 
+		return;
+	}
+
+	//キー操作(どの画像を表示するかなど)
+	public void keyControl(TWInfo tInfo) {
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
 			if(this.menu.isMenuTime()==true) {//メニュー画面状態か
@@ -209,10 +219,13 @@ public class TextMode extends GameMode {
 	}
 
 
+
 	//毎回呼び出されるやつ
 	@Override
 	public void draw(TWInfo tInfo) {
+		this.keyControl(tInfo);
 		this.control(tInfo);
+
 		this.haikei.draw(tInfo);
 		this.hotate.draw(tInfo);
 		this.same.draw(tInfo);
@@ -227,8 +240,8 @@ public class TextMode extends GameMode {
 	//消すまでは1回しか呼び出されない
 	@Override
 	public void loadMedia() throws IOException {
+		this.haikei.setImage(ImageIO.read(new File("media/haikei.png")));
 		this.haikei.setImage(ImageIO.read(new File("media/haikei_default.png")));
-		this.haikei.setImage(ImageIO.read(new File("media/haikei2.png")));
 
 		this.hotate.setImage(ImageIO.read(new File("media/kai.png")));
 		this.hotate.setImage(ImageIO.read(new File("media/kai2.png")));

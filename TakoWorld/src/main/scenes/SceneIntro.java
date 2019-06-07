@@ -22,8 +22,8 @@ public class SceneIntro extends TWEvent{
 			this.sceneText=TextData.intro_txt;
 
 			//イベント作成
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
@@ -40,18 +40,19 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));//固まったぞ
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle,h_rm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_pp)));//..きろ
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));//..きろ
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_nmL)));//起きろって
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_nmR)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_rm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_nmL)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));

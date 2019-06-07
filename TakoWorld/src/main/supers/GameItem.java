@@ -11,6 +11,8 @@ import main.TWInfo;
 
 //背景とかキャラ
 public abstract class GameItem {
+	public int nowState;//現在の状態
+	public boolean isChange;//画像を切り替えるか
 	private ArrayList<ImageState> imgList=new ArrayList<ImageState>();
 
 	public GameItem setImage(BufferedImage img) {

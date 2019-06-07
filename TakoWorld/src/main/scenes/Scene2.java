@@ -16,7 +16,7 @@ public class Scene2 extends TWEvent{
 
 		this.sceneText=TextData.s2_txt;
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle,h_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(h_sw)));
 

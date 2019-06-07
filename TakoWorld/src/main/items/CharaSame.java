@@ -11,6 +11,7 @@ public class CharaSame extends GameChara {
 
 	@Override
 	public void first() {
+		this.nowState=CharaSame.REMOVE;
 		this.setVisible(0, false);
 		this.setVisible(1, false);
 		this.setVisible(2, false);
@@ -19,6 +20,25 @@ public class CharaSame extends GameChara {
 
 	@Override
 	public void control(TWInfo tInfo) {
+		if(this.isChange==true) {
+			if(this.nowState==CharaSame.REMOVE) {
+				this.setVisible(0, false);
+				this.setVisible(1, false);
+				this.setVisible(2, false);
+				this.setVisible(3, false);
+			}else if(this.nowState==CharaSame.NORMAL_L) {
+				this.setVisible(0, true);
+				this.setVisible(1, false);
+				this.setVisible(2, true);
+				this.setVisible(3, false);
+			}else if(this.nowState==CharaSame.NORMAL_R) {
+				this.setVisible(0, false);
+				this.setVisible(1, true);
+				this.setVisible(2, false);
+				this.setVisible(3, true);
+			}
+			this.isChange=false;
+		}
 		return;
 
 	}
@@ -26,22 +46,8 @@ public class CharaSame extends GameChara {
 	@Override
 	public void keyControl(TWInfo tInfo, int key, int action) {
 		if(key==KEY_STATE.Z) {
-			if(action==CharaSame.REMOVE) {
-				this.setVisible(0, false);
-				this.setVisible(1, false);
-				this.setVisible(2, false);
-				this.setVisible(3, false);
-			}else if(action==CharaSame.NORMAL_L) {
-				this.setVisible(0, true);
-				this.setVisible(1, false);
-				this.setVisible(2, true);
-				this.setVisible(3, false);
-			}else if(action==CharaSame.NORMAL_R) {
-				this.setVisible(0, false);
-				this.setVisible(1, true);
-				this.setVisible(2, false);
-				this.setVisible(3, true);
-			}
+			this.nowState=action;
+			this.isChange=true;
 		}
 		return;
 	}

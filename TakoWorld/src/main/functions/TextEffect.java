@@ -1,6 +1,11 @@
 package main.functions;
 
+import java.awt.Color;
+import java.awt.geom.Point2D;
+
+import main.TWFrame;
 import main.TWInfo;
+import main.items.GameText;
 
 //一文を文字送り
 public class TextEffect {
@@ -15,13 +20,14 @@ public class TextEffect {
 		TextEffect.strFin=false;
 		TextEffect.lastTime=tInfo.currentTime;
 	}
-
+/*
 	//アニメなしver
 	public static String[] textAnim(TWInfo tInfo,String[] texts) {
 		TextEffect.strFin=true;
 		return texts;
 	}
-/*
+	*/
+
 	//毎回呼び出される
 	public static String[] textAnim(TWInfo tInfo,String[] texts) {
 		String[] nowText=new String[GameText.gyoNum];
@@ -76,7 +82,7 @@ public class TextEffect {
 		}
 		return nowText;
 	}
-*/
+
 /*
 	//1行の処理
 	public static String OneTextAnim(String text,long lastTime) {

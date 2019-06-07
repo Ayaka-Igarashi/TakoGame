@@ -19,7 +19,7 @@ public abstract class TWEvent {
 	//イベント内容作成
 	protected Action nextText=new Action(ITEM_NUM.TEXT,1);
 	protected Action b_nm=new Action(ITEM_NUM.BACK, Haikei.BLUE);
-	protected Action b_castle=new Action(ITEM_NUM.BACK, Haikei.CASTLE);
+	protected Action b_pp=new Action(ITEM_NUM.BACK, Haikei.PURPLE);
 	protected Action h_rm=new Action(ITEM_NUM.HOTATE,Hotate.REMOVE);
 	protected Action h_nm= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL);
 	protected Action h_sw=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED);

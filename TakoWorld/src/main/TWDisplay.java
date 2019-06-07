@@ -111,7 +111,8 @@ public class TWDisplay extends GameDisplay{
 			//待ち時間後の処理
 			if(tInfo.currentTime-tInfo.pushTime>300&&pushFlg==true) {//待ち時間を作る
 				GameDisplay.current=TWDisplay.this.main;
-				TWDisplay.this.mode.first();//初期画像設定
+				TWDisplay.this.mode.first(tInfo);//初期画像設定
+				if(this.nowChoice==1)tInfo.load();//コンティニューの場合ロードする
 				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);//bgm
 				pushFlg=false;
 				this.nowChoice=0;//選択をデフォルトの位置にする

@@ -13,6 +13,8 @@ public class Hotate extends GameChara{
 	//初期設定
 	@Override
 	public void first() {
+		this.nowState=Hotate.NORMAL;
+		this.isChange=false;
 		this.setVisible(0, true);
 		this.setVisible(1, false);
 		return;
@@ -20,6 +22,19 @@ public class Hotate extends GameChara{
 
 	@Override
 	public void control(TWInfo tInfo) {
+		if(this.isChange==true) {
+			if(this.nowState==Hotate.REMOVE) {
+				this.setVisible(0, false);
+				this.setVisible(1, false);
+			}else if(this.nowState==Hotate.NORMAL) {
+				this.setVisible(0, true);
+				this.setVisible(1, false);
+			}else if(this.nowState==Hotate.SWEATED) {
+				this.setVisible(0, false);
+				this.setVisible(1, true);
+			}
+			this.isChange=false;
+		}
 		return;
 	}
 
@@ -27,16 +42,8 @@ public class Hotate extends GameChara{
 	@Override
 	public void keyControl(TWInfo tInfo,int key,int action) {
 		if(key==KEY_STATE.Z) {
-			if(action==Hotate.REMOVE) {
-				this.setVisible(0, false);
-				this.setVisible(1, false);
-			}else if(action==Hotate.NORMAL) {
-				this.setVisible(0, true);
-				this.setVisible(1, false);
-			}else if(action==Hotate.SWEATED) {
-				this.setVisible(0, false);
-				this.setVisible(1, true);
-			}
+			this.nowState=action;
+			this.isChange=true;
 		}
 		return;
 	}
