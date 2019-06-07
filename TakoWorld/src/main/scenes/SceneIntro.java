@@ -16,14 +16,14 @@ public class SceneIntro extends TWEvent{
 		public SceneIntro() {
 			//ラベル設定
 			this.label=SCENE_NUM.INTRO;
-			this.next=SCENE_NUM.ONE;
+			this.next=SCENE_NUM.END;
 
 			//テキスト設定
 			this.sceneText=TextData.intro_txt;
 
 			//イベント作成
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));/*
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
@@ -38,12 +38,46 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));*/
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));//固まったぞ
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_castle,h_rm)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		}
 
 		@Override
