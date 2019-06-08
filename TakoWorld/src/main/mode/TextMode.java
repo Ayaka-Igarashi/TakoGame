@@ -1,4 +1,4 @@
-package main;
+package main.mode;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -9,6 +9,8 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
+import main.Action;
+import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;

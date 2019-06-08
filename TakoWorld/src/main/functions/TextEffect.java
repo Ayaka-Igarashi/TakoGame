@@ -55,6 +55,7 @@ public class TextEffect {
 				charNum=c.length;//文字の数
 				//文字送りスピード調節
 				nowNum=(int)((double)(tInfo.currentTime-TextEffect.lastTime)*0.05);
+
 				num=Math.min(charNum,nowNum);
 				for(int j=0;j<num;j++) {
 					nowText[TextEffect.nowLine]+=String.valueOf(c[j]);
@@ -67,7 +68,7 @@ public class TextEffect {
 					}else if(TextEffect.nowLine==texts.length-1) {
 						TextEffect.strFin=true;//次の文にいってよい
 					}
-
+					//System.out.println("Time : "+tInfo.frameTime);//フレーム速度測る
 					TextEffect.lastTime=tInfo.currentTime;//時間の更新
 				}
 			}

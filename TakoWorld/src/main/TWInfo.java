@@ -9,6 +9,7 @@ import java.io.IOException;
 import javax.swing.JOptionPane;
 
 import main.constant.SAVE_DATA;
+import main.mode.TextMode;
 
 public class TWInfo {
 	public Graphics2D g;

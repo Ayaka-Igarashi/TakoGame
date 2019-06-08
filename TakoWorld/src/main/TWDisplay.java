@@ -14,6 +14,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.mode.TextMode;
 import main.supers.GameDisplay;
 import main.supers.GameMode;
 import main.supers.SoundBox;
