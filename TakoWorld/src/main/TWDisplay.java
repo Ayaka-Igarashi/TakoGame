@@ -7,6 +7,7 @@ import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
@@ -14,6 +15,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.mode.BattleMode;
 import main.mode.TextMode;
 import main.supers.GameDisplay;
 import main.supers.GameMode;
@@ -22,7 +24,9 @@ import main.supers.SoundBox;
 public class TWDisplay extends GameDisplay{
 	GameDisplay title,main,end;
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
-	GameMode mode=new TextMode();
+	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
+	private GameMode mode =null;
+	private int modeNum=0;
 
 	public TWDisplay() {
 		this.title=new TWTitle();
@@ -30,6 +34,9 @@ public class TWDisplay extends GameDisplay{
 		this.end=new TWEnd();
 		//追加していく
 		TWDisplay.current=this.title;
+		this.modeList.add(new TextMode());
+		this.modeList.add(new BattleMode());
+		this.mode=modeList.get(1);
 	}
 
 	@Override
@@ -42,6 +49,9 @@ public class TWDisplay extends GameDisplay{
 		this.main.loadMedia();
 		this.end.loadMedia();
 		//追加していく
+		for(int i=0;i<this.modeList.size();i++) {
+			this.modeList.get(i).loadMedia();
+		}
 	}
 
 
@@ -126,6 +136,8 @@ public class TWDisplay extends GameDisplay{
 			//音楽読み込み
 			try {
 				SoundBox.singleton.loadSound(new File("media/sound/bom34.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/question.wav"));
+				SoundBox.singleton.setLoop(MUSIC_NUM.QUESTION, 0, 331000);//ループ設定
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {
@@ -142,6 +154,7 @@ public class TWDisplay extends GameDisplay{
 		//繰り返し呼ばれる
 		@Override
 		public void show(TWInfo tInfo) {
+
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
 			if(TWDisplay.this.mode.isExit()) {
 				GameDisplay.current=TWDisplay.this.title;
@@ -165,7 +178,7 @@ public class TWDisplay extends GameDisplay{
 
 		@Override
 		public void loadMedia() throws IOException {
-			TWDisplay.this.mode.loadMedia();
+			//TWDisplay.this.mode.loadMedia();
 		}
 
 	}

@@ -9,6 +9,7 @@ public abstract class GameMode {
 	public abstract boolean isExit();//タイトルに戻るかどうか
 	public abstract void first(TWInfo tInfo);//最初の画像設定
 	public abstract void control(TWInfo tInfo);
+	public abstract void keyControl(TWInfo tInfo);
 	public abstract void draw(TWInfo tInfo);
 	public abstract void loadMedia() throws IOException;
 

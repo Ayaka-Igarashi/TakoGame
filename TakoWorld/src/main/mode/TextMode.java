@@ -272,8 +272,6 @@ public class TextMode extends GameMode {
 
 		//音楽読み込み
 		try {
-			SoundBox.singleton.loadSound(new File("media/sound/question.wav"));
-			SoundBox.singleton.setLoop(MUSIC_NUM.QUESTION, 0, 331000);//ループ設定
 			SoundBox.singleton.loadSound(new File("media/sound/choice.wav"));
 		}catch (UnsupportedAudioFileException e) {
 			e.printStackTrace();
