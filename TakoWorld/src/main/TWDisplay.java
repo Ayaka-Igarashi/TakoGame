@@ -26,7 +26,7 @@ public class TWDisplay extends GameDisplay{
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
 	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
 	private GameMode mode =null;
-	private int modeNum=1;
+	private int modeNum=1;//初期のモード番号
 
 	public TWDisplay() {
 		this.title=new TWTitle();
@@ -122,8 +122,14 @@ public class TWDisplay extends GameDisplay{
 			//待ち時間後の処理
 			if(tInfo.currentTime-tInfo.pushTime>300&&pushFlg==true) {//待ち時間を作る
 				GameDisplay.current=TWDisplay.this.main;
-				TWDisplay.this.mode.first(tInfo);//初期画像設定
-				if(this.nowChoice==1)tInfo.load();//コンティニューの場合ロードする
+				if(this.nowChoice==1) {//コンティニューの場合ロードする
+					TWDisplay.this.mode=TWDisplay.this.modeList.get(0);//テキストモードにする
+					TWDisplay.this.modeNum=0;
+					TWDisplay.this.mode.first(tInfo);//初期画像設定
+					tInfo.load();
+				}else {
+					TWDisplay.this.mode.first(tInfo);//初期画像設定
+				}
 				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);//bgm
 				pushFlg=false;
 				this.nowChoice=0;//選択をデフォルトの位置にする
@@ -158,9 +164,10 @@ public class TWDisplay extends GameDisplay{
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
 			if(TWDisplay.this.mode.isExit()) {
 				GameDisplay.current=TWDisplay.this.title;
+				TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
+				TWDisplay.this.modeNum=1;
 				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
-			}
-			if(TWDisplay.this.mode.isEnd()) {
+			}else if(TWDisplay.this.mode.isEnd()) {
 				if(TWDisplay.this.modeNum==1) {
 					TWDisplay.this.mode =TWDisplay.this.modeList.get(0);
 					TWDisplay.this.modeNum=0;
@@ -197,7 +204,7 @@ public class TWDisplay extends GameDisplay{
 		public void show(TWInfo tInfo) {
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
-			String str ="CLEAR! PUSH Z";
+			String str ="END!!! PUSH Z";
 			//真ん中に文字を表示
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
@@ -209,6 +216,8 @@ public class TWDisplay extends GameDisplay{
 			}
 			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.title;
+				TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
+				TWDisplay.this.modeNum=1;
 				pushFlg=false;
 			}
 
