@@ -26,7 +26,7 @@ public class TWDisplay extends GameDisplay{
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
 	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
 	private GameMode mode =null;
-	private int modeNum=0;
+	private int modeNum=1;
 
 	public TWDisplay() {
 		this.title=new TWTitle();
@@ -36,7 +36,7 @@ public class TWDisplay extends GameDisplay{
 		TWDisplay.current=this.title;
 		this.modeList.add(new TextMode());
 		this.modeList.add(new BattleMode());
-		this.mode=modeList.get(1);
+		this.mode=modeList.get(this.modeNum);
 	}
 
 	@Override
@@ -161,9 +161,16 @@ public class TWDisplay extends GameDisplay{
 				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
 			}
 			if(TWDisplay.this.mode.isEnd()) {
-				GameDisplay.current=TWDisplay.this.end;
-				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
+				if(TWDisplay.this.modeNum==1) {
+					TWDisplay.this.mode =TWDisplay.this.modeList.get(0);
+					TWDisplay.this.modeNum=0;
+					TWDisplay.this.mode.first(tInfo);//初期画像設定
+				}else {
+					GameDisplay.current=TWDisplay.this.end;
+					SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
+				}
 			}
+
 			/*
 			if(TWDisplay.this.mode.isEnd()&&pushFlg==false) {
 				tInfo.pushTime=tInfo.currentTime;

@@ -3,10 +3,10 @@ package main.scenes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import main.Action;
 import main.TWInfo;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
+import main.struct.Action;
 import main.supers.TWEvent;
 
 public class Scene4 extends TWEvent {
@@ -16,6 +16,7 @@ public class Scene4 extends TWEvent {
 		this.next=SCENE_NUM.END;
 
 		this.sceneText=TextData.s4_txt;
+		this.sceneTextChara=TextData.intro_txt_chara;
 
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));

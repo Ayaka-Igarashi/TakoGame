@@ -6,30 +6,36 @@ import java.awt.Font;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.functions.TextEffect;
+import main.struct.TextChara;
 import main.supers.GameItem;
 
 //テキスト
 public class GameText extends GameItem{
 	private String[][] gameTexts;
 	private int nowTextNum;//現在のテキスト番号
+	public TextBox textBox=null;
+
 	public static final int gyoNum=2;//行数
 	public static final int gyoSp=45;//行間隔
 	private String[] nowText=new String[GameText.gyoNum];//現在の表示テキスト
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,20);
 
 	//テキスト設定
-	public void setTexts(String[][] sceneTexts) {
+	public void setTexts(String[][] sceneTexts,TextChara[] sceneTextChara) {
 		this.gameTexts=sceneTexts;
+		this.textBox.textChara=sceneTextChara;//テキストボックス情報設定
 		return;
 	}
 
 	//テキスト番号の初期化
 	public void resetNowTextNum() {
 		this.nowTextNum=0;
+		this.textBox.nowTextNum=0;//テキストボックス情報設定
 	}
 
 	public void setNowTextNum(int num) {
 		this.nowTextNum=num;
+		this.textBox.nowTextNum=num;//テキストボックス情報設定
 	}
 
 	@Override

@@ -3,11 +3,11 @@ package main.scenes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import main.Action;
 import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
+import main.struct.Action;
 import main.supers.TWEvent;
 
 public class Scene1 extends TWEvent{
@@ -17,16 +17,17 @@ public class Scene1 extends TWEvent{
 
 		//テキスト設定
 		this.sceneText=TextData.s1_txt;
+		this.sceneTextChara=TextData.intro_txt_chara;
 
 		Action c0=new Action(ITEM_NUM.CHOICE,0);
 
 		this.A.add(new ArrayList<Action>(Arrays.asList(h_rm,s_nmL)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm,b_nm,s_rm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw,b_nm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h,b_nm,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw_h)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw_h,b_nm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw_h)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
 	}
 

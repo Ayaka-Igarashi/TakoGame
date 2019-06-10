@@ -3,11 +3,11 @@ package main.scenes;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import main.Action;
 import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
+import main.struct.Action;
 import main.supers.TWEvent;
 
 public class Scene3 extends TWEvent {
@@ -17,6 +17,7 @@ public class Scene3 extends TWEvent {
 		this.next=SCENE_NUM.END;
 
 		this.sceneText=TextData.s3_txt;
+		this.sceneTextChara=TextData.intro_txt_chara;
 
 		Action c0=new Action(ITEM_NUM.CHOICE,0);
 

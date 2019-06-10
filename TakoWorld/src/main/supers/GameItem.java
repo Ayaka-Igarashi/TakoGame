@@ -5,15 +5,15 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
-import main.ImageState;
 import main.TWFrame;
 import main.TWInfo;
+import main.struct.ImageState;
 
 //背景とかキャラ
 public abstract class GameItem {
 	public int nowState;//現在の状態
 	public boolean isChange;//画像を切り替えるか
-	private ArrayList<ImageState> imgList=new ArrayList<ImageState>();
+	protected ArrayList<ImageState> imgList=new ArrayList<ImageState>();
 
 	public GameItem setImage(BufferedImage img) {
 		this.imgList.add(new ImageState(img,new Point2D.Double(0, 0),false));

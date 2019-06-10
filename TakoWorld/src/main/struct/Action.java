@@ -1,4 +1,4 @@
-package main;
+package main.struct;
 
 //キャラと行動を格納する
 public class Action {

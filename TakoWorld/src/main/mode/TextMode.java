@@ -9,7 +9,6 @@ import javax.imageio.ImageIO;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-import main.Action;
 import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.KEY_STATE;
@@ -28,6 +27,7 @@ import main.scenes.Scene2;
 import main.scenes.Scene3;
 import main.scenes.Scene4;
 import main.scenes.SceneIntro;
+import main.struct.Action;
 import main.supers.GameMode;
 import main.supers.SoundBox;
 import main.supers.TWEvent;
@@ -94,7 +94,7 @@ public class TextMode extends GameMode {
 	//シーンを変える
 	public void changeScene(int sceneNum) {
 		this.nowScene=sceneNum;
-		this.text.setTexts(this.sceneList.get(nowScene).getText());
+		this.text.setTexts(this.sceneList.get(nowScene).getText(),this.sceneList.get(nowScene).getTextChara());
 	}
 
 	//最初の画像設定とシーン設定
@@ -110,8 +110,10 @@ public class TextMode extends GameMode {
 		this.text.first();
 		this.choice.first();
 		this.menu.first();
+		this.text.textBox=this.textBox;
+
 		this.nowScene=SCENE_NUM.INTRO;
-		this.text.setTexts(this.sceneList.get(nowScene).getText());
+		this.text.setTexts(this.sceneList.get(nowScene).getText(),this.sceneList.get(nowScene).getTextChara());
 		this.endFlg=false;
 
 		tInfo.textModeInfo=this;
@@ -163,11 +165,10 @@ public class TextMode extends GameMode {
 
 							if(event[i].item==ITEM_NUM.BACK) {
 								this.haikei.keyControl(tInfo,KEY_STATE.Z,event[i].action);
-							}else if(event[i].item==ITEM_NUM.TEXTBOX) {
-								this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.TEXT) {
 								this.textNum+=1;
 								this.text.keyControl(tInfo,KEY_STATE.Z,this.textNum);//this.pushNumZを送る
+								this.textBox.keyControl(tInfo,KEY_STATE.Z,event[i].action);//テキストボックス
 							}else if(event[i].item==ITEM_NUM.CHOICE) {
 								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.HOTATE) {
@@ -245,8 +246,20 @@ public class TextMode extends GameMode {
 		this.haikei.setImage(ImageIO.read(new File("media/haikei.png")));
 		this.haikei.setImage(ImageIO.read(new File("media/haikei_default.png")));
 
-		this.hotate.setImage(ImageIO.read(new File("media/kai.png")));
-		this.hotate.setImage(ImageIO.read(new File("media/kai2.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/kai.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/kai2.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_default_L.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_default_R.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_active_L.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_active_R.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_cry_L.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_cry_R.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_happy_L.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_happy_R.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_lazy_L.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_lazy_R.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_serious_L.png")));
+		this.hotate.setImage(ImageIO.read(new File("media/hotate/hotate_serious_R.png")));
 
 		this.same.setImage(ImageIO.read(new File("media/same/same_body_L.png")));
 		this.same.setImage(ImageIO.read(new File("media/same/same_body_R.png")));
@@ -256,10 +269,16 @@ public class TextMode extends GameMode {
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_back.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_R.png")));
-		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox2_L.png")));
-		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox2_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_pink_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_pink_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_yellow_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_yellow_R.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_hotate_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_hotate_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_unknown_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_unknown_R.png")));
 
 
 		this.img_choice=ImageIO.read(new File("media/choice.png"));
