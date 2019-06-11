@@ -11,12 +11,14 @@ import javax.imageio.ImageIO;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.items_b.Player;
 import main.items_b.TWMenu_B;
 import main.supers.GameMode;
 import main.supers.SoundBox;
 
 public class BattleMode extends GameMode {
 	private TWMenu_B menu = new TWMenu_B();
+	private Player player =new Player();
 
 	private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
 	private boolean endFlg = false;
@@ -41,12 +43,14 @@ public class BattleMode extends GameMode {
 	public void first(TWInfo tInfo) {
 		this.endFlg = false;
 		this.menu.first();
+		this.player.first();
 
 	}
 
 	@Override
 	public void control(TWInfo tInfo) {
 		this.menu.control(tInfo);
+		this.player.control(tInfo);
 
 	}
 
@@ -56,7 +60,8 @@ public class BattleMode extends GameMode {
 			if (this.menu.isMenuTime() == true) {//メニュー画面状態か
 				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
 			} else {
-				this.endFlg = true;
+				this.player.keyControl(tInfo, KEY_STATE.Z, 0);
+				//this.endFlg = true;
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.Z] = false;
@@ -106,13 +111,16 @@ public class BattleMode extends GameMode {
 		tInfo.g.drawString("GAME MODE", 100, 100);
 
 		this.menu.draw(tInfo);
+		this.player.draw(tInfo);
 
 	}
 
 	@Override
 	public void loadMedia() throws IOException {
 		this.img_test = ImageIO.read(new File("media/logo.png"));
-		
+
+		this.player.setImage(ImageIO.read(new File("media/same_mini.png")));
+
 
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
 		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
