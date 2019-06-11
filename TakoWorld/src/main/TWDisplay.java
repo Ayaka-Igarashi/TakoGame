@@ -26,7 +26,7 @@ public class TWDisplay extends GameDisplay{
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
 	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
 	private GameMode mode =null;
-	private int modeNum=1;//初期のモード番号
+	private int modeNum=0;//初期のモード番号
 
 	public TWDisplay() {
 		this.title=new TWTitle();
