@@ -23,7 +23,7 @@ public class SceneIntro extends TWEvent{
 			this.sceneTextChara=TextData.intro_txt_chara;
 
 			//イベント作成
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));

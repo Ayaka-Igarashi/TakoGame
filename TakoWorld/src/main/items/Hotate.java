@@ -27,8 +27,7 @@ public class Hotate extends GameChara{
 	public void first() {
 		this.nowState=Hotate.NORMAL_HUMAN;
 		this.isChange=false;
-		this.setVisible(0, true);
-		for(int i=1;i<this.imgList.size();i++) {
+		for(int i=0;i<this.imgList.size();i++) {
 			this.setVisible(i, false);
 		}
 		return;
