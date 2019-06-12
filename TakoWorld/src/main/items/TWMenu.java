@@ -90,7 +90,7 @@ public class TWMenu extends GameItem {
 		if(key==KEY_STATE.X) {
 			if(this.menuTime==false) {
 				this.menuTime=true;//メニュー表示状態にする
-			}else if(this.menuTime==true) {//メニューを閉じる
+			}else if(this.menuTime==true&&this.menuState!=3&&this.menuState!=4) {//メニューを閉じる
 				this.menuTime=false;
 				this.menuState=-1;
 				this.nowChoice=0;

@@ -17,9 +17,11 @@ import main.constant.SCENE_NUM;
 import main.functions.TextEffect;
 import main.items.CharaSame;
 import main.items.Choice;
+import main.items.Forward;
 import main.items.GameText;
 import main.items.Haikei;
 import main.items.Hotate;
+import main.items.SoundItem;
 import main.items.TWMenu;
 import main.items.TextBox;
 import main.scenes.Scene1;
@@ -42,6 +44,8 @@ public class TextMode extends GameMode {
 	private GameText text=new GameText();
 	private Choice choice=new Choice();
 	private TWMenu menu=new TWMenu();
+	private Forward forward=new Forward();
+	private SoundItem sound=new SoundItem();
 
 	private BufferedImage img_choice;
 
@@ -85,8 +89,10 @@ public class TextMode extends GameMode {
 
 	public Choice getChoice() {return choice;}
 	public void setChoice(Choice choice) {this.choice = choice;}
-	////////////////////////////////////////////////////////////
 
+	public SoundItem getSound() {return sound;}
+	public void setSound(SoundItem sound) {this.sound = sound;}
+	////////////////////////////////////////////////////////////
 
 
 
@@ -110,6 +116,8 @@ public class TextMode extends GameMode {
 		this.text.first();
 		this.choice.first();
 		this.menu.first();
+		this.forward.first();
+		this.sound.first();
 		this.text.textBox=this.textBox;
 
 		this.nowScene=SCENE_NUM.INTRO;
@@ -129,6 +137,8 @@ public class TextMode extends GameMode {
 		this.text.control(tInfo);
 		this.choice.control(tInfo);
 		this.menu.control(tInfo);
+		this.forward.control(tInfo);
+		this.sound.control(tInfo);
 
 		return;
 	}
@@ -137,7 +147,9 @@ public class TextMode extends GameMode {
 	public void keyControl(TWInfo tInfo) {
 		//Zキーが押された瞬間の処理
 		if(tInfo.keyState[KEY_STATE.Z]==true&&tInfo.keyReleased[KEY_STATE.Z]==true) {
-			if(this.menu.isMenuTime()==true) {//メニュー画面状態か
+			if(this.forward.getIsAnime()==true) {
+				return;
+			}else if(this.menu.isMenuTime()==true) {//メニュー画面状態か
 				this.menu.keyControl(tInfo,KEY_STATE.Z,1);
 			}else if(this.menu.isMenuTime()==false) {
 				if(TextEffect.strFin==false) {//テキスト送り途中の早送りの処理
@@ -175,6 +187,10 @@ public class TextMode extends GameMode {
 								this.hotate.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.SAME) {
 								this.same.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.FORWARD) {
+								this.forward.keyControl(tInfo, KEY_STATE.Z, event[i].action);
+							}else if(event[i].item==ITEM_NUM.SOUND) {
+								this.sound.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}
 						}
 						this.pushNum_Z+=1;//押した回数に1を足す
@@ -191,8 +207,10 @@ public class TextMode extends GameMode {
 
 		//Xキー
 		if(tInfo.keyState[KEY_STATE.X]==true&&tInfo.keyReleased[KEY_STATE.X]==true) {
-			this.menu.keyControl(tInfo,KEY_STATE.X,1);
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			if(this.forward.getIsEffect()==false) {
+				this.menu.keyControl(tInfo,KEY_STATE.X,1);
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			}
 			tInfo.keyReleased[KEY_STATE.X]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.X]==false&&tInfo.keyReleased[KEY_STATE.X]==false) {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
@@ -236,6 +254,7 @@ public class TextMode extends GameMode {
 		this.text.draw(tInfo);
 		this.choice.draw(tInfo);
 		this.menu.draw(tInfo);
+		this.forward.draw(tInfo);
 
 		tInfo.textModeInfo=this;//情報更新
 	}
@@ -289,6 +308,7 @@ public class TextMode extends GameMode {
 		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
 
 
+
 		//音楽読み込み
 		try {
 			SoundBox.singleton.loadSound(new File("media/sound/choice.wav"));
@@ -311,6 +331,12 @@ public class TextMode extends GameMode {
 	//タイトルに戻るかどうか
 	public boolean isExit() {
 		return this.menu.isExit();
+	}
+
+	@Override
+	public void stopBGM() {
+		this.sound.stopBGM();
+		return;
 	}
 
 }

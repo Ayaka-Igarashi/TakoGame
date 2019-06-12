@@ -12,12 +12,14 @@ import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
 import main.items_b.Player;
+import main.items_b.SoundItem_B;
 import main.items_b.TWMenu_B;
 import main.supers.GameMode;
 import main.supers.SoundBox;
 
 public class BattleMode extends GameMode {
 	private TWMenu_B menu = new TWMenu_B();
+	private SoundItem_B sound =new SoundItem_B();
 	private Player player =new Player();
 
 	private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
@@ -43,6 +45,7 @@ public class BattleMode extends GameMode {
 	public void first(TWInfo tInfo) {
 		this.endFlg = false;
 		this.menu.first();
+		this.sound.first();
 		this.player.first();
 
 	}
@@ -50,6 +53,7 @@ public class BattleMode extends GameMode {
 	@Override
 	public void control(TWInfo tInfo) {
 		this.menu.control(tInfo);
+		this.sound.control(tInfo);
 		this.player.control(tInfo);
 
 	}
@@ -61,7 +65,7 @@ public class BattleMode extends GameMode {
 				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
 			} else {
 				this.player.keyControl(tInfo, KEY_STATE.Z, 0);
-				//this.endFlg = true;
+				this.endFlg = true;
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.Z] = false;
@@ -73,6 +77,7 @@ public class BattleMode extends GameMode {
 		//Xキー
 		if (tInfo.keyState[KEY_STATE.X] == true && tInfo.keyReleased[KEY_STATE.X] == true) {
 			this.menu.keyControl(tInfo, KEY_STATE.X, 1);
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.X] = false;//キーが放されていない状態にする
 		} else if (tInfo.keyState[KEY_STATE.X] == false && tInfo.keyReleased[KEY_STATE.X] == false) {
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
@@ -83,6 +88,7 @@ public class BattleMode extends GameMode {
 		//上キー（選択肢用）
 		if (tInfo.keyState[KEY_STATE.UP] == true && tInfo.keyReleased[KEY_STATE.UP] == true) {
 			this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.UP] = false;//キーが放されていない状態にする
 		} else if (tInfo.keyState[KEY_STATE.UP] == false && tInfo.keyReleased[KEY_STATE.UP] == false) {
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
@@ -92,6 +98,7 @@ public class BattleMode extends GameMode {
 		//下キー
 		if (tInfo.keyState[KEY_STATE.DOWN] == true && tInfo.keyReleased[KEY_STATE.DOWN] == true) {
 			this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
+			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.DOWN] = false;//キーが放されていない状態にする
 		} else if (tInfo.keyState[KEY_STATE.DOWN] == false && tInfo.keyReleased[KEY_STATE.DOWN] == false) {
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
@@ -125,6 +132,11 @@ public class BattleMode extends GameMode {
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
 		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
 
+	}
+
+	@Override
+	public void stopBGM() {
+		return;
 	}
 
 }

@@ -57,6 +57,7 @@ public class TWInfo {
 		//saveData[SAVE_DATA.TEXTBOX]=this.textModeInfo.getTextBox().
 		saveData[SAVE_DATA.HOTATE]=this.textModeInfo.getHotate().nowState;
 		saveData[SAVE_DATA.SAME]=this.textModeInfo.getCharaSame().nowState;
+		saveData[SAVE_DATA.BGM]=this.textModeInfo.getSound().nowState;
 	}
 
 	//ロード時にtextmodeを書き換える
@@ -73,6 +74,11 @@ public class TWInfo {
 		this.textModeInfo.getHotate().isChange=true;
 		this.textModeInfo.getCharaSame().nowState=saveData[SAVE_DATA.SAME];
 		this.textModeInfo.getCharaSame().isChange=true;
+
+		if(this.textModeInfo.getSound().nowState!=saveData[SAVE_DATA.BGM]) {//違うbgmだったらロード
+			this.textModeInfo.getSound().nowState=saveData[SAVE_DATA.BGM];
+			this.textModeInfo.getSound().isChange=true;
+		}
 	}
 
 	//セーブ

@@ -26,7 +26,7 @@ public class TWDisplay extends GameDisplay{
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
 	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
 	private GameMode mode =null;
-	private int modeNum=0;//初期のモード番号
+	private int modeNum=1;//初期のモード番号
 
 	public TWDisplay() {
 		this.title=new TWTitle();
@@ -130,7 +130,6 @@ public class TWDisplay extends GameDisplay{
 				}else {
 					TWDisplay.this.mode.first(tInfo);//初期画像設定
 				}
-				SoundBox.singleton.loopClip(MUSIC_NUM.QUESTION);//bgm
 				pushFlg=false;
 				this.nowChoice=0;//選択をデフォルトの位置にする
 			}
@@ -144,6 +143,8 @@ public class TWDisplay extends GameDisplay{
 				SoundBox.singleton.loadSound(new File("media/sound/bom34.wav"));
 				SoundBox.singleton.loadSound(new File("media/sound/question.wav"));
 				SoundBox.singleton.setLoop(MUSIC_NUM.QUESTION, 0, 331000);//ループ設定
+				SoundBox.singleton.loadSound(new File("media/sound/戦闘曲31.wav"));
+				SoundBox.singleton.setLoop(MUSIC_NUM.BATTLE, 10000, 2132000);//ループ設定
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {
@@ -163,18 +164,19 @@ public class TWDisplay extends GameDisplay{
 
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
 			if(TWDisplay.this.mode.isExit()) {
+				TWDisplay.this.mode.stopBGM();//bgmを止める
 				GameDisplay.current=TWDisplay.this.title;
 				TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
 				TWDisplay.this.modeNum=1;
-				SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
 			}else if(TWDisplay.this.mode.isEnd()) {
 				if(TWDisplay.this.modeNum==1) {
+					TWDisplay.this.mode.stopBGM();//bgmを止める
 					TWDisplay.this.mode =TWDisplay.this.modeList.get(0);
 					TWDisplay.this.modeNum=0;
 					TWDisplay.this.mode.first(tInfo);//初期画像設定
 				}else {
+					TWDisplay.this.mode.stopBGM();//bgmを止める
 					GameDisplay.current=TWDisplay.this.end;
-					SoundBox.singleton.stopClip(MUSIC_NUM.QUESTION);//bgmを止める
 				}
 			}
 
@@ -192,7 +194,6 @@ public class TWDisplay extends GameDisplay{
 
 		@Override
 		public void loadMedia() throws IOException {
-			//TWDisplay.this.mode.loadMedia();
 		}
 
 	}

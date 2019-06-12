@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import main.TWInfo;
 import main.constant.ITEM_NUM;
+import main.constant.MUSIC_NUM;
 import main.items.CharaSame;
+import main.items.Forward;
 import main.items.Haikei;
 import main.items.Hotate;
 import main.struct.Action;
@@ -43,6 +45,12 @@ public abstract class TWEvent {
 	protected Action s_rm=new Action(ITEM_NUM.SAME,CharaSame.REMOVE);
 	protected Action s_nmL=new Action(ITEM_NUM.SAME,CharaSame.NORMAL_L);
 	protected Action s_nmR=new Action(ITEM_NUM.SAME,CharaSame.NORMAL_R);
+
+	protected Action f_b=new Action(ITEM_NUM.FORWARD, Forward.BLACK);
+	protected Action f_w=new Action(ITEM_NUM.FORWARD, Forward.WHITE);
+	protected Action f_w2=new Action(ITEM_NUM.FORWARD, Forward.WHITE_2);
+
+	protected Action sound_battle=new Action(ITEM_NUM.SOUND,MUSIC_NUM.BATTLE);
 
 	//イベントを返す
 	public ArrayList<ArrayList<Action>> getEvent(){

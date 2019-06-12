@@ -13,4 +13,6 @@ public abstract class GameMode {
 	public abstract void draw(TWInfo tInfo);
 	public abstract void loadMedia() throws IOException;
 
+	public abstract void stopBGM();
+
 }

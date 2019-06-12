@@ -11,6 +11,7 @@ public class CharaSame extends GameChara {
 
 	@Override
 	public void first() {
+		this.isChange=false;
 		this.nowState=CharaSame.REMOVE;
 		this.setVisible(0, false);
 		this.setVisible(1, false);
