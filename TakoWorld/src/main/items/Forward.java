@@ -54,6 +54,8 @@ public class Forward extends GameItem {
 			}else if(this.isEffectNow==true) {
 				tInfo.g.setColor(new Color(0, 0, 0, 1.0f));
 				tInfo.g.fill(new Rectangle2D.Double(0,TWFrame.title_bar_height,800,600));
+				tInfo.g.setColor(Color.WHITE);
+				this.drawStr(tInfo, "Go Next... ( PUSH Z )", 570, 570);
 			}else if(this.isEffectOff==true) {
 				float alpha =1-(float)(tInfo.currentTime-this.effectStartTime)/500;
 				if(alpha<=0) {
