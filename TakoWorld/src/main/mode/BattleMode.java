@@ -128,7 +128,6 @@ public class BattleMode extends GameMode {
 
 		this.player.setImage(ImageIO.read(new File("media/same_mini.png")));
 
-
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
 		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
 
