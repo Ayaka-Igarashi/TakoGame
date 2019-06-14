@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Image;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -58,11 +59,18 @@ public class TWDisplay extends GameDisplay{
 	//タイトル画面
 	public class TWTitle extends GameDisplay{
 		private BufferedImage img_title;
+		private BufferedImage img_choice;
 		boolean pushFlg=false;//ボタンが押されたか判定
 		private int nowChoice=0;//選択しているもの
+		private Point2D.Double[] pos= {
+				new Point2D.Double(100,520),
+				new Point2D.Double(350,520),
+				new Point2D.Double(600,520)
+				};
 
 		@Override
 		public void show(TWInfo tInfo) {
+
 			/*
 			//別の処理方法
 			ImageFilter filter = new AreaAveragingScaleFilter(800,600);
@@ -72,6 +80,9 @@ public class TWDisplay extends GameDisplay{
 
 			tInfo.g.drawImage(this.img_title.getScaledInstance(800, 600, Image.SCALE_SMOOTH),0,TWFrame.title_bar_height,null);
 
+			tInfo.g.drawImage(this.img_choice,(int)this.pos[this.nowChoice].x,(int)this.pos[this.nowChoice].y+TWFrame.title_bar_height,null);
+
+			/*
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
 			String str;
@@ -84,6 +95,7 @@ public class TWDisplay extends GameDisplay{
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, 500);
+			*/
 
 			//1回押したらもう押されないように
 			if(tInfo.keyState[KEY_STATE.Z]&&tInfo.keyReleased[KEY_STATE.Z]&&pushFlg==false) {
@@ -99,24 +111,25 @@ public class TWDisplay extends GameDisplay{
 				tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			}
 
-			//上
-			if(tInfo.keyState[KEY_STATE.UP]&&tInfo.keyReleased[KEY_STATE.UP]&&pushFlg==false) {
-				if(this.nowChoice>0) {
-					this.nowChoice-=1;
-				}
-				tInfo.keyReleased[KEY_STATE.UP]=false;//キーが放されていない状態にする
-			}else if(tInfo.keyState[KEY_STATE.UP]==false) {
-				tInfo.keyReleased[KEY_STATE.UP]=true;//キーが放された状態にする
-			}
-
-			//下
-			if(tInfo.keyState[KEY_STATE.DOWN]&&tInfo.keyReleased[KEY_STATE.DOWN]&&pushFlg==false) {
+			//右
+			if(tInfo.keyState[KEY_STATE.RIGHT]&&tInfo.keyReleased[KEY_STATE.RIGHT]&&pushFlg==false) {
 				if(this.nowChoice<2) {
 					this.nowChoice+=1;
 				}
-				tInfo.keyReleased[KEY_STATE.DOWN]=false;//キーが放されていない状態にする
-			}else if(tInfo.keyState[KEY_STATE.DOWN]==false) {
-				tInfo.keyReleased[KEY_STATE.DOWN]=true;//キーが放された状態にする
+
+				tInfo.keyReleased[KEY_STATE.RIGHT]=false;//キーが放されていない状態にする
+			}else if(tInfo.keyState[KEY_STATE.RIGHT]==false) {
+				tInfo.keyReleased[KEY_STATE.RIGHT]=true;//キーが放された状態にする
+			}
+
+			//左
+			if(tInfo.keyState[KEY_STATE.LEFT]&&tInfo.keyReleased[KEY_STATE.LEFT]&&pushFlg==false) {
+				if(this.nowChoice>0) {
+					this.nowChoice-=1;
+				}
+				tInfo.keyReleased[KEY_STATE.LEFT]=false;//キーが放されていない状態にする
+			}else if(tInfo.keyState[KEY_STATE.LEFT]==false) {
+				tInfo.keyReleased[KEY_STATE.LEFT]=true;//キーが放された状態にする
 			}
 
 			//待ち時間後の処理
@@ -138,6 +151,7 @@ public class TWDisplay extends GameDisplay{
 		@Override
 		public void loadMedia() throws IOException {
 			this.img_title=ImageIO.read(new File("media/title.png"));
+			this.img_choice=ImageIO.read(new File("media/title.png"));
 			//音楽読み込み
 			try {
 				SoundBox.singleton.loadSound(new File("media/sound/bom34.wav"));
