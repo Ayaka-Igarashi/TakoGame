@@ -63,9 +63,9 @@ public class TWDisplay extends GameDisplay{
 		boolean pushFlg=false;//ボタンが押されたか判定
 		private int nowChoice=0;//選択しているもの
 		private Point2D.Double[] pos= {
-				new Point2D.Double(100,520),
-				new Point2D.Double(350,520),
-				new Point2D.Double(600,520)
+				new Point2D.Double(70,485),
+				new Point2D.Double(280,485),
+				new Point2D.Double(530,485)
 				};
 
 		@Override
@@ -107,7 +107,7 @@ public class TWDisplay extends GameDisplay{
 				pushFlg=true;
 				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//効果音を流す
 				tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
-			}else if(tInfo.keyState[KEY_STATE.Z]==false) {
+			}else if(tInfo.keyState[KEY_STATE.Z]==false&&tInfo.keyReleased[KEY_STATE.Z]==false) {
 				tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 			}
 
@@ -116,10 +116,12 @@ public class TWDisplay extends GameDisplay{
 				if(this.nowChoice<2) {
 					this.nowChoice+=1;
 				}
-
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE3);//効果音を流す
 				tInfo.keyReleased[KEY_STATE.RIGHT]=false;//キーが放されていない状態にする
-			}else if(tInfo.keyState[KEY_STATE.RIGHT]==false) {
+			}else if(tInfo.keyState[KEY_STATE.RIGHT]==false&&tInfo.keyReleased[KEY_STATE.RIGHT]==false) {
+
 				tInfo.keyReleased[KEY_STATE.RIGHT]=true;//キーが放された状態にする
+				SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE3);//効果音を止める
 			}
 
 			//左
@@ -127,9 +129,12 @@ public class TWDisplay extends GameDisplay{
 				if(this.nowChoice>0) {
 					this.nowChoice-=1;
 				}
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE3);//効果音を流す
 				tInfo.keyReleased[KEY_STATE.LEFT]=false;//キーが放されていない状態にする
-			}else if(tInfo.keyState[KEY_STATE.LEFT]==false) {
+			}else if(tInfo.keyState[KEY_STATE.LEFT]==false&&tInfo.keyReleased[KEY_STATE.LEFT]==false) {
+
 				tInfo.keyReleased[KEY_STATE.LEFT]=true;//キーが放された状態にする
+				SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE3);//効果音を止める
 			}
 
 			//待ち時間後の処理
@@ -151,7 +156,7 @@ public class TWDisplay extends GameDisplay{
 		@Override
 		public void loadMedia() throws IOException {
 			this.img_title=ImageIO.read(new File("media/title.png"));
-			this.img_choice=ImageIO.read(new File("media/title.png"));
+			this.img_choice=ImageIO.read(new File("media/choice_icon.png"));
 			//音楽読み込み
 			try {
 				SoundBox.singleton.loadSound(new File("media/sound/bom34.wav"));
@@ -159,6 +164,7 @@ public class TWDisplay extends GameDisplay{
 				SoundBox.singleton.setLoop(MUSIC_NUM.QUESTION, 0, 331000);//ループ設定
 				SoundBox.singleton.loadSound(new File("media/sound/戦闘曲31.wav"));
 				SoundBox.singleton.setLoop(MUSIC_NUM.BATTLE, 10000, 2132000);//ループ設定
+				SoundBox.singleton.loadSound(new File("media/sound/choice3.wav"));
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {

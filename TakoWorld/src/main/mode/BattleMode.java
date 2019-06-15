@@ -76,6 +76,7 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void keyControl(TWInfo tInfo) {
+		this.nowPhase.keyControl(tInfo);
 		if (tInfo.keyState[KEY_STATE.Z] == true && tInfo.keyReleased[KEY_STATE.Z] == true) {
 			if (this.menu.isMenuTime() == true) {//メニュー画面状態か
 				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
@@ -134,7 +135,7 @@ public class BattleMode extends GameMode {
 		tInfo.g.drawString("GAME MODE", 100, 100);
 
 		this.nowPhase.show();
-		
+
 		this.menu.draw(tInfo);
 		this.player.draw(tInfo);
 
@@ -153,6 +154,7 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void stopBGM() {
+		this.sound.stopBGM();
 		return;
 	}
 
