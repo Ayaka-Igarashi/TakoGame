@@ -2,10 +2,13 @@ package main.phase;
 
 import main.TWInfo;
 import main.constant.KEY_STATE;
+import main.stage.Stage;
+import main.stage.Stage1;
 
 public class BattlePhase {
 	BattlePhase start,main,clear,lose;
 	private BattlePhase nowPhase=null;
+	Stage nowStage =new Stage1();
 
 	public BattlePhase(){
 		this.start=new StartPhase();
@@ -37,7 +40,7 @@ public class BattlePhase {
 
 		@Override
 		public void first() {
-			// TODO 自動生成されたメソッド・スタブ
+			this.nowStage.first();
 
 		}
 
@@ -56,10 +59,6 @@ public class BattlePhase {
 	}
 
 	public class MainPhase extends BattlePhase {
-
-		public MainPhase() {
-
-		}
 
 		@Override
 		public void first() {
@@ -85,10 +84,6 @@ public class BattlePhase {
 
 	public class ClearPhase extends BattlePhase {
 
-		public ClearPhase() {
-
-		}
-
 		@Override
 		public void first() {
 			// TODO 自動生成されたメソッド・スタブ
@@ -110,10 +105,6 @@ public class BattlePhase {
 	}
 
 	public class LosePhase extends BattlePhase {
-
-		public LosePhase() {
-
-		}
 
 		@Override
 		public void first() {
