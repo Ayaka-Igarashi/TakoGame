@@ -15,16 +15,11 @@ import main.items_b.Player;
 import main.items_b.SoundItem_B;
 import main.items_b.TWMenu_B;
 import main.phase.BattlePhase;
-import main.phase.ClearPhase;
-import main.phase.LosePhase;
-import main.phase.MainPhase;
-import main.phase.StartPhase;
 import main.supers.GameMode;
 import main.supers.SoundBox;
 
 public class BattleMode extends GameMode {
-	private BattlePhase start,main,clear,lose;
-	private BattlePhase nowPhase=null;
+	private BattlePhase phase;
 	private TWMenu_B menu = new TWMenu_B();
 	private SoundItem_B sound =new SoundItem_B();
 	private Player player =new Player();
@@ -35,10 +30,6 @@ public class BattleMode extends GameMode {
 	private BufferedImage img_test;
 
 	public BattleMode() {
-		this.start=new StartPhase();
-		this.main=new MainPhase();
-		this.clear=new ClearPhase();
-		this.lose=new LosePhase();
 
 	}
 
@@ -58,7 +49,7 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void first(TWInfo tInfo) {
-		this.nowPhase=start;
+		this.phase.first();
 		this.endFlg = false;
 		this.menu.first();
 		this.sound.first();
@@ -76,11 +67,14 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void keyControl(TWInfo tInfo) {
-		this.nowPhase.keyControl(tInfo);
+
+
+
 		if (tInfo.keyState[KEY_STATE.Z] == true && tInfo.keyReleased[KEY_STATE.Z] == true) {
 			if (this.menu.isMenuTime() == true) {//メニュー画面状態か
 				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
 			} else {
+				this.phase.keyControl(tInfo,KEY_STATE.Z);
 				this.player.keyControl(tInfo, KEY_STATE.Z, 0);
 				this.endFlg = true;
 			}
@@ -99,7 +93,6 @@ public class BattleMode extends GameMode {
 		} else if (tInfo.keyState[KEY_STATE.X] == false && tInfo.keyReleased[KEY_STATE.X] == false) {
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.X] = true;//キーが放された状態にする
-
 		}
 
 		//上キー（選択肢用）
@@ -134,7 +127,7 @@ public class BattleMode extends GameMode {
 		tInfo.g.setFont(this.font);
 		tInfo.g.drawString("GAME MODE", 100, 100);
 
-		this.nowPhase.show();
+		this.phase.draw(tInfo);
 
 		this.menu.draw(tInfo);
 		this.player.draw(tInfo);
