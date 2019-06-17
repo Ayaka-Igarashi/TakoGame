@@ -8,6 +8,7 @@ import java.io.IOException;
 
 import javax.swing.JOptionPane;
 
+import main.constant.KEY_STATE;
 import main.constant.SAVE_DATA;
 import main.mode.TextMode;
 
@@ -26,8 +27,8 @@ public class TWInfo {
 
 	//初期化
 	public TWInfo() {
-		this.keyState=new boolean[8];
-		this.keyReleased=new boolean[8];
+		this.keyState=new boolean[KEY_STATE.NUM];
+		this.keyReleased=new boolean[KEY_STATE.NUM];
 		for(int i=0;i<this.keyState.length;i++) {
 			this.keyState[i]=false;
 			this.keyReleased[i]=true;//放された後ということにする

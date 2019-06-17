@@ -4,6 +4,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
+import main.TWFrame;
 import main.TWInfo;
 import main.struct.ImageState;
 import main.supers.GameItem;
@@ -30,7 +31,7 @@ public abstract class GameChara_B extends GameItem{
 		if(this.imgList.get(idx).visible==false)return;
 		//
 		AffineTransform oldtr=tInfo.g.getTransform();
-		tInfo.g.translate(this.position.x, this.position.y);
+		tInfo.g.translate(this.position.x, this.position.y+TWFrame.title_bar_height);
 		tInfo.g.rotate(this.angle/180.0*Math.PI,0,0);
 		tInfo.g.drawImage(this.imgList.get(idx).img, -(int)this.center.x, -(int)this.center.y,null);
 		//変形復帰

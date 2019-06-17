@@ -61,7 +61,7 @@ public class BattlePhase extends GamePhase{
 
 		@Override
 		public void keyControl(TWInfo tInfo,int key) {
-			BattlePhase.this.nowStage.getPlayer().keyControl(tInfo,-1, 0);
+			BattlePhase.this.nowStage.getPlayer().keyControl(tInfo,-1, -1);
 
 		}
 

@@ -131,6 +131,9 @@ public class TWFrame {
 				keyState[KEY_STATE.SPACE]=b;
 				//keyReleased[KEY_STATE.SPACE]=!b;
 				break;
+			case KeyEvent.VK_SHIFT:
+				keyState[KEY_STATE.SHIFT]=b;
+				break;
 			}
 
 		}

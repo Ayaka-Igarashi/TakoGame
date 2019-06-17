@@ -10,4 +10,7 @@ public class KEY_STATE {
 	public static final int X=5;
 	public static final int C=6;
 	public static final int SPACE=7;
+	public static final int SHIFT=8;
+
+	public static final int NUM=9;
 }

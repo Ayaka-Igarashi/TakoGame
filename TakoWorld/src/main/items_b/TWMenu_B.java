@@ -68,6 +68,7 @@ public class TWMenu_B extends GameItem {
 						this.confirmChoice=0;
 					}
 				}
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			}
 		}
 		if(key==KEY_STATE.X) {
