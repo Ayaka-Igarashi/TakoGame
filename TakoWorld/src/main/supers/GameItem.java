@@ -46,6 +46,7 @@ public abstract class GameItem {
 
 	//1つの画像を線画する
 	public void drawOne(TWInfo tInfo,int idx){
+		if(this.imgList.get(idx)==null)return;
 		if(this.imgList.get(idx).visible==false)return;
 		//変形は今のところしない
 		AffineTransform oldtr=tInfo.g.getTransform();

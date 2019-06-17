@@ -1,38 +1,48 @@
 package main.stage;
 
+import java.io.File;
 import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import main.TWInfo;
 import main.items_b.GameChara_B;
+import main.items_b.Player;
 
 public class Stage1 extends Stage {
-	@Override
-	public void first() {
-		// TODO 自動生成されたメソッド・スタブ
+	private Player player =new Player();
 
-	}
-
+	///////////////set  &  get  ////////////////
 	@Override
 	public GameChara_B getPlayer() {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		return this.player;
 	}
-
-	@Override
-	public void loadMedia() throws IOException {
-		// TODO 自動生成されたメソッド・スタブ
-
-	}
-
 	@Override
 	public GameChara_B getEnemy() {
 		// TODO 自動生成されたメソッド・スタブ
 		return null;
 	}
 
+
+	////////////////////////////////////////////
+
+	@Override
+	public void first() {
+		this.player.first();
+
+	}
+
+
+	@Override
+	public void loadMedia() throws IOException {
+		this.player.setImage(ImageIO.read(new File("media/same_mini.png")).getSubimage(0, 0, 70, 100));
+
+	}
+
+
 	@Override
 	public void draw(TWInfo tInfo) {
-		// TODO 自動生成されたメソッド・スタブ
+		this.player.draw(tInfo);
 
 	}
 

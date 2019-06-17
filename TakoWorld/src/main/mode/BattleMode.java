@@ -11,7 +11,6 @@ import javax.imageio.ImageIO;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
-import main.items_b.Player;
 import main.items_b.SoundItem_B;
 import main.items_b.TWMenu_B;
 import main.phase.BattlePhase;
@@ -19,10 +18,9 @@ import main.supers.GameMode;
 import main.supers.SoundBox;
 
 public class BattleMode extends GameMode {
-	private BattlePhase phase;
+	private BattlePhase phase=new BattlePhase();
 	private TWMenu_B menu = new TWMenu_B();
 	private SoundItem_B sound =new SoundItem_B();
-	private Player player =new Player();
 
 	private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
 	private boolean endFlg = false;
@@ -53,7 +51,6 @@ public class BattleMode extends GameMode {
 		this.endFlg = false;
 		this.menu.first();
 		this.sound.first();
-		this.player.first();
 
 	}
 
@@ -61,13 +58,12 @@ public class BattleMode extends GameMode {
 	public void control(TWInfo tInfo) {
 		this.menu.control(tInfo);
 		this.sound.control(tInfo);
-		this.player.control(tInfo);
 
 	}
 
 	@Override
 	public void keyControl(TWInfo tInfo) {
-
+		this.phase.keyControl(tInfo, -1);
 
 
 		if (tInfo.keyState[KEY_STATE.Z] == true && tInfo.keyReleased[KEY_STATE.Z] == true) {
@@ -75,7 +71,7 @@ public class BattleMode extends GameMode {
 				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
 			} else {
 				this.phase.keyControl(tInfo,KEY_STATE.Z);
-				this.player.keyControl(tInfo, KEY_STATE.Z, 0);
+				//this.player.keyControl(tInfo, KEY_STATE.Z, 0);
 				this.endFlg = true;
 			}
 			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
@@ -98,20 +94,20 @@ public class BattleMode extends GameMode {
 		//上キー（選択肢用）
 		if (tInfo.keyState[KEY_STATE.UP] == true && tInfo.keyReleased[KEY_STATE.UP] == true) {
 			this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.UP] = false;//キーが放されていない状態にする
 		} else if (tInfo.keyState[KEY_STATE.UP] == false && tInfo.keyReleased[KEY_STATE.UP] == false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+			//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.UP] = true;//キーが放された状態にする
 		}
 
 		//下キー
 		if (tInfo.keyState[KEY_STATE.DOWN] == true && tInfo.keyReleased[KEY_STATE.DOWN] == true) {
 			this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 			tInfo.keyReleased[KEY_STATE.DOWN] = false;//キーが放されていない状態にする
 		} else if (tInfo.keyState[KEY_STATE.DOWN] == false && tInfo.keyReleased[KEY_STATE.DOWN] == false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+			//SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 			tInfo.keyReleased[KEY_STATE.DOWN] = true;//キーが放された状態にする
 		}
 
@@ -130,15 +126,13 @@ public class BattleMode extends GameMode {
 		this.phase.draw(tInfo);
 
 		this.menu.draw(tInfo);
-		this.player.draw(tInfo);
 
 	}
 
 	@Override
 	public void loadMedia() throws IOException {
+		this.phase.loadMedia();
 		this.img_test = ImageIO.read(new File("media/logo.png"));
-
-		this.player.setImage(ImageIO.read(new File("media/same_mini.png")));
 
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
 		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
