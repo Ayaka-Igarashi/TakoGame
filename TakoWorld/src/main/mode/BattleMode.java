@@ -1,6 +1,5 @@
 package main.mode;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -48,7 +47,7 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void first(TWInfo tInfo) {
-		this.phase.first();
+		this.phase.first(tInfo);
 		this.endFlg = false;
 		this.menu.first();
 		this.sound.first();
@@ -64,10 +63,9 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void keyControl(TWInfo tInfo) {
-		if(this.menu.isMenuTime()==false) {
+		if(this.menu.isMenuTime()==false) {//メニュー画面の時はキー入力無効(controlも)
 			this.phase.keyControl(tInfo, -1);
 		}
-
 
 
 		if (tInfo.keyState[KEY_STATE.Z] == true && tInfo.keyReleased[KEY_STATE.Z] == true) {
@@ -120,9 +118,9 @@ public class BattleMode extends GameMode {
 		this.control(tInfo);
 
 		tInfo.g.drawImage(this.img_back, 0, TWFrame.title_bar_height, null);
-		tInfo.g.setBackground(Color.BLACK);
-		tInfo.g.setFont(this.font);
-		tInfo.g.drawString("GAME MODE", 100, 100);
+		//tInfo.g.setBackground(Color.BLACK);
+		//tInfo.g.setFont(this.font);
+		//tInfo.g.drawString("GAME MODE", 100, 100);
 
 		this.phase.draw(tInfo);
 

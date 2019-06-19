@@ -9,12 +9,13 @@ public abstract class Stage {
 	private double width=800;
 	private double height=600;
 
-	public abstract void first();
+	public abstract void first(TWInfo tInfo);
 
 	public abstract GameChara_B getPlayer();
 	public abstract void loadMedia() throws IOException;
 	public abstract GameChara_B getEnemy();
 
+	public abstract void control(TWInfo tInfo);
 	public abstract void draw(TWInfo tInfo);
 	public abstract void init(TWInfo tInfo);
 

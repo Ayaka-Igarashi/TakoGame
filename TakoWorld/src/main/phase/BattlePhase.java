@@ -20,9 +20,9 @@ public class BattlePhase extends GamePhase{
 		this.lose=new LosePhase();
 	}
 
-	public void first() {
+	public void first(TWInfo tInfo) {
 		this.nowPhase=start;
-		this.nowPhase.first();
+		this.nowPhase.first(tInfo);
 	}
 
 	public void keyControl(TWInfo tInfo,int key) {
@@ -54,19 +54,21 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first() {
-			BattlePhase.this.nowStage.first();
+		public void first(TWInfo tInfo) {
+			BattlePhase.this.nowStage.first(tInfo);
 
 		}
 
 		@Override
 		public void keyControl(TWInfo tInfo,int key) {
+			BattlePhase.this.nowStage.control(tInfo);
 			BattlePhase.this.nowStage.getPlayer().keyControl(tInfo,-1, -1);
 
 		}
 
 		@Override
 		public void draw(TWInfo tInfo) {
+
 			BattlePhase.this.nowStage.draw(tInfo);
 
 		}
@@ -85,7 +87,7 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first() {
+		public void first(TWInfo tInfo) {
 			// TODO 自動生成されたメソッド・スタブ
 
 		}
@@ -118,7 +120,7 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first() {
+		public void first(TWInfo tInfo) {
 			// TODO 自動生成されたメソッド・スタブ
 
 		}
@@ -148,7 +150,7 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first() {
+		public void first(TWInfo tInfo) {
 			// TODO 自動生成されたメソッド・スタブ
 
 		}
