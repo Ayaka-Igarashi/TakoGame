@@ -7,7 +7,7 @@ import main.TWInfo;
 public class AttackItem extends GameChara_B {
 	private Random random = new Random();
 	private long lastJudgeTime;
-	private final long AppearTime=20000;
+	private final long AppearTime=20000;//出現時間
 	private final int probability=20;//出現確率
 
 	@Override
