@@ -20,7 +20,7 @@ public class Player extends GameChara_B{
 	public void first() {
 		this.setVisible(0, true);
 		this.position=new Point2D.Double(400, 500);
-
+		this.attackAnim.first();
 	}
 
 	@Override

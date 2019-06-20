@@ -79,7 +79,7 @@ public class AnimItem extends GameChara_B {
 
 	@Override
 	public void first() {
-		// TODO 自動生成されたメソッド・スタブ
+		this.isAnim=false;
 
 	}
 
