@@ -12,6 +12,10 @@ public class Player extends GameChara_B{
 	private int attackMeter;//攻撃ゲージ
 	public AnimItem attackAnim=new AnimItem();
 
+	public Player() {
+		this.size=25;
+	}
+
 	@Override
 	public void first() {
 		this.setVisible(0, true);

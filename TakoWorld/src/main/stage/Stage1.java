@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.TWInfo;
+import main.functions.Vector;
 import main.items_b.AttackItem;
 import main.items_b.GameChara_B;
 import main.items_b.Player;
@@ -54,6 +55,11 @@ public class Stage1 extends Stage {
 	public void control(TWInfo tInfo) {
 		this.player.control(tInfo);
 		this.item.control(tInfo);
+		if(this.hitBoss()==true) {
+			this.player.position.x=400;
+			this.player.position.y=600;
+			System.out.println("hit");
+		}
 
 	}
 
@@ -63,8 +69,20 @@ public class Stage1 extends Stage {
 		this.item.draw(tInfo);
 		this.player.draw(tInfo);
 
-
 	}
+
+	@Override
+	public boolean hitBoss() {
+		return Vector.distance(this.takoyaki.position, this.player.position)<=this.takoyaki.size+this.player.size;
+	}
+
+	@Override
+	public boolean hitItem() {
+		// TODO 自動生成されたメソッド・スタブ
+		return false;
+	}
+
+
 
 	@Override
 	public void init(TWInfo tInfo) {

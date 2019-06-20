@@ -19,6 +19,9 @@ public abstract class Stage {
 	public abstract void draw(TWInfo tInfo);
 	public abstract void init(TWInfo tInfo);
 
+	public abstract boolean hitBoss();
+	public abstract boolean hitItem();
+
 	//敵の弾のデータを取得する
 	//public abstract ArrayList<BulletChara> getBullets_E();
 

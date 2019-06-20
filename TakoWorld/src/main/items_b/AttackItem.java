@@ -10,6 +10,10 @@ public class AttackItem extends GameChara_B {
 	private final long AppearTime=20000;//出現時間
 	private final int probability=20;//出現確率
 
+	public AttackItem() {
+		this.size=50;
+	}
+
 	@Override
 	public void first() {
 
