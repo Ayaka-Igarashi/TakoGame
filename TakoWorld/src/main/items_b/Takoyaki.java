@@ -7,7 +7,7 @@ import main.TWInfo;
 public class Takoyaki extends GameChara_B {
 
 	public Takoyaki() {
-		this.size=50;
+		this.size=40;
 	}
 
 	@Override

@@ -7,6 +7,8 @@ public class MUSIC_NUM {
 	public static final int BATTLE=2;
 	public static final int CHOICE3=3;
 	public static final int ATTACK=4;
-	public static final int CHOICE=5;
+	public static final int DEAD=5;
+	public static final int GET=6;
+	public static final int CHOICE=7;
 
 }

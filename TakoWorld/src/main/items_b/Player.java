@@ -87,5 +87,14 @@ public class Player extends GameChara_B{
 		}
 	}
 
+	//アイテム取得時の処理
+	public void hitItem() {
+		if(this.attackMeter<6) {
+			this.attackMeter+=1;
+			System.out.println(this.attackMeter);
+		}
+
+	}
+
 
 }

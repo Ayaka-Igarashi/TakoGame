@@ -166,6 +166,8 @@ public class TWDisplay extends GameDisplay{
 				SoundBox.singleton.setLoop(MUSIC_NUM.BATTLE, 10000, 2132000);//ループ設定
 				SoundBox.singleton.loadSound(new File("media/sound/choice3.wav"));
 				SoundBox.singleton.loadSound(new File("media/sound/attack.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/fire.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/get.wav"));
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {

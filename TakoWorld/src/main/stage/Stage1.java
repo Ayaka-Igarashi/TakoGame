@@ -6,11 +6,13 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import main.TWInfo;
+import main.constant.MUSIC_NUM;
 import main.functions.Vector;
 import main.items_b.AttackItem;
 import main.items_b.GameChara_B;
 import main.items_b.Player;
 import main.items_b.Takoyaki;
+import main.supers.SoundBox;
 
 public class Stage1 extends Stage {
 	private Player player =new Player();
@@ -59,8 +61,13 @@ public class Stage1 extends Stage {
 		if(this.hitBoss()==true) {
 			this.player.hitBoss();
 			this.IsReStart=true;
+			SoundBox.singleton.playClip(MUSIC_NUM.DEAD);
 		}
-
+		if(this.hitItem()==true) {
+			this.player.hitItem();
+			this.item.got();
+			SoundBox.singleton.playClip(MUSIC_NUM.GET);
+		}
 	}
 
 	@Override
@@ -89,8 +96,7 @@ public class Stage1 extends Stage {
 
 	@Override
 	public boolean hitItem() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return Vector.distance(this.item.position, this.player.position)<=this.item.size+this.player.size;
 	}
 
 

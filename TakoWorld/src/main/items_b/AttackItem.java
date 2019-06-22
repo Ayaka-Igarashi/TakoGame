@@ -7,18 +7,16 @@ import main.TWInfo;
 public class AttackItem extends GameChara_B {
 	private Random random = new Random();
 	private long lastJudgeTime;
-	private final long AppearTime=3000;//出現時間
-	private final int probability=40;//出現確率
+	private final long AppearTime=20000;//出現時間
+	private final int probability=15;//出現確率
 
 
 	public AttackItem() {
-		this.size=50;
+		this.size=20;
 	}
 
 	@Override
-	public void first() {
-
-	}
+	public void first() {}
 
 	public void first(TWInfo tInfo) {
 		this.setVisible(0, false);
@@ -45,6 +43,8 @@ public class AttackItem extends GameChara_B {
 			}else if(this.imgList.get(0).visible == true) {
 				if(tInfo.currentTime-this.lastJudgeTime-this.menuTime>this.AppearTime) {
 					this.setVisible(0, false);
+					this.position.x=-100;
+					this.position.y=-100;
 					this.lastJudgeTime = tInfo.currentTime;
 					this.menuTime=0;
 				}
@@ -55,6 +55,13 @@ public class AttackItem extends GameChara_B {
 	@Override
 	public void keyControl(TWInfo tInfo, int key, int action) {
 		// TODO 自動生成されたメソッド・スタブ
+	}
+
+	//アイテムを取得
+	public void got() {
+		this.setVisible(0, false);
+		this.position.x=-100;
+		this.position.y=-100;
 	}
 
 }
