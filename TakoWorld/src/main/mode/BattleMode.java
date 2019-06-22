@@ -1,6 +1,5 @@
 package main.mode;
 
-import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -22,7 +21,7 @@ public class BattleMode extends GameMode {
 	private TWMenu_B menu = new TWMenu_B();
 	private SoundItem_B sound =new SoundItem_B();
 
-	private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
+	//private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
 
 	private BufferedImage img_back;
 
@@ -61,46 +60,48 @@ public class BattleMode extends GameMode {
 			this.phase.keyControl(tInfo, -1);
 		}
 
-
-		if (tInfo.keyState[KEY_STATE.Z] == true && tInfo.keyReleased[KEY_STATE.Z] == true) {
-			if (this.menu.isMenuTime() == true) {//メニュー画面状態か
-				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
-			} else {
+		if(this.phase.canOpenMenu()==true) {
+			if (tInfo.keyState[KEY_STATE.Z] == true && tInfo.keyReleased[KEY_STATE.Z] == true) {
+				if (this.menu.isMenuTime() == true) {//メニュー画面状態か
+					this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
+				} else {
+				}
+				tInfo.keyReleased[KEY_STATE.Z] = false;
+			} else if (tInfo.keyState[KEY_STATE.Z] == false && tInfo.keyReleased[KEY_STATE.Z] == false) {
+				SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+				tInfo.keyReleased[KEY_STATE.Z] = true;//キーが放された状態にする
 			}
-			tInfo.keyReleased[KEY_STATE.Z] = false;
-		} else if (tInfo.keyState[KEY_STATE.Z] == false && tInfo.keyReleased[KEY_STATE.Z] == false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
-			tInfo.keyReleased[KEY_STATE.Z] = true;//キーが放された状態にする
-		}
 
-		//Xキー
-		if (tInfo.keyState[KEY_STATE.X] == true && tInfo.keyReleased[KEY_STATE.X] == true) {
-			this.menu.keyControl(tInfo, KEY_STATE.X, 1);
-			SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			tInfo.keyReleased[KEY_STATE.X] = false;//キーが放されていない状態にする
-		} else if (tInfo.keyState[KEY_STATE.X] == false && tInfo.keyReleased[KEY_STATE.X] == false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
-			tInfo.keyReleased[KEY_STATE.X] = true;//キーが放された状態にする
-		}
+			//Xキー
+			if (tInfo.keyState[KEY_STATE.X] == true && tInfo.keyReleased[KEY_STATE.X] == true) {
+				this.menu.keyControl(tInfo, KEY_STATE.X, 1);
+				SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+				tInfo.keyReleased[KEY_STATE.X] = false;//キーが放されていない状態にする
+			} else if (tInfo.keyState[KEY_STATE.X] == false && tInfo.keyReleased[KEY_STATE.X] == false) {
+				SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+				tInfo.keyReleased[KEY_STATE.X] = true;//キーが放された状態にする
+			}
 
-		//上キー（選択肢用）
-		if (tInfo.keyState[KEY_STATE.UP] == true && tInfo.keyReleased[KEY_STATE.UP] == true) {
-			this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
-			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			tInfo.keyReleased[KEY_STATE.UP] = false;//キーが放されていない状態にする
-		} else if (tInfo.keyState[KEY_STATE.UP] == false && tInfo.keyReleased[KEY_STATE.UP] == false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
-			tInfo.keyReleased[KEY_STATE.UP] = true;//キーが放された状態にする
-		}
+			//上キー（選択肢用）
+			if (tInfo.keyState[KEY_STATE.UP] == true && tInfo.keyReleased[KEY_STATE.UP] == true) {
+				this.menu.keyControl(tInfo, KEY_STATE.UP, 1);
+				//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+				tInfo.keyReleased[KEY_STATE.UP] = false;//キーが放されていない状態にする
+			} else if (tInfo.keyState[KEY_STATE.UP] == false && tInfo.keyReleased[KEY_STATE.UP] == false) {
+				SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+				tInfo.keyReleased[KEY_STATE.UP] = true;//キーが放された状態にする
+			}
 
-		//下キー
-		if (tInfo.keyState[KEY_STATE.DOWN] == true && tInfo.keyReleased[KEY_STATE.DOWN] == true) {
-			this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
-			//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
-			tInfo.keyReleased[KEY_STATE.DOWN] = false;//キーが放されていない状態にする
-		} else if (tInfo.keyState[KEY_STATE.DOWN] == false && tInfo.keyReleased[KEY_STATE.DOWN] == false) {
-			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
-			tInfo.keyReleased[KEY_STATE.DOWN] = true;//キーが放された状態にする
+			//下キー
+			if (tInfo.keyState[KEY_STATE.DOWN] == true && tInfo.keyReleased[KEY_STATE.DOWN] == true) {
+				this.menu.keyControl(tInfo, KEY_STATE.DOWN, 1);
+				//SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+				tInfo.keyReleased[KEY_STATE.DOWN] = false;//キーが放されていない状態にする
+			} else if (tInfo.keyState[KEY_STATE.DOWN] == false && tInfo.keyReleased[KEY_STATE.DOWN] == false) {
+				SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+				tInfo.keyReleased[KEY_STATE.DOWN] = true;//キーが放された状態にする
+			}
+
 		}
 
 	}

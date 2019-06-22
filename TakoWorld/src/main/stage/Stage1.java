@@ -83,18 +83,17 @@ public class Stage1 extends Stage {
 		this.takoyaki.draw(tInfo);
 		this.item.draw(tInfo);
 		this.player.draw(tInfo);
-
 	}
 
 	@Override
 	public void startMotion(TWInfo tInfo) {
-		this.player.enter(tInfo);
+		this.player.enter(tInfo,100);
 	}
 
 
 	@Override
 	public void reStart(TWInfo tInfo) {
-		this.player.enter(tInfo);
+		this.player.enter(tInfo,190);
 	}
 
 

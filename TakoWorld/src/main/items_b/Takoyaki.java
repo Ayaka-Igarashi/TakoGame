@@ -10,7 +10,7 @@ public class Takoyaki extends GameChara_B {
 
 
 	public Takoyaki() {
-		this.size=40;
+		this.size=25;
 	}
 
 	@Override
@@ -36,8 +36,7 @@ public class Takoyaki extends GameChara_B {
 	public void hitAttack() {
 		if(this.life>0) {
 			this.life-=10;
-			System.out.println(this.life);
-			//SoundBox.singleton.playClip(MUSIC_NUM.HIT);
+			//System.out.println(this.life);
 		}
 		if(this.life<=0) {
 			this.setVisible(0, false);

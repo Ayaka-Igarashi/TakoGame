@@ -13,7 +13,7 @@ public class Player extends GameChara_B{
 	public AnimItem attackAnim=new AnimItem();
 
 	public Player() {
-		this.size=25;
+		this.size=20;
 	}
 
 	@Override
@@ -26,8 +26,8 @@ public class Player extends GameChara_B{
 	}
 
 	//スタートで入ってくるモーション
-	public void enter(TWInfo tInfo) {
-		this.position.y-=100*tInfo.frameTime;
+	public void enter(TWInfo tInfo,int entrySpeed) {
+		this.position.y-=entrySpeed*tInfo.frameTime;
 	}
 
 	@Override
@@ -50,16 +50,24 @@ public class Player extends GameChara_B{
 
 
 		if(tInfo.keyState[KEY_STATE.RIGHT]) {
-			this.position.x+=this.speed*tInfo.frameTime;
+			if(this.position.x+this.center.x<800) {
+				this.position.x+=this.speed*tInfo.frameTime;
+			}
 		}
 		if(tInfo.keyState[KEY_STATE.LEFT]) {
-			this.position.x-=this.speed*tInfo.frameTime;
+			if(this.position.x-this.center.x>0) {
+				this.position.x-=this.speed*tInfo.frameTime;
+			}
 		}
 		if(tInfo.keyState[KEY_STATE.UP]) {
-			this.position.y-=this.speed*tInfo.frameTime;
+			if(this.position.y-this.center.y>0) {
+				this.position.y-=this.speed*tInfo.frameTime;
+			}
 		}
 		if(tInfo.keyState[KEY_STATE.DOWN]) {
-			this.position.y+=this.speed*tInfo.frameTime;
+			if(this.position.y+this.center.y<600) {
+				this.position.y+=this.speed*tInfo.frameTime;
+			}
 		}
 		if(tInfo.keyState[KEY_STATE.Z]&tInfo.keyReleased[KEY_STATE.Z]==true) {
 			this.attackAnim.start(tInfo);

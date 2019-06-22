@@ -66,12 +66,17 @@ public class BattlePhase extends GamePhase{
 
 	public void setMenuTime(long openTime) {
 		this.nowStage.setMenuTime(openTime);
-		this.menuTime=openTime;
+		this.menuTime+=openTime;
 	}
 	public void setIsMenu(boolean menuTime) {
 		this.isMenuTime=menuTime;
 		this.nowStage.setIsMenuTime(menuTime);
 
+	}
+
+	//クリア時とゲームオーバー時はメニュー画面開けない
+	public boolean canOpenMenu() {
+		return this.nowPhase!=clear&&this.nowPhase!=lose;
 	}
 
 
@@ -87,6 +92,7 @@ public class BattlePhase extends GamePhase{
 		public void first(TWInfo tInfo) {
 			BattlePhase.this.nowStage.first(tInfo);
 			this.startTime=tInfo.currentTime;
+			BattlePhase.this.menuTime=0;
 		}
 
 		@Override
@@ -173,12 +179,16 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void first(TWInfo tInfo) {
 			this.startTime=tInfo.currentTime;
+			BattlePhase.this.menuTime=0;
 		}
 
 		@Override
 		public void keyControl(TWInfo tInfo, int key) {
 			BattlePhase.this.nowStage.control(tInfo);
-			BattlePhase.this.nowStage.reStart(tInfo);
+			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>500) {
+				BattlePhase.this.nowStage.reStart(tInfo);
+			}
+
 
 			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>1000) {
 				BattlePhase.this.nowPhase=main;

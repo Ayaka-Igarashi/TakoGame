@@ -38,7 +38,7 @@ public class AnimItem extends GameChara_B {
 	@Override
 	public void first() {
 		this.isAnim=false;
-		this.size=30;
+		this.size=50;
 		this.isJudge=false;
 	}
 
