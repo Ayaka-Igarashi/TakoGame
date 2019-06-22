@@ -68,6 +68,14 @@ public class Stage1 extends Stage {
 			this.item.got();
 			SoundBox.singleton.playClip(MUSIC_NUM.GET);
 		}
+		if(this.hitAttack()==true&&this.player.attackAnim.isJudge==true) {
+			this.takoyaki.hitAttack();
+			this.player.attackAnim.isJudge=false;
+			SoundBox.singleton.playClip(MUSIC_NUM.HIT);
+		}else if(this.hitAttack()==false&&this.player.attackAnim.isJudge==true) {
+			this.player.attackAnim.isJudge=false;
+			SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
+		}
 	}
 
 	@Override
@@ -89,6 +97,7 @@ public class Stage1 extends Stage {
 		this.player.enter(tInfo);
 	}
 
+
 	@Override
 	public boolean hitBoss() {
 		return Vector.distance(this.takoyaki.position, this.player.position)<=this.takoyaki.size+this.player.size;
@@ -97,6 +106,11 @@ public class Stage1 extends Stage {
 	@Override
 	public boolean hitItem() {
 		return Vector.distance(this.item.position, this.player.position)<=this.item.size+this.player.size;
+	}
+
+	@Override
+	public boolean hitAttack() {
+		return Vector.distance(this.takoyaki.position, this.player.attackAnim.position)<=this.takoyaki.size+this.player.attackAnim.size;
 	}
 
 
@@ -114,8 +128,7 @@ public class Stage1 extends Stage {
 
 	@Override
 	public boolean isBossLiving() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return this.takoyaki.isAlive;
 	}
 
 	@Override

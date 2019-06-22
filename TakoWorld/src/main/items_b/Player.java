@@ -91,9 +91,8 @@ public class Player extends GameChara_B{
 	public void hitItem() {
 		if(this.attackMeter<6) {
 			this.attackMeter+=1;
-			System.out.println(this.attackMeter);
+			//System.out.println(this.attackMeter);
 		}
-
 	}
 
 

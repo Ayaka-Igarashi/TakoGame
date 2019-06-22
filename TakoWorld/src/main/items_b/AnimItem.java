@@ -18,6 +18,8 @@ public class AnimItem extends GameChara_B {
 
 	public boolean isAnim;
 
+	public boolean isJudge;
+
 	//protected boolean autorepeat=true;
 	public GameChara_B setAnimation(int x,int y,int num,long oneTime) {
 		this.isAnim=false;
@@ -32,12 +34,22 @@ public class AnimItem extends GameChara_B {
 		return this;
 	}
 
+	//初期設定
+	@Override
+	public void first() {
+		this.isAnim=false;
+		this.size=30;
+		this.isJudge=false;
+	}
+
+
 
 	public void start(TWInfo tInfo) {
 		if(this.isAnim==false) {
 			this.startTime=tInfo.currentTime;
 			this.isAnim=true;
-			SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
+			this.isJudge=true;
+			//SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
 			this.menuTime=0;
 		}
 	}
@@ -57,6 +69,7 @@ public class AnimItem extends GameChara_B {
 		if(this.nowFrame==this.framenum) {
 			this.isAnim=false;
 			SoundBox.singleton.stopClip(MUSIC_NUM.ATTACK);
+			SoundBox.singleton.stopClip(MUSIC_NUM.HIT);
 			return this;
 		}
 
@@ -81,11 +94,6 @@ public class AnimItem extends GameChara_B {
 	}
 
 
-	@Override
-	public void first() {
-		this.isAnim=false;
-
-	}
 
 	@Override
 	public void control(TWInfo tInfo) {

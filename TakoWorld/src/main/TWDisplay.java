@@ -168,6 +168,7 @@ public class TWDisplay extends GameDisplay{
 				SoundBox.singleton.loadSound(new File("media/sound/attack.wav"));
 				SoundBox.singleton.loadSound(new File("media/sound/fire.wav"));
 				SoundBox.singleton.loadSound(new File("media/sound/get.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/hit.wav"));
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {

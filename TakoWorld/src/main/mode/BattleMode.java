@@ -23,7 +23,6 @@ public class BattleMode extends GameMode {
 	private SoundItem_B sound =new SoundItem_B();
 
 	private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
-	private boolean endFlg = false;
 
 	private BufferedImage img_back;
 
@@ -33,22 +32,17 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public boolean isEnd() {
-		if (this.endFlg == true) {
-			return true;
-		} else {
-			return false;
-		}
+		return this.phase.clearFlg;
 	}
 
 	@Override
 	public boolean isExit() {
-		return this.menu.isExit();
+		return this.menu.isExit()||this.phase.exitFlg;
 	}
 
 	@Override
 	public void first(TWInfo tInfo) {
 		this.phase.first(tInfo);
-		this.endFlg = false;
 		this.menu.first();
 		this.sound.first();
 
@@ -72,7 +66,6 @@ public class BattleMode extends GameMode {
 			if (this.menu.isMenuTime() == true) {//メニュー画面状態か
 				this.menu.keyControl(tInfo, KEY_STATE.Z, 1);
 			} else {
-				//this.endFlg = true;
 			}
 			tInfo.keyReleased[KEY_STATE.Z] = false;
 		} else if (tInfo.keyState[KEY_STATE.Z] == false && tInfo.keyReleased[KEY_STATE.Z] == false) {

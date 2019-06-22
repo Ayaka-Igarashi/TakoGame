@@ -22,6 +22,7 @@ public abstract class Stage {
 
 	public abstract boolean hitBoss();
 	public abstract boolean hitItem();
+	public abstract boolean hitAttack();
 
 	//プレイヤー生きてるか
 	public abstract boolean isPlayerAlive();

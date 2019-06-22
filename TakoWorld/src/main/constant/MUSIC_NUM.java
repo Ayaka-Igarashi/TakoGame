@@ -9,6 +9,7 @@ public class MUSIC_NUM {
 	public static final int ATTACK=4;
 	public static final int DEAD=5;
 	public static final int GET=6;
-	public static final int CHOICE=7;
+	public static final int HIT=7;
+	public static final int CHOICE=8;
 
 }
