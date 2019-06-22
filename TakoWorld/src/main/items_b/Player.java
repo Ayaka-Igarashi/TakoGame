@@ -8,7 +8,7 @@ import main.supers.GameItem;
 
 public class Player extends GameChara_B{
 	private int speed=300;
-	private int life=4;//残機
+	public int life=4;//残機
 	private int attackMeter;//攻撃ゲージ
 	public AnimItem attackAnim=new AnimItem();
 
@@ -20,6 +20,8 @@ public class Player extends GameChara_B{
 	public void first() {
 		this.setVisible(0, true);
 		this.position=new Point2D.Double(400, 500);
+		this.life=4;
+		this.attackMeter=0;
 		this.attackAnim.first();
 	}
 
@@ -67,6 +69,17 @@ public class Player extends GameChara_B{
 	public GameItem draw(TWInfo tInfo) {
 		this.attackAnim.draw(tInfo);
 		return super.draw(tInfo);
+	}
+
+	//当たった時の処理
+	public void hitBoss() {
+		if(this.life>0) {
+			this.life-=1;
+			if(this.life>0) {
+				this.position.x=400;
+				this.position.y=600;
+			}
+		}
 	}
 
 

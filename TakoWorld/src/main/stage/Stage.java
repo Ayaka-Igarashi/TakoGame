@@ -22,6 +22,14 @@ public abstract class Stage {
 	public abstract boolean hitBoss();
 	public abstract boolean hitItem();
 
+	//プレイヤー生きてるか
+	public abstract boolean isPlayerAlive();
+	//ボスが生きているか
+	public abstract boolean isBossLiving();
+
+	public abstract void setMenuTime(long openTime);
+	public abstract void setIsMenuTime(boolean isMenuTime);
+
 	//敵の弾のデータを取得する
 	//public abstract ArrayList<BulletChara> getBullets_E();
 
@@ -60,8 +68,11 @@ public abstract class Stage {
 		this.height = height;
 	}
 
+
+
+
+
 	//当たり判定
 	//public abstract boolean hitTestAll(GraphicsInfo gInfo);
-	//ボスが生きているか
-	public abstract boolean isBossLiving();
+
 }

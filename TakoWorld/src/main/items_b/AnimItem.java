@@ -38,6 +38,7 @@ public class AnimItem extends GameChara_B {
 			this.startTime=tInfo.currentTime;
 			this.isAnim=true;
 			SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
+			this.menuTime=0;
 		}
 	}
 
@@ -46,8 +47,11 @@ public class AnimItem extends GameChara_B {
 
 		if(this.isAnim==false)return this;
 
-		//現在のコマを求める
-		this.nowFrame=(int) ((tInfo.currentTime-this.startTime)/this.oneTime);
+		if(this.isMenuTime==false) {//メニュー表示中はアニメーションストップ
+			//現在のコマを求める
+			this.nowFrame=(int) ((tInfo.currentTime-this.startTime-this.menuTime)/this.oneTime);
+		}
+
 
 		//アニメ終了判定
 		if(this.nowFrame==this.framenum) {

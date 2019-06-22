@@ -56,9 +56,7 @@ public class Stage1 extends Stage {
 		this.player.control(tInfo);
 		this.item.control(tInfo);
 		if(this.hitBoss()==true) {
-			this.player.position.x=400;
-			this.player.position.y=600;
-			System.out.println("hit");
+			this.player.hitBoss();
 		}
 
 	}
@@ -91,9 +89,25 @@ public class Stage1 extends Stage {
 	}
 
 	@Override
+	public boolean isPlayerAlive() {
+		return this.player.life>0;
+	}
+
+	@Override
 	public boolean isBossLiving() {
 		// TODO 自動生成されたメソッド・スタブ
 		return false;
+	}
+
+	@Override
+	public void setMenuTime(long openTime) {
+		this.item.menuTime=openTime;
+		this.player.attackAnim.menuTime=openTime;
+
+	}
+	@Override
+	public void setIsMenuTime(boolean isMenuTime) {
+		this.player.attackAnim.isMenuTime=isMenuTime;
 	}
 
 

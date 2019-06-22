@@ -19,6 +19,10 @@ public class TWMenu_B extends GameItem {
 
 	private boolean exitFlg;
 
+	private long startTime;//メニューを開いた時の時間
+	public long openTime;//メニュー表示時間
+	public boolean setTimeFlg;
+
 	private String[] menuText= {"EXIT"};
 	private String[] confirm= {"タイトルに戻りますか"};
 	private String[] yesNo= {"はい","いいえ"};
@@ -39,6 +43,10 @@ public class TWMenu_B extends GameItem {
 		return this.exitFlg;
 	}
 
+	public void resetOpenTime() {
+		this.openTime=0;
+	}
+
 	@Override
 	public void first() {
 		this.menuTime=false;
@@ -46,6 +54,9 @@ public class TWMenu_B extends GameItem {
 		this.nowChoice=0;
 		this.confirmChoice=0;
 		this.exitFlg=false;
+		this.startTime=0;
+		this.openTime=0;
+		this.setTimeFlg=false;
 		return;
 	}
 
@@ -74,11 +85,15 @@ public class TWMenu_B extends GameItem {
 		if(key==KEY_STATE.X) {
 			if(this.menuTime==false) {
 				this.menuTime=true;//メニュー表示状態にする
+				this.startTime=tInfo.currentTime;//時間を測る
 			}else if(this.menuTime==true) {//メニューを閉じる
 				this.menuTime=false;
 				this.menuState=-1;
 				this.nowChoice=0;
 				this.confirmChoice=0;
+				this.openTime=tInfo.currentTime-this.startTime;
+				this.setTimeFlg=true;
+				//System.out.println(TWMenu_B.openTime);
 			}
 		}
 		if(key==KEY_STATE.UP) {

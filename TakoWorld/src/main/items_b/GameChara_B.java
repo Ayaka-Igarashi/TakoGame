@@ -15,6 +15,9 @@ public abstract class GameChara_B extends GameItem{
 	public double angle=0.0;
 	public double size;
 
+	public long menuTime;//メニュー表示時間を保存
+	public boolean isMenuTime;//メニュー表示中か
+
 	@Override
 	public GameItem setImage(BufferedImage img) {
 
