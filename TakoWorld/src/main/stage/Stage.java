@@ -8,6 +8,7 @@ import main.items_b.GameChara_B;
 public abstract class Stage {
 	private double width=800;
 	private double height=600;
+	public boolean IsReStart;
 
 	public abstract void first(TWInfo tInfo);
 
@@ -29,6 +30,10 @@ public abstract class Stage {
 
 	public abstract void setMenuTime(long openTime);
 	public abstract void setIsMenuTime(boolean isMenuTime);
+
+	//スタート時の動き
+	public abstract void startMotion(TWInfo tInfo);
+	public abstract void reStart(TWInfo tInfo);//プレイヤーの残機が減った時
 
 	//敵の弾のデータを取得する
 	//public abstract ArrayList<BulletChara> getBullets_E();
@@ -67,6 +72,8 @@ public abstract class Stage {
 	public void setHeight(double height) {
 		this.height = height;
 	}
+
+
 
 
 

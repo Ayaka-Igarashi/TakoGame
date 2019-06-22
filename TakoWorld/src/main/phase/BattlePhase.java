@@ -9,7 +9,7 @@ import main.stage.Stage1;
 import main.supers.GamePhase;
 
 public class BattlePhase extends GamePhase{
-	GamePhase start,main,clear,lose;
+	GamePhase start,main,reStart,clear,lose;
 	private GamePhase nowPhase=null;
 	public Stage nowStage =new Stage1();
 
@@ -19,10 +19,12 @@ public class BattlePhase extends GamePhase{
 	public BattlePhase(){
 		this.start=new StartPhase();
 		this.main=new MainPhase();
+		this.reStart=new ReStartPhase();
 		this.clear=new ClearPhase();
 		this.lose=new LosePhase();
 	}
 
+	//スタートするたびに実行
 	public void first(TWInfo tInfo) {
 		this.nowPhase=start;
 		this.nowPhase.first(tInfo);
@@ -67,6 +69,7 @@ public class BattlePhase extends GamePhase{
 
 		}
 
+		//スタート押すたびに実行
 		@Override
 		public void first(TWInfo tInfo) {
 			BattlePhase.this.nowStage.first(tInfo);
@@ -77,8 +80,9 @@ public class BattlePhase extends GamePhase{
 		public void keyControl(TWInfo tInfo,int key) {
 			//BattlePhase.this.nowStage.control(tInfo);
 			//BattlePhase.this.nowStage.getPlayer().keyControl(tInfo,-1, -1);
+			BattlePhase.this.nowStage.startMotion(tInfo);
 
-			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>2000) {
+			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>1200) {
 				BattlePhase.this.nowPhase=main;
 			}
 
@@ -121,7 +125,12 @@ public class BattlePhase extends GamePhase{
 
 			if(BattlePhase.this.nowStage.isPlayerAlive()==false) {
 				BattlePhase.this.nowPhase=lose;
+			}else if(BattlePhase.this.nowStage.IsReStart==true) {
+				BattlePhase.this.nowPhase=reStart;
+				BattlePhase.this.nowPhase.first(tInfo);
+				BattlePhase.this.nowStage.IsReStart=false;
 			}
+
 		}
 
 		@Override
@@ -129,6 +138,40 @@ public class BattlePhase extends GamePhase{
 			BattlePhase.this.nowStage.draw(tInfo);
 			tInfo.g.setBackground(Color.BLACK);
 			tInfo.g.drawString("Main", 100, 100);
+
+		}
+
+		@Override
+		public void loadMedia() throws IOException {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
+
+	public class ReStartPhase extends GamePhase {
+
+		@Override
+		public void first(TWInfo tInfo) {
+			this.startTime=tInfo.currentTime;
+		}
+
+		@Override
+		public void keyControl(TWInfo tInfo, int key) {
+			BattlePhase.this.nowStage.control(tInfo);
+			BattlePhase.this.nowStage.reStart(tInfo);
+
+			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>1000) {
+				BattlePhase.this.nowPhase=main;
+			}
+
+		}
+
+		@Override
+		public void draw(TWInfo tInfo) {
+			BattlePhase.this.nowStage.draw(tInfo);
+			tInfo.g.setBackground(Color.BLACK);
+			tInfo.g.drawString("reSTART", 100, 100);
 
 		}
 

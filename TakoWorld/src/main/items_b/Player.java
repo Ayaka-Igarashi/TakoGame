@@ -19,10 +19,15 @@ public class Player extends GameChara_B{
 	@Override
 	public void first() {
 		this.setVisible(0, true);
-		this.position=new Point2D.Double(400, 500);
+		this.position=new Point2D.Double(400, 650);
 		this.life=4;
 		this.attackMeter=0;
 		this.attackAnim.first();
+	}
+
+	//スタートで入ってくるモーション
+	public void enter(TWInfo tInfo) {
+		this.position.y-=100*tInfo.frameTime;
 	}
 
 	@Override
@@ -77,7 +82,7 @@ public class Player extends GameChara_B{
 			this.life-=1;
 			if(this.life>0) {
 				this.position.x=400;
-				this.position.y=600;
+				this.position.y=650;
 			}
 		}
 	}

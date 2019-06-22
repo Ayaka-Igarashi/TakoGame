@@ -36,6 +36,7 @@ public class Stage1 extends Stage {
 		this.player.first();
 		this.takoyaki.first();
 		this.item.first(tInfo);
+		this.IsReStart=false;
 
 	}
 
@@ -57,6 +58,7 @@ public class Stage1 extends Stage {
 		this.item.control(tInfo);
 		if(this.hitBoss()==true) {
 			this.player.hitBoss();
+			this.IsReStart=true;
 		}
 
 	}
@@ -67,6 +69,17 @@ public class Stage1 extends Stage {
 		this.item.draw(tInfo);
 		this.player.draw(tInfo);
 
+	}
+
+	@Override
+	public void startMotion(TWInfo tInfo) {
+		this.player.enter(tInfo);
+	}
+
+
+	@Override
+	public void reStart(TWInfo tInfo) {
+		this.player.enter(tInfo);
 	}
 
 	@Override
