@@ -29,9 +29,10 @@ public class BattleMode extends GameMode {
 
 	}
 
+	//バトルモードからはエンディングにいかない
 	@Override
 	public boolean isEnd() {
-		return this.phase.clearFlg;
+		return false;
 	}
 
 	@Override
@@ -40,8 +41,18 @@ public class BattleMode extends GameMode {
 	}
 
 	@Override
-	public void first(TWInfo tInfo) {
-		this.phase.first(tInfo);
+	public boolean isModeChange() {
+		return this.phase.clearFlg;
+	}
+
+	@Override
+	public int getNextScene() {
+		return this.phase.nowStage.nextScene;
+	}
+
+	@Override
+	public void first(TWInfo tInfo,int scene) {
+		this.phase.first(tInfo,scene);
 		this.menu.first();
 		this.sound.first();
 

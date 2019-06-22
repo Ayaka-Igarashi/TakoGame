@@ -16,6 +16,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.constant.SCENE_NUM;
 import main.mode.BattleMode;
 import main.mode.TextMode;
 import main.supers.GameDisplay;
@@ -27,7 +28,7 @@ public class TWDisplay extends GameDisplay{
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.PLAIN,40);
 	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
 	private GameMode mode =null;
-	private int modeNum=1;//初期のモード番号
+	private int modeNum=0;//初期のモード番号
 
 	public TWDisplay() {
 		this.title=new TWTitle();
@@ -143,10 +144,14 @@ public class TWDisplay extends GameDisplay{
 				if(this.nowChoice==1) {//コンティニューの場合ロードする
 					TWDisplay.this.mode=TWDisplay.this.modeList.get(0);//テキストモードにする
 					TWDisplay.this.modeNum=0;
-					TWDisplay.this.mode.first(tInfo);//初期画像設定
+					TWDisplay.this.mode.first(tInfo,SCENE_NUM.INTRO);//初期画像設定
 					tInfo.load();
 				}else {
-					TWDisplay.this.mode.first(tInfo);//初期画像設定
+					if(TWDisplay.this.modeNum==0) {
+						TWDisplay.this.mode.first(tInfo,SCENE_NUM.INTRO);//初期画像設定
+					}else if(TWDisplay.this.modeNum==1) {
+						TWDisplay.this.mode.first(tInfo,SCENE_NUM.S1);//初期画像設定
+					}
 				}
 				pushFlg=false;
 				this.nowChoice=0;//選択をデフォルトの位置にする
@@ -181,6 +186,7 @@ public class TWDisplay extends GameDisplay{
 	//本編
 	public class TWMain extends GameDisplay{
 		//boolean pushFlg=false;//ボタンが押されたか判定
+		private int nextScene;
 
 		//繰り返し呼ばれる
 		@Override
@@ -193,6 +199,9 @@ public class TWDisplay extends GameDisplay{
 				TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
 				TWDisplay.this.modeNum=1;
 			}else if(TWDisplay.this.mode.isEnd()) {
+				TWDisplay.this.mode.stopBGM();//bgmを止める
+				GameDisplay.current=TWDisplay.this.end;
+				/*
 				if(TWDisplay.this.modeNum==1) {
 					TWDisplay.this.mode.stopBGM();//bgmを止める
 					TWDisplay.this.mode =TWDisplay.this.modeList.get(0);
@@ -201,6 +210,20 @@ public class TWDisplay extends GameDisplay{
 				}else {
 					TWDisplay.this.mode.stopBGM();//bgmを止める
 					GameDisplay.current=TWDisplay.this.end;
+				}
+				*/
+			}else if(TWDisplay.this.mode.isModeChange()) {
+				TWDisplay.this.mode.stopBGM();//bgmを止める
+				if(TWDisplay.this.modeNum==0) {
+					this.nextScene=TWDisplay.this.mode.getNextScene();
+					TWDisplay.this.mode =TWDisplay.this.modeList.get(1);
+					TWDisplay.this.modeNum=1;
+					TWDisplay.this.mode.first(tInfo,this.nextScene);//初期画像設定
+				}else if(TWDisplay.this.modeNum==1) {
+					this.nextScene=TWDisplay.this.mode.getNextScene();
+					TWDisplay.this.mode =TWDisplay.this.modeList.get(0);
+					TWDisplay.this.modeNum=0;
+					TWDisplay.this.mode.first(tInfo,this.nextScene);//初期画像設定
 				}
 			}
 

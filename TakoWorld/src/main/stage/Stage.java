@@ -10,6 +10,8 @@ public abstract class Stage {
 	private double height=600;
 	public boolean IsReStart;
 
+	public int nextScene;
+
 	public abstract void first(TWInfo tInfo);
 
 	public abstract GameChara_B getPlayer();

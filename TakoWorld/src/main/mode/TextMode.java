@@ -52,6 +52,8 @@ public class TextMode extends GameMode {
 	private ArrayList<TWEvent> sceneList =new ArrayList<TWEvent>();//イベントリスト
 	private int nowScene;//現在のシーン
 	private boolean endFlg;
+	private boolean modeChageFlg;
+	private int nextBattleMode;
 
 	//消すまでは1回しか呼び出されない
 	public TextMode() {
@@ -106,9 +108,10 @@ public class TextMode extends GameMode {
 	//最初の画像設定とシーン設定
 	//最初から始めるごとに呼び出される
 	@Override
-	public void first(TWInfo tInfo) {
+	public void first(TWInfo tInfo,int scene) {
 		this.pushNum_Z=0;
 		this.textNum=0;
+
 		this.haikei.first();
 		this.hotate.first();
 		this.same.first();
@@ -120,9 +123,10 @@ public class TextMode extends GameMode {
 		this.sound.first();
 		this.text.textBox=this.textBox;
 
-		this.nowScene=SCENE_NUM.INTRO;
+		this.nowScene=scene;
 		this.text.setTexts(this.sceneList.get(nowScene).getText(),this.sceneList.get(nowScene).getTextChara());
 		this.endFlg=false;
+		this.modeChageFlg=false;
 
 		tInfo.textModeInfo=this;
 	}
@@ -162,6 +166,9 @@ public class TextMode extends GameMode {
 						this.sceneList.get(nowScene).branch(tInfo);//分岐をきめる
 						if(this.sceneList.get(nowScene).getNext()==SCENE_NUM.END) {//エンディングに行く
 							this.endFlg=true;
+						}else if(this.sceneList.get(nowScene).getNext()>=SCENE_NUM.BATTLE){//バトルモードに行く
+							this.modeChageFlg=true;
+							this.nextBattleMode=this.sceneList.get(nowScene).getNext();
 						}else {
 							this.changeScene(this.sceneList.get(nowScene).getNext());//次のシーンに行く
 							this.text.resetNowTextNum();
@@ -331,6 +338,16 @@ public class TextMode extends GameMode {
 	//タイトルに戻るかどうか
 	public boolean isExit() {
 		return this.menu.isExit();
+	}
+
+	@Override
+	public boolean isModeChange() {
+		return this.modeChageFlg;
+	}
+
+	@Override
+	public int getNextScene() {
+		return this.nextBattleMode;
 	}
 
 	@Override

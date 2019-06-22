@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 
 import main.TWInfo;
 import main.constant.MUSIC_NUM;
+import main.constant.SCENE_NUM;
 import main.functions.Vector;
 import main.items_b.AttackItem;
 import main.items_b.GameChara_B;
@@ -32,6 +33,10 @@ public class Stage1 extends Stage {
 
 
 	////////////////////////////////////////////
+
+	public Stage1() {
+		this.nextScene=SCENE_NUM.ONE;
+	}
 
 	@Override
 	public void first(TWInfo tInfo) {

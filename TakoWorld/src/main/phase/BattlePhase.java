@@ -36,9 +36,9 @@ public class BattlePhase extends GamePhase{
 	}
 
 	//スタートするたびに実行
-	public void first(TWInfo tInfo) {
+	public void first(TWInfo tInfo,int scene) {
 		this.nowPhase=start;
-		this.nowPhase.first(tInfo);
+		this.nowPhase.first(tInfo,0);
 		this.menuTime=0;
 		this.clearFlg=false;
 		this.exitFlg=false;
@@ -89,7 +89,7 @@ public class BattlePhase extends GamePhase{
 
 		//スタート押すたびに実行
 		@Override
-		public void first(TWInfo tInfo) {
+		public void first(TWInfo tInfo,int scene) {
 			BattlePhase.this.nowStage.first(tInfo);
 			this.startTime=tInfo.currentTime;
 			BattlePhase.this.menuTime=0;
@@ -133,7 +133,7 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first(TWInfo tInfo) {
+		public void first(TWInfo tInfo,int scene) {
 			// TODO 自動生成されたメソッド・スタブ
 
 		}
@@ -145,14 +145,14 @@ public class BattlePhase extends GamePhase{
 
 			if(BattlePhase.this.nowStage.isBossLiving()==false) {
 				BattlePhase.this.nowPhase=clear;
-				BattlePhase.this.nowPhase.first(tInfo);
+				BattlePhase.this.nowPhase.first(tInfo,0);
 				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);
 			}else if(BattlePhase.this.nowStage.isPlayerAlive()==false) {
 				BattlePhase.this.nowPhase=lose;
-				BattlePhase.this.nowPhase.first(tInfo);
+				BattlePhase.this.nowPhase.first(tInfo,0);
 			}else if(BattlePhase.this.nowStage.IsReStart==true) {
 				BattlePhase.this.nowPhase=reStart;
-				BattlePhase.this.nowPhase.first(tInfo);
+				BattlePhase.this.nowPhase.first(tInfo,0);
 				BattlePhase.this.nowStage.IsReStart=false;
 			}
 
@@ -177,7 +177,7 @@ public class BattlePhase extends GamePhase{
 	public class ReStartPhase extends GamePhase {
 
 		@Override
-		public void first(TWInfo tInfo) {
+		public void first(TWInfo tInfo,int scene) {
 			this.startTime=tInfo.currentTime;
 			BattlePhase.this.menuTime=0;
 		}
@@ -219,7 +219,7 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first(TWInfo tInfo) {
+		public void first(TWInfo tInfo,int scene) {
 			this.startTime=tInfo.currentTime;
 		}
 
@@ -233,7 +233,6 @@ public class BattlePhase extends GamePhase{
 			if(tInfo.currentTime-this.startTime>3800) {
 				BattlePhase.this.clearFlg=true;
 			}
-
 		}
 
 		@Override
@@ -269,7 +268,7 @@ public class BattlePhase extends GamePhase{
 		}
 
 		@Override
-		public void first(TWInfo tInfo) {
+		public void first(TWInfo tInfo,int scene) {
 			this.startTime=tInfo.currentTime;
 			this.pushFlg=false;
 		}
@@ -287,7 +286,7 @@ public class BattlePhase extends GamePhase{
 				}
 				else if(tInfo.currentTime-this.pushTime>500&&pushFlg==true) {
 					BattlePhase.this.nowPhase=start;
-					BattlePhase.this.nowPhase.first(tInfo);
+					BattlePhase.this.nowPhase.first(tInfo,0);
 				}
 			}
 			if(tInfo.currentTime-this.startTime>6500&&pushFlg==false) {
@@ -313,7 +312,7 @@ public class BattlePhase extends GamePhase{
 				tInfo.g.drawString(str,400-strw, 350);
 
 				tInfo.g.setFont(BattlePhase.this.font_s);
-				str="PUSH Z to continue : "+this.leftTime;
+				str="PUSH Z to Retry : "+this.leftTime;
 				strw=fm.stringWidth(str)/2;
 				tInfo.g.drawString(str,760-strw, 550);
 			}
