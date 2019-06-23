@@ -50,7 +50,7 @@ public class Stage1 extends Stage {
 
 	@Override
 	public void loadMedia() throws IOException {
-		this.player.setImage(ImageIO.read(new File("media/battle/same_mini.png")).getSubimage(0, 0, 70, 100));
+		this.player.setImage(ImageIO.read(new File("media/battle/same_mini.png")).getSubimage(0, 0, 55, 75));
 		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack.png")));
 		this.player.attackAnim.setAnimation(3, 3, 9, 60);
 		this.takoyaki.setImage(ImageIO.read(new File("media/battle/たこ焼き.png")).getSubimage(0, 0, 110, 100));
@@ -62,6 +62,7 @@ public class Stage1 extends Stage {
 	@Override
 	public void control(TWInfo tInfo) {
 		this.player.control(tInfo);
+		this.takoyaki.control(tInfo);
 		this.item.control(tInfo);
 		if(this.hitBoss()==true) {
 			this.player.hitBoss();

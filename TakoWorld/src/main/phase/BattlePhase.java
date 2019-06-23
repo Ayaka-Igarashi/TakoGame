@@ -314,7 +314,7 @@ public class BattlePhase extends GamePhase{
 				tInfo.g.setFont(BattlePhase.this.font_s);
 				str="PUSH Z to Retry : "+this.leftTime;
 				strw=fm.stringWidth(str)/2;
-				tInfo.g.drawString(str,760-strw, 550);
+				tInfo.g.drawString(str,760-strw, 400);
 			}
 		}
 

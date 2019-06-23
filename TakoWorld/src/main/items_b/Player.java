@@ -9,8 +9,11 @@ import main.supers.GameItem;
 public class Player extends GameChara_B{
 	private int speed=300;
 	public int life=4;//残機
-	private int attackMeter;//攻撃ゲージ
+	private int attackPoint;//攻撃ゲージ
+
 	public AnimItem attackAnim=new AnimItem();
+	private AttackMeter attackMeter=new AttackMeter();
+	private PlayerLife lifeMeter=new PlayerLife();
 
 	public Player() {
 		this.size=20;
@@ -21,8 +24,10 @@ public class Player extends GameChara_B{
 		this.setVisible(0, true);
 		this.position=new Point2D.Double(400, 650);
 		this.life=4;
-		this.attackMeter=0;
+		this.attackPoint=0;
 		this.attackAnim.first();
+		this.attackMeter.first();
+		this.lifeMeter.first();
 	}
 
 	//スタートで入ってくるモーション
@@ -81,6 +86,8 @@ public class Player extends GameChara_B{
 	@Override
 	public GameItem draw(TWInfo tInfo) {
 		this.attackAnim.draw(tInfo);
+		this.attackMeter.draw(tInfo);
+		this.lifeMeter.draw(tInfo);
 		return super.draw(tInfo);
 	}
 
@@ -88,6 +95,7 @@ public class Player extends GameChara_B{
 	public void hitBoss() {
 		if(this.life>0) {
 			this.life-=1;
+			this.lifeMeter.life=this.life;
 			if(this.life>0) {
 				this.position.x=400;
 				this.position.y=650;
@@ -97,8 +105,9 @@ public class Player extends GameChara_B{
 
 	//アイテム取得時の処理
 	public void hitItem() {
-		if(this.attackMeter<6) {
-			this.attackMeter+=1;
+		if(this.attackPoint<6) {
+			this.attackPoint+=1;
+			this.attackMeter.amount=this.attackPoint;
 			//System.out.println(this.attackMeter);
 		}
 	}

@@ -3,10 +3,14 @@ package main.items_b;
 import java.awt.geom.Point2D;
 
 import main.TWInfo;
+import main.supers.GameItem;
 
 public class Takoyaki extends GameChara_B {
+	private final int MAX_LIFE=100;
 	private int life;
 	public boolean isAlive;
+
+	private EnemyLife lifeMeter =new EnemyLife(this.MAX_LIFE);
 
 
 	public Takoyaki() {
@@ -15,16 +19,26 @@ public class Takoyaki extends GameChara_B {
 
 	@Override
 	public void first() {
-		this.life=100;
+		this.life=this.MAX_LIFE;
 		this.isAlive=true;
 		this.setVisible(0, true);
 		this.position=new Point2D.Double(400, 100);
+
+		this.lifeMeter.first();
+		this.lifeMeter.position.x=this.position.x-this.center.x;
+		this.lifeMeter.position.y=this.position.y-50;
+	}
+
+	@Override
+	public GameItem draw(TWInfo tInfo) {
+		this.lifeMeter.draw(tInfo);
+		return super.draw(tInfo);
 	}
 
 	@Override
 	public void control(TWInfo tInfo) {
-		// TODO 自動生成されたメソッド・スタブ
-
+		this.lifeMeter.position.x=this.position.x-this.center.x;
+		this.lifeMeter.position.y=this.position.y-50;
 	}
 
 	@Override
@@ -36,6 +50,7 @@ public class Takoyaki extends GameChara_B {
 	public void hitAttack() {
 		if(this.life>0) {
 			this.life-=10;
+			this.lifeMeter.life=this.life;
 			//System.out.println(this.life);
 		}
 		if(this.life<=0) {
