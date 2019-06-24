@@ -3,22 +3,21 @@ package main.items_b;
 import java.awt.geom.AffineTransform;
 
 import main.TWInfo;
-import main.constant.MUSIC_NUM;
 import main.supers.GameItem;
-import main.supers.SoundBox;
 
-public class AnimItem extends GameChara_B {
+public abstract class AnimItem extends GameChara_B {
 
 	protected long startTime;
 	protected int framex,framey;//横、縦のコマ数
 	protected int framenum;//コマ数
 	protected long oneTime;//コマ時間
 
-	private int nowFrame;//現在のコマ
+	protected int nowFrame;//現在のコマ
 
 	public boolean isAnim;
 
 	public boolean isJudge;
+
 
 	//protected boolean autorepeat=true;
 	public GameChara_B setAnimation(int x,int y,int num,long oneTime) {
@@ -38,7 +37,6 @@ public class AnimItem extends GameChara_B {
 	@Override
 	public void first() {
 		this.isAnim=false;
-		this.size=50;
 		this.isJudge=false;
 	}
 
@@ -49,10 +47,11 @@ public class AnimItem extends GameChara_B {
 			this.startTime=tInfo.currentTime;
 			this.isAnim=true;
 			this.isJudge=true;
-			//SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
 			this.menuTime=0;
 		}
 	}
+
+	protected abstract void stopClip();
 
 	@Override
 	public GameItem draw(TWInfo tInfo) {
@@ -66,18 +65,21 @@ public class AnimItem extends GameChara_B {
 
 
 		//アニメ終了判定
-		if(this.nowFrame==this.framenum) {
+		if(this.nowFrame>=this.framenum) {
 			this.isAnim=false;
-			SoundBox.singleton.stopClip(MUSIC_NUM.ATTACK);
-			SoundBox.singleton.stopClip(MUSIC_NUM.HIT);
+			this.stopClip();
 			return this;
 		}
+		//System.out.println(this.nowFrame+" : "+this.isMenuTime);
 
+		int col=this.nowFrame%this.framex;//横マス
+		int row=this.nowFrame/this.framex;//縦マス
 
-		int row=this.nowFrame/this.framex;
-		int col=this.nowFrame%this.framey;
 		int w=this.imgList.get(0).img.getWidth()/framex;
 		int h=this.imgList.get(0).img.getHeight()/framey;
+
+		//System.out.println(col+" : "+row);
+		//System.out.println(this.nowFrame+" : "+this.framex+" : "+this.framey);
 
 		//変形退避
 		AffineTransform oldtr=tInfo.g.getTransform();

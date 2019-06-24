@@ -142,7 +142,7 @@ public class BattleMode extends GameMode {
 	@Override
 	public void loadMedia() throws IOException {
 		this.phase.loadMedia();
-		this.img_back = ImageIO.read(new File("media/haikei.png"));
+		this.img_back = ImageIO.read(new File("media/haikei_default.png"));
 
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
 		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));

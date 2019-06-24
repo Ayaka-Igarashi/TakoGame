@@ -91,14 +91,14 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void first(TWInfo tInfo,int scene) {
 			BattlePhase.this.nowStage.first(tInfo);
+			//BattlePhase.this.nowStage.getPlayer().setInvincibleTime(2000);
 			this.startTime=tInfo.currentTime;
 			BattlePhase.this.menuTime=0;
 		}
 
 		@Override
 		public void keyControl(TWInfo tInfo,int key) {
-			//BattlePhase.this.nowStage.control(tInfo);
-			//BattlePhase.this.nowStage.getPlayer().keyControl(tInfo,-1, -1);
+			BattlePhase.this.nowStage.getEnemy().control(tInfo);
 			BattlePhase.this.nowStage.startMotion(tInfo);
 
 			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>1200) {

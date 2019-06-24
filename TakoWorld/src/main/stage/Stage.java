@@ -1,11 +1,18 @@
 package main.stage;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import main.TWInfo;
+import main.functions.Vector;
 import main.items_b.GameChara_B;
+import main.shot.BulletChara;
 
 public abstract class Stage {
+	protected boolean isMenuTime;
+	protected long menuTime;
+
 	private double width=800;
 	private double height=600;
 	public boolean IsReStart;
@@ -25,6 +32,11 @@ public abstract class Stage {
 	public abstract boolean hitBoss();
 	public abstract boolean hitItem();
 	public abstract boolean hitAttack();
+	public abstract boolean hitBullet(TWInfo tInfo);
+
+	public boolean hitTest(GameChara_B A,GameChara_B B) {
+		return Vector.distance(A.position, B.position)<=A.size+B.size;
+	}
 
 	//プレイヤー生きてるか
 	public abstract boolean isPlayerAlive();
@@ -38,31 +50,31 @@ public abstract class Stage {
 	public abstract void startMotion(TWInfo tInfo);
 	public abstract void reStart(TWInfo tInfo);//プレイヤーの残機が減った時
 
-	//敵の弾のデータを取得する
-	//public abstract ArrayList<BulletChara> getBullets_E();
 
-	//自機の弾データを取得する
-	//public abstract ArrayList<BulletChara> getBullets_J();
+
+	//敵の弾のデータを取得する
+	public abstract ArrayList<BulletChara> getBullets();
+
 
 	//弾の画像を取得する
-	//public abstract BufferedImage getBulletImage(int type);
-/*
+	public abstract BufferedImage getBulletImage(int type);
+
 	//空いてる弾を探す
 	protected int searchidx=0;
 	public BulletChara searchBullet() {
-		ArrayList<BulletChara>bullets_e=this.getBullets_E();
-		int m=bullets_e.size();
+		ArrayList<BulletChara>bullets=this.getBullets();
+		int m=bullets.size();
 		//空き弾を探す
 		for(;this.searchidx<m;this.searchidx++) {
-			if(bullets_e.get(this.searchidx).visible==false) {
-				return bullets_e.get(this.searchidx);
+			if(bullets.get(this.searchidx).visible==false) {
+				return bullets.get(this.searchidx);
 			}
 		}
 		//空きがないときはnullを返して発射キャンセル
 		this.searchidx=0;
 		return null;
 	}
-*/
+
 	public double getWidth() {
 		return width;
 	}
@@ -78,11 +90,5 @@ public abstract class Stage {
 
 
 
-
-
-
-
-	//当たり判定
-	//public abstract boolean hitTestAll(GraphicsInfo gInfo);
 
 }
