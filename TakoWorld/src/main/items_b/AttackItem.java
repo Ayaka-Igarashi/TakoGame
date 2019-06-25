@@ -59,7 +59,7 @@ public class AttackItem extends GameChara_B {
 		/*
 		tInfo.g.fillOval((int)(this.position.x)-(int)this.size, (int)(this.position.y)-(int)this.size+TWFrame.title_bar_height,
 				(int)this.size*2, (int)this.size*2);
-				*/
+		*/
 		return this;
 	}
 

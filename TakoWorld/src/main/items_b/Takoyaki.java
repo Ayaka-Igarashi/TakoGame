@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import main.TWInfo;
 import main.pattern.Pattern;
-import main.shot.BasicShooter;
+import main.shot.SplatterShooter;
 import main.stage.Stage;
 import main.supers.GameItem;
 
@@ -26,6 +26,7 @@ public class Takoyaki extends GameChara_B {
 		this.patternList.add(new PatternT1());
 		this.curpat=this.patternList.get(0);
 		this.patternlist_addlast(new PatternBasicShoot(20000));
+		this.patternList.get(1).setNext(this.patternList.get(1));
 	}
 
 	//最後の要素と連結して追加
@@ -143,8 +144,9 @@ public class Takoyaki extends GameChara_B {
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
 
-			if(tInfo.currentTime-this.lastShooting-Takoyaki.this.menuTime>600) {
-				BasicShooter.singleton.shoot(tInfo, stage);
+			if(tInfo.currentTime-this.lastShooting-Takoyaki.this.menuTime>300) {
+				SplatterShooter.singleton.shoot(tInfo, stage);
+
 				this.lastShooting=tInfo.currentTime;
 				Takoyaki.this.menuTime=0;
 			}
