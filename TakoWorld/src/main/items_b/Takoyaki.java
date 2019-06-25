@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import main.TWInfo;
 import main.pattern.Pattern;
 import main.shot.SplatterShooter;
+import main.shot.TargetShooter;
 import main.stage.Stage;
 import main.supers.GameItem;
 
@@ -146,6 +147,7 @@ public class Takoyaki extends GameChara_B {
 
 			if(tInfo.currentTime-this.lastShooting-Takoyaki.this.menuTime>300) {
 				SplatterShooter.singleton.shoot(tInfo, stage);
+				TargetShooter.singleton.shoot(tInfo, stage);
 
 				this.lastShooting=tInfo.currentTime;
 				Takoyaki.this.menuTime=0;
