@@ -21,7 +21,7 @@ public class Takoyaki extends GameChara_B {
 
 
 	public Takoyaki() {
-		this.size=25;
+		this.size=30;
 
 		this.patternList.add(new PatternT1());
 		this.curpat=this.patternList.get(0);
@@ -53,7 +53,16 @@ public class Takoyaki extends GameChara_B {
 	public GameItem draw(TWInfo tInfo,Stage stage) {
 		this.lifeMeter.draw(tInfo);
 
-		if(this.curpat==null) return super.draw(tInfo);
+		if(this.curpat==null) {
+			super.draw(tInfo);
+			/*
+			tInfo.g.setColor(Color.CYAN);
+			tInfo.g.fillOval((int)(this.position.x)-(int)this.size, (int)(this.position.y)-(int)this.size+TWFrame.title_bar_height,
+					(int)this.size*2, (int)this.size*2);
+			tInfo.g.setColor(Color.BLACK);
+			*/
+			return this;
+		}
 
 		if(this.curpat.isFinished(tInfo)==false) {
 			if(this.isMenuTime==false) {
@@ -64,13 +73,20 @@ public class Takoyaki extends GameChara_B {
 			if(this.curpat!=null)this.curpat.start(tInfo);
 		}
 
-		return super.draw(tInfo);
+		super.draw(tInfo);
+		/*
+		tInfo.g.setColor(Color.CYAN);
+		tInfo.g.fillOval((int)(this.position.x)-(int)this.size, (int)(this.position.y)-(int)this.size+TWFrame.title_bar_height,
+				(int)this.size*2, (int)this.size*2);
+		tInfo.g.setColor(Color.BLACK);
+		*/
+		return this;
 	}
 
 	@Override
 	public void control(TWInfo tInfo) {
 		this.lifeMeter.position.x=this.position.x-this.center.x;
-		this.lifeMeter.position.y=this.position.y-50;
+		this.lifeMeter.position.y=this.position.y-80;
 	}
 
 	@Override

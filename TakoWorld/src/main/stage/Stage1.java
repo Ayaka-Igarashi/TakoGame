@@ -86,9 +86,9 @@ public class Stage1 extends Stage {
 		this.item.setImage(ImageIO.read(new File("media/battle/attackItem.png")).getSubimage(0, 0, 50, 50));
 
 		this.img_shot = ImageIO.read(new File("media/battle/bullet.png"));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 50, 50));
-		this.img_bullets.add(this.img_shot.getSubimage(50, 0, 50, 50));
-		this.img_bullets.add(this.img_shot.getSubimage(50, 0, 50, 50));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 30, 30));
+		this.img_bullets.add(this.img_shot.getSubimage(30, 0, 30, 30));
+		this.img_bullets.add(this.img_shot.getSubimage(60, 0, 30, 30));
 
 	}
 

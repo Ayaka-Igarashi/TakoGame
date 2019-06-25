@@ -3,6 +3,7 @@ package main.items_b;
 import java.util.Random;
 
 import main.TWInfo;
+import main.supers.GameItem;
 
 public class AttackItem extends GameChara_B {
 	private Random random = new Random();
@@ -12,7 +13,7 @@ public class AttackItem extends GameChara_B {
 
 
 	public AttackItem() {
-		this.size=20;
+		this.size=30;
 	}
 
 	@Override
@@ -20,8 +21,8 @@ public class AttackItem extends GameChara_B {
 
 	public void first(TWInfo tInfo) {
 		this.setVisible(0, false);
-		this.position.x = 100;
-		this.position.y = 200;
+		this.position.x = -100;
+		this.position.y = -100;
 		this.lastJudgeTime = tInfo.currentTime;
 
 		this.menuTime=0;
@@ -53,15 +54,28 @@ public class AttackItem extends GameChara_B {
 	}
 
 	@Override
+	public GameItem draw(TWInfo tInfo) {
+		super.draw(tInfo);
+		/*
+		tInfo.g.fillOval((int)(this.position.x)-(int)this.size, (int)(this.position.y)-(int)this.size+TWFrame.title_bar_height,
+				(int)this.size*2, (int)this.size*2);
+				*/
+		return this;
+	}
+
+	@Override
 	public void keyControl(TWInfo tInfo, int key, int action) {
 		// TODO 自動生成されたメソッド・スタブ
 	}
 
 	//アイテムを取得
 	public void got() {
-		this.setVisible(0, false);
-		this.position.x=-100;
-		this.position.y=-100;
+		if(this.imgList.get(0).visible == true) {
+			this.setVisible(0, false);
+			this.position.x=-100;
+			this.position.y=-100;
+		}
+
 	}
 
 }

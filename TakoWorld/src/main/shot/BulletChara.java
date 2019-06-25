@@ -45,12 +45,16 @@ public class BulletChara extends GameChara_B{
 		if(this.img==null)return this;
 		if(this.visible==false)return this;
 		AffineTransform oldtr=tInfo.g.getTransform();
-		tInfo.g.translate(0, TWFrame.title_bar_height);
+		tInfo.g.translate((int)this.position.x, (int)this.position.y+TWFrame.title_bar_height);
 		tInfo.g.rotate(0,0,0);
 		tInfo.g.drawImage(this.img,
-				(int)this.position.x,
-				(int)this.position.y,
+				-(int)this.center.x,
+				-(int)this.center.y,
 				null);
+		/*
+		tInfo.g.fillOval(-(int)this.size, -(int)this.size,
+				(int)this.size*2, (int)this.size*2);
+				*/
 		tInfo.g.setTransform(oldtr);
 		return this;
 	}

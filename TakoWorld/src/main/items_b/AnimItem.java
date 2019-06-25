@@ -2,6 +2,7 @@ package main.items_b;
 
 import java.awt.geom.AffineTransform;
 
+import main.TWFrame;
 import main.TWInfo;
 import main.supers.GameItem;
 
@@ -83,7 +84,7 @@ public abstract class AnimItem extends GameChara_B {
 
 		//変形退避
 		AffineTransform oldtr=tInfo.g.getTransform();
-		tInfo.g.translate(this.position.x, this.position.y);
+		tInfo.g.translate(this.position.x, this.position.y+TWFrame.title_bar_height);
 		tInfo.g.rotate(this.angle/180.0*Math.PI,0,0);
 		tInfo.g.drawImage(this.imgList.get(0).img,
 				-(int)this.center.x,-(int)this.center.y,-(int)this.center.x+w,-(int)this.center.y+h,

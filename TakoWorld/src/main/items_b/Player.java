@@ -1,7 +1,9 @@
 package main.items_b;
 
+import java.awt.Color;
 import java.awt.geom.Point2D;
 
+import main.TWFrame;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.supers.GameItem;
@@ -20,7 +22,7 @@ public class Player extends GameChara_B{
 	private PlayerLife lifeMeter=new PlayerLife();
 
 	public Player() {
-		this.size=20;
+		this.size=10;
 	}
 
 	@Override
@@ -55,13 +57,14 @@ public class Player extends GameChara_B{
 		if(tInfo.currentTime>=this.invincibleStop) {
 			this.isInvincible=false;
 		}
+		this.setVisible(0, true);
+		this.setVisible(1, false);
+		this.setVisible(2, false);
 	}
 
 	@Override
 	public void keyControl(TWInfo tInfo, int key, int action) {
-		this.setVisible(0, true);
-		this.setVisible(1, false);
-		this.setVisible(2, false);
+
 		if(tInfo.keyState[KEY_STATE.SHIFT]&&tInfo.keyReleased[KEY_STATE.SHIFT]) {
 			this.speed=150;
 			tInfo.keyReleased[KEY_STATE.SHIFT]=false;
@@ -122,7 +125,12 @@ public class Player extends GameChara_B{
 		this.spAttackAnim.draw(tInfo);
 		this.attackMeter.draw(tInfo);
 		this.lifeMeter.draw(tInfo);
-		return super.draw(tInfo);
+		super.draw(tInfo);
+		tInfo.g.setColor(new Color(0, 20, 200, 200));
+		tInfo.g.fillOval((int)(this.position.x)-(int)this.size, (int)(this.position.y)-(int)this.size+TWFrame.title_bar_height,
+				(int)this.size*2, (int)this.size*2);
+		tInfo.g.setColor(Color.BLACK);
+		return this;
 	}
 
 	//当たった時の処理
