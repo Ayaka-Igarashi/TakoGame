@@ -43,7 +43,7 @@ public abstract class Stage {
 	//ボスが生きているか
 	public abstract boolean isBossLiving();
 
-	public abstract void setMenuTime(long openTime);
+	//public abstract void setMenuTime(long openTime);
 	public abstract void setIsMenuTime(boolean isMenuTime);
 
 	//スタート時の動き

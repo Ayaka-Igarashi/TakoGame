@@ -45,10 +45,9 @@ public abstract class AnimItem extends GameChara_B {
 
 	public void start(TWInfo tInfo) {
 		if(this.isAnim==false) {
-			this.startTime=tInfo.currentTime;
+			this.startTime=tInfo.currentTime_withoutMenu;
 			this.isAnim=true;
 			this.isJudge=true;
-			this.menuTime=0;
 		}
 	}
 
@@ -61,7 +60,7 @@ public abstract class AnimItem extends GameChara_B {
 
 		if(this.isMenuTime==false) {//メニュー表示中はアニメーションストップ
 			//現在のコマを求める
-			this.nowFrame=(int) ((tInfo.currentTime-this.startTime-this.menuTime)/this.oneTime);
+			this.nowFrame=(int) ((tInfo.currentTime_withoutMenu-this.startTime)/this.oneTime);
 		}
 
 

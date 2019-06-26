@@ -24,7 +24,6 @@ public class BattlePhase extends GamePhase{
 	private Font font = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 40);
 	private Font font_s = new Font("HG丸ｺﾞｼｯｸM-PRO", Font.PLAIN, 20);
 
-	protected long menuTime;
 	protected boolean isMenuTime;
 
 	public BattlePhase(){
@@ -39,7 +38,6 @@ public class BattlePhase extends GamePhase{
 	public void first(TWInfo tInfo,int scene) {
 		this.nowPhase=start;
 		this.nowPhase.first(tInfo,0);
-		this.menuTime=0;
 		this.clearFlg=false;
 		this.exitFlg=false;
 	}
@@ -64,10 +62,12 @@ public class BattlePhase extends GamePhase{
 
 	}
 
+	/*
 	public void setMenuTime(long openTime) {
-		this.nowStage.setMenuTime(openTime);
-		this.menuTime+=openTime;
+		//this.nowStage.setMenuTime(openTime);
 	}
+	*/
+
 	public void setIsMenu(boolean menuTime) {
 		this.isMenuTime=menuTime;
 		this.nowStage.setIsMenuTime(menuTime);
@@ -91,9 +91,7 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void first(TWInfo tInfo,int scene) {
 			BattlePhase.this.nowStage.first(tInfo);
-			//BattlePhase.this.nowStage.getPlayer().setInvincibleTime(2000);
-			this.startTime=tInfo.currentTime;
-			BattlePhase.this.menuTime=0;
+			this.startTime=tInfo.currentTime_withoutMenu;
 		}
 
 		@Override
@@ -101,9 +99,8 @@ public class BattlePhase extends GamePhase{
 			BattlePhase.this.nowStage.getEnemy().control(tInfo);
 			BattlePhase.this.nowStage.startMotion(tInfo);
 
-			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>1200) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>1200) {
 				BattlePhase.this.nowPhase=main;
-				BattlePhase.this.menuTime=0;
 			}
 
 		}
@@ -178,21 +175,19 @@ public class BattlePhase extends GamePhase{
 
 		@Override
 		public void first(TWInfo tInfo,int scene) {
-			this.startTime=tInfo.currentTime;
-			BattlePhase.this.menuTime=0;
+			this.startTime=tInfo.currentTime_withoutMenu;
 		}
 
 		@Override
 		public void keyControl(TWInfo tInfo, int key) {
 			BattlePhase.this.nowStage.control(tInfo);
-			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>500) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>500) {
 				BattlePhase.this.nowStage.reStart(tInfo);
 			}
 
 
-			if(tInfo.currentTime-this.startTime-BattlePhase.this.menuTime>1000) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>1000) {
 				BattlePhase.this.nowPhase=main;
-				BattlePhase.this.menuTime=0;
 			}
 
 		}
@@ -220,7 +215,7 @@ public class BattlePhase extends GamePhase{
 
 		@Override
 		public void first(TWInfo tInfo,int scene) {
-			this.startTime=tInfo.currentTime;
+			this.startTime=tInfo.currentTime_withoutMenu;
 		}
 
 		@Override
@@ -230,7 +225,7 @@ public class BattlePhase extends GamePhase{
 				BattlePhase.this.nowStage.getPlayer().keyControl(tInfo,-1, -1);
 			}
 			*/
-			if(tInfo.currentTime-this.startTime>3800) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>3800) {
 				BattlePhase.this.clearFlg=true;
 			}
 		}
@@ -241,7 +236,7 @@ public class BattlePhase extends GamePhase{
 			tInfo.g.setBackground(Color.BLACK);
 			tInfo.g.drawString("CLEAR", 100, 100);
 
-			if(tInfo.currentTime-this.startTime>800) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
 				tInfo.g.setBackground(Color.BLACK);
 				tInfo.g.setFont(BattlePhase.this.font);
 				String str="CLEAR!!!";
@@ -269,41 +264,41 @@ public class BattlePhase extends GamePhase{
 
 		@Override
 		public void first(TWInfo tInfo,int scene) {
-			this.startTime=tInfo.currentTime;
+			this.startTime=tInfo.currentTime_withoutMenu;
 			this.pushFlg=false;
 		}
 
 		@Override
 		public void keyControl(TWInfo tInfo,int key) {
-			if(tInfo.currentTime-this.startTime>800) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
 				if(tInfo.keyState[KEY_STATE.Z]&&tInfo.keyReleased[KEY_STATE.Z]&&pushFlg==false) {
 					pushFlg=true;
-					this.pushTime=tInfo.currentTime;
+					this.pushTime=tInfo.currentTime_withoutMenu;
 					SoundBox.singleton.playClip(MUSIC_NUM.CHOICE3);
 					tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
 				}else if(tInfo.keyState[KEY_STATE.Z]==false&&tInfo.keyReleased[KEY_STATE.Z]==false) {
 					tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 				}
-				else if(tInfo.currentTime-this.pushTime>500&&pushFlg==true) {
+				else if(tInfo.currentTime_withoutMenu-this.pushTime>500&&pushFlg==true) {
 					BattlePhase.this.nowPhase=start;
 					BattlePhase.this.nowPhase.first(tInfo,0);
 				}
 			}
-			if(tInfo.currentTime-this.startTime>6500&&pushFlg==false) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>6500&&pushFlg==false) {
 				BattlePhase.this.exitFlg=true;
 			}
 		}
 
 		@Override
 		public void draw(TWInfo tInfo) {
-			this.leftTime=(int) (6-(tInfo.currentTime-this.startTime+200)/1000);
+			this.leftTime=(int) (6-(tInfo.currentTime_withoutMenu-this.startTime+200)/1000);
 
 
 			BattlePhase.this.nowStage.draw(tInfo);
 			tInfo.g.setBackground(Color.BLACK);
 			tInfo.g.drawString("GAME OVER", 100, 100);
 
-			if(tInfo.currentTime-this.startTime>800) {
+			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
 				tInfo.g.setBackground(Color.BLACK);
 				tInfo.g.setFont(BattlePhase.this.font);
 				String str="GAME OVER";

@@ -12,7 +12,7 @@ public class ChaseMover extends BulletMover {
 		if(bullet.position.x<0||bullet.position.x>stage.getWidth()||bullet.position.y<0||bullet.position.y>stage.getHeight()) {
 			bullet.visible=false;
 		}
-		long l=tInfo.currentTime-bullet.getStartTime();
+		long l=tInfo.currentTime_withoutMenu-bullet.getStartTime();
 		if(l%1500<10) {
 			bullet.vector.x=stage.getPlayer().position.x;
 			bullet.vector.y=stage.getPlayer().position.y;

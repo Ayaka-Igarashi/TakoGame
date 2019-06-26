@@ -23,14 +23,13 @@ public class AttackItem extends GameChara_B {
 		this.setVisible(0, false);
 		this.position.x = -100;
 		this.position.y = -100;
-		this.lastJudgeTime = tInfo.currentTime;
+		this.lastJudgeTime = tInfo.currentTime_withoutMenu;
 
-		this.menuTime=0;
 	}
 
 	@Override
 	public void control(TWInfo tInfo) {
-		if (tInfo.currentTime - this.lastJudgeTime -this.menuTime> 1000) {
+		if (tInfo.currentTime_withoutMenu - this.lastJudgeTime > 1000) {
 			if (this.imgList.get(0).visible == false) {
 				int randomValue = random.nextInt(100);
 				//System.out.println(randomValue);
@@ -39,15 +38,13 @@ public class AttackItem extends GameChara_B {
 					this.position.x=random.nextInt(700)+50;
 					this.position.y=random.nextInt(300)+200;
 				}
-				this.lastJudgeTime = tInfo.currentTime;
-				this.menuTime=0;
+				this.lastJudgeTime = tInfo.currentTime_withoutMenu;
 			}else if(this.imgList.get(0).visible == true) {
-				if(tInfo.currentTime-this.lastJudgeTime-this.menuTime>this.AppearTime) {
+				if(tInfo.currentTime_withoutMenu-this.lastJudgeTime>this.AppearTime) {
 					this.setVisible(0, false);
 					this.position.x=-100;
 					this.position.y=-100;
-					this.lastJudgeTime = tInfo.currentTime;
-					this.menuTime=0;
+					this.lastJudgeTime = tInfo.currentTime_withoutMenu;
 				}
 			}
 		}

@@ -8,7 +8,7 @@ import main.supers.GameItem;
 
 public class EnemyLife extends GameChara_B {
 	private final int MAX_LIFE;
-	public int life;
+	public double life;
 
 	public EnemyLife(int life) {
 		this.MAX_LIFE=life;

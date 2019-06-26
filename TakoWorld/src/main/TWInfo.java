@@ -16,6 +16,7 @@ public class TWInfo {
 	public Graphics2D g;
 	public double frameTime;
 	public long currentTime;
+	public long currentTime_withoutMenu;//メニュー画面抜きの時間
 	public long pushTime;//最後にボタンを押した時間
 	public boolean[] keyState;
 	public boolean[] keyReleased;//キーが押された後はなされたか

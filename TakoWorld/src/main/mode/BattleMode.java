@@ -119,13 +119,9 @@ public class BattleMode extends GameMode {
 
 	@Override
 	public void draw(TWInfo tInfo) {
-		//this.menu.resetOpenTime();
 		this.keyControl(tInfo);
 		this.control(tInfo);
-		if(this.menu.setTimeFlg==true) {
-			this.phase.setMenuTime(this.menu.openTime);
-			this.menu.setTimeFlg=false;
-		}
+
 		this.phase.setIsMenu(this.menu.isMenuTime());
 
 		tInfo.g.drawImage(this.img_back, 0, TWFrame.title_bar_height, null);

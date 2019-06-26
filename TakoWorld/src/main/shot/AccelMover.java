@@ -14,7 +14,7 @@ public class AccelMover extends BulletMover {
 			{
 				bullet.visible = false;
 			}
-			long l = tInfo.currentTime - bullet.getStartTime();
+			long l = tInfo.currentTime_withoutMenu - bullet.getStartTime();
 			bullet.vector.normalize();
 			double s = 200.0;
 			if(l > 500) s = s + (double)l / 5.0;

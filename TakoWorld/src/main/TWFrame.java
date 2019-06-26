@@ -20,6 +20,8 @@ public class TWFrame {
 	TWDisplay display=new TWDisplay();
 	public static int title_bar_height;//タイトルバーの長さ
 
+
+
 	TWFrame(){
 		this.mainWindow=new JFrame("TakoWorld");
 		this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,9 +50,12 @@ public class TWFrame {
 		}catch(IOException e) {
 			JOptionPane.showMessageDialog(this.mainWindow, "画像が読み込めません");
 		}
+
 	}
 
+
 	void start() {
+
 		Timer t=new Timer();
 		t.schedule(new RenderTask(), 0,16);
 	}
@@ -58,12 +63,32 @@ public class TWFrame {
 	long lastTime=System.currentTimeMillis();
 	TWInfo tInfo=new TWInfo();
 
+	private boolean firstCycle=true;
+
 	void render() {
 		long currentTime=System.currentTimeMillis();
 		//フレーム速度
 		this.tInfo.frameTime=(currentTime-this.lastTime)*0.001;
+
+
+		//メニュー操作抜きの時間
+		if(this.firstCycle==true) {
+			this.tInfo.currentTime_withoutMenu=currentTime;
+			this.firstCycle=false;
+
+		}else {
+			this.tInfo.currentTime_withoutMenu+=currentTime-this.lastTime;
+		}
+
+		//普通の時間
 		this.lastTime=currentTime;
 		this.tInfo.currentTime=currentTime;
+
+
+		//System.out.println(this.tInfo.currentTime_withoutMenu+" : "+this.tInfo.currentTime);
+
+
+
 
 		Graphics2D g=(Graphics2D)this.strategy.getDrawGraphics();
 		g.setBackground(Color.BLACK);

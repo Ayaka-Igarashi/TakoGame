@@ -22,12 +22,14 @@ public class Player extends GameChara_B{
 	private PlayerLife lifeMeter=new PlayerLife();
 
 	public Player() {
-		this.size=10;
+		this.size=8;
 	}
 
 	@Override
 	public void first() {
 		this.setVisible(0, true);
+		this.setVisible(1, false);
+		this.setVisible(2, false);
 		this.position=new Point2D.Double(400, 650);
 		this.life=4;
 		this.attackPoint=0;

@@ -18,7 +18,7 @@ import main.shot.BulletChara;
 import main.supers.SoundBox;
 
 public class Stage1 extends Stage {
-	private BufferedImage img_player;
+	private BufferedImage img_player, img_takoyaki;
 	private Player player = new Player();
 	private Takoyaki takoyaki = new Takoyaki();
 	private AttackItem item = new AttackItem();
@@ -73,7 +73,7 @@ public class Stage1 extends Stage {
 
 	@Override
 	public void loadMedia() throws IOException {
-		this.img_player=ImageIO.read(new File("media/battle/same_mini.png"));
+		this.img_player = ImageIO.read(new File("media/battle/same_mini.png"));
 		this.player.setImage(this.img_player.getSubimage(0, 0, 51, 75));
 		this.player.setImage(this.img_player.getSubimage(51, 0, 51, 75));
 		this.player.setImage(this.img_player.getSubimage(102, 0, 54, 75));
@@ -82,7 +82,10 @@ public class Stage1 extends Stage {
 		this.player.spAttackAnim.setImage(ImageIO.read(new File("media/battle/attack_sp.png")));
 		this.player.spAttackAnim.setAnimation(1, 15, 15, 60);
 
-		this.takoyaki.setImage(ImageIO.read(new File("media/battle/たこ焼き.png")).getSubimage(0, 0, 110, 100));
+		this.img_takoyaki = ImageIO.read(new File("media/battle/たこ焼き.png"));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 125, 100));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(125, 0, 125, 100));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(250, 0, 125, 100));
 		this.item.setImage(ImageIO.read(new File("media/battle/attackItem.png")).getSubimage(0, 0, 50, 50));
 
 		this.img_shot = ImageIO.read(new File("media/battle/bullet.png"));
@@ -98,7 +101,7 @@ public class Stage1 extends Stage {
 		this.takoyaki.control(tInfo);
 		this.item.control(tInfo);
 		if (this.hitBoss() == true || this.hitBullet(tInfo) == true) {
-			if(this.player.isInvincible==false) {
+			if (this.player.isInvincible == false) {
 				this.player.hitBoss();
 				this.IsReStart = true;
 				SoundBox.singleton.playClip(MUSIC_NUM.DEAD);
@@ -133,19 +136,19 @@ public class Stage1 extends Stage {
 
 		for (int i = 0; i < MAX_BULLETS; i++) {
 			if (this.bullets.get(i).visible == true) {
-				this.bullets.get(i).draw(tInfo, this ,isMenuTime);
+				this.bullets.get(i).draw(tInfo, this, isMenuTime);
 			}
 		}
 	}
 
 	@Override
 	public void startMotion(TWInfo tInfo) {
-		this.player.enter(tInfo, 100 ,2000);
+		this.player.enter(tInfo, 100, 2000);
 	}
 
 	@Override
 	public void reStart(TWInfo tInfo) {
-		this.player.enter(tInfo, 190,1500);
+		this.player.enter(tInfo, 190, 1500);
 	}
 
 	@Override
@@ -191,32 +194,31 @@ public class Stage1 extends Stage {
 		return this.takoyaki.isAlive;
 	}
 
-	@Override
-	public void setMenuTime(long openTime) {
-		this.menuTime+=openTime;
-		this.item.menuTime = openTime;
-		this.player.attackAnim.menuTime += openTime;
-		this.player.spAttackAnim.menuTime += openTime;
-		this.takoyaki.menuTime+=openTime;
+	/*
+		public void setMenuTime(long openTime) {
+			//this.menuTime+=openTime;
+			//this.item.menuTime = openTime;
+			//this.player.attackAnim.menuTime += openTime;
+			//this.player.spAttackAnim.menuTime += openTime;
+			//this.takoyaki.menuTime+=openTime;
 
-	}
+		}
+	*/
 
 	@Override
 	public void setIsMenuTime(boolean isMenuTime) {
-		this.isMenuTime=isMenuTime;
+		this.isMenuTime = isMenuTime;
 		this.player.attackAnim.isMenuTime = isMenuTime;
 		this.player.spAttackAnim.isMenuTime = isMenuTime;
-		this.takoyaki.isMenuTime=isMenuTime;
+		this.takoyaki.isMenuTime = isMenuTime;
 	}
 
 	@Override
 	public void removeAllBullets() {
 		for (int i = 0; i < MAX_BULLETS; i++) {
-			this.bullets.get(i).visible=false;
+			this.bullets.get(i).visible = false;
 		}
 
 	}
-
-
 
 }

@@ -62,7 +62,7 @@ public class BulletChara extends GameChara_B{
 	public void setVisible(TWInfo tInfo,boolean b) {
 		this.visible=b;
 		if(b==true) {
-			this.starttime=tInfo.currentTime;
+			this.starttime=tInfo.currentTime_withoutMenu;
 		}
 	}
 

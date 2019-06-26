@@ -23,7 +23,7 @@ public abstract class Pattern {
 
 		//開始時間の記録
 		public void start(TWInfo tInfo) {
-			this.starttime=tInfo.currentTime;
+			this.starttime=tInfo.currentTime_withoutMenu;
 		}
 
 		//終了判定
