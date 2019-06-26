@@ -1,5 +1,6 @@
 package main.items_b;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.geom.Point2D;
 
@@ -47,7 +48,7 @@ public class Player extends GameChara_B{
 	public void enter(TWInfo tInfo,int entrySpeed,long invincibleTime) {
 		this.position.y-=entrySpeed*tInfo.frameTime;
 		this.isInvincible=true;
-		this.invincibleStop=tInfo.currentTime+invincibleTime;
+		this.invincibleStop=tInfo.currentTime_withoutMenu+invincibleTime;
 	}
 
 	@Override
@@ -56,7 +57,7 @@ public class Player extends GameChara_B{
 			this.attackAnim.position.x=this.position.x;
 			this.attackAnim.position.y=this.position.y-80;
 		}
-		if(tInfo.currentTime>=this.invincibleStop) {
+		if(tInfo.currentTime_withoutMenu>=this.invincibleStop) {
 			this.isInvincible=false;
 		}
 		this.setVisible(0, true);
@@ -134,6 +135,25 @@ public class Player extends GameChara_B{
 		tInfo.g.setColor(Color.BLACK);
 		return this;
 	}
+
+
+
+	@Override
+	public void drawOne(TWInfo tInfo, int idx) {
+		float alpha=1.0f;
+		if(this.isInvincible==true) {
+			alpha=0.6f;
+			if((this.invincibleStop-tInfo.currentTime_withoutMenu)%130<30) {
+				alpha=0.4f;
+			}
+		}
+		AlphaComposite ac = AlphaComposite.getInstance(AlphaComposite.SRC_OVER, alpha);
+		tInfo.g.setComposite(ac);
+		super.drawOne(tInfo, idx);
+		ac=AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0f);
+		tInfo.g.setComposite(ac);
+	}
+
 
 	//当たった時の処理
 	public void hitBoss() {

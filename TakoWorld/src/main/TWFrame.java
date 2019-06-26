@@ -28,9 +28,11 @@ public class TWFrame {
 		//タイトルバーの長さを求める
 		this.mainWindow.pack();
 		TWFrame.title_bar_height=this.mainWindow.getInsets().top;
+
 		//System.out.println(TWFrame.title_bar_height);
 
 		//this.mainWindow.setUndecorated(true);//タイトルバー消す
+		//TWFrame.title_bar_height=0;
 
 		this.mainWindow.setSize(800,600+TWFrame.title_bar_height);
 		this.mainWindow.setLocationRelativeTo(null);
