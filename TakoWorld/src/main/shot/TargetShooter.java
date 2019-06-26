@@ -1,5 +1,7 @@
 package main.shot;
 
+import java.awt.geom.Point2D;
+
 import main.TWInfo;
 import main.functions.Vector;
 import main.stage.Stage;
@@ -9,10 +11,10 @@ public class TargetShooter extends Shooter {
 	private Vector v=new Vector();
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage) {
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
 		BulletChara bullet =stage.searchBullet();
 		if(bullet==null)return;
-		bullet.mover=ChaseMover.singleton;
+		bullet.mover=AccelMover.singleton;
 		bullet.position.x=stage.getEnemy().position.x;
 		bullet.position.y=stage.getEnemy().position.y;
 		bullet.vector.x=stage.getPlayer().position.x;
@@ -25,7 +27,7 @@ public class TargetShooter extends Shooter {
 		bullet.vector.y*=500;
 		double r =bullet.vector.angle();
 		bullet.angle=r/Math.PI*180.0;
-		bullet.setImage(stage.getBulletImage(Stage1.STAR_BULLET));
+		bullet.setImage(stage.getBulletImage(Stage1.BLACK_BULLET));
 		bullet.setVisible(tInfo, true);
 
 	}

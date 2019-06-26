@@ -121,6 +121,7 @@ public class Stage1 extends Stage {
 			this.takoyaki.hitAttack(30);
 			this.player.spAttackAnim.isJudge = false;
 			SoundBox.singleton.playClip(MUSIC_NUM.BOMB);
+			this.removeAllBullets();
 		}
 	}
 
@@ -207,5 +208,15 @@ public class Stage1 extends Stage {
 		this.player.spAttackAnim.isMenuTime = isMenuTime;
 		this.takoyaki.isMenuTime=isMenuTime;
 	}
+
+	@Override
+	public void removeAllBullets() {
+		for (int i = 0; i < MAX_BULLETS; i++) {
+			this.bullets.get(i).visible=false;
+		}
+
+	}
+
+
 
 }

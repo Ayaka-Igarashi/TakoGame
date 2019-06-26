@@ -1,5 +1,7 @@
 package main.shot;
 
+import java.awt.geom.Point2D;
+
 import main.TWInfo;
 import main.stage.Stage;
 import main.stage.Stage1;
@@ -7,8 +9,8 @@ import main.stage.Stage1;
 public class SplatterShooter extends Shooter {
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage) {
-		double r=(Math.random()*60-30.0)/180.0*Math.PI;
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
+		double r=(Math.random()*120-60.0)/180.0*Math.PI;
 		BulletChara bullet=stage.searchBullet();
 		if(bullet==null)return;
 		bullet.mover=StraightMover.singleton;

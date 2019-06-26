@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 import main.TWInfo;
 import main.pattern.Pattern;
+import main.shot.CrossShooter;
+import main.shot.RollingShooter;
 import main.shot.SplatterShooter;
 import main.shot.TargetShooter;
 import main.stage.Stage;
@@ -26,8 +28,9 @@ public class Takoyaki extends GameChara_B {
 
 		this.patternList.add(new PatternT1());
 		this.curpat=this.patternList.get(0);
-		this.patternlist_addlast(new PatternBasicShoot(20000));
-		this.patternList.get(1).setNext(this.patternList.get(1));
+		this.patternlist_addlast(new PatternT2(20000));
+		this.patternlist_addlast(new PatternT3(10000));
+		this.patternList.get(2).setNext(this.patternList.get(1));
 	}
 
 	//最後の要素と連結して追加
@@ -127,10 +130,11 @@ public class Takoyaki extends GameChara_B {
 
 	}
 
-	class PatternBasicShoot extends Pattern{
-		private long lastShooting=0;
+	class PatternT2 extends Pattern{
+		private long lastShooting1=0;
+		private long lastShooting2=0;
 
-		public PatternBasicShoot(long l) {
+		public PatternT2(long l) {
 			this.limit=l;
 		}
 
@@ -145,11 +149,52 @@ public class Takoyaki extends GameChara_B {
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
 
-			if(tInfo.currentTime-this.lastShooting-Takoyaki.this.menuTime>300) {
-				SplatterShooter.singleton.shoot(tInfo, stage);
-				TargetShooter.singleton.shoot(tInfo, stage);
+			if(tInfo.currentTime-this.lastShooting1-Takoyaki.this.menuTime>100) {
+				SplatterShooter.singleton.shoot(tInfo, stage,Takoyaki.this.position);
+				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position);
 
-				this.lastShooting=tInfo.currentTime;
+				this.lastShooting1=tInfo.currentTime;
+				Takoyaki.this.menuTime=0;
+			}
+			if(tInfo.currentTime-this.lastShooting2-Takoyaki.this.menuTime>600) {
+				TargetShooter.singleton.shoot(tInfo, stage,Takoyaki.this.position);
+				this.lastShooting2=tInfo.currentTime;
+				Takoyaki.this.menuTime=0;
+			}
+
+		}
+
+	}
+	class PatternT3 extends Pattern{
+		private long lastShooting1=0;
+		private long lastShooting2=0;
+
+		public PatternT3(long l) {
+			this.limit=l;
+		}
+
+		@Override
+		public boolean isFinished(TWInfo tInfo) {
+			if(tInfo.currentTime-this.starttime>this.limit) {
+				return true;
+			}
+			return false;
+		}
+
+		@Override
+		public void move(TWInfo tInfo, Stage stage) {
+
+			if(tInfo.currentTime-this.lastShooting1-Takoyaki.this.menuTime>100) {
+				SplatterShooter.singleton.shoot(tInfo, stage,Takoyaki.this.position);
+				RollingShooter.singleton.shoot(tInfo, stage,Takoyaki.this.position);
+				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position);
+
+				this.lastShooting1=tInfo.currentTime;
+				Takoyaki.this.menuTime=0;
+			}
+			if(tInfo.currentTime-this.lastShooting2-Takoyaki.this.menuTime>600) {
+				TargetShooter.singleton.shoot(tInfo, stage,Takoyaki.this.position);
+				this.lastShooting2=tInfo.currentTime;
 				Takoyaki.this.menuTime=0;
 			}
 

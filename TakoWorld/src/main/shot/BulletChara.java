@@ -30,7 +30,7 @@ public class BulletChara extends GameChara_B{
 
 	public BulletChara() {
 		this.visible=false;
-		this.size=12;
+		this.size=7;
 	}
 
 

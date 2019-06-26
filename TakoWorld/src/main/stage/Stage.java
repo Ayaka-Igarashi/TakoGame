@@ -59,6 +59,8 @@ public abstract class Stage {
 	//弾の画像を取得する
 	public abstract BufferedImage getBulletImage(int type);
 
+	public abstract void removeAllBullets();
+
 	//空いてる弾を探す
 	protected int searchidx=0;
 	public BulletChara searchBullet() {

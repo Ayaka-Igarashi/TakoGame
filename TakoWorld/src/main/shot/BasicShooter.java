@@ -1,5 +1,7 @@
 package main.shot;
 
+import java.awt.geom.Point2D;
+
 import main.TWInfo;
 import main.stage.Stage;
 import main.stage.Stage1;
@@ -7,7 +9,7 @@ import main.stage.Stage1;
 public class BasicShooter extends Shooter{
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage) {
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
 		BulletChara bullet=stage.searchBullet()	;
 		if(bullet==null)return;
 		bullet.mover=StraightMover.singleton;
