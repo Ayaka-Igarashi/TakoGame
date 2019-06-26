@@ -71,6 +71,9 @@ public class TWDisplay extends GameDisplay{
 
 		@Override
 		public void show(TWInfo tInfo) {
+			if(tInfo.keyState[KEY_STATE.ESC]==true) {
+				System.exit(0);
+			}
 
 			/*
 			//別の処理方法
@@ -191,6 +194,9 @@ public class TWDisplay extends GameDisplay{
 		//繰り返し呼ばれる
 		@Override
 		public void show(TWInfo tInfo) {
+			if(tInfo.keyState[KEY_STATE.ESC]==true) {
+				System.exit(0);
+			}
 
 			TWDisplay.this.mode.draw(tInfo);//現在のモードを線画
 			if(TWDisplay.this.mode.isExit()) {
@@ -250,6 +256,10 @@ public class TWDisplay extends GameDisplay{
 
 		@Override
 		public void show(TWInfo tInfo) {
+			if(tInfo.keyState[KEY_STATE.ESC]==true) {
+				System.exit(0);
+			}
+
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
 			String str ="END!!! PUSH Z";

@@ -48,10 +48,16 @@ public class Choice extends GameItem{
 			return 0;
 		}
 	}
+	public int getChoiceText() {
+		return this.nowText;
+	}
+
 	//データ適用
-	public void applyChoiceTime(int choiceTime) {
+	public void applyChoiceTime(int choiceTime,int choiceText) {
 		if(choiceTime==1) {
 			this.choiceTime=true;
+			this.nowText=choiceText;
+			this.choiceNum=this.choiceText.get(this.nowText).length;
 		}else {
 			this.choiceTime=false;
 		}
@@ -115,11 +121,11 @@ public class Choice extends GameItem{
 		FontMetrics fm=tInfo.g.getFontMetrics();
 		int sw;//文字の長さ
 		int sh;
-		for(int i=0;i<this.choiceText.get(0).length;i++) {
-			sw=fm.stringWidth(this.choiceText.get(0)[i]);
+		for(int i=0;i<this.choiceText.get(this.nowText).length;i++) {
+			sw=fm.stringWidth(this.choiceText.get(this.nowText)[i]);
 			sh=fm.getHeight();
 			this.drawStr(tInfo,
-					this.choiceText.get(0)[i],
+					this.choiceText.get(this.nowText)[i],
 					(int)this.loc[i].x+this.img_width/2-sw/2,
 					(int)this.loc[i].y+this.img_height/2+sh/2 -5);
 		}
@@ -128,6 +134,7 @@ public class Choice extends GameItem{
 
 	@Override
 	public GameItem draw(TWInfo tInfo) {
+
 		if(this.choiceTime==true) {
 			for(int i=0;i<this.choiceNum;i++) {
 				if(i==this.nowChoice) {
