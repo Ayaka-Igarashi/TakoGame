@@ -62,11 +62,6 @@ public class BattlePhase extends GamePhase{
 
 	}
 
-	/*
-	public void setMenuTime(long openTime) {
-		//this.nowStage.setMenuTime(openTime);
-	}
-	*/
 
 	public void setIsMenu(boolean menuTime) {
 		this.isMenuTime=menuTime;

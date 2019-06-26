@@ -194,16 +194,6 @@ public class Stage1 extends Stage {
 		return this.takoyaki.isAlive;
 	}
 
-	/*
-		public void setMenuTime(long openTime) {
-			//this.menuTime+=openTime;
-			//this.item.menuTime = openTime;
-			//this.player.attackAnim.menuTime += openTime;
-			//this.player.spAttackAnim.menuTime += openTime;
-			//this.takoyaki.menuTime+=openTime;
-
-		}
-	*/
 
 	@Override
 	public void setIsMenuTime(boolean isMenuTime) {
