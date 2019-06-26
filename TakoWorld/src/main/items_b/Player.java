@@ -111,13 +111,13 @@ public class Player extends GameChara_B{
 		}else if(tInfo.keyState[KEY_STATE.Z]==false&&tInfo.keyReleased[KEY_STATE.Z]==false) {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 		}
-		if(tInfo.keyState[KEY_STATE.SPACE]&&tInfo.keyReleased[KEY_STATE.SPACE]==true&&this.attackPoint>=2) {
+		if(tInfo.keyState[KEY_STATE.A]&&tInfo.keyReleased[KEY_STATE.A]==true&&this.attackPoint>=2) {
 			this.spAttackAnim.start(tInfo);
 			this.attackPoint-=2;
 			this.attackMeter.amount=this.attackPoint;
-			tInfo.keyReleased[KEY_STATE.SPACE]=false;
-		}else if(tInfo.keyState[KEY_STATE.SPACE]==false&&tInfo.keyReleased[KEY_STATE.SPACE]==false) {
-			tInfo.keyReleased[KEY_STATE.SPACE]=true;//キーが放された状態にする
+			tInfo.keyReleased[KEY_STATE.A]=false;
+		}else if(tInfo.keyState[KEY_STATE.A]==false&&tInfo.keyReleased[KEY_STATE.A]==false) {
+			tInfo.keyReleased[KEY_STATE.A]=true;//キーが放された状態にする
 		}
 
 	}
