@@ -77,7 +77,7 @@ public class Stage1 extends Stage {
 		this.player.setImage(this.img_player.getSubimage(0, 0, 51, 75));
 		this.player.setImage(this.img_player.getSubimage(51, 0, 51, 75));
 		this.player.setImage(this.img_player.getSubimage(102, 0, 54, 75));
-		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack.png")));
+		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack2.png")));
 		this.player.attackAnim.setAnimation(3, 3, 9, 60);
 		this.player.spAttackAnim.setImage(ImageIO.read(new File("media/battle/attack_sp.png")));
 		this.player.spAttackAnim.setAnimation(1, 15, 15, 60);
@@ -113,7 +113,7 @@ public class Stage1 extends Stage {
 			SoundBox.singleton.playClip(MUSIC_NUM.GET);
 		}
 		if (this.hitAttack() == true && this.player.attackAnim.isJudge == true) {
-			this.takoyaki.hitAttack(10);
+			this.takoyaki.hitAttack(10,tInfo);
 			this.player.attackAnim.isJudge = false;
 			SoundBox.singleton.playClip(MUSIC_NUM.HIT);
 		} else if (this.hitAttack() == false && this.player.attackAnim.isJudge == true) {
@@ -121,7 +121,7 @@ public class Stage1 extends Stage {
 			SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
 		}
 		if (this.player.spAttackAnim.isJudge == true) {
-			this.takoyaki.hitAttack(30);
+			this.takoyaki.hitAttack(30,tInfo);
 			this.player.spAttackAnim.isJudge = false;
 			SoundBox.singleton.playClip(MUSIC_NUM.BOMB);
 			this.removeAllBullets();

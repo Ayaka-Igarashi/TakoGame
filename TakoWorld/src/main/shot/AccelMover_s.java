@@ -3,7 +3,7 @@ package main.shot;
 import main.TWInfo;
 import main.stage.Stage;
 
-public class AccelMover extends BulletMover {
+public class AccelMover_s extends BulletMover {
 	@Override
 	public void move(TWInfo tInfo, Stage stage, BulletChara bullet) {
 		if( bullet.position.x < 0 ||
@@ -15,12 +15,12 @@ public class AccelMover extends BulletMover {
 			}
 			long l = tInfo.currentTime_withoutMenu - bullet.getStartTime();
 			bullet.vector.normalize();
-			double s = 200.0;
+			double s = 100.0;
 			if(l > 500) s = s + (double)l / 5.0;
 			bullet.vector.x *= s;
 			bullet.vector.y *= s;
 			bullet.position.x += bullet.vector.x * tInfo.frameTime;
 			bullet.position.y += bullet.vector.y * tInfo.frameTime;
 	}
-	public static AccelMover singleton = new AccelMover();
+	public static AccelMover_s singleton = new AccelMover_s();
 }

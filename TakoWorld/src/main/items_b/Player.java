@@ -55,7 +55,7 @@ public class Player extends GameChara_B{
 	public void control(TWInfo tInfo) {
 		if(this.attackAnim.isAnim==false) {
 			this.attackAnim.position.x=this.position.x;
-			this.attackAnim.position.y=this.position.y-80;
+			this.attackAnim.position.y=this.position.y-150;
 		}
 		if(tInfo.currentTime_withoutMenu>=this.invincibleStop) {
 			this.isInvincible=false;
