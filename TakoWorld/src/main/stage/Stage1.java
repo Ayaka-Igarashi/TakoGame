@@ -164,7 +164,7 @@ public class Stage1 extends Stage {
 	}
 
 	@Override
-	public boolean hitAttack() {
+	public boolean hitAttack() {//
 		Point2D.Double position1=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y-110);
 		boolean test1=Vector.distance(position1, this.takoyaki.position)<=this.player.attackAnim.size-10+this.takoyaki.size;
 
