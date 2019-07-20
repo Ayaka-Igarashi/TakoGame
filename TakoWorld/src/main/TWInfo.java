@@ -59,6 +59,7 @@ public class TWInfo {
 		saveData[SAVE_DATA.HAIKEI]=this.textModeInfo.getHaikei().nowState;
 		saveData[SAVE_DATA.HOTATE]=this.textModeInfo.getHotate().nowState;
 		saveData[SAVE_DATA.SAME]=this.textModeInfo.getCharaSame().nowState;
+		saveData[SAVE_DATA.ENEMY]=this.textModeInfo.getEnemy().nowState;
 		saveData[SAVE_DATA.BGM]=this.textModeInfo.getSound().nowState;
 	}
 
@@ -76,6 +77,8 @@ public class TWInfo {
 		this.textModeInfo.getHotate().isChange=true;
 		this.textModeInfo.getCharaSame().nowState=saveData[SAVE_DATA.SAME];
 		this.textModeInfo.getCharaSame().isChange=true;
+		this.textModeInfo.getEnemy().nowState=saveData[SAVE_DATA.ENEMY];
+		this.textModeInfo.getEnemy().isChange=true;
 
 		if(this.textModeInfo.getSound().nowState!=saveData[SAVE_DATA.BGM]) {//違うbgmだったらロード
 			this.textModeInfo.getSound().nowState=saveData[SAVE_DATA.BGM];

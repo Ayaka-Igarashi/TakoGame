@@ -104,8 +104,8 @@ public class BattlePhase extends GamePhase{
 		public void draw(TWInfo tInfo) {
 
 			BattlePhase.this.nowStage.draw(tInfo);
-			tInfo.g.setBackground(Color.BLACK);
-			tInfo.g.drawString("START", 100, 100);
+			//tInfo.g.setBackground(Color.BLACK);
+			//tInfo.g.drawString("START", 100, 100);
 
 
 
@@ -153,8 +153,8 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void draw(TWInfo tInfo) {
 			BattlePhase.this.nowStage.draw(tInfo);
-			tInfo.g.setBackground(Color.BLACK);
-			tInfo.g.drawString("Main", 100, 100);
+			//tInfo.g.setBackground(Color.BLACK);
+			//tInfo.g.drawString("Main", 100, 100);
 
 		}
 
@@ -190,8 +190,8 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void draw(TWInfo tInfo) {
 			BattlePhase.this.nowStage.draw(tInfo);
-			tInfo.g.setBackground(Color.BLACK);
-			tInfo.g.drawString("reSTART", 100, 100);
+			//tInfo.g.setBackground(Color.BLACK);
+			//tInfo.g.drawString("reSTART", 100, 100);
 
 		}
 
@@ -228,8 +228,8 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void draw(TWInfo tInfo) {
 			BattlePhase.this.nowStage.draw(tInfo);
-			tInfo.g.setBackground(Color.BLACK);
-			tInfo.g.drawString("CLEAR", 100, 100);
+			//tInfo.g.setBackground(Color.BLACK);
+			//tInfo.g.drawString("CLEAR", 100, 100);
 
 			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
 				tInfo.g.setBackground(Color.BLACK);
@@ -290,8 +290,8 @@ public class BattlePhase extends GamePhase{
 
 
 			BattlePhase.this.nowStage.draw(tInfo);
-			tInfo.g.setBackground(Color.BLACK);
-			tInfo.g.drawString("GAME OVER", 100, 100);
+			//tInfo.g.setBackground(Color.BLACK);
+			//tInfo.g.drawString("GAME OVER", 100, 100);
 
 			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
 				tInfo.g.setBackground(Color.BLACK);

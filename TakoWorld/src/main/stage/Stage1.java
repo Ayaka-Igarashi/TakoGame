@@ -1,5 +1,6 @@
 package main.stage;
 
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +11,7 @@ import javax.imageio.ImageIO;
 import main.TWInfo;
 import main.constant.MUSIC_NUM;
 import main.constant.SCENE_NUM;
+import main.functions.Vector;
 import main.items_b.AttackItem;
 import main.items_b.GameChara_B;
 import main.items_b.Player;
@@ -83,15 +85,15 @@ public class Stage1 extends Stage {
 		this.player.spAttackAnim.setAnimation(1, 15, 15, 60);
 
 		this.img_takoyaki = ImageIO.read(new File("media/battle/たこ焼き.png"));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 125, 100));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(125, 0, 125, 100));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(250, 0, 125, 100));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 122, 122));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(122, 0, 122, 122));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(244, 0, 122, 122));
 		this.item.setImage(ImageIO.read(new File("media/battle/attackItem.png")).getSubimage(0, 0, 50, 50));
 
 		this.img_shot = ImageIO.read(new File("media/battle/bullet.png"));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 30, 30));
-		this.img_bullets.add(this.img_shot.getSubimage(30, 0, 30, 30));
-		this.img_bullets.add(this.img_shot.getSubimage(60, 0, 30, 30));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 31, 31));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 31, 31, 31));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 62, 31, 31));
 
 	}
 
@@ -163,11 +165,24 @@ public class Stage1 extends Stage {
 
 	@Override
 	public boolean hitAttack() {
-		return this.hitTest(this.takoyaki, this.player.attackAnim);
+		Point2D.Double position1=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y-110);
+		boolean test1=Vector.distance(position1, this.takoyaki.position)<=this.player.attackAnim.size-10+this.takoyaki.size;
+
+		Point2D.Double position2=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y+110);
+		boolean test2=Vector.distance(position2, this.takoyaki.position)<=this.player.attackAnim.size-10+this.takoyaki.size;
+
+		Point2D.Double position3=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y-40);
+		boolean test3=Vector.distance(position3, this.takoyaki.position)<=this.player.attackAnim.size+this.takoyaki.size;
+
+		Point2D.Double position4=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y+40);
+		boolean test4=Vector.distance(position4, this.takoyaki.position)<=this.player.attackAnim.size+this.takoyaki.size;
+
+		return test1||test2||test3||test4;
 	}
 
 	@Override
 	public boolean hitBullet(TWInfo tInfo) {
+
 		for (int i = 0; i < MAX_BULLETS; i++) {
 			if (this.bullets.get(i).visible == true) {
 				if (this.hitTest(this.bullets.get(i), this.player) == true) {

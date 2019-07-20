@@ -6,6 +6,7 @@ import main.TWInfo;
 import main.constant.ITEM_NUM;
 import main.constant.MUSIC_NUM;
 import main.items.CharaSame;
+import main.items.Enemy;
 import main.items.Forward;
 import main.items.Haikei;
 import main.items.Hotate;
@@ -25,8 +26,8 @@ public abstract class TWEvent {
 
 	protected Action b_nm=new Action(ITEM_NUM.BACK, Haikei.BLUE);
 	protected Action b_pp=new Action(ITEM_NUM.BACK, Haikei.PURPLE);
-	protected Action h_rm=new Action(ITEM_NUM.HOTATE,Hotate.REMOVE);
 
+	protected Action h_rm=new Action(ITEM_NUM.HOTATE,Hotate.REMOVE);
 	protected Action h_nm_h= new Action(ITEM_NUM.HOTATE,Hotate.NORMAL_HUMAN);
 	protected Action h_sw_h=new Action(ITEM_NUM.HOTATE,Hotate.SWEATED_HUMAN);
 	protected Action h_nmL=new Action(ITEM_NUM.HOTATE,Hotate.NORMAL_L);
@@ -45,6 +46,10 @@ public abstract class TWEvent {
 	protected Action s_rm=new Action(ITEM_NUM.SAME,CharaSame.REMOVE);
 	protected Action s_nmL=new Action(ITEM_NUM.SAME,CharaSame.NORMAL_L);
 	protected Action s_nmR=new Action(ITEM_NUM.SAME,CharaSame.NORMAL_R);
+
+	protected Action e_rm=new Action(ITEM_NUM.ENEMY, Enemy.REMOVE);
+	protected Action takoyaki_L=new Action(ITEM_NUM.ENEMY, Enemy.TAKOYAKI_L);
+	protected Action takoyaki_R=new Action(ITEM_NUM.ENEMY, Enemy.TAKOYAKI_R);
 
 	protected Action f_b=new Action(ITEM_NUM.FORWARD, Forward.BLACK);
 	protected Action f_w=new Action(ITEM_NUM.FORWARD, Forward.WHITE);

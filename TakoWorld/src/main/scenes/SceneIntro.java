@@ -28,8 +28,8 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_L)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw_h)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw_h)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h)));
@@ -46,7 +46,7 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_sw_h)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(f_b)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_pp,h_lazyR,f_b)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,e_rm,b_pp,h_lazyR,f_b)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));//..きろ
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));//..きろ
@@ -103,20 +103,20 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(f_b)));//暗転
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm,f_b)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_nmL,sound_battle)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_R,s_nmL,sound_battle)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,f_w2)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,f_w2)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,e_rm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_activeR,f_w)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_R,h_rm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_activeR,e_rm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));

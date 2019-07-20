@@ -10,7 +10,8 @@ public class SAVE_DATA {
 	public static final int TEXTBOX=6;
 	public static final int HOTATE=7;
 	public static final int SAME=8;
-	public static final int BGM=9;
+	public static final int ENEMY=9;
+	public static final int BGM=10;
 
-	public static final int NUM=10;//定数の個数（最大値）を入れる
+	public static final int NUM=11;//定数の個数（最大値）を入れる
 }

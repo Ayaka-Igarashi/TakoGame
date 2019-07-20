@@ -17,6 +17,7 @@ import main.constant.SCENE_NUM;
 import main.functions.TextEffect;
 import main.items.CharaSame;
 import main.items.Choice;
+import main.items.Enemy;
 import main.items.Forward;
 import main.items.GameText;
 import main.items.Haikei;
@@ -40,6 +41,7 @@ public class TextMode extends GameMode {
 	private Haikei haikei=new Haikei();
 	private Hotate hotate=new Hotate();
 	private CharaSame same=new CharaSame();
+	private Enemy enemy=new Enemy();
 	private TextBox textBox=new TextBox();
 	private GameText text=new GameText();
 	private Choice choice=new Choice();
@@ -86,6 +88,9 @@ public class TextMode extends GameMode {
 	public CharaSame getCharaSame() {return same;}
 	public void getCharaSame(CharaSame same) {this.same = same;}
 
+	public Enemy getEnemy() {return enemy;}
+	public void setEnemy(Enemy enemy) {this.enemy = enemy;}
+
 	public TextBox getTextBox() {return textBox;}
 	public void setTextBox(TextBox textBox) {this.textBox = textBox;}
 
@@ -115,6 +120,7 @@ public class TextMode extends GameMode {
 		this.haikei.first();
 		this.hotate.first();
 		this.same.first();
+		this.enemy.first();
 		this.textBox.first();
 		this.text.first();
 		this.choice.first();
@@ -137,6 +143,7 @@ public class TextMode extends GameMode {
 		this.haikei.control(tInfo);
 		this.hotate.control(tInfo);
 		this.same.control(tInfo);
+		this.enemy.control(tInfo);
 		this.textBox.control(tInfo);
 		this.text.control(tInfo);
 		this.choice.control(tInfo);
@@ -194,6 +201,8 @@ public class TextMode extends GameMode {
 								this.hotate.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.SAME) {
 								this.same.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.ENEMY) {
+								this.enemy.keyControl(tInfo,KEY_STATE.Z,event[i].action);
 							}else if(event[i].item==ITEM_NUM.FORWARD) {
 								this.forward.keyControl(tInfo, KEY_STATE.Z, event[i].action);
 							}else if(event[i].item==ITEM_NUM.SOUND) {
@@ -257,6 +266,7 @@ public class TextMode extends GameMode {
 		this.haikei.draw(tInfo);
 		this.hotate.draw(tInfo);
 		this.same.draw(tInfo);
+		this.enemy.draw(tInfo);
 		this.textBox.draw(tInfo);
 		this.text.draw(tInfo);
 		this.choice.draw(tInfo);
@@ -291,6 +301,9 @@ public class TextMode extends GameMode {
 		this.same.setImage(ImageIO.read(new File("media/same/same_body_R.png")));
 		this.same.setImage(ImageIO.read(new File("media/same/same_face_default_L.png")));
 		this.same.setImage(ImageIO.read(new File("media/same/same_face_default_R.png")));
+
+		this.enemy.setImage(ImageIO.read(new File("media/enemy/takoyaki_L.png")));
+		this.enemy.setImage(ImageIO.read(new File("media/enemy/takoyaki_R.png")));
 
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_back.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_L.png")));

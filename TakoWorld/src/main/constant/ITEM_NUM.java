@@ -8,6 +8,7 @@ public class ITEM_NUM {
 	public static final int TEXT=3;
 	public static final int HOTATE=4;
 	public static final int SAME=5;
-	public static final int FORWARD=6;
-	public static final int SOUND=7;
+	public static final int ENEMY=6;
+	public static final int FORWARD=7;
+	public static final int SOUND=8;
 }
