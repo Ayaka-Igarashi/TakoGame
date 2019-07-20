@@ -85,15 +85,15 @@ public class Stage1 extends Stage {
 		this.player.spAttackAnim.setAnimation(1, 15, 15, 60);
 
 		this.img_takoyaki = ImageIO.read(new File("media/battle/たこ焼き.png"));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 122, 122));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(122, 0, 122, 122));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(244, 0, 122, 122));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 120, 120));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(120, 0, 120, 120));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(240, 0, 120, 120));
 		this.item.setImage(ImageIO.read(new File("media/battle/attackItem.png")).getSubimage(0, 0, 50, 50));
 
 		this.img_shot = ImageIO.read(new File("media/battle/bullet.png"));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 31, 31));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 31, 31, 31));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 62, 31, 31));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 50, 50));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 50, 50, 50));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 100, 50, 50));
 
 	}
 
@@ -164,7 +164,7 @@ public class Stage1 extends Stage {
 	}
 
 	@Override
-	public boolean hitAttack() {//
+	public boolean hitAttack() {
 		Point2D.Double position1=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y-110);
 		boolean test1=Vector.distance(position1, this.takoyaki.position)<=this.player.attackAnim.size-10+this.takoyaki.size;
 

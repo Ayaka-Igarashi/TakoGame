@@ -6,10 +6,7 @@ import main.stage.Stage;
 public class AccelMover_s extends BulletMover {
 	@Override
 	public void move(TWInfo tInfo, Stage stage, BulletChara bullet) {
-		if( bullet.position.x < 0 ||
-				bullet.position.x > stage.getWidth() ||
-				bullet.position.y < 0 ||
-				bullet.position.y > stage.getHeight())
+		if(bullet.position.x<-10||bullet.position.x>stage.getWidth()+10||bullet.position.y<-10||bullet.position.y>stage.getHeight()+10)
 			{
 				bullet.visible = false;
 			}
