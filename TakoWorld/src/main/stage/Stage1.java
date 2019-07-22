@@ -75,25 +75,31 @@ public class Stage1 extends Stage {
 
 	@Override
 	public void loadMedia() throws IOException {
-		this.img_player = ImageIO.read(new File("media/battle/same_mini.png"));
-		this.player.setImage(this.img_player.getSubimage(0, 0, 51, 75));
-		this.player.setImage(this.img_player.getSubimage(51, 0, 51, 75));
-		this.player.setImage(this.img_player.getSubimage(102, 0, 54, 75));
+		this.img_player = ImageIO.read(new File("media/battle/player.png"));
+		this.player.setImage(this.img_player.getSubimage(0, 0, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(0, 90*2, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(0, 90, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90, 0, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90, 90*2, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90, 90, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90*2, 0, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90*2, 90*2, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90*2, 90, 90, 90));
 		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack2.png")));
 		this.player.attackAnim.setAnimation(3, 3, 9, 60);
 		this.player.spAttackAnim.setImage(ImageIO.read(new File("media/battle/attack_sp.png")));
 		this.player.spAttackAnim.setAnimation(1, 15, 15, 60);
 
 		this.img_takoyaki = ImageIO.read(new File("media/battle/たこ焼き.png"));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 120, 120));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(120, 0, 120, 120));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(240, 0, 120, 120));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 100, 100));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(100, 0, 100, 100));
+		this.takoyaki.setImage(this.img_takoyaki.getSubimage(200, 0, 100, 100));
 		this.item.setImage(ImageIO.read(new File("media/battle/attackItem.png")).getSubimage(0, 0, 50, 50));
 
 		this.img_shot = ImageIO.read(new File("media/battle/bullet.png"));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 50, 50));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 50, 50, 50));
-		this.img_bullets.add(this.img_shot.getSubimage(0, 100, 50, 50));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 0, 27, 27));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 27, 27, 27));
+		this.img_bullets.add(this.img_shot.getSubimage(0, 27*2, 27, 27));
 
 	}
 

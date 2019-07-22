@@ -305,6 +305,7 @@ public class TextMode extends GameMode {
 		this.enemy.setImage(ImageIO.read(new File("media/enemy/takoyaki_L.png")));
 		this.enemy.setImage(ImageIO.read(new File("media/enemy/takoyaki_R.png")));
 
+
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_back.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_R.png")));
@@ -312,12 +313,18 @@ public class TextMode extends GameMode {
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_pink_R.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_yellow_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_yellow_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_green_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_green_R.png")));
+
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_same_R.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_hotate_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_hotate_R.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_unknown_L.png")));
 		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_unknown_R.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_tako_L.png")));
+		this.textBox.setImage(ImageIO.read(new File("media/textbox/textbox_tako_R.png")));
+
 
 
 		this.img_choice=ImageIO.read(new File("media/choice.png"));
