@@ -77,14 +77,14 @@ public class Stage1 extends Stage {
 	public void loadMedia() throws IOException {
 		this.img_player = ImageIO.read(new File("media/battle/player.png"));
 		this.player.setImage(this.img_player.getSubimage(0, 0, 90, 90));
-		this.player.setImage(this.img_player.getSubimage(0, 90*2, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(0, 90, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(0, 90*2, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(90, 0, 90, 90));
-		this.player.setImage(this.img_player.getSubimage(90, 90*2, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(90, 90, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90, 90*2, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(90*2, 0, 90, 90));
-		this.player.setImage(this.img_player.getSubimage(90*2, 90*2, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(90*2, 90, 90, 90));
+		this.player.setImage(this.img_player.getSubimage(90*2, 90*2, 90, 90));
 		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack2.png")));
 		this.player.attackAnim.setAnimation(3, 3, 9, 60);
 		this.player.spAttackAnim.setImage(ImageIO.read(new File("media/battle/attack_sp.png")));

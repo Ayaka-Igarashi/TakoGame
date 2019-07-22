@@ -28,9 +28,12 @@ public class Player extends GameChara_B{
 
 	@Override
 	public void first() {
-		this.setVisible(0, true);
-		this.setVisible(1, false);
-		this.setVisible(2, false);
+		for(int i=0;i<9;i++) {
+			if(i==0)this.setVisible(i, true);
+			else {
+				this.setVisible(i, false);
+			}
+		}
 		this.position=new Point2D.Double(400, 650);
 		this.life=4;
 		this.attackPoint=0;
@@ -60,9 +63,31 @@ public class Player extends GameChara_B{
 		if(tInfo.currentTime_withoutMenu>=this.invincibleStop) {
 			this.isInvincible=false;
 		}
-		this.setVisible(0, true);
-		this.setVisible(1, false);
-		this.setVisible(2, false);
+
+
+		if(attackPoint<2) {
+			for(int i=0;i<9;i++) {
+				if(i==0)this.setVisible(i, true);
+				else {
+					this.setVisible(i, false);
+				}
+			}
+		}else if(attackPoint<6) {
+			for(int i=0;i<9;i++) {
+				if(i==3)this.setVisible(i, true);
+				else {
+					this.setVisible(i, false);
+				}
+			}
+		}else {
+			for(int i=0;i<9;i++) {
+				if(i==6)this.setVisible(i, true);
+				else {
+					this.setVisible(i, false);
+				}
+			}
+		}
+
 	}
 
 	@Override
@@ -78,18 +103,56 @@ public class Player extends GameChara_B{
 
 
 		if(tInfo.keyState[KEY_STATE.RIGHT]) {
-			this.setVisible(0, false);
-			this.setVisible(1, false);
-			this.setVisible(2, true);
+			if(attackPoint<2) {
+				for(int i=0;i<9;i++) {
+					if(i==1)this.setVisible(i, true);
+					else {
+						this.setVisible(i, false);
+					}
+				}
+			}else if(attackPoint<6) {
+				for(int i=0;i<9;i++) {
+					if(i==4)this.setVisible(i, true);
+					else {
+						this.setVisible(i, false);
+					}
+				}
+			}else {
+				for(int i=0;i<9;i++) {
+					if(i==7)this.setVisible(i, true);
+					else {
+						this.setVisible(i, false);
+					}
+				}
+			}
 
 			if(this.position.x+this.center.x<800) {
 				this.position.x+=this.speed*tInfo.frameTime;
 			}
 		}
 		if(tInfo.keyState[KEY_STATE.LEFT]) {
-			this.setVisible(0, false);
-			this.setVisible(1, true);
-			this.setVisible(2, false);
+			if(attackPoint<2) {
+				for(int i=0;i<9;i++) {
+					if(i==2)this.setVisible(i, true);
+					else {
+						this.setVisible(i, false);
+					}
+				}
+			}else if(attackPoint<6) {
+				for(int i=0;i<9;i++) {
+					if(i==5)this.setVisible(i, true);
+					else {
+						this.setVisible(i, false);
+					}
+				}
+			}else {
+				for(int i=0;i<9;i++) {
+					if(i==8)this.setVisible(i, true);
+					else {
+						this.setVisible(i, false);
+					}
+				}
+			}
 
 			if(this.position.x-this.center.x>0) {
 				this.position.x-=this.speed*tInfo.frameTime;
