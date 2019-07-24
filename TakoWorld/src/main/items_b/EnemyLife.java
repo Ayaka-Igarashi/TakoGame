@@ -1,8 +1,5 @@
 package main.items_b;
 
-import java.awt.Color;
-
-import main.TWFrame;
 import main.TWInfo;
 import main.supers.GameItem;
 
@@ -21,11 +18,12 @@ public class EnemyLife extends GameChara_B {
 
 	@Override
 	public GameItem draw(TWInfo tInfo) {
+		/*
 		tInfo.g.setColor(Color.RED);
 		tInfo.g.fillRect((int)this.position.x, (int)this.position.y+TWFrame.title_bar_height, (int)(this.life*1.5), 5);
 		tInfo.g.setColor(Color.BLACK);
 		tInfo.g.drawRect((int)this.position.x, (int)this.position.y+TWFrame.title_bar_height, (int)(this.MAX_LIFE*1.5), 5);
-
+		*/
 		return this;
 	}
 

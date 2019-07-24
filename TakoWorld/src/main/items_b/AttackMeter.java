@@ -1,14 +1,12 @@
 package main.items_b;
 
-import java.awt.Color;
 import java.awt.geom.Point2D;
 
-import main.TWFrame;
 import main.TWInfo;
 import main.supers.GameItem;
 
 public class AttackMeter extends GameChara_B {
-	private final int MAX=6;
+	private final int MAX=1;
 	public int amount;
 
 	public AttackMeter() {
@@ -19,11 +17,11 @@ public class AttackMeter extends GameChara_B {
 	@Override
 	public void first() {
 		this.amount=0;
-
 	}
 
 	@Override
 	public GameItem draw(TWInfo tInfo) {
+		/*
 		tInfo.g.setColor(Color.BLUE);
 		tInfo.g.fillRect((int)this.position.x, (int)this.position.y+TWFrame.title_bar_height, (int)(this.amount*25), 5);
 		tInfo.g.setColor(Color.BLACK);
@@ -32,6 +30,7 @@ public class AttackMeter extends GameChara_B {
 				(int)(this.position.x+this.MAX*25/3), (int)this.position.y-3+TWFrame.title_bar_height);
 		tInfo.g.drawLine((int)(this.position.x+this.MAX*25/3*2), (int)this.position.y+8+TWFrame.title_bar_height,
 				(int)(this.position.x+this.MAX*25/3*2), (int)this.position.y-3+TWFrame.title_bar_height);
+		*/
 		return this;
 	}
 

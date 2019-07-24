@@ -85,10 +85,19 @@ public class Stage1 extends Stage {
 		this.player.setImage(this.img_player.getSubimage(90*2, 0, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(90*2, 90, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(90*2, 90*2, 90, 90));
-		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack2.png")));
-		this.player.attackAnim.setAnimation(3, 3, 9, 60);
+
+		//this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attack2.png")));
+		//this.player.attackAnim.setAnimation(3, 3, 9, 60);
+		this.player.attackAnim.setImage(ImageIO.read(new File("media/battle/attackanim.png")));
+		this.player.attackAnim.setAnimation(4, 1, 4, 60);
 		this.player.spAttackAnim.setImage(ImageIO.read(new File("media/battle/attack_sp.png")));
 		this.player.spAttackAnim.setAnimation(1, 15, 15, 60);
+
+		this.player.lifeMeter.setImage(ImageIO.read(new File("media/battle/life_back.png")));
+		this.player.lifeMeter.setImage(ImageIO.read(new File("media/battle/life1.png")));
+		this.player.lifeMeter.setImage(ImageIO.read(new File("media/battle/life2.png")));
+		this.player.lifeMeter.setImage(ImageIO.read(new File("media/battle/life3.png")));
+		//this.player.lifeMeter.setImage(ImageIO.read(new File("media/battle/playerLife.png")));
 
 		this.img_takoyaki = ImageIO.read(new File("media/battle/たこ焼き.png"));
 		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 100, 100));
@@ -147,6 +156,8 @@ public class Stage1 extends Stage {
 				this.bullets.get(i).draw(tInfo, this, isMenuTime);
 			}
 		}
+
+		this.player.lifeMeter.draw(tInfo);
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class Player extends GameChara_B{
 	public SpAttackAnim spAttackAnim =new SpAttackAnim(1000);
 
 	private AttackMeter attackMeter=new AttackMeter();
-	private PlayerLife lifeMeter=new PlayerLife();
+	public PlayerLife lifeMeter=new PlayerLife();
 
 	public Player() {
 		this.size=8;
@@ -65,16 +65,9 @@ public class Player extends GameChara_B{
 		}
 
 
-		if(attackPoint<2) {
+		if(attackPoint<1) {
 			for(int i=0;i<9;i++) {
 				if(i==0)this.setVisible(i, true);
-				else {
-					this.setVisible(i, false);
-				}
-			}
-		}else if(attackPoint<6) {
-			for(int i=0;i<9;i++) {
-				if(i==3)this.setVisible(i, true);
 				else {
 					this.setVisible(i, false);
 				}
@@ -103,16 +96,9 @@ public class Player extends GameChara_B{
 
 
 		if(tInfo.keyState[KEY_STATE.RIGHT]) {
-			if(attackPoint<2) {
+			if(attackPoint<1) {
 				for(int i=0;i<9;i++) {
 					if(i==1)this.setVisible(i, true);
-					else {
-						this.setVisible(i, false);
-					}
-				}
-			}else if(attackPoint<6) {
-				for(int i=0;i<9;i++) {
-					if(i==4)this.setVisible(i, true);
 					else {
 						this.setVisible(i, false);
 					}
@@ -131,16 +117,9 @@ public class Player extends GameChara_B{
 			}
 		}
 		if(tInfo.keyState[KEY_STATE.LEFT]) {
-			if(attackPoint<2) {
+			if(attackPoint<1) {
 				for(int i=0;i<9;i++) {
 					if(i==2)this.setVisible(i, true);
-					else {
-						this.setVisible(i, false);
-					}
-				}
-			}else if(attackPoint<6) {
-				for(int i=0;i<9;i++) {
-					if(i==5)this.setVisible(i, true);
 					else {
 						this.setVisible(i, false);
 					}
@@ -174,9 +153,9 @@ public class Player extends GameChara_B{
 		}else if(tInfo.keyState[KEY_STATE.Z]==false&&tInfo.keyReleased[KEY_STATE.Z]==false) {
 			tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
 		}
-		if(tInfo.keyState[KEY_STATE.A]&&tInfo.keyReleased[KEY_STATE.A]==true&&this.attackPoint>=2) {
+		if(tInfo.keyState[KEY_STATE.A]&&tInfo.keyReleased[KEY_STATE.A]==true&&this.attackPoint>=1) {
 			this.spAttackAnim.start(tInfo);
-			this.attackPoint-=2;
+			this.attackPoint-=1;
 			this.attackMeter.amount=this.attackPoint;
 			tInfo.keyReleased[KEY_STATE.A]=false;
 		}else if(tInfo.keyState[KEY_STATE.A]==false&&tInfo.keyReleased[KEY_STATE.A]==false) {
@@ -190,7 +169,7 @@ public class Player extends GameChara_B{
 		this.attackAnim.draw(tInfo);
 		this.spAttackAnim.draw(tInfo);
 		this.attackMeter.draw(tInfo);
-		this.lifeMeter.draw(tInfo);
+		//this.lifeMeter.draw(tInfo);
 		super.draw(tInfo);
 		tInfo.g.setColor(new Color(0, 20, 200, 200));
 		tInfo.g.fillOval((int)(this.position.x)-(int)this.size, (int)(this.position.y)-(int)this.size+TWFrame.title_bar_height,
@@ -232,7 +211,7 @@ public class Player extends GameChara_B{
 
 	//アイテム取得時の処理
 	public void hitItem() {
-		if(this.attackPoint<6) {
+		if(this.attackPoint<1) {
 			this.attackPoint+=1;
 			this.attackMeter.amount=this.attackPoint;
 		}
