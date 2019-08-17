@@ -8,15 +8,20 @@ import java.io.IOException;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
+import main.constant.SCENE_NUM;
 import main.stage.Stage;
 import main.stage.Stage1;
+import main.stage.Stage2;
 import main.supers.GamePhase;
 import main.supers.SoundBox;
 
 public class BattlePhase extends GamePhase{
 	GamePhase start,main,reStart,clear,lose;
 	private GamePhase nowPhase=null;
-	public Stage nowStage =new Stage1();
+	//private ArrayList<Stage> stageList=new ArrayList<Stage>();//ステージのリスト
+	private Stage stage1=new Stage1();
+	private Stage stage2=new Stage2();
+	public Stage nowStage =stage1;
 
 	public boolean clearFlg;
 	public boolean exitFlg;
@@ -32,14 +37,31 @@ public class BattlePhase extends GamePhase{
 		this.reStart=new ReStartPhase();
 		this.clear=new ClearPhase();
 		this.lose=new LosePhase();
+
+		//this.stageList.add(new Stage1());//リスト追加
+		//this.stageList.add(new Stage2());
 	}
 
 	//スタートするたびに実行
 	public void first(TWInfo tInfo,int scene) {
+		//System.out.println(scene);
+		//this.nowStage=this.stage1;
+
+		//ステージ切り替え
+		if(scene==SCENE_NUM.S1) {
+			this.nowStage=this.stage1;
+		}else if(scene==SCENE_NUM.S2) {
+			this.nowStage=this.stage2;
+		}
+
+
 		this.nowPhase=start;
 		this.nowPhase.first(tInfo,0);
 		this.clearFlg=false;
 		this.exitFlg=false;
+
+
+
 	}
 
 	public void keyControl(TWInfo tInfo,int key) {
@@ -53,7 +75,8 @@ public class BattlePhase extends GamePhase{
 
 	@Override
 	public void loadMedia() throws IOException {
-		this.nowStage.loadMedia();
+		this.stage1.loadMedia();
+		this.stage2.loadMedia();
 
 		//this.start.loadMedia();
 		//this.main.loadMedia();

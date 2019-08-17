@@ -13,7 +13,7 @@ public class Scene4 extends TWEvent {
 
 	public Scene4() {
 		this.label=SCENE_NUM.FOUR;
-		this.next=SCENE_NUM.END;
+		this.next=SCENE_NUM.S2;
 
 		this.sceneText=TextData.s4_txt;
 		this.sceneTextChara=TextData.intro_txt_chara;

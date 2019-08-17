@@ -280,7 +280,7 @@ public class TextMode extends GameMode {
 	@Override
 	public void loadMedia() throws IOException {
 		this.haikei.setImage(ImageIO.read(new File("media/haikei.png")));
-		this.haikei.setImage(ImageIO.read(new File("media/haikei_default.png")));
+		this.haikei.setImage(ImageIO.read(new File("media/haikei3.png")));
 
 		this.hotate.setImage(ImageIO.read(new File("media/hotate/kai.png")));
 		this.hotate.setImage(ImageIO.read(new File("media/hotate/kai2.png")));

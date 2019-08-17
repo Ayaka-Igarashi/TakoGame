@@ -12,8 +12,9 @@ public class CrossShooterCircle extends Shooter {
 
 	@Override
 	public void shoot(TWInfo tInfo, Stage stage, Double position) {
-		double r = 10.0 / 180.0 * Math.PI;
-		this.v.x = 35.26;
+		double radius=15.0;//間隔
+		double r = radius / 180.0 * Math.PI;
+		this.v.x = Math.tan(r);//35.26
 		this.v.y = 200.0;
 		for (int i = 0; i < 36; i++) {
 			BulletChara bullet = stage.searchBullet();
