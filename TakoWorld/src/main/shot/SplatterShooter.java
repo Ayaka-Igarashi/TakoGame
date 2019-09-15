@@ -9,7 +9,7 @@ import main.stage.Stage1;
 public class SplatterShooter extends Shooter {
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position,int num) {
 		double r=(Math.random()*120-60.0)/180.0*Math.PI;
 		BulletChara bullet=stage.searchBullet();
 		if(bullet==null)return;

@@ -7,19 +7,19 @@ import main.functions.Vector;
 import main.stage.Stage;
 import main.stage.Stage1;
 
-public class CrossShooterCircle extends Shooter {
+public class CircleShooter extends Shooter {
 	private Vector v = new Vector();
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage, Double position) {
-		double radius=15.0;//間隔
+	public void shoot(TWInfo tInfo, Stage stage, Double position,int num) {
+		double radius=(double)(360/num);//15.0;//間隔
 		double r = radius / 180.0 * Math.PI;
 		this.v.x = Math.tan(r);//35.26
 		this.v.y = 200.0;
 		for (int i = 0; i < 36; i++) {
 			BulletChara bullet = stage.searchBullet();
 			if (bullet != null) {
-				bullet.mover = AccelMover_s.singleton;
+				bullet.mover = StraightMover.singleton;
 				bullet.position.x = position.x;
 				bullet.position.y = position.y;
 				bullet.vector.x = this.v.x;
@@ -33,5 +33,5 @@ public class CrossShooterCircle extends Shooter {
 
 	}
 
-	public static CrossShooterCircle singleton = new CrossShooterCircle();
+	public static CircleShooter singleton = new CircleShooter();
 }

@@ -11,10 +11,14 @@ public class TargetShooter extends Shooter {
 	private Vector v=new Vector();
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position,int num) {
 		BulletChara bullet =stage.searchBullet();
 		if(bullet==null)return;
-		bullet.mover=AccelMover.singleton;
+		if(num==0) {
+			bullet.mover=AccelMover.singleton;
+		}else {
+			bullet.mover=AccelMover_s.singleton;
+		}
 		bullet.position.x=stage.getEnemy().position.x;
 		bullet.position.y=stage.getEnemy().position.y;
 		bullet.vector.x=stage.getPlayer().position.x;

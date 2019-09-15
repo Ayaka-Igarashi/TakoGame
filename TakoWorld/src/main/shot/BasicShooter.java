@@ -9,7 +9,7 @@ import main.stage.Stage1;
 public class BasicShooter extends Shooter{
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position,int num) {
 		BulletChara bullet=stage.searchBullet()	;
 		if(bullet==null)return;
 		bullet.mover=StraightMover.singleton;

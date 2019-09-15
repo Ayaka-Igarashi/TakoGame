@@ -9,7 +9,7 @@ import main.stage.Stage1;
 public class RollingShooter extends Shooter {
 
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage, Double position) {
+	public void shoot(TWInfo tInfo, Stage stage, Double position,int num) {
 		double r =Effect.linear(tInfo, 5000, 0.0, Math.PI * 2);
 		BulletChara bullet = stage.searchBullet();
 		if(bullet == null) return;

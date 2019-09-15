@@ -10,7 +10,7 @@ import main.stage.Stage1;
 public class CrossShooter extends Shooter {
 	private Vector v = new Vector();
 	@Override
-	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position) {
+	public void shoot(TWInfo tInfo, Stage stage,Point2D.Double position,int num) {
 		double r = 120.0 / 180.0 * Math.PI;
 		this.v.x = 200.0;
 		this.v.y = 120.0;

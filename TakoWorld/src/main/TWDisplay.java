@@ -153,7 +153,7 @@ public class TWDisplay extends GameDisplay{
 					if(TWDisplay.this.modeNum==0) {
 						TWDisplay.this.mode.first(tInfo,SCENE_NUM.INTRO);//初期画像設定
 					}else if(TWDisplay.this.modeNum==1) {
-						TWDisplay.this.mode.first(tInfo,SCENE_NUM.S1);//初期画像設定
+						TWDisplay.this.mode.first(tInfo,SCENE_NUM.S2);//初期画像設定
 					}
 				}
 				pushFlg=false;
