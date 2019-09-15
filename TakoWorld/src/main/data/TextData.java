@@ -4,7 +4,10 @@ import main.items.TextBox;
 import main.struct.TextChara;
 
 public class TextData {
-	public static String[] choice1 = { "左のドア", "前のドア", "右のドア" };
+	public static String[] choice0 = { "左のドア", "前のドア", "右のドア" };
+	public static String[] choice1 = { "左の部屋", "前の部屋", "右の部屋" };
+	public static String[] choice2 = { "木の板", "おおきなばね", "水晶玉" };
+	public static String[] choice3 = { "入る", "入らない" };
 
 	//最初の文は便宜上空白にする
 	public static TextChara[] intro_txt_chara = {
@@ -271,16 +274,106 @@ public class TextData {
 
 	public static String[][] s2_txt = {
 			{ "" },
-			{ "きょろきょろ" },
-			{ "だれか他にいたりするかな？" },
+			{ "たこ焼きをたおした" },
+			{ "2階" },
+			{ "" }
+	};
+
+	public static String[][] s2_S_txt = {
+			{ "" },
+			{ "どの部屋に入る？" },
+			{ "" }
+	};
+
+	public static String[][] s2_L1_txt = {
+			{ "" },
+			{ "左の部屋1" },
+			{ "" }
+	};
+
+	public static String[][] s2_LS_txt = {
+			{ "" },
+			{ "何を選ぶ？" },
+			{ "" }
+	};
+
+	public static String[][] s2_LS1_txt = {
+			{ "" },
+			{ "木の板にした" },
+			{ "これなら大丈夫そうだ" },
+			{ "" }
+	};
+
+	public static String[][] s2_LS2_txt = {
+			{ "" },
+			{ "ばねにした" },
+			{ "これはだめだろ" },
+			{ "" }
+	};
+
+	public static String[][] s2_LS3_txt = {
+			{ "" },
+			{ "水晶にした" },
+			{ "これはないだろ" },
+			{ "" }
+	};
+
+	public static String[][] s2_L2_txt = {
+			{ "" },
+			{ "もうここは大丈夫だろ" },
+			{ "" }
+	};
+
+	public static String[][] s2_F1_txt = {
+			{ "" },
+			{ "前の部屋1" },
+			{ "大きな穴があいていて進めない！" },
+			{ "" }
+	};
+
+	public static String[][] s2_F2_txt = {
+			{ "" },
+			{ "前の部屋2" },
+			{ "" }
+	};
+
+	public static String[][] s2_R1_txt = {
+			{ "" },
+			{ "なんか不穏な空気がする・・・" },
+			{ "本当にいくのか？" },
+			{ "" }
+	};
+
+	public static String[][] s2_R2_txt = {
+			{ "" },
+			{ "もうここはいいだろ","次行くぞ" },
+			{ "" }
+	};
+
+	public static String[][] s2_R3_txt = {
+			{ "" },
+			{ "右のドアを開けたら、そこにはおぞましい姿のたこがいた" },
+			{ "きゃーーーーー" },
+			{ "" }
+	};
+
+	public static String[][] s2_R4_txt = {
+			{ "" },
+			{ "やっぱやめとこう" },
+			{ "" }
+	};
+
+	public static String[][] s2_R5_txt = {
+			{ "" },
+			{ "おぞましいたこを倒した！" },
 			{ "" }
 	};
 
 	public static String[][] s3_txt = {
 			{ "" },
-			{ "とりあえずこわいから、", "この場にいよう。" },
-			{ "待つこと数十分" },
-			{ "だれもこないなあ" },
+			{ "たこさんウインナーを倒した！", "おみごと！" },
+			{ "いえい" },
+			{ "やったー" },
 			{ "" }
 	};
 

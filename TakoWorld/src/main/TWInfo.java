@@ -26,6 +26,11 @@ public class TWInfo {
 
 	public int[] choice=new int[5];//選択したもの
 
+	//フラグが立っているか
+	public boolean switchFlg=false;//1階
+	public boolean boardFlg=false;//2階
+	public boolean extraFlg=false;//2階
+
 	//初期化
 	public TWInfo() {
 		this.keyState=new boolean[KEY_STATE.NUM];

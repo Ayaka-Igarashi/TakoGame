@@ -33,7 +33,10 @@ public class Choice extends GameItem{
 	private int img_height;
 
 	public Choice() {
+		this.choiceText.add(TextData.choice0);
 		this.choiceText.add(TextData.choice1);
+		this.choiceText.add(TextData.choice2);
+		this.choiceText.add(TextData.choice3);
 	}
 
 	public boolean isChoiceTime() {

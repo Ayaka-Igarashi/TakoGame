@@ -13,6 +13,7 @@ import main.stage.Stage;
 import main.stage.Stage1;
 import main.stage.Stage2;
 import main.stage.StageDemo;
+import main.stage.StageExtra;
 import main.supers.GamePhase;
 import main.supers.SoundBox;
 
@@ -23,6 +24,7 @@ public class BattlePhase extends GamePhase{
 	private Stage stageDemo=new StageDemo();
 	private Stage stage1=new Stage1();
 	private Stage stage2=new Stage2();
+	private Stage stageExtra=new StageExtra();
 	public Stage nowStage =stage1;
 
 	public boolean clearFlg;
@@ -56,6 +58,8 @@ public class BattlePhase extends GamePhase{
 			this.nowStage=this.stage1;
 		}else if(scene==SCENE_NUM.S2) {
 			this.nowStage=this.stage2;
+		}else if(scene==SCENE_NUM.SExtra) {
+			this.nowStage=this.stageExtra;
 		}
 
 
@@ -82,6 +86,7 @@ public class BattlePhase extends GamePhase{
 		this.stageDemo.loadMedia();
 		this.stage1.loadMedia();
 		this.stage2.loadMedia();
+		this.stageExtra.loadMedia();
 
 		//this.start.loadMedia();
 		//this.main.loadMedia();

@@ -25,17 +25,31 @@ import main.items.Hotate;
 import main.items.SoundItem;
 import main.items.TWMenu;
 import main.items.TextBox;
-import main.scenes.Scene1;
-import main.scenes.Scene1F_1;
-import main.scenes.Scene1F_2;
-import main.scenes.Scene1L;
-import main.scenes.Scene1R_1;
-import main.scenes.Scene1R_2;
-import main.scenes.Scene1S;
-import main.scenes.Scene2;
 import main.scenes.Scene3;
 import main.scenes.Scene4;
 import main.scenes.SceneIntro;
+import main.scenes.one.Scene1;
+import main.scenes.one.Scene1F_1;
+import main.scenes.one.Scene1F_2;
+import main.scenes.one.Scene1L;
+import main.scenes.one.Scene1R_1;
+import main.scenes.one.Scene1R_2;
+import main.scenes.one.Scene1S;
+import main.scenes.two.Scene2;
+import main.scenes.two.Scene2F_1;
+import main.scenes.two.Scene2F_2;
+import main.scenes.two.Scene2L_1;
+import main.scenes.two.Scene2L_2;
+import main.scenes.two.Scene2L_S;
+import main.scenes.two.Scene2L_S1;
+import main.scenes.two.Scene2L_S2;
+import main.scenes.two.Scene2L_S3;
+import main.scenes.two.Scene2R_1;
+import main.scenes.two.Scene2R_2;
+import main.scenes.two.Scene2R_3;
+import main.scenes.two.Scene2R_4;
+import main.scenes.two.Scene2R_5;
+import main.scenes.two.Scene2S;
 import main.struct.Action;
 import main.supers.GameMode;
 import main.supers.SoundBox;
@@ -73,7 +87,26 @@ public class TextMode extends GameMode {
 		this.sceneList.add(SCENE_NUM.ONE_F2,new Scene1F_2());
 		this.sceneList.add(SCENE_NUM.ONE_R1,new Scene1R_1());
 		this.sceneList.add(SCENE_NUM.ONE_R2,new Scene1R_2());
+
 		this.sceneList.add(SCENE_NUM.TWO,new Scene2());
+		this.sceneList.add(SCENE_NUM.TWO_S,new Scene2S());
+
+		this.sceneList.add(SCENE_NUM.TWO_L1,new Scene2L_1());
+		this.sceneList.add(SCENE_NUM.TWO_L2,new Scene2L_2());
+		this.sceneList.add(SCENE_NUM.TWO_LS,new Scene2L_S());
+		this.sceneList.add(SCENE_NUM.TWO_LS1,new Scene2L_S1());
+		this.sceneList.add(SCENE_NUM.TWO_LS2,new Scene2L_S2());
+		this.sceneList.add(SCENE_NUM.TWO_LS3,new Scene2L_S3());
+
+		this.sceneList.add(SCENE_NUM.TWO_F1,new Scene2F_1());
+		this.sceneList.add(SCENE_NUM.TWO_F2,new Scene2F_2());
+
+		this.sceneList.add(SCENE_NUM.TWO_R1,new Scene2R_1());
+		this.sceneList.add(SCENE_NUM.TWO_R2,new Scene2R_2());
+		this.sceneList.add(SCENE_NUM.TWO_R3,new Scene2R_3());
+		this.sceneList.add(SCENE_NUM.TWO_R4,new Scene2R_4());
+		this.sceneList.add(SCENE_NUM.TWO_R5,new Scene2R_5());
+
 		this.sceneList.add(SCENE_NUM.THREE,new Scene3());
 		this.sceneList.add(SCENE_NUM.FOUR,new Scene4());
 	}

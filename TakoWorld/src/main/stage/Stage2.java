@@ -56,7 +56,7 @@ public class Stage2 extends Stage {
 	////////////////////////////////////////////
 
 	public Stage2() {
-		this.nextScene = SCENE_NUM.INTRO;
+		this.nextScene = SCENE_NUM.THREE;
 	}
 
 	@Override

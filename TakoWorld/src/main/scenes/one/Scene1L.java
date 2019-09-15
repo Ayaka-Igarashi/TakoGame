@@ -1,4 +1,4 @@
-package main.scenes;
+package main.scenes.one;
 
 import java.util.ArrayList;
 import java.util.Arrays;
