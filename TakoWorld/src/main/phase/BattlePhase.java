@@ -12,6 +12,7 @@ import main.constant.SCENE_NUM;
 import main.stage.Stage;
 import main.stage.Stage1;
 import main.stage.Stage2;
+import main.stage.StageDemo;
 import main.supers.GamePhase;
 import main.supers.SoundBox;
 
@@ -19,6 +20,7 @@ public class BattlePhase extends GamePhase{
 	GamePhase start,main,reStart,clear,lose;
 	private GamePhase nowPhase=null;
 	//private ArrayList<Stage> stageList=new ArrayList<Stage>();//ステージのリスト
+	private Stage stageDemo=new StageDemo();
 	private Stage stage1=new Stage1();
 	private Stage stage2=new Stage2();
 	public Stage nowStage =stage1;
@@ -48,7 +50,9 @@ public class BattlePhase extends GamePhase{
 		//this.nowStage=this.stage1;
 
 		//ステージ切り替え
-		if(scene==SCENE_NUM.S1) {
+		if(scene==SCENE_NUM.SDemo) {
+			this.nowStage=this.stageDemo;
+		}else if(scene==SCENE_NUM.S1) {
 			this.nowStage=this.stage1;
 		}else if(scene==SCENE_NUM.S2) {
 			this.nowStage=this.stage2;
@@ -75,6 +79,7 @@ public class BattlePhase extends GamePhase{
 
 	@Override
 	public void loadMedia() throws IOException {
+		this.stageDemo.loadMedia();
 		this.stage1.loadMedia();
 		this.stage2.loadMedia();
 

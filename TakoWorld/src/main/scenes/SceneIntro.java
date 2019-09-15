@@ -16,7 +16,7 @@ public class SceneIntro extends TWEvent{
 		public SceneIntro() {
 			//ラベル設定
 			this.label=SCENE_NUM.INTRO;
-			this.next=SCENE_NUM.S1;
+			this.next=SCENE_NUM.SDemo;
 
 			//テキスト設定
 			this.sceneText=TextData.intro_txt;
