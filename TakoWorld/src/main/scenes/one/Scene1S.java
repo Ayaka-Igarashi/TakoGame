@@ -17,11 +17,11 @@ public class Scene1S extends TWEvent{
 
 		//テキスト設定
 		this.sceneText=TextData.s1_S_txt;
-		this.sceneTextChara=TextData.intro_txt_chara;
+		this.sceneTextChara=TextData.s1_s_txt_chara;
 
 		Action c0=new Action(ITEM_NUM.CHOICE,0);
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h,b_nm,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,b_nm,s_nmL)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(c0)));
 	}
 
@@ -31,9 +31,17 @@ public class Scene1S extends TWEvent{
 		if(tInfo.choice[0]==0) {
 			this.next=SCENE_NUM.ONE_L;
 		}else if(tInfo.choice[0]==1) {
-			this.next=SCENE_NUM.ONE_F2;
+			if(tInfo.switchFlg==true) {
+				this.next=SCENE_NUM.ONE_F2;
+			}else {
+				this.next=SCENE_NUM.ONE_F1;
+			}
 		}else if(tInfo.choice[0]==2) {
-			this.next=SCENE_NUM.ONE_R1;
+			if(tInfo.switchFlg==true) {
+				this.next=SCENE_NUM.ONE_R2;
+			}else {
+				this.next=SCENE_NUM.ONE_R1;
+			}
 		}
 
 	}

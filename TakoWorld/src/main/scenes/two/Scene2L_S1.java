@@ -25,6 +25,7 @@ public class Scene2L_S1 extends TWEvent{
 
 	@Override
 	public void branch(TWInfo tInfo) {
+		tInfo.boardFlg=true;
 		return;
 	}
 }

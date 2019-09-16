@@ -17,10 +17,17 @@ public class Scene1F_1 extends TWEvent{
 
 		//テキスト設定
 		this.sceneText=TextData.s1_F1_txt;
-		this.sceneTextChara=TextData.intro_txt_chara;
+		this.sceneTextChara=TextData.s1_F1_txt_chara;
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(h_rm,s_nmL)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h,b_nm,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_nmL,b_nm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_activeR)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 	}
 
 	@Override

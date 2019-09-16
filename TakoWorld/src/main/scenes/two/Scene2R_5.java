@@ -24,6 +24,7 @@ public class Scene2R_5 extends TWEvent{
 
 	@Override
 	public void branch(TWInfo tInfo) {
+		tInfo.extraFlg=true;
 		return;
 	}
 }

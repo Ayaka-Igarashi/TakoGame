@@ -19,12 +19,14 @@ public class Scene1R_1 extends TWEvent{
 		this.sceneText=TextData.s1_R1_txt;
 		this.sceneTextChara=TextData.intro_txt_chara;
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(h_rm,s_nmL)));
+
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h,b_nm,s_rm)));
 	}
 
 	@Override
 	public void branch(TWInfo tInfo) {
+		//フラグを立てる
+		tInfo.switchFlg=true;
 		return;
 	}
 

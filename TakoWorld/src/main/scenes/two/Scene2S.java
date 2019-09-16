@@ -29,11 +29,23 @@ public class Scene2S extends TWEvent{
 	public void branch(TWInfo tInfo) {
 		if(tInfo.choice[1]==-1)return;
 		if(tInfo.choice[1]==0) {
-			this.next=SCENE_NUM.TWO_L1;
+			if(tInfo.boardFlg==false) {
+				this.next=SCENE_NUM.TWO_L1;
+			}else {
+				this.next=SCENE_NUM.TWO_L2;
+			}
 		}else if(tInfo.choice[1]==1) {
-			this.next=SCENE_NUM.TWO_F2;
+			if(tInfo.boardFlg==false) {
+				this.next=SCENE_NUM.TWO_F1;
+			}else {
+				this.next=SCENE_NUM.TWO_F2;
+			}
 		}else if(tInfo.choice[1]==2) {
-			this.next=SCENE_NUM.TWO_R1;
+			if(tInfo.extraFlg==false) {
+				this.next=SCENE_NUM.TWO_R1;
+			}else {
+				this.next=SCENE_NUM.TWO_R2;
+			}
 		}
 	}
 

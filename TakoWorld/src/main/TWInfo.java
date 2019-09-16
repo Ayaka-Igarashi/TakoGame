@@ -66,6 +66,22 @@ public class TWInfo {
 		saveData[SAVE_DATA.SAME]=this.textModeInfo.getCharaSame().nowState;
 		saveData[SAVE_DATA.ENEMY]=this.textModeInfo.getEnemy().nowState;
 		saveData[SAVE_DATA.BGM]=this.textModeInfo.getSound().nowState;
+		if(this.switchFlg==true) {
+			saveData[SAVE_DATA.SWITCH_FLG]=1;
+		}else {
+			saveData[SAVE_DATA.SWITCH_FLG]=0;
+		}
+		if(this.boardFlg==true) {
+			saveData[SAVE_DATA.BOARD_FLG]=1;
+		}else {
+			saveData[SAVE_DATA.BOARD_FLG]=0;
+		}
+		if(this.extraFlg==true) {
+			saveData[SAVE_DATA.EXTRA_FLG]=1;
+		}else {
+			saveData[SAVE_DATA.EXTRA_FLG]=0;
+		}
+
 	}
 
 	//ロード時にtextmodeを書き換える
@@ -89,6 +105,23 @@ public class TWInfo {
 			this.textModeInfo.getSound().nowState=saveData[SAVE_DATA.BGM];
 			this.textModeInfo.getSound().isChange=true;
 		}
+
+		if(saveData[SAVE_DATA.SWITCH_FLG]==1){
+			this.switchFlg=true;
+		}else {
+			this.switchFlg=false;
+		}
+		if(saveData[SAVE_DATA.BOARD_FLG]==1){
+			this.boardFlg=true;
+		}else {
+			this.boardFlg=false;
+		}
+		if(saveData[SAVE_DATA.EXTRA_FLG]==1){
+			this.extraFlg=true;
+		}else {
+			this.extraFlg=false;
+		}
+
 	}
 
 	//セーブ

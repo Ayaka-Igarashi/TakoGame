@@ -110,6 +110,89 @@ public class TextData {
 			new TextChara(TextBox.HOTATE, TextChara.right),
 	};
 
+	public static TextChara[] s1_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+	};
+
+	public static TextChara[] s1_s_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1)
+	};
+
+	public static TextChara[] s1_L_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1)
+	};
+
+	public static TextChara[] s1_F1_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+	};
+
+	public static TextChara[] s1_F2_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.TAKO, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.TAKO, TextChara.right),
+			new TextChara(-1, -1)
+	};
+
 	//最初の文は便宜上空白にする
 	public static String[][] intro_txt = {
 			{ "" },
@@ -227,10 +310,10 @@ public class TextData {
 			{ "ちょっ・・・待ってくださいーーー！", "少しゆっくり行きましょうよー！" },
 			{ "相変わらずせっかちだなぁ" },
 			{ "" },
-			{ "大広間にでた" },
+			{ "そのまままっすぐ歩いていったら","大広間にたどり着いた" },
 			{ "この部屋すごい広いですね！" },
 			{ "前と左と右　3つドアがあるな・・・","どの部屋に行けばいいんだ？" },
-			{ "ぅもう・・・なんも聞いてないな" },
+			{ "ぅもう・・・私の話なんも聞いてないな" },
 			{ "とりあえず1つずつ入ってみましょうか" },
 			{ "" }
 	};
@@ -244,19 +327,62 @@ public class TextData {
 
 	public static String[][] s1_L_txt = {
 			{ "" },
-			{ "左の部屋" },
+			{ "左側の部屋に入った" },
+			{ "この部屋もこまめに掃除しているのか","広く、仰々しい装いで綺麗な見た目だった" },
+			{ "そして部屋の真ん中にはいかにも中世の貴族が使いそうな","細長いテーブルが1つある" },
+			{ "どうやら誰か重鎮をもてなすのであろう","テーブルには溢れんばかりの量の食事が並べてある" },
+			{ "ここはダイニングルームみたいですね" },
+			{ "そうみたいだな","・・・ん？" },
+			{ "もしかして、あれはたこ焼き！！？" },
+			{ "ひゃーーー！！","またたこ焼き！？襲ってくるーー！！" },
+			{ "違うぞホタテ、さっきの喋るたこ焼きヤローじゃなくて","本物の食べるたこ焼きだ" },
+			{ "ふぇ・・・それならよかった"},
+			{ "じゃあさっそくいただこうか","こんなところでたこ焼きを食えるなんてラッキーだな" },
+			{ "勝手に食べたら怒られちゃわないですか！？","大事なお客さんのものかもしれないし！！" },
+			{ "まー、まー","あとで話し合えばへーきだろ" },
+			{ "肉体言語で話し合いをしそうだなぁ・・・" },
+			{ "それはそうと、サメさんってなんでそんなに","たこ焼きが好きなんですか？" },
+			{ "見た瞬間一目散に向かってくし" },
+			{ "うーんとな、昔オオサカに旅行いったんだよ","オオサカってたこ焼き屋さん沢山あるだろ" },
+			{ "気になって食べてみたら","あのたこ焼き、ものすんごいおいしかったんだよ" },
+			{ "意外と単純な理由・・・" },
+			{ "それ以来たこ焼きにどーもハマってしまった","どっぷりと" },
+			{ "ほら、このたこ焼きおいしいぞ","沢山あるからホタテも食べてみろよ" },
+			{ "私は、遠慮しときます","たこ焼きはあまり好きではないので" },
+			{ "まじか、こんなおいしいもの嫌いな奴がいんのか","もったいない舌をしてるな" },
+			{ "まず、タコの見た目から受け付けられないんで","口に入れるなんて鳥肌が立ちますっ" },
+			{ "ここ、食べ物以外何もなさそうだし","サメさんが満足したら次の場所行きましょう" },
+			{ "あと5分で食う"},
+			{ "10分後" },
+			{ "ふうぅ・・・満足した","これでめちゃめちゃ気力が湧いてきた！" },
+			{ "それはよかったです","じゃあ次の部屋行きましょう" },
+			{ "大広間に戻った" },
 			{ "" }
 	};
 
 	public static String[][] s1_F1_txt = {
 			{ "" },
-			{ "前の部屋1" },
+			{ "前のドアの前まで来た" },
+			{"ガチャガチャ"},
+			{"あれ、開かないぞ"},
+			{"どうやらロックがかかってるみたいです","ロックを解除しなきゃですね"},
+			{"鍵じゃなくて電子ロックなんだな","この城意外と技術が進んでるな"},
+			{"このままじゃ進めなさそうなので","ロックを解除するスイッチ的なのを探してみましょう"},
+			{"・・・力ずくで開けられないか？"},
+			{"やめてください！","器物損壊です！！"},
+			{ "大広間に戻った" },
 			{ "" }
 	};
 
 	public static String[][] s1_F2_txt = {
 			{ "" },
-			{ "前の部屋2" },
+			{ "前の部屋への扉は特にロックもかかっておらず","すんなり開いた" },
+			{"あ、階段だ！","ここから上に行けますね！"},
+			{"よし！どうせ親玉は最上階でのんびりしてんだろ","とっととのぼるか"},
+			{"ミツケタゾ！"},
+			{"ひゃあ！！！","本物の喋るたこ焼き！！！"},
+			{"出たな喋るたこ焼き！","今度こそお前をメッタメタにして食してやる！"},
+			{"ジャマモノ　メ","ココデ　シマツシテ　クレヨウ"},
 			{ "" }
 	};
 
