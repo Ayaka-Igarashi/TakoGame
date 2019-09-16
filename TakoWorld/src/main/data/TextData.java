@@ -193,6 +193,40 @@ public class TextData {
 			new TextChara(-1, -1)
 	};
 
+	public static TextChara[] s1_R1_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(TextBox.HOTATE, TextChara.right),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(-1, -1),
+			new TextChara(-1, -1)
+			//do
+	};
+
+	public static TextChara[] s1_R2_txt_chara = {
+			new TextChara(-1, -1),
+			new TextChara(TextBox.SAME, TextChara.left),
+			new TextChara(-1, -1)
+	};
+
 	//最初の文は便宜上空白にする
 	public static String[][] intro_txt = {
 			{ "" },
@@ -388,13 +422,34 @@ public class TextData {
 
 	public static String[][] s1_R1_txt = {
 			{ "" },
-			{ "右の部屋1" },
+			{ "右の部屋に入った" },
+			{"そこには高そうなソファーがいくつも並べてある","客人を招くために作られた応接間のようだ"},
+			{"ここにはヤツはいなさそうだな"},
+			{"そうですね"},
+			{"にしても、ここもまた立派な部屋ですね～","ひとまず探索してみましょうか"},
+			{"探索すること少々"},
+			{"おいホタテ、ここにかっこいいスイッチがあるぞ"},
+			{"ほんとだ金塗りにされてて豪華ですね","なんのスイッチですかね？"},
+			{"さあ、なんなんだろうな？"},
+			{"にしても、こういうかっこいいスイッチって","つい押したくなっちゃうんだよな～"},
+			{"いやいや、不用意に押したら敵がわらわら","出てきたり・・・・"},
+			{"とりあえず押してみるか"},
+			{"えっ・・・・・・・・・"},
+			{"ぽちっ"},
+			{"しかしボタンは押されたものの、","特に当たりに変わった様子はない"},
+			{"！！！！！"},
+			{"ちょっとおおお！！！","いきなり何押してるんですか！？"},
+			{"・・・・・・・・・うーむ","何も起こんないな"},
+			{"まあ、ヤバいこと起こんなかったし","大丈夫だろ"},
+			{"そうですかね・・・？","変なことにならないといいんだけど"},
+			{"ここには他に何にもなさそうだ","もう次いこうぜ"},
+			{"大広間に戻った"},
 			{ "" }
 	};
 
 	public static String[][] s1_R2_txt = {
 			{ "" },
-			{ "右の部屋2" },
+			{ "そこはもう大丈夫じゃないか？" },
 			{ "" }
 	};
 
@@ -402,6 +457,15 @@ public class TextData {
 			{ "" },
 			{ "たこ焼きをたおした" },
 			{ "2階" },
+			{"",""},
+			{"",""},
+			{"",""},
+			{"",""},
+			{"",""},
+			{"",""},
+			{"",""},
+			{"",""},
+			{"",""},
 			{ "" }
 	};
 
