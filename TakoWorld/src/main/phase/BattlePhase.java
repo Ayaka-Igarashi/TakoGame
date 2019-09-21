@@ -18,7 +18,7 @@ import main.supers.GamePhase;
 import main.supers.SoundBox;
 
 public class BattlePhase extends GamePhase{
-	GamePhase start,main,reStart,clear,lose;
+	GamePhase startConfirm,start,main,reStart,clear,lose;
 	private GamePhase nowPhase=null;
 	//private ArrayList<Stage> stageList=new ArrayList<Stage>();//ステージのリスト
 	private Stage stageDemo=new StageDemo();
@@ -36,6 +36,7 @@ public class BattlePhase extends GamePhase{
 	protected boolean isMenuTime;
 
 	public BattlePhase(){
+		this.startConfirm=new StartConfirmPhase();
 		this.start=new StartPhase();
 		this.main=new MainPhase();
 		this.reStart=new ReStartPhase();
@@ -63,7 +64,8 @@ public class BattlePhase extends GamePhase{
 		}
 
 
-		this.nowPhase=start;
+		this.nowPhase=startConfirm;
+		//this.nowPhase=start;
 		this.nowPhase.first(tInfo,0);
 		this.clearFlg=false;
 		this.exitFlg=false;
@@ -108,6 +110,63 @@ public class BattlePhase extends GamePhase{
 	}
 
 
+	public class StartConfirmPhase extends GamePhase {
+		private boolean pushFlg;
+		private long time_y;
+
+		public StartConfirmPhase() {
+
+		}
+
+		//スタート押すたびに実行
+		@Override
+		public void first(TWInfo tInfo,int scene) {
+			this.startTime=tInfo.currentTime_withoutMenu;
+			this.time_y=this.startTime;
+			this.pushFlg=false;
+		}
+
+		@Override
+		public void keyControl(TWInfo tInfo,int key) {
+
+			if(tInfo.keyState[KEY_STATE.Z]&&tInfo.keyReleased[KEY_STATE.Z]&&pushFlg==false) {
+				pushFlg=true;
+				tInfo.keyReleased[KEY_STATE.Z]=false;//キーが放されていない状態にする
+			}else if(tInfo.keyState[KEY_STATE.Z]==false&&tInfo.keyReleased[KEY_STATE.Z]==false) {
+				tInfo.keyReleased[KEY_STATE.Z]=true;//キーが放された状態にする
+			}else if(pushFlg==true) {
+				BattlePhase.this.nowPhase=start;
+				BattlePhase.this.nowPhase.first(tInfo,0);
+			}
+
+
+		}
+
+		@Override
+		public void draw(TWInfo tInfo) {
+			double y=Math.pow(tInfo.currentTime_withoutMenu-this.time_y, 2)*-1/5000+(tInfo.currentTime_withoutMenu-this.time_y)*1/5;
+			if((tInfo.currentTime_withoutMenu-this.time_y)>1000) {
+				this.time_y=tInfo.currentTime_withoutMenu;
+			}
+
+			tInfo.g.setBackground(Color.BLACK);
+			tInfo.g.setFont(BattlePhase.this.font);
+			String str="Push Z to start";
+			FontMetrics fm=tInfo.g.getFontMetrics();
+			int strw=fm.stringWidth(str)/2;
+			tInfo.g.drawString(str,400-strw, (int) (350-y));
+
+
+
+		}
+
+		@Override
+		public void loadMedia() throws IOException {
+			// TODO 自動生成されたメソッド・スタブ
+
+		}
+
+	}
 
 	public class StartPhase extends GamePhase {
 

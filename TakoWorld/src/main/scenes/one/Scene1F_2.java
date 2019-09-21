@@ -22,7 +22,7 @@ public class Scene1F_2 extends TWEvent{
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,b_nm,s_nmL)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_happyR)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_R,h_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_R,h_rm,sound_battle)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_activeR,e_rm)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_R,h_rm)));
