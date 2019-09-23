@@ -17,12 +17,12 @@ import main.supers.SoundBox;
 public class Choice extends GameItem{
 	private ArrayList<String[]> choiceText=new ArrayList<String[]>();
 	private int nowText;
-	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.BOLD,25);
+	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.BOLD,30);
 
 	private Point2D.Double[] loc= {
-			new Point2D.Double(280,80),
-			new Point2D.Double(280,190),
-			new Point2D.Double(280,300)
+			new Point2D.Double(40,60),
+			new Point2D.Double(40,140),
+			new Point2D.Double(40,220)
 	};
 
 	private boolean choiceTime;//選択肢が出ている状態か
@@ -119,7 +119,7 @@ public class Choice extends GameItem{
 	}
 
 	public void drawText(TWInfo tInfo) {
-		tInfo.g.setColor(Color.BLACK);
+		tInfo.g.setColor(new Color(0, 25, 132));
 		tInfo.g.setFont(this.font);
 		FontMetrics fm=tInfo.g.getFontMetrics();
 		int sw;//文字の長さ
@@ -129,8 +129,8 @@ public class Choice extends GameItem{
 			sh=fm.getHeight();
 			this.drawStr(tInfo,
 					this.choiceText.get(this.nowText)[i],
-					(int)this.loc[i].x+this.img_width/2-sw/2,
-					(int)this.loc[i].y+this.img_height/2+sh/2 -5);
+					(int)this.loc[i].x+this.img_width/2-sw/2-260,
+					(int)this.loc[i].y+this.img_height/2+sh/2 -285);
 		}
 	}
 
@@ -139,6 +139,13 @@ public class Choice extends GameItem{
 	public GameItem draw(TWInfo tInfo) {
 
 		if(this.choiceTime==true) {
+			this.setVisible(0, true);
+			this.drawOne(tInfo,0);
+			this.setPosition(1, loc[this.nowChoice]);
+			this.setVisible(1, true);
+			this.drawOne(tInfo,1);
+
+			/*
 			for(int i=0;i<this.choiceNum;i++) {
 				if(i==this.nowChoice) {
 					this.setPosition(1, loc[i]);
@@ -150,6 +157,7 @@ public class Choice extends GameItem{
 					this.drawOne(tInfo,0);
 				}
 			}
+			*/
 			this.drawText(tInfo);
 		}
 

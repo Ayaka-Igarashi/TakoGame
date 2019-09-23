@@ -20,7 +20,7 @@ import main.shot.BulletChara;
 import main.supers.SoundBox;
 
 public class Stage2 extends Stage {
-	private BufferedImage img_player, img_takoyaki;
+	private BufferedImage img_player, img_takoyaki,img_start;
 	private Player player = new Player();
 	private TakosanU takoyaki = new TakosanU();
 	private AttackItem item = new AttackItem();
@@ -74,7 +74,15 @@ public class Stage2 extends Stage {
 	}
 
 	@Override
+	public void drawStart(TWInfo tInfo) {
+		tInfo.g.drawImage(this.img_start, 0, -100,null);
+
+	}
+
+	@Override
 	public void loadMedia() throws IOException {
+		this.img_start=ImageIO.read(new File("media/enemy/takoyaki_R.png"));
+
 		this.img_player = ImageIO.read(new File("media/battle/player.png"));
 		this.player.setImage(this.img_player.getSubimage(0, 0, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(0, 90, 90, 90));

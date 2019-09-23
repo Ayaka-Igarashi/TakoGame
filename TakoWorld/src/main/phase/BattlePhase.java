@@ -144,8 +144,11 @@ public class BattlePhase extends GamePhase{
 
 		@Override
 		public void draw(TWInfo tInfo) {
-			double y=Math.pow(tInfo.currentTime_withoutMenu-this.time_y, 2)*-1/5000+(tInfo.currentTime_withoutMenu-this.time_y)*1/5;
-			if((tInfo.currentTime_withoutMenu-this.time_y)>1000) {
+			BattlePhase.this.nowStage.drawStart(tInfo);
+			int h=10;
+			int T=600;
+			double y=Math.pow(tInfo.currentTime_withoutMenu-this.time_y, 2)*-4*h/Math.pow(T, 2)+(tInfo.currentTime_withoutMenu-this.time_y)*4*h/T;
+			if((tInfo.currentTime_withoutMenu-this.time_y)>T) {
 				this.time_y=tInfo.currentTime_withoutMenu;
 			}
 
@@ -156,6 +159,8 @@ public class BattlePhase extends GamePhase{
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, (int) (350-y));
 
+			//tInfo.g.drawLine(400-strw, 350, 400+strw, 350);
+			tInfo.g.fillRect(400-strw, 357, strw*2, 2);
 
 
 		}

@@ -26,6 +26,7 @@ public abstract class Stage {
 	public abstract GameChara_B getEnemy();
 
 	public abstract void control(TWInfo tInfo);
+	public abstract void drawStart(TWInfo tInfo);//ready画面時の線画
 	public abstract void draw(TWInfo tInfo);
 	public abstract void init(TWInfo tInfo);
 

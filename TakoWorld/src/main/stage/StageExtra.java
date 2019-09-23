@@ -14,15 +14,15 @@ import main.constant.SCENE_NUM;
 import main.functions.Vector;
 import main.items_b.AttackItem;
 import main.items_b.GameChara_B;
+import main.items_b.NamaTako;
 import main.items_b.Player;
-import main.items_b.TakosanU;
 import main.shot.BulletChara;
 import main.supers.SoundBox;
 
 public class StageExtra extends Stage {
-	private BufferedImage img_player, img_takoyaki;
+	private BufferedImage img_player, img_takoyaki,img_start;
 	private Player player = new Player();
-	private TakosanU takoyaki = new TakosanU();
+	private NamaTako namaTako = new NamaTako();
 	private AttackItem item = new AttackItem();
 
 	private BufferedImage img_shot;
@@ -41,7 +41,7 @@ public class StageExtra extends Stage {
 
 	@Override
 	public GameChara_B getEnemy() {
-		return this.takoyaki;
+		return this.namaTako;
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class StageExtra extends Stage {
 	@Override
 	public void first(TWInfo tInfo) {
 		this.player.first();
-		this.takoyaki.first();
+		this.namaTako.first();
 		this.item.first(tInfo);
 		this.IsReStart = false;
 
@@ -75,6 +75,8 @@ public class StageExtra extends Stage {
 
 	@Override
 	public void loadMedia() throws IOException {
+		this.img_start=ImageIO.read(new File("media/enemy/takoyaki_R.png"));
+
 		this.img_player = ImageIO.read(new File("media/battle/player.png"));
 		this.player.setImage(this.img_player.getSubimage(0, 0, 90, 90));
 		this.player.setImage(this.img_player.getSubimage(0, 90, 90, 90));
@@ -100,9 +102,9 @@ public class StageExtra extends Stage {
 		//this.player.lifeMeter.setImage(ImageIO.read(new File("media/battle/playerLife.png")));
 
 		this.img_takoyaki = ImageIO.read(new File("media/battle/たこ焼き2.png"));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(0, 0, 100, 100));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(100, 0, 100, 100));
-		this.takoyaki.setImage(this.img_takoyaki.getSubimage(200, 0, 100, 100));
+		this.namaTako.setImage(this.img_takoyaki.getSubimage(0, 0, 100, 100));
+		this.namaTako.setImage(this.img_takoyaki.getSubimage(100, 0, 100, 100));
+		this.namaTako.setImage(this.img_takoyaki.getSubimage(200, 0, 100, 100));
 		this.item.setImage(ImageIO.read(new File("media/battle/attackItem.png")).getSubimage(0, 0, 50, 50));
 
 		this.img_shot = ImageIO.read(new File("media/battle/bullet.png"));
@@ -115,7 +117,7 @@ public class StageExtra extends Stage {
 	@Override
 	public void control(TWInfo tInfo) {
 		this.player.control(tInfo);
-		this.takoyaki.control(tInfo);
+		this.namaTako.control(tInfo);
 		this.item.control(tInfo);
 		if (this.hitBoss() == true || this.hitBullet(tInfo) == true) {
 			if (this.player.isInvincible == false) {
@@ -130,7 +132,7 @@ public class StageExtra extends Stage {
 			SoundBox.singleton.playClip(MUSIC_NUM.GET);
 		}
 		if (this.hitAttack() == true && this.player.attackAnim.isJudge == true) {
-			this.takoyaki.hitAttack(10,tInfo);
+			this.namaTako.hitAttack(10,tInfo);
 			this.player.attackAnim.isJudge = false;
 			SoundBox.singleton.playClip(MUSIC_NUM.HIT);
 		} else if (this.hitAttack() == false && this.player.attackAnim.isJudge == true) {
@@ -138,7 +140,7 @@ public class StageExtra extends Stage {
 			SoundBox.singleton.playClip(MUSIC_NUM.ATTACK);
 		}
 		if (this.player.spAttackAnim.isJudge == true) {
-			this.takoyaki.hitAttack(30,tInfo);
+			this.namaTako.hitAttack(30,tInfo);
 			this.player.spAttackAnim.isJudge = false;
 			SoundBox.singleton.playClip(MUSIC_NUM.BOMB);
 			this.removeAllBullets();
@@ -147,7 +149,7 @@ public class StageExtra extends Stage {
 
 	@Override
 	public void draw(TWInfo tInfo) {
-		this.takoyaki.draw(tInfo, this);
+		this.namaTako.draw(tInfo, this);
 		this.item.draw(tInfo);
 		this.player.draw(tInfo);
 
@@ -158,6 +160,13 @@ public class StageExtra extends Stage {
 		}
 
 		this.player.lifeMeter.draw(tInfo);
+	}
+
+
+	@Override
+	public void drawStart(TWInfo tInfo) {
+		tInfo.g.drawImage(this.img_start, 0, -100,null);
+
 	}
 
 	@Override
@@ -172,7 +181,7 @@ public class StageExtra extends Stage {
 
 	@Override
 	public boolean hitBoss() {
-		return this.hitTest(this.takoyaki, this.player);
+		return this.hitTest(this.namaTako, this.player);
 	}
 
 	@Override
@@ -183,16 +192,16 @@ public class StageExtra extends Stage {
 	@Override
 	public boolean hitAttack() {
 		Point2D.Double position1=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y-110);
-		boolean test1=Vector.distance(position1, this.takoyaki.position)<=this.player.attackAnim.size-10+this.takoyaki.size;
+		boolean test1=Vector.distance(position1, this.namaTako.position)<=this.player.attackAnim.size-10+this.namaTako.size;
 
 		Point2D.Double position2=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y+110);
-		boolean test2=Vector.distance(position2, this.takoyaki.position)<=this.player.attackAnim.size-10+this.takoyaki.size;
+		boolean test2=Vector.distance(position2, this.namaTako.position)<=this.player.attackAnim.size-10+this.namaTako.size;
 
 		Point2D.Double position3=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y-40);
-		boolean test3=Vector.distance(position3, this.takoyaki.position)<=this.player.attackAnim.size+this.takoyaki.size;
+		boolean test3=Vector.distance(position3, this.namaTako.position)<=this.player.attackAnim.size+this.namaTako.size;
 
 		Point2D.Double position4=new Point2D.Double(this.player.attackAnim.position.x,this.player.attackAnim.position.y+40);
-		boolean test4=Vector.distance(position4, this.takoyaki.position)<=this.player.attackAnim.size+this.takoyaki.size;
+		boolean test4=Vector.distance(position4, this.namaTako.position)<=this.player.attackAnim.size+this.namaTako.size;
 
 		return test1||test2||test3||test4;
 	}
@@ -223,7 +232,7 @@ public class StageExtra extends Stage {
 
 	@Override
 	public boolean isBossLiving() {
-		return this.takoyaki.isAlive;
+		return this.namaTako.isAlive;
 	}
 
 
@@ -232,7 +241,7 @@ public class StageExtra extends Stage {
 		this.isMenuTime = isMenuTime;
 		this.player.attackAnim.isMenuTime = isMenuTime;
 		this.player.spAttackAnim.isMenuTime = isMenuTime;
-		this.takoyaki.isMenuTime = isMenuTime;
+		this.namaTako.isMenuTime = isMenuTime;
 	}
 
 	@Override
