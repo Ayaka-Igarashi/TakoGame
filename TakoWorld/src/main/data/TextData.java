@@ -6,7 +6,7 @@ import main.struct.TextChara;
 public class TextData {
 	public static String[] choice0 = { "左の部屋", "前の部屋", "右の部屋" };
 	public static String[] choice1 = { "左の部屋", "前の部屋", "右の部屋" };
-	public static String[] choice2 = { "木の板", "おおきなばね", "水晶玉" };
+	public static String[] choice2 = { "インク銃", "ダイナマイト", "とうめい薬" };
 	public static String[] choice3 = { "入る", "入らない" };
 
 	//最初の文は便宜上空白にする

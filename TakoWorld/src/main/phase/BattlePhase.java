@@ -3,8 +3,13 @@ package main.phase;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontMetrics;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
+import main.TWFrame;
 import main.TWInfo;
 import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
@@ -92,8 +97,8 @@ public class BattlePhase extends GamePhase{
 
 		//this.start.loadMedia();
 		//this.main.loadMedia();
-		//this.clear.loadMedia();
-		//this.lose.loadMedia();
+		this.clear.loadMedia();
+		this.lose.loadMedia();
 
 	}
 
@@ -301,6 +306,7 @@ public class BattlePhase extends GamePhase{
 	}
 
 	public class ClearPhase extends GamePhase {
+		private BufferedImage img_clear;
 		public ClearPhase() {
 
 		}
@@ -325,28 +331,29 @@ public class BattlePhase extends GamePhase{
 		@Override
 		public void draw(TWInfo tInfo) {
 			BattlePhase.this.nowStage.draw(tInfo);
-			//tInfo.g.setBackground(Color.BLACK);
-			//tInfo.g.drawString("CLEAR", 100, 100);
 
 			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
+				/*
 				tInfo.g.setBackground(Color.BLACK);
 				tInfo.g.setFont(BattlePhase.this.font);
 				String str="CLEAR!!!";
 				FontMetrics fm=tInfo.g.getFontMetrics();
 				int strw=fm.stringWidth(str)/2;
 				tInfo.g.drawString(str,400-strw, 350);
+				*/
+				tInfo.g.drawImage(this.img_clear,0,TWFrame.title_bar_height,null);
 			}
 		}
 
 		@Override
 		public void loadMedia() throws IOException {
-			// TODO 自動生成されたメソッド・スタブ
-
+			this.img_clear=ImageIO.read(new File("media/battle/clear.png"));
 		}
 
 	}
 
 	public class LosePhase extends GamePhase {
+		private BufferedImage img_gameOver,img_num,img1,img2,img3,img4,img5,img0;
 		private boolean pushFlg;
 		private long pushTime;
 		private int leftTime;
@@ -385,12 +392,11 @@ public class BattlePhase extends GamePhase{
 		public void draw(TWInfo tInfo) {
 			this.leftTime=(int) (6-(tInfo.currentTime_withoutMenu-this.startTime+200)/1000);
 
-
 			BattlePhase.this.nowStage.draw(tInfo);
-			//tInfo.g.setBackground(Color.BLACK);
-			//tInfo.g.drawString("GAME OVER", 100, 100);
 
 			if(tInfo.currentTime_withoutMenu-this.startTime>800) {
+				/*
+
 				tInfo.g.setBackground(Color.BLACK);
 				tInfo.g.setFont(BattlePhase.this.font);
 				String str="GAME OVER";
@@ -402,12 +408,44 @@ public class BattlePhase extends GamePhase{
 				str="PUSH Z to Retry : "+this.leftTime;
 				strw=fm.stringWidth(str)/2;
 				tInfo.g.drawString(str,760-strw, 400);
+				*/
+
+				tInfo.g.drawImage(this.img_gameOver,0,TWFrame.title_bar_height,null);
+				switch (this.leftTime) {
+				case 0:
+					tInfo.g.drawImage(this.img0,380,TWFrame.title_bar_height+538,null);
+					break;
+				case 1:
+					tInfo.g.drawImage(this.img1,380,TWFrame.title_bar_height+538,null);
+					break;
+				case 2:
+					tInfo.g.drawImage(this.img2,380,TWFrame.title_bar_height+538,null);
+					break;
+				case 3:
+					tInfo.g.drawImage(this.img3,380,TWFrame.title_bar_height+538,null);
+					break;
+				case 4:
+					tInfo.g.drawImage(this.img4,380,TWFrame.title_bar_height+538,null);
+					break;
+				case 5:
+					tInfo.g.drawImage(this.img5,380,TWFrame.title_bar_height+538,null);
+					break;
+				default:
+					break;
+				}
 			}
 		}
 
 		@Override
 		public void loadMedia() throws IOException {
-			// TODO 自動生成されたメソッド・スタブ
+			this.img_gameOver=ImageIO.read(new File("media/battle/gameover.png"));
+			this.img_num=ImageIO.read(new File("media/battle/number.png"));
+			this.img0=this.img_num.getSubimage(30*9, 0, 30, 30);
+			this.img1=this.img_num.getSubimage(0, 0, 30, 30);
+			this.img2=this.img_num.getSubimage(30*1, 0, 30, 30);
+			this.img3=this.img_num.getSubimage(30*2, 0, 30, 30);
+			this.img4=this.img_num.getSubimage(30*3, 0, 30, 30);
+			this.img5=this.img_num.getSubimage(30*4, 0, 30, 30);
 		}
 
 	}

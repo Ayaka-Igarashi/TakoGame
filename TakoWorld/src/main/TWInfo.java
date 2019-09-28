@@ -24,7 +24,7 @@ public class TWInfo {
 	public TextMode textModeInfo;//現在のゲームデータ
 	private int[] saveData=new int[SAVE_DATA.NUM];//セーブデータ
 
-	public int[] choice=new int[5];//選択したもの
+	public int[] choice=new int[10];//選択したもの
 
 	//フラグが立っているか
 	public boolean switchFlg=false;//1階
