@@ -30,6 +30,8 @@ public class TWInfo {
 	public boolean switchFlg=false;//1階
 	public boolean boardFlg=false;//2階
 	public boolean extraFlg=false;//2階
+	public int help1Flg=0;//1階
+	public int help2Flg=0;//2階
 
 	//初期化
 	public TWInfo() {
@@ -81,6 +83,9 @@ public class TWInfo {
 		}else {
 			saveData[SAVE_DATA.EXTRA_FLG]=0;
 		}
+		saveData[SAVE_DATA.HELP1_FLG]=this.help1Flg;
+		saveData[SAVE_DATA.HELP2_FLG]=this.help2Flg;
+
 
 	}
 
@@ -121,6 +126,8 @@ public class TWInfo {
 		}else {
 			this.extraFlg=false;
 		}
+		this.help1Flg=saveData[SAVE_DATA.HELP1_FLG];
+		this.help2Flg=saveData[SAVE_DATA.HELP2_FLG];
 
 	}
 

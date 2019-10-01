@@ -1,21 +1,25 @@
-package main.scenes.two;
+package main.scenes.one;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 import main.TWInfo;
+import main.constant.ITEM_NUM;
 import main.constant.SCENE_NUM;
 import main.data.TextData;
 import main.struct.Action;
 import main.supers.TWEvent;
 
-public class Scene2 extends TWEvent{
-	public Scene2() {
-		this.label=SCENE_NUM.TWO;
-		this.next=SCENE_NUM.TWO_S;
+public class Scene1F_3 extends TWEvent{
+	public Scene1F_3() {
+		//ラベル設定
+		this.label=SCENE_NUM.ONE_F3;
 
-		this.sceneText=TextData.s2_txt;
-		this.sceneTextChara=TextData.intro_txt_chara;
+		//テキスト設定
+		this.sceneText=TextData.s1_F3_txt;
+		this.sceneTextChara=TextData.s1_s_txt_chara;
+
+		Action c4=new Action(ITEM_NUM.CHOICE,4);
 
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
@@ -27,11 +31,20 @@ public class Scene2 extends TWEvent{
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-
+		this.A.add(new ArrayList<Action>(Arrays.asList(c4)));
 	}
 
 	@Override
 	public void branch(TWInfo tInfo) {
-		return;
+		if(tInfo.choice[4]==-1)return;
+		if(tInfo.choice[4]==0) {
+			this.next=SCENE_NUM.ONE_F_YES;
+			tInfo.help1Flg=1;
+		}else if(tInfo.choice[4]==1) {
+			this.next=SCENE_NUM.ONE_F_NO;
+			tInfo.help1Flg=0;
+		}
+
 	}
+
 }

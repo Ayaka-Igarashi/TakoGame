@@ -31,6 +31,9 @@ import main.scenes.SceneIntro;
 import main.scenes.one.Scene1;
 import main.scenes.one.Scene1F_1;
 import main.scenes.one.Scene1F_2;
+import main.scenes.one.Scene1F_3;
+import main.scenes.one.Scene1F_NO;
+import main.scenes.one.Scene1F_YES;
 import main.scenes.one.Scene1L;
 import main.scenes.one.Scene1R_1;
 import main.scenes.one.Scene1R_2;
@@ -38,6 +41,9 @@ import main.scenes.one.Scene1S;
 import main.scenes.two.Scene2;
 import main.scenes.two.Scene2F_1;
 import main.scenes.two.Scene2F_2;
+import main.scenes.two.Scene2F_3;
+import main.scenes.two.Scene2F_NO;
+import main.scenes.two.Scene2F_YES;
 import main.scenes.two.Scene2L_1;
 import main.scenes.two.Scene2L_2;
 import main.scenes.two.Scene2L_S;
@@ -85,6 +91,10 @@ public class TextMode extends GameMode {
 		this.sceneList.add(SCENE_NUM.ONE_L,new Scene1L());
 		this.sceneList.add(SCENE_NUM.ONE_F1,new Scene1F_1());
 		this.sceneList.add(SCENE_NUM.ONE_F2,new Scene1F_2());
+		this.sceneList.add(SCENE_NUM.ONE_F3,new Scene1F_3());
+		this.sceneList.add(SCENE_NUM.ONE_F_YES,new Scene1F_YES());
+		this.sceneList.add(SCENE_NUM.ONE_F_NO,new Scene1F_NO());
+
 		this.sceneList.add(SCENE_NUM.ONE_R1,new Scene1R_1());
 		this.sceneList.add(SCENE_NUM.ONE_R2,new Scene1R_2());
 
@@ -100,6 +110,9 @@ public class TextMode extends GameMode {
 
 		this.sceneList.add(SCENE_NUM.TWO_F1,new Scene2F_1());
 		this.sceneList.add(SCENE_NUM.TWO_F2,new Scene2F_2());
+		this.sceneList.add(SCENE_NUM.TWO_F3,new Scene2F_3());
+		this.sceneList.add(SCENE_NUM.TWO_F_YES,new Scene2F_YES());
+		this.sceneList.add(SCENE_NUM.TWO_F_NO,new Scene2F_NO());
 
 		this.sceneList.add(SCENE_NUM.TWO_R1,new Scene2R_1());
 		this.sceneList.add(SCENE_NUM.TWO_R2,new Scene2R_2());

@@ -15,6 +15,8 @@ public class SAVE_DATA {
 	public static final int SWITCH_FLG=11;
 	public static final int BOARD_FLG=12;
 	public static final int EXTRA_FLG=13;
+	public static final int HELP1_FLG=14;
+	public static final int HELP2_FLG=15;
 
-	public static final int NUM=14;//定数の個数（最大値）を入れる
+	public static final int NUM=16;//定数の個数（最大値）を入れる
 }

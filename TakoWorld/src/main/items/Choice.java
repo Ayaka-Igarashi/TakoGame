@@ -37,6 +37,8 @@ public class Choice extends GameItem{
 		this.choiceText.add(TextData.choice1);
 		this.choiceText.add(TextData.choice2);
 		this.choiceText.add(TextData.choice3);
+		this.choiceText.add(TextData.choice4);
+		this.choiceText.add(TextData.choice5);
 	}
 
 	public boolean isChoiceTime() {
