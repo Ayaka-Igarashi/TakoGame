@@ -24,11 +24,11 @@ public class TWMenu extends GameItem {
 	private String[] yesNo= {"はい","いいえ"};
 	private Font font=new Font("HG丸ｺﾞｼｯｸM-PRO",Font.BOLD,25);
 
-	private Point2D.Double menuLoc=new Point2D.Double(140, 80);
+	private Point2D.Double menuLoc=new Point2D.Double(0, 0);
 	private Point2D.Double[] loc= {
-			new Point2D.Double(450,195),
-			new Point2D.Double(450,275),
-			new Point2D.Double(450,355)
+			new Point2D.Double(250,125),
+			new Point2D.Double(250,240),
+			new Point2D.Double(250,355)
 	};
 
 	public boolean isMenuTime() {
@@ -143,19 +143,20 @@ public class TWMenu extends GameItem {
 	//テキストを書く
 	public void drawText(TWInfo tInfo) {
 		tInfo.g.setColor(Color.WHITE);
+		//tInfo.g.setColor(new Color(0, 25, 132));
 		tInfo.g.setFont(this.font);
 		if(this.menuState==-1) {
 			for(int i=0;i<this.menuText.length;i++) {
-				this.drawStr(tInfo,this.menuText[i],(int)this.loc[i].x-100,(int)this.loc[i].y+25);
+				this.drawStr(tInfo,this.menuText[i],(int)this.loc[i].x+100,(int)this.loc[i].y+25);
 			}
 		}else if(this.menuState==0||this.menuState==1||this.menuState==2){
-			this.drawStr(tInfo,this.confirm[this.menuState],200,200);
-			this.drawStr(tInfo,this.yesNo[0],350,240);//yes
-			this.drawStr(tInfo,this.yesNo[1],350,300);//no
+			this.drawStr(tInfo,this.confirm[this.menuState],300,110);
+			this.drawStr(tInfo,this.yesNo[0],(int)this.loc[0].x+100,(int)this.loc[0].y+25);//yes
+			this.drawStr(tInfo,this.yesNo[1],(int)this.loc[1].x+100,(int)this.loc[1].y+25);//no
 		}else if(this.menuState==3) {
-			this.drawStr(tInfo,"セーブしました",200,200);
+			this.drawStr(tInfo,"セーブしました",300,110);
 		}else if(this.menuState==4) {
-			this.drawStr(tInfo,"ロードします",200,200);
+			this.drawStr(tInfo,"ロードします",300,110);
 		}
 	}
 

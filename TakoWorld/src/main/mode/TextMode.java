@@ -378,7 +378,8 @@ public class TextMode extends GameMode {
 
 
 		this.choice.setImage(ImageIO.read(new File("media/choicePic.png")));
-		this.choice.setImage(ImageIO.read(new File("media/choiceItem.png")));
+		this.img_choice=ImageIO.read(new File("media/choiceItem.png"));
+		this.choice.setImage(this.img_choice);
 		/*
 		this.img_choice=ImageIO.read(new File("media/choice.png"));
 		this.choice.setImage(this.img_choice.getSubimage(0, 0, 230, 100));
@@ -386,7 +387,7 @@ public class TextMode extends GameMode {
 		*/
 
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
-		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
+		this.menu.setImage(this.img_choice);
 
 
 

@@ -141,7 +141,7 @@ public class BattleMode extends GameMode {
 		this.img_back = ImageIO.read(new File("media/haikei_default.png"));
 
 		this.menu.setImage(ImageIO.read(new File("media/menu.png")));
-		this.menu.setImage(ImageIO.read(new File("media/menu_arrow.png")));
+		this.menu.setImage(ImageIO.read(new File("media/choiceItem.png")));
 
 	}
 

@@ -2,9 +2,9 @@ package main;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontMetrics;
 import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -18,6 +18,7 @@ import main.constant.KEY_STATE;
 import main.constant.MUSIC_NUM;
 import main.constant.SCENE_NUM;
 import main.mode.BattleMode;
+import main.mode.EndingMode;
 import main.mode.TextMode;
 import main.supers.GameDisplay;
 import main.supers.GameMode;
@@ -29,6 +30,8 @@ public class TWDisplay extends GameDisplay{
 	private ArrayList<GameMode> modeList =new ArrayList<GameMode>();
 	private GameMode mode =null;
 	private int modeNum=0;//初期のモード番号
+
+	private EndingMode endMode=new EndingMode();
 
 	public TWDisplay() {
 		this.title=new TWTitle();
@@ -177,6 +180,9 @@ public class TWDisplay extends GameDisplay{
 				SoundBox.singleton.loadSound(new File("media/sound/fire.wav"));
 				SoundBox.singleton.loadSound(new File("media/sound/get.wav"));
 				SoundBox.singleton.loadSound(new File("media/sound/hit.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/ジングル.wav"));
+				SoundBox.singleton.loadSound(new File("media/sound/ending.wav"));
+				SoundBox.singleton.setLoop(MUSIC_NUM.ENDING, 1187000, 2371000);//ループ設定
 			}catch (UnsupportedAudioFileException e) {
 				e.printStackTrace();
 			}catch (LineUnavailableException e) {
@@ -207,6 +213,7 @@ public class TWDisplay extends GameDisplay{
 			}else if(TWDisplay.this.mode.isEnd()) {
 				TWDisplay.this.mode.stopBGM();//bgmを止める
 				GameDisplay.current=TWDisplay.this.end;
+				TWDisplay.this.endMode.first(tInfo, 3);//エンド１
 				/*
 				if(TWDisplay.this.modeNum==1) {
 					TWDisplay.this.mode.stopBGM();//bgmを止める
@@ -252,14 +259,18 @@ public class TWDisplay extends GameDisplay{
 	}
 	//エンディング
 	public class TWEnd extends GameDisplay{
-		boolean pushFlg=false;//ボタンが押されたか判定
+		private final int ENDING=1;
+		private final int STAFF=2;
+		private int phase=this.ENDING;
+		private boolean isEffectOn=false;
+		private BufferedImage img_staff;
 
 		@Override
 		public void show(TWInfo tInfo) {
 			if(tInfo.keyState[KEY_STATE.ESC]==true) {
 				System.exit(0);
 			}
-
+			/*
 			tInfo.g.setColor(new Color(50,80,255));
 			tInfo.g.setFont(TWDisplay.this.font);
 			String str ="END!!! PUSH Z";
@@ -267,27 +278,69 @@ public class TWDisplay extends GameDisplay{
 			FontMetrics fm=tInfo.g.getFontMetrics();
 			int strw=fm.stringWidth(str)/2;
 			tInfo.g.drawString(str,400-strw, 400);
+			*/
+			if(this.phase==this.ENDING) {
+				TWDisplay.this.endMode.draw(tInfo);
+
+				if(TWDisplay.this.endMode.isEnd()&&this.isEffectOn==false) {
+					this.isEffectOn=true;
+					tInfo.pushTime=tInfo.currentTime;
+				}
+				if(this.isEffectOn==true) {
+					float alpha =(float)(tInfo.currentTime-tInfo.pushTime)/600;
+					if(alpha>=1) {
+						alpha=1;
+						this.phase=this.STAFF;
+						tInfo.pushTime=tInfo.currentTime;
+					}
+					tInfo.g.setColor(new Color(0, 0, 0, alpha));
+					tInfo.g.fill(new Rectangle2D.Double(0,TWFrame.title_bar_height,800,600));
+				}
+
+			}else if(this.phase==this.STAFF) {
+				if(this.isEffectOn==true) {
+					if(tInfo.currentTime-tInfo.pushTime>700) {
+						TWDisplay.this.endMode.stopBGM();
+					}
+					if(tInfo.currentTime-tInfo.pushTime>1500) {
+						this.isEffectOn=false;
+						SoundBox.singleton.playClip(MUSIC_NUM.JINGLE);
+					}
+				}else {
+					tInfo.g.drawImage(this.img_staff.getScaledInstance(800, 600, Image.SCALE_SMOOTH),0,TWFrame.title_bar_height,null);
+					if(tInfo.currentTime-tInfo.pushTime>9000) {
+						GameDisplay.current=TWDisplay.this.title;
+						TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
+						TWDisplay.this.modeNum=1;
+						this.phase=this.ENDING;
+					}
+				}
+
+			}
+
+			/*
 			if(tInfo.keyState[KEY_STATE.Z]&&pushFlg==false) {
+
 				tInfo.pushTime=tInfo.currentTime;
 				pushFlg=true;
 				SoundBox.singleton.playClip(MUSIC_NUM.BOMB);//音楽を流す
 			}
-			if(tInfo.currentTime-tInfo.pushTime>500&&pushFlg==true) {
+			if(tInfo.currentTime-tInfo.pushTime>3000&&pushFlg==true) {
 				GameDisplay.current=TWDisplay.this.title;
 				TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
 				TWDisplay.this.modeNum=1;
 				pushFlg=false;
 			}
+			*/
 
 		}
 
 		@Override
 		public void loadMedia() throws IOException {
-			// TODO 自動生成されたメソッド・スタブ
+			TWDisplay.this.endMode.loadMedia();
+			this.img_staff=ImageIO.read(new File("media/staff.png"));
 
 		}
-
 	}
-
 
 }
