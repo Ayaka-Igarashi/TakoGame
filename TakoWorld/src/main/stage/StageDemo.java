@@ -15,14 +15,14 @@ import main.functions.Vector;
 import main.items_b.AttackItem;
 import main.items_b.GameChara_B;
 import main.items_b.Player;
-import main.items_b.Takoyaki;
+import main.items_b.Takoyaki_Demo;
 import main.shot.BulletChara;
 import main.supers.SoundBox;
 
 public class StageDemo extends Stage {
 	private BufferedImage img_player, img_takoyaki,img_start;
 	private Player player = new Player();
-	private Takoyaki takoyaki = new Takoyaki();
+	private Takoyaki_Demo takoyaki = new Takoyaki_Demo();
 	private AttackItem item = new AttackItem();
 
 	private BufferedImage img_shot;
