@@ -243,7 +243,7 @@ public class TextMode extends GameMode {
 
 					}//そのまま次のシーンへ
 					if(sceneList.get(nowScene).getEvent().size()>this.pushNum_Z) {
-						Action[] event =new Action[sceneList.get(nowScene).getEvent().get(this.pushNum_Z).size()];
+						Action[] event =new Action[sceneList.get(nowScene).getEvent().get(this.pushNum_Z).size()];//イベントの個数指定
 						for(int i=0;i<event.length;i++) {
 							event[i]=sceneList.get(nowScene).getEvent().get(this.pushNum_Z).get(i);//イベントを取り出すAction型
 
@@ -288,6 +288,45 @@ public class TextMode extends GameMode {
 			tInfo.keyReleased[KEY_STATE.X]=false;//キーが放されていない状態にする
 		}else if(tInfo.keyState[KEY_STATE.X]==false&&tInfo.keyReleased[KEY_STATE.X]==false) {
 			tInfo.keyReleased[KEY_STATE.X]=true;//キーが放された状態にする
+			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
+		}
+
+		//Cキー(スキップ)
+		if(tInfo.keyState[KEY_STATE.C]==true&&tInfo.keyReleased[KEY_STATE.C]==true) {
+			if(this.forward.getIsEffect()==false) {
+				if(this.menu.isMenuTime()==false) {//メニュー画面状態か
+					if(sceneList.get(nowScene).getEvent().size()>this.pushNum_Z) {
+						Action[] event =new Action[sceneList.get(nowScene).getEvent().get(sceneList.get(nowScene).getEvent().size()-1).size()];//イベントの個数指定
+						for(int i=0;i<event.length;i++) {
+							event[i]=sceneList.get(nowScene).getEvent().get(sceneList.get(nowScene).getEvent().size()-1).get(i);//イベントを取り出すAction型
+
+							if(event[i].item==ITEM_NUM.BACK) {
+								this.haikei.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.TEXT) {
+								this.text.keyControl(tInfo,KEY_STATE.Z,-1);//this.pushNumZを送る
+								this.textBox.keyControl(tInfo,KEY_STATE.Z,-1);//テキストボックス
+							}else if(event[i].item==ITEM_NUM.CHOICE) {
+								this.choice.keyControl(tInfo, KEY_STATE.Z, event[i].action);
+							}else if(event[i].item==ITEM_NUM.HOTATE) {
+								this.hotate.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.SAME) {
+								this.same.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.ENEMY) {
+								this.enemy.keyControl(tInfo,KEY_STATE.Z,event[i].action);
+							}else if(event[i].item==ITEM_NUM.FORWARD) {
+								this.forward.keyControl(tInfo, KEY_STATE.Z, event[i].action);
+							}else if(event[i].item==ITEM_NUM.SOUND) {
+								this.sound.keyControl(tInfo, KEY_STATE.Z, event[i].action);
+							}
+						}
+						this.pushNum_Z=sceneList.get(nowScene).getEvent().size();
+						SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
+					}
+				}
+			}
+			tInfo.keyReleased[KEY_STATE.C]=false;//キーが放されていない状態にする
+		}else if(tInfo.keyState[KEY_STATE.C]==false&&tInfo.keyReleased[KEY_STATE.C]==false) {
+			tInfo.keyReleased[KEY_STATE.C]=true;//キーが放された状態にする
 			SoundBox.singleton.stopClip(MUSIC_NUM.CHOICE);//効果音を止める
 		}
 

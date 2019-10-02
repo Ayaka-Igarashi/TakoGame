@@ -75,14 +75,20 @@ public class GameText extends GameItem{
 	//押された瞬間の処理
 	public void keyControl(TWInfo tInfo, int key,int action) {
 		if(key==KEY_STATE.Z) {
-			if(TextEffect.strFin==true) {
-				if(this.nowTextNum<gameTexts.length-1) {//次の文章へ（表示テキストをaction(pushNumZ）に依存させたい?
-					this.nowTextNum+=1;//this.nowTextNum=action;
-					TextEffect.firstPrm(tInfo);
+			if(action==-1) {
+				this.nowTextNum=this.gameTexts.length-2;//this.nowTextNum=action;
+				TextEffect.firstPrm(tInfo);
+			}else {
+				if(TextEffect.strFin==true) {
+					if(this.nowTextNum<gameTexts.length-1) {//次の文章へ（表示テキストをaction(pushNumZ）に依存させたい?
+						this.nowTextNum+=1;//this.nowTextNum=action;
+						TextEffect.firstPrm(tInfo);
+					}
+				}else if(TextEffect.strFin==false) {
+					TextEffect.strFin=true;
 				}
-			}else if(TextEffect.strFin==false) {
-				TextEffect.strFin=true;
 			}
+
 		}
 		return;
 	}

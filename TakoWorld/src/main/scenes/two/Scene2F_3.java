@@ -14,12 +14,11 @@ public class Scene2F_3 extends TWEvent{
 	public Scene2F_3() {
 		this.label=SCENE_NUM.TWO_F3;
 
-		this.sceneText=TextData.s2_R1_txt;
+		this.sceneText=TextData.s2_F3_txt;
 		this.sceneTextChara=TextData.intro_txt_chara;
 
 		Action c5=new Action(ITEM_NUM.CHOICE,5);
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(c5)));
 

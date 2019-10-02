@@ -213,7 +213,16 @@ public class TWDisplay extends GameDisplay{
 			}else if(TWDisplay.this.mode.isEnd()) {
 				TWDisplay.this.mode.stopBGM();//bgmを止める
 				GameDisplay.current=TWDisplay.this.end;
-				TWDisplay.this.endMode.first(tInfo, 3);//エンド１
+				//エンディング分岐
+				int endingNum=0;
+				if(tInfo.extraFlg==false&&tInfo.help1Flg==1&&tInfo.help2Flg==1) {
+					endingNum=3;
+				}else if(tInfo.extraFlg==true&&tInfo.help1Flg==0&&tInfo.help2Flg==0) {
+					endingNum=2;
+				}else {
+					endingNum=1;
+				}
+				TWDisplay.this.endMode.first(tInfo, endingNum);//エンド
 				/*
 				if(TWDisplay.this.modeNum==1) {
 					TWDisplay.this.mode.stopBGM();//bgmを止める

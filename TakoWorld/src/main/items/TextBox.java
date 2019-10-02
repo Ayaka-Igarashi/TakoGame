@@ -254,9 +254,14 @@ public class TextBox extends GameItem {
 	@Override
 	public void keyControl(TWInfo tInfo,int key,int action) {
 		if(key==KEY_STATE.Z) {
-			if(this.nowTextNum<textChara.length-1) {//次の文章へ
-				this.nowTextNum+=1;
+			if(action==-1) {
+				this.nowTextNum=this.textChara.length-1;
+			}else {
+				if(this.nowTextNum<textChara.length-1) {//次の文章へ
+					this.nowTextNum+=1;
+				}
 			}
+
 		}
 		return;
 	}
