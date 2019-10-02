@@ -31,7 +31,7 @@ public class Scene1 extends TWEvent{
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_nmL)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_nmL,b_nm)));
 	}
 
 	@Override
