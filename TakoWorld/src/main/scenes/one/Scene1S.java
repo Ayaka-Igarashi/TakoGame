@@ -22,7 +22,7 @@ public class Scene1S extends TWEvent{
 		Action c0=new Action(ITEM_NUM.CHOICE,0);
 
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,b_nm,s_nmL)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(c0,h_nmR,b_nm,s_nmL)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(c0,h_rm,b_nm,s_nmL)));
 	}
 
 	@Override

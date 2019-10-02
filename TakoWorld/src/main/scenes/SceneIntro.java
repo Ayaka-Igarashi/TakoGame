@@ -120,7 +120,7 @@ public class SceneIntro extends TWEvent{
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,takoyaki_R,h_rm)));
 			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_activeR,e_rm)));
-			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_pp,h_activeR,s_nmL,sound_battle)));
+			this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_pp,h_activeR,s_nmL,e_rm,sound_battle)));
 		}
 
 		@Override

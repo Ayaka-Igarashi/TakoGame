@@ -33,8 +33,11 @@ public class SoundItem extends GameItem{
 	@Override
 	public void keyControl(TWInfo tInfo, int key, int action) {
 		if(key==KEY_STATE.Z) {
-			this.nowState=action;
-			this.isChange=true;
+			if(this.nowState!=action) {
+				this.nowState=action;
+				this.isChange=true;
+			}
+
 		}
 
 	}
