@@ -25,7 +25,7 @@ public class Hotate extends GameChara{
 	//初期設定
 	@Override
 	public void first() {
-		this.nowState=Hotate.NORMAL_HUMAN;
+		this.nowState=Hotate.REMOVE;
 		this.isChange=false;
 		for(int i=0;i<this.imgList.size();i++) {
 			this.setVisible(i, false);

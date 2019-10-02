@@ -35,15 +35,17 @@ public class Takoyaki extends GameChara_B {
 
 		this.patternList.add(new PatternT1());
 		this.curpat = this.patternList.get(0);
-		this.patternlist_addlast(new PatternT2(12000));
-		this.patternlist_addlast(new PatternT3(15000));
-		this.patternlist_addlast(new PatternT4(30000));
-		this.patternList.get(3).setNext(this.patternList.get(1));
+		this.patternlist_addlast(new PatternT2(2000));
+		this.patternlist_addlast(new PatternT3(299));
+		this.patternlist_addlast(new PatternT2(600));
+		this.patternlist_addlast(new PatternT4(800));
+		this.patternlist_addlast(new PatternT2(900));
+		this.patternList.get(5).setNext(this.patternList.get(2));
 
 		this.patternList.add(new PatternT5(10000));
-		this.patternlist_addlast(new PatternT6(15000));
+		this.patternlist_addlast(new PatternT6(2399));
 		this.patternlist_addlast(new PatternT7(30000));
-		this.patternList.get(6).setNext(this.patternList.get(6));
+		this.patternList.get(8).setNext(this.patternList.get(8));
 	}
 
 	//最後の要素と連結して追加
@@ -61,6 +63,7 @@ public class Takoyaki extends GameChara_B {
 		this.setVisible(1, false);
 		this.setVisible(2, false);
 		this.position = new Point2D.Double(400, 50);
+		this.angle=0;
 
 		this.remainLife=1;
 		this.isInvincible=false;
@@ -167,7 +170,7 @@ public class Takoyaki extends GameChara_B {
 				this.invincibleStop=tInfo.currentTime_withoutMenu+2000;
 
 				if(this.remainLife==0) {
-					this.curpat=this.patternList.get(4);
+					this.curpat=this.patternList.get(6);
 					this.curpat.start(tInfo);
 				}
 			}
@@ -228,7 +231,7 @@ public class Takoyaki extends GameChara_B {
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
 
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 170) {//70
+			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 400) {//70
 				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
 				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
 
@@ -263,13 +266,13 @@ public class Takoyaki extends GameChara_B {
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
 
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 150) {//100
+			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 400) {//100
 				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
 				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
 
 				this.lastShooting1 = tInfo.currentTime_withoutMenu;
 			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 800) {//600
+			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 30) {//600
 				TargetShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
 				this.lastShooting2 = tInfo.currentTime_withoutMenu;
 			}
@@ -297,15 +300,15 @@ public class Takoyaki extends GameChara_B {
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
 
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 200) {//100
+			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 400) {//100
 				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
-				RollingShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
+
 				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
 
 				this.lastShooting1 = tInfo.currentTime_withoutMenu;
 			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 800) {//600
-				TargetShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,0);
+			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 30) {//600
+				RollingShooter.singleton.shoot(tInfo, stage, Takoyaki.this.position,600);
 				this.lastShooting2 = tInfo.currentTime_withoutMenu;
 			}
 
@@ -395,12 +398,14 @@ public class Takoyaki extends GameChara_B {
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
 			if(this.goleft==true) {
+				Takoyaki.this.angle-=120*tInfo.frameTime;
 				if(Takoyaki.this.position.x<700) {
 					Takoyaki.this.position.x+=120*tInfo.frameTime;
 				}else {
 					this.goleft=false;
 				}
 			}else {
+				Takoyaki.this.angle+=120*tInfo.frameTime;
 				if(Takoyaki.this.position.x>100) {
 					Takoyaki.this.position.x-=120*tInfo.frameTime;
 				}else {

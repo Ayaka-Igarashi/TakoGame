@@ -21,8 +21,8 @@ public class Scene2L_S extends TWEvent{
 
 		Action c2=new Action(ITEM_NUM.CHOICE,2);
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nm_h,b_nm,s_rm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(c2)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,b_nm,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(c2,h_rm)));
 	}
 
 	@Override

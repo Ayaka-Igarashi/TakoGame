@@ -7,15 +7,12 @@ import java.util.ArrayList;
 import main.TWInfo;
 import main.pattern.Pattern;
 import main.shot.CircleShooter;
-import main.shot.CrossShooter;
-import main.shot.RollingShooter;
 import main.shot.SplatterShooter;
-import main.shot.TargetShooter;
 import main.stage.Stage;
 import main.supers.GameItem;
 
 public class Takoyaki_Demo extends GameChara_B {
-	private final int MAX_LIFE = 100;
+	private final int MAX_LIFE = 150;
 	private double life;
 	private long lastDecrese;
 
@@ -35,10 +32,10 @@ public class Takoyaki_Demo extends GameChara_B {
 
 		this.patternList.add(new PatternT1());
 		this.curpat = this.patternList.get(0);
-		this.patternlist_addlast(new PatternT2(12000));
-		this.patternlist_addlast(new PatternT3(15000));
+		this.patternlist_addlast(new PatternT2(8000));
+		this.patternlist_addlast(new PatternT3(16000));
 		this.patternlist_addlast(new PatternT4(30000));
-		this.patternList.get(3).setNext(this.patternList.get(1));
+		this.patternList.get(3).setNext(this.patternList.get(3));
 
 	}
 
@@ -57,6 +54,7 @@ public class Takoyaki_Demo extends GameChara_B {
 		this.setVisible(1, false);
 		this.setVisible(2, false);
 		this.position = new Point2D.Double(400, 50);
+		this.angle=0;
 
 		this.remainLife=0;
 		this.isInvincible=false;
@@ -177,12 +175,6 @@ public class Takoyaki_Demo extends GameChara_B {
 		this.life-=num*tInfo.frameTime;
 		this.lifeMeter.life=this.life;
 		this.lastDecrese=tInfo.currentTime_withoutMenu;
-		/*
-		if(tInfo.currentTime_withoutMenu-this.lastDecrese>100) {
-			this.life-=num/10;
-			this.lifeMeter.life=this.life;
-			this.lastDecrese=tInfo.currentTime_withoutMenu;
-		}*/
 
 	}
 
@@ -223,18 +215,12 @@ public class Takoyaki_Demo extends GameChara_B {
 
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
+			Takoyaki_Demo.this.angle-=120*tInfo.frameTime;
 
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 170) {//70
+			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 150) {//70
 				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-
 				this.lastShooting1 = tInfo.currentTime_withoutMenu;
 			}
-			/*
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2 > 600) {
-				this.lastShooting2 = tInfo.currentTime_withoutMenu;
-			}
-			*/
 
 		}
 
@@ -258,15 +244,15 @@ public class Takoyaki_Demo extends GameChara_B {
 
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
+			Takoyaki_Demo.this.angle-=120*tInfo.frameTime;
 
 			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 150) {//100
 				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
 
 				this.lastShooting1 = tInfo.currentTime_withoutMenu;
 			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 800) {//600
-				TargetShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
+			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 3200) {//600
+				CircleShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,18);
 				this.lastShooting2 = tInfo.currentTime_withoutMenu;
 			}
 
@@ -292,16 +278,15 @@ public class Takoyaki_Demo extends GameChara_B {
 
 		@Override
 		public void move(TWInfo tInfo, Stage stage) {
+			Takoyaki_Demo.this.angle-=120*tInfo.frameTime;
 
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 200) {//100
+			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 150) {//100
 				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-				RollingShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-				CrossShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
 
 				this.lastShooting1 = tInfo.currentTime_withoutMenu;
 			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 800) {//600
-				TargetShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
+			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 2200) {//600
+				CircleShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,18);
 				this.lastShooting2 = tInfo.currentTime_withoutMenu;
 			}
 
@@ -309,118 +294,6 @@ public class Takoyaki_Demo extends GameChara_B {
 
 	}
 
-	class PatternT5 extends Pattern {
-		public PatternT5(long l) {
-			this.limit = l;
-		}
 
-		@Override
-		public boolean isFinished(TWInfo tInfo) {
-			if (Takoyaki_Demo.this.position.y < 90) {
-				return true;
-			}
-			return false;
-		}
-
-		@Override
-		public void move(TWInfo tInfo, Stage stage) {
-			if(tInfo.currentTime_withoutMenu-this.starttime>1000) {
-				Takoyaki_Demo.this.position.y -= 30 * tInfo.frameTime;
-			}
-		}
-
-	}
-
-	class PatternT6 extends Pattern {
-		private long lastShooting1 = 0;
-		private long lastShooting2 = 0;
-		private long lastShooting3 = 0;
-
-		public PatternT6(long l) {
-			this.limit = l;
-		}
-
-		@Override
-		public boolean isFinished(TWInfo tInfo) {
-			if (tInfo.currentTime_withoutMenu - this.starttime > this.limit) {
-				return true;
-			}
-			return false;
-		}
-
-		@Override
-		public void move(TWInfo tInfo, Stage stage) {
-
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 200) {//100
-				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-
-				this.lastShooting1 = tInfo.currentTime_withoutMenu;
-			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 600) {
-
-				this.lastShooting2 = tInfo.currentTime_withoutMenu;
-			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting3  > 1200) {//1200
-				CircleShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,24);
-				this.lastShooting3 = tInfo.currentTime_withoutMenu;
-			}
-
-		}
-
-	}
-
-	class PatternT7 extends Pattern {
-		private long lastShooting1 = 0;
-		private long lastShooting2 = 0;
-		private long lastShooting3 = 0;
-
-		private boolean goleft=false;
-
-		public PatternT7(long l) {
-			this.limit = l;
-		}
-
-		@Override
-		public boolean isFinished(TWInfo tInfo) {
-			if (tInfo.currentTime_withoutMenu - this.starttime > this.limit) {
-				return true;
-			}
-			return false;
-		}
-
-		@Override
-		public void move(TWInfo tInfo, Stage stage) {
-			if(this.goleft==true) {
-				if(Takoyaki_Demo.this.position.x<700) {
-					Takoyaki_Demo.this.position.x+=120*tInfo.frameTime;
-				}else {
-					this.goleft=false;
-				}
-			}else {
-				if(Takoyaki_Demo.this.position.x>100) {
-					Takoyaki_Demo.this.position.x-=120*tInfo.frameTime;
-				}else {
-					this.goleft=true;
-				}
-			}
-
-
-			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 200) {//100
-				SplatterShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,0);
-
-				this.lastShooting1 = tInfo.currentTime_withoutMenu;
-			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting2  > 600) {
-
-				this.lastShooting2 = tInfo.currentTime_withoutMenu;
-			}
-			if (tInfo.currentTime_withoutMenu - this.lastShooting3  > 1500) {//1200
-				CircleShooter.singleton.shoot(tInfo, stage, Takoyaki_Demo.this.position,24);
-				this.lastShooting3 = tInfo.currentTime_withoutMenu;
-			}
-
-		}
-
-	}
 
 }

@@ -17,9 +17,11 @@ public class Scene2L_S2 extends TWEvent{
 		this.sceneText=TextData.s2_LS2_txt;
 		this.sceneTextChara=TextData.intro_txt_chara;
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_nmL)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_activeR)));
 		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h_sw_h)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_nmL)));
 
 	}
 

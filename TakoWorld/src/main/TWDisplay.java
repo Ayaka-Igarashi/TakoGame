@@ -156,7 +156,7 @@ public class TWDisplay extends GameDisplay{
 					if(TWDisplay.this.modeNum==0) {
 						TWDisplay.this.mode.first(tInfo,SCENE_NUM.INTRO);//初期画像設定
 					}else if(TWDisplay.this.modeNum==1) {
-						TWDisplay.this.mode.first(tInfo,SCENE_NUM.S2);//初期画像設定
+						TWDisplay.this.mode.first(tInfo,SCENE_NUM.SDemo);//初期画像設定
 					}
 				}
 				pushFlg=false;
@@ -208,8 +208,8 @@ public class TWDisplay extends GameDisplay{
 			if(TWDisplay.this.mode.isExit()) {
 				TWDisplay.this.mode.stopBGM();//bgmを止める
 				GameDisplay.current=TWDisplay.this.title;
-				TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
-				TWDisplay.this.modeNum=1;
+				TWDisplay.this.mode=TWDisplay.this.modeList.get(0);
+				TWDisplay.this.modeNum=0;
 			}else if(TWDisplay.this.mode.isEnd()) {
 				TWDisplay.this.mode.stopBGM();//bgmを止める
 				GameDisplay.current=TWDisplay.this.end;
@@ -319,8 +319,8 @@ public class TWDisplay extends GameDisplay{
 					tInfo.g.drawImage(this.img_staff.getScaledInstance(800, 600, Image.SCALE_SMOOTH),0,TWFrame.title_bar_height,null);
 					if(tInfo.currentTime-tInfo.pushTime>9000) {
 						GameDisplay.current=TWDisplay.this.title;
-						TWDisplay.this.mode=TWDisplay.this.modeList.get(1);
-						TWDisplay.this.modeNum=1;
+						TWDisplay.this.mode=TWDisplay.this.modeList.get(0);
+						TWDisplay.this.modeNum=0;
 						this.phase=this.ENDING;
 					}
 				}

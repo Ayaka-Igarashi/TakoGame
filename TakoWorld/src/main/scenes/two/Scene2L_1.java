@@ -17,8 +17,19 @@ public class Scene2L_1 extends TWEvent{
 		this.sceneText=TextData.s2_L1_txt;
 		this.sceneTextChara=TextData.intro_txt_chara;
 
-		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm)));
-		this.A.add(new ArrayList<Action>(Arrays.asList(h_sw_h)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,b_nm,h_rm,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_nmL)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_rm,s_rm)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,s_nmL)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText)));
+		this.A.add(new ArrayList<Action>(Arrays.asList(nextText,h_nmR,s_rm)));
 
 	}
 

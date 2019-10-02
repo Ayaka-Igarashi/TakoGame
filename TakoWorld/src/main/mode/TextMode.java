@@ -320,6 +320,7 @@ public class TextMode extends GameMode {
 							}
 						}
 						this.pushNum_Z=sceneList.get(nowScene).getEvent().size();
+						this.textNum=sceneList.get(nowScene).getText().length-2;
 						SoundBox.singleton.playClip(MUSIC_NUM.CHOICE);//効果音を流す
 					}
 				}

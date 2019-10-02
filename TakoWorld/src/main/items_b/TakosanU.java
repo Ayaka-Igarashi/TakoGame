@@ -61,6 +61,7 @@ public class TakosanU extends GameChara_B {
 		this.setVisible(1, false);
 		this.setVisible(2, false);
 		this.position = new Point2D.Double(400, 50);
+		this.angle=0;
 
 		this.remainLife=2;
 		this.isInvincible=false;
@@ -314,7 +315,7 @@ public class TakosanU extends GameChara_B {
 
 			if (tInfo.currentTime_withoutMenu - this.lastShooting1  > 200) {//100
 				SplatterShooter.singleton.shoot(tInfo, stage, TakosanU.this.position,0);
-				RollingShooter.singleton.shoot(tInfo, stage, TakosanU.this.position,0);
+				RollingShooter.singleton.shoot(tInfo, stage, TakosanU.this.position,5000);
 				CrossShooter.singleton.shoot(tInfo, stage, TakosanU.this.position,0);
 
 				this.lastShooting1 = tInfo.currentTime_withoutMenu;
