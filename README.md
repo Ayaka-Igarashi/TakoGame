@@ -1,2 +1,2 @@
 <h1>たこワールド</h1>
-<img href="gameover(1)"></img>
+<img src="gameover(1)">
